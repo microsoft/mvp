@@ -13,24 +13,23 @@
     <script src="Javascripts/packery.pkgd.min.js"></script>
     <script src="Javascripts/main.js"></script>
     <script src="Javascripts/interactions.js"></script>
-
     <style>
-       .videocontainer {
-        position: relative;
-        width: 100%;
-        height: 0;
-        padding-bottom: 56.25%;
-    }
-    .video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+        .videocontainer {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+        }
+
+        .video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
-
 <body>
     <header class="site-header">
         <div class="wrapper">
@@ -55,7 +54,22 @@
         <div class="wrapper">
             <div class="home">
                 <ul id="container" class="post-list js-packery" data-packery-options="{ &quot;itemSelector&quot;: &quot;.item&quot; }" style="position: relative; height: 7674px;">
-                      <li class="carditem item" id="azure-20app-20service-2017-02-17-senparc" style="position: absolute; left: 1044px; top: 0px;">
+                    <li class="carditem item" id="azure-20app-20service-2017-02-17-senparc" style="position: absolute; left: 1044px; top: 0px;">
+                        <div class="card">
+                            <div class="card-image blue">
+                                <a href="https://github.com/Microsoft/MVP" target="_blank">
+                                    <span style="color:white;background-color:#0089D1;" class="card-title inline">
+                                        <span class="card-date">Sep 20, 2017</span>
+                                        MVP Xamarin App - developed by Microsoft
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="card-content">
+                                Native apps for the Microsoft MVP to manage contributions.<p><a href="https://github.com/Microsoft/mvp/tree/master/MVP" target="_blank">Browse code</a></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="carditem item" id="azure-20app-20service-2017-02-17-senparc" style="position: absolute; left: 1044px; top: 0px;">
                         <div class="card">
                             <div class="card-image blue">
                                 <a href="https://github.com/daronyondem/mvp-api-dot-net" target="_blank">
@@ -65,8 +79,8 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class="card-video videocontainer" >
-                                <iframe class="video" src="https://channel9.msdn.com/Blogs/daron/MVP-API-Intro/player"  allowFullScreen frameBorder="0"></iframe>
+                            <div class="card-video videocontainer">
+                                <iframe class="video" src="https://channel9.msdn.com/Blogs/daron/MVP-API-Intro/player" allowFullScreen frameBorder="0"></iframe>
                             </div>
                             <div class="card-content">
                                 This just starts with a simple SWAGGER exported from Azure API Management and AutoRest generated SDK.<p><a href="https://github.com/daronyondem/mvp-api-dot-net" target="_blank">Browse code</a></p>
@@ -118,21 +132,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="carditem item" id="azure-20app-20service-2017-02-17-senparc" style="position: absolute; left: 1044px; top: 0px;">
-                        <div class="card">
-                            <div class="card-image blue">
-                                <a href="https://github.com/Microsoft/MVP" target="_blank">
-                                    <span style="color:white;background-color:#0089D1;" class="card-title inline">
-                                        <span class="card-date">Mar 1, 2017</span>
-                                        MVP Xamarin App - developed by Microsoft
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="card-content">
-                                Native apps for the Microsoft MVP to manage contributions.<p><a href="https://github.com/Microsoft/MVP" target="_blank">Browse code</a></p>
-                            </div>
-                        </div>
-                    </li>
+
                 </ul>
                 <div class="row" id="no-results" style="display:none">
                     <div class="col s12">No matches were found for your search criteria. Please adjust your criteria and try again.</div>
@@ -188,6 +188,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>
