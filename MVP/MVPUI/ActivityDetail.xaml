@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MVPUI.ContributionDetail"
+             xmlns:local="clr-namespace:MVPUI;assembly=MVPUI"
+             BackgroundColor="White">
+  <ScrollView HorizontalOptions="FillAndExpand">
+    <StackLayout Orientation="Vertical" BackgroundColor="{StaticResource BlueBackgroundColor}" HorizontalOptions="FillAndExpand">
+      <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Horizontal" >
+          <Label Margin="15,25,0,0" Grid.Column="0" Text="Add a new contribution" HorizontalOptions="FillAndExpand" TextColor="White"></Label>
+
+          <Image x:Name="btnCancel" WidthRequest="36" HeightRequest="36" HorizontalOptions="Fill"/>
+          <!--<Label x:Name="labelCancel" Text="×" FontSize="16" TextColor="White"  HorizontalOptions="Fill"></Label>-->
+        </StackLayout>
+        <Label x:Name="lableErrorMesage" HorizontalOptions="CenterAndExpand" Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="Red" FontSize="18"></Label>
+      </StackLayout>
+    
+      <StackLayout Orientation="Vertical" Margin="8" BackgroundColor="White" HorizontalOptions="Fill">
+        <Grid Margin="15">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="13*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+          </Grid.RowDefinitions>
+
+          <Label Text="Contribution Type" TextColor="{StaticResource NormalLabelTextColor}"
+                 Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"
+                 VerticalTextAlignment="End" ></Label>
+          <local:BorderPicker HeightRequest="40"  x:Name="contributionTypeSelector"
+                               TextColor="Black"
+                               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                               SelectedIndexChanged="OnContributionTypeSelectedIndexChanged">
+
+          </local:BorderPicker>
+          <StackLayout  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Label Text="Contribution Area "  TextColor="{StaticResource NormalLabelTextColor}"
+                VerticalTextAlignment="End"   ></Label>
+          </StackLayout>
+          <local:BorderPicker HeightRequest="40"  x:Name="ContributionAreaSelector"
+                              TextColor="Black"
+                              Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+
+          </local:BorderPicker>
+          <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Label Text="Date of contribution"  TextColor="{StaticResource NormalLabelTextColor}"
+                VerticalTextAlignment="End"   ></Label>
+          </StackLayout>
+          <local:BorderDatePicker  x:Name="ContributionDateSelector"
+                                   Date="{Binding MyContribution.StartDate}" TextColor="Black"
+                                   Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+                                  >
+          </local:BorderDatePicker>
+          <StackLayout   Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Label Text="Title of contribution "  TextColor="{StaticResource NormalLabelTextColor}"
+                VerticalTextAlignment="End"   ></Label>
+            <Label Text="{Binding ErrorMessageForTitle}" TextColor="Red"
+                   VerticalTextAlignment="End"></Label>
+          </StackLayout>
+
+          <local:BorderEntry  x:Name="entryTitle" Text="{Binding MyContribution.Title}" TextColor="Black"
+                              Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"></local:BorderEntry>
+          <Label Text="Visibility:" TextColor="{StaticResource NormalLabelTextColor}"
+                 Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"
+                 VerticalTextAlignment="End"  ></Label>
+
+
+
+
+          <local:BorderPicker x:Name="PersonGroupSelector"
+                            TextColor="Black"
+                            Grid.Row="9"  Grid.Column="0" Grid.ColumnSpan="3">
+            <local:BorderPicker.HeightRequest>
+              <!--<OnPlatform  x:TypeArguments="x:Double" Android="40"  >
+              </OnPlatform>-->
+            </local:BorderPicker.HeightRequest>
+
+
+
+
+          </local:BorderPicker>
+          <StackLayout   Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <Label Text="URL"  TextColor="{StaticResource NormalLabelTextColor}"
+                VerticalTextAlignment="End"   ></Label>
+            <Label Text="{Binding ErrorMessageForURL}" TextColor="Red"
+                   IsVisible="{Binding IsNeededURL}"
+                   VerticalTextAlignment="End"></Label>
+          </StackLayout>
+
+          <local:BorderEntry x:Name="entryURL" TextColor="Black"
+                             Text="{Binding MyContribution.ReferenceUrl}"
+                             Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="3" ></local:BorderEntry>
+
+          <Label Text="Description"  Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3"  TextColor="{StaticResource NormalLabelTextColor}"
+                VerticalTextAlignment="End"   ></Label>
+
+          <local:BorderEditor HeightRequest="120" x:Name="entryDescription" TextColor="Black"
+                               Text="{Binding MyContribution.Description}"
+                              Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="3">
+
+          </local:BorderEditor >
+          <!--<local:BorderEntry  x:Name="entryDescription" TextColor="Black"
+                               Text="{Binding MyContribution.Description}"
+                              Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="3" ></local:BorderEntry>-->
+
+          <StackLayout Orientation="Vertical"  Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="3">
+            <Label Text="Location" TextColor="{StaticResource NormalLabelTextColor}"
+                     VerticalTextAlignment="End" ></Label>
+            <Label x:Name="labelLocation"
+                   Text="Location" TextColor="{StaticResource NormalLabelTextColor}"
+                   VerticalTextAlignment="End" ></Label>
+
+          </StackLayout>
+          <StackLayout Orientation="Vertical"
+                       Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="3">
+
+            <StackLayout  Orientation="Horizontal">
+              <Label Text="{Binding AnnualQuantityTipText}"  TextColor="{StaticResource NormalLabelTextColor}"
+                VerticalTextAlignment="End"  ></Label>
+              <Label Text="{Binding ErrorMessageForAnnualQuantity}" TextColor="Red"
+                     IsVisible="{Binding IsNeededAnnualQuantity}"
+                     VerticalTextAlignment="End"></Label>
+            </StackLayout>
+            <local:BorderEntry  x:Name="entryAnnualQuantity" TextColor="Black" Text="{Binding MyContribution.AnnualQuantity}"></local:BorderEntry>
+          </StackLayout>
+          <StackLayout IsVisible="{Binding IsNeededSecondAnnualQuantity}" Orientation="Vertical"
+                       Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="3">
+            <StackLayout Orientation="Horizontal">
+              <Label Text="{Binding SecondAnnualQuantityTipText}" TextColor="{StaticResource NormalLabelTextColor}"
+                   VerticalTextAlignment="End"   ></Label>
+
+              <Label Text="{Binding ErrorMessageForSecondAnnualQuantity}" TextColor="Red"                   
+                     VerticalTextAlignment="End"></Label>
+            </StackLayout>
+
+            <local:BorderEntry  x:Name="entrySecondAnnualQuantity" TextColor="Black" Text="{Binding MyContribution.SecondAnnualQuantity}"
+                 ></local:BorderEntry>
+          </StackLayout>
+          <StackLayout  Orientation="Vertical"
+                         Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="3">
+            <StackLayout Orientation="Horizontal">
+              <Label Text="{Binding AnnualReachTipText}"  TextColor="{StaticResource NormalLabelTextColor}"
+                    VerticalTextAlignment="End"  ></Label>
+              <Label Text="{Binding ErrorMessageForAnnualReach}" TextColor="Red"
+                        VerticalTextAlignment="End"></Label>
+            </StackLayout>
+            <local:BorderEntry x:Name="entryAnnualReach" TextColor="Black" Text="{Binding MyContribution.AnnualReach}"></local:BorderEntry>
+          </StackLayout>
+        </Grid>
+      </StackLayout>
+
+      <Image HorizontalOptions="CenterAndExpand" x:Name="imgSave" HeightRequest="36" WidthRequest="36" Margin="0,0,0,45"></Image>
+
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

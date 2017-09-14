@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Microsoft.Mvpui.App">
+  <Application.Resources>
+
+    <ResourceDictionary>
+
+      <Color x:Key="BlueBackgroundColor">#0072C6</Color>
+      <Color x:Key="NormalTextColor">White</Color>
+      <Color x:Key="NormalLabelTextColor">Black</Color>
+      <!--<OnPlatform x:Key="NormalLabelTextColor" x:TypeArguments="Color" Android="Black" WinPhone="Black" iOS="Black"></OnPlatform>-->
+      <!--set for different platform-->
+      <OnPlatform x:Key="NormalLabelFontSize" x:TypeArguments="x:Double" Android="14" WinPhone="14" iOS="13"></OnPlatform>
+      <OnPlatform x:Key="BottomMenuLabelFontSize" x:TypeArguments="x:Double" Android="12" WinPhone="12" iOS="10"></OnPlatform>
+      <OnPlatform x:Key="ContributionBtnFontSize" x:TypeArguments="x:Double" Android="16" WinPhone="16" iOS="10"></OnPlatform>
+
+      <OnPlatform x:Key="CommonProfileLabelFontSize" x:TypeArguments="x:Double" Android="14" WinPhone="14" iOS="12"></OnPlatform>
+      <OnPlatform x:Key="SmallProfileLabelFontSize" x:TypeArguments="x:Double" Android="14" WinPhone="14" iOS="10"></OnPlatform>
+      <OnPlatform x:Key="XSmallProfileLabelFontSize" x:TypeArguments="x:Double" Android="13" WinPhone="13" iOS="10"></OnPlatform>
+
+      <Color x:Key="CommonProfileLabelTextColor">#969696</Color>
+          <Color x:Key="CommonProfileLabelTextSecondColor">#3E3E3E</Color>
+    </ResourceDictionary>
+
+  </Application.Resources>
+</Application>

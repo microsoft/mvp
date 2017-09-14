@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MVPUI.Login">
+  <ContentPage.Content>
+    <StackLayout VerticalOptions="Fill" BackgroundColor="{StaticResource BlueBackgroundColor}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="5"></ColumnDefinition>
+          <ColumnDefinition Width="20"></ColumnDefinition>
+          <ColumnDefinition Width="*"></ColumnDefinition>
+          <ColumnDefinition Width="50"></ColumnDefinition>
+          <ColumnDefinition Width="45"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="5"></RowDefinition>
+          <RowDefinition Height="35"></RowDefinition>
+          <RowDefinition Height="80"></RowDefinition>
+          <RowDefinition Height="200" ></RowDefinition>
+          <RowDefinition Height="45"></RowDefinition>
+          <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackLayout BackgroundColor="White" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal">
+          <Image Margin="10,0,0,0" VerticalOptions="Center" Source="{Binding SearchIcon}" HeightRequest="25" ></Image>
+          <Entry VerticalOptions="Fill" BackgroundColor="White" HorizontalOptions="FillAndExpand"  Placeholder="Find an MVP" FontSize="14"></Entry>
+        </StackLayout>
+        <Image Source="{Binding SettingIcon}" Grid.Row="1" Grid.Column="4"></Image>
+        <Image Grid.ColumnSpan="5" Grid.Row="3" HeightRequest="200" Source="{Binding MvpBackgroundLogo}"></Image>
+       
+        <Label TextColor="White" Text="Sign in" Grid.ColumnSpan="5" Grid.Row="4" FontSize="28" WidthRequest="110" Margin="30,0,0,0" HorizontalOptions="Center" x:Name="loginBtn"></Label>
+      </Grid>
+    </StackLayout>
+  </ContentPage.Content>
+</ContentPage>
