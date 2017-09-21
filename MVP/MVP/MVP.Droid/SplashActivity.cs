@@ -7,17 +7,20 @@ using Android.Util;
 using Android.Content.PM;
 
 namespace Microsoft.Mvp.Droid
-{  
-    [Activity(MainLauncher = true, NoHistory = true, Theme = "@style/MyTheme.Splash",
-    ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class SplashScreen : Activity
-    {
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
+{
 
+    [Activity(Label = "MVP",
+        Icon = "@drawable/icon",
+        Theme = "@style/SplashTheme",
+        MainLauncher = true)]
+    public class SplashActivity : AppCompatActivity
+    {
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
             var intent = new Intent(this, typeof(MainActivity));
             StartActivity(intent);
+            Finish();
         }
     }
 }

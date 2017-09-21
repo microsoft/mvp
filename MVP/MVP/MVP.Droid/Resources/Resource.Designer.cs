@@ -1491,7 +1491,7 @@ namespace Microsoft.Mvp.Droid
 			public const int primary = 2131296347;
 			
 			// aapt resource value: 0x7f09005c
-			public const int primaryDark = 2131296348;
+			public const int primary_dark = 2131296348;
 			
 			// aapt resource value: 0x7f09003e
 			public const int primary_dark_material_dark = 2131296318;
@@ -2281,8 +2281,26 @@ namespace Microsoft.Mvp.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
+			// aapt resource value: 0x7f020152
+			public const int avd_hide_password_1 = 2130837842;
+			
+			// aapt resource value: 0x7f020153
+			public const int avd_hide_password_2 = 2130837843;
+			
+			// aapt resource value: 0x7f020154
+			public const int avd_hide_password_3 = 2130837844;
+			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
+			
+			// aapt resource value: 0x7f020155
+			public const int avd_show_password_1 = 2130837845;
+			
+			// aapt resource value: 0x7f020156
+			public const int avd_show_password_2 = 2130837846;
+			
+			// aapt resource value: 0x7f020157
+			public const int avd_show_password_3 = 2130837847;
 			
 			// aapt resource value: 0x7f020055
 			public const int Benefits = 2130837589;
@@ -3293,8 +3311,8 @@ namespace Microsoft.Mvp.Droid
 			// aapt resource value: 0x7f0c004f
 			public const int list_item = 2131492943;
 			
-			// aapt resource value: 0x7f0c00b8
-			public const int masked = 2131493048;
+			// aapt resource value: 0x7f0c00ba
+			public const int masked = 2131493050;
 			
 			// aapt resource value: 0x7f0c00a6
 			public const int media_actions = 2131493030;
@@ -3494,6 +3512,9 @@ namespace Microsoft.Mvp.Droid
 			// aapt resource value: 0x7f0c001f
 			public const int showTitle = 2131492895;
 			
+			// aapt resource value: 0x7f0c00b7
+			public const int sliding_tabs = 2131493047;
+			
 			// aapt resource value: 0x7f0c007a
 			public const int smallLabel = 2131492986;
 			
@@ -3572,6 +3593,9 @@ namespace Microsoft.Mvp.Droid
 			// aapt resource value: 0x7f0c005e
 			public const int title_template = 2131492958;
 			
+			// aapt resource value: 0x7f0c00b8
+			public const int toolbar = 2131493048;
+			
 			// aapt resource value: 0x7f0c0031
 			public const int top = 2131492913;
 			
@@ -3596,8 +3620,8 @@ namespace Microsoft.Mvp.Droid
 			// aapt resource value: 0x7f0c000e
 			public const int view_offset_helper = 2131492878;
 			
-			// aapt resource value: 0x7f0c00b7
-			public const int visible = 2131493047;
+			// aapt resource value: 0x7f0c00b9
+			public const int visible = 2131493049;
 			
 			// aapt resource value: 0x7f0c0098
 			public const int volume_item_container = 2131493016;
@@ -3898,6 +3922,12 @@ namespace Microsoft.Mvp.Droid
 			
 			// aapt resource value: 0x7f030043
 			public const int support_simple_spinner_dropdown_item = 2130903107;
+			
+			// aapt resource value: 0x7f030044
+			public const int Tabbar = 2130903108;
+			
+			// aapt resource value: 0x7f030045
+			public const int Toolbar = 2130903109;
 			
 			static Layout()
 			{
@@ -4224,6 +4254,9 @@ namespace Microsoft.Mvp.Droid
 			
 			// aapt resource value: 0x7f0a016e
 			public const int Animation_Design_BottomSheetDialog = 2131362158;
+			
+			// aapt resource value: 0x7f0a0189
+			public const int AppCompatDialogStyle = 2131362185;
 			
 			// aapt resource value: 0x7f0a00b0
 			public const int Base_AlertDialog_AppCompat = 2131361968;
@@ -4699,15 +4732,6 @@ namespace Microsoft.Mvp.Droid
 			// aapt resource value: 0x7f0a0003
 			public const int CardView_Light = 2131361795;
 			
-			// aapt resource value: 0x7f0a0188
-			public const int MyTheme = 2131362184;
-			
-			// aapt resource value: 0x7f0a0187
-			public const int MyTheme_Base = 2131362183;
-			
-			// aapt resource value: 0x7f0a0189
-			public const int MyTheme_Splash = 2131362185;
-			
 			// aapt resource value: 0x7f0a002d
 			public const int Platform_AppCompat = 2131361837;
 			
@@ -4785,6 +4809,12 @@ namespace Microsoft.Mvp.Droid
 			
 			// aapt resource value: 0x7f0a004d
 			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131361869;
+			
+			// aapt resource value: 0x7f0a018a
+			public const int SplashTheme = 2131362186;
+			
+			// aapt resource value: 0x7f0a018b
+			public const int SplashTheme_Base = 2131362187;
 			
 			// aapt resource value: 0x7f0a00db
 			public const int TextAppearance_AppCompat = 2131362011;
@@ -5103,6 +5133,12 @@ namespace Microsoft.Mvp.Droid
 			
 			// aapt resource value: 0x7f0a000a
 			public const int Theme_MediaRouter_LightControlPanel = 2131361802;
+			
+			// aapt resource value: 0x7f0a0187
+			public const int Theme_MyTheme = 2131362183;
+			
+			// aapt resource value: 0x7f0a0188
+			public const int Theme_MyTheme_Base = 2131362184;
 			
 			// aapt resource value: 0x7f0a011d
 			public const int ThemeOverlay_AppCompat = 2131362077;
