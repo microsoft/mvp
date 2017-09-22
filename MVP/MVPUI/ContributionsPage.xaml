@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Microsoft.Mvpui.ContributionsPage"
+             Title="Contributions">
+    <ListView ItemsSource="{Binding List}"
+            HasUnevenRows="True"
+              RowHeight="-1"
+            CachingStrategy="RecycleElement">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
+                    <ViewCell.ContextActions>
+                        <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
+                           Text="Edit" />
+                        <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                           Text="Delete" IsDestructive="True" />
+                    </ViewCell.ContextActions>
+                    <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
+                        <Image x:Name="image5" WidthRequest="45" HeightRequest="35" Source="{Binding Icon}"/>
+                        <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                            <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource CommonProfileLabelTextSecondColor}" VerticalTextAlignment="Center" FontAttributes="Bold">
+                                <Label.FontSize>
+                                    <OnPlatform x:TypeArguments="x:Double">
+                                        <OnPlatform.iOS>11</OnPlatform.iOS>
+                                        <OnPlatform.Android>14</OnPlatform.Android>
+                                        <OnPlatform.WinPhone>14</OnPlatform.WinPhone>
+                                    </OnPlatform>
+                                </Label.FontSize>
+                            </Label>
+                            <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                                <Label Text="{Binding DataFormat}" TextColor="{StaticResource CommonProfileLabelTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label  Text="{Binding LabelTextOfContribution}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding AnnualReach}" TextColor="{StaticResource CommonProfileLabelTextColor}"  VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout >
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

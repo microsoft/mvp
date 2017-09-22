@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.MyProfile"
-             BackgroundColor="{StaticResource BlueBackgroundColor}">
+             BackgroundColor="{StaticResource BlueBackgroundColor}"
+             Title="My Profile">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Settings" Icon="{Binding StrSettingImage}" x:Name="ToolBarSettings"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
             <Grid>
@@ -16,9 +20,6 @@
                             <OnPlatform.iOS>0,20,0,0</OnPlatform.iOS>
                         </OnPlatform>
                     </StackLayout.Margin>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Image x:Name="imageSettings" Source="{Binding StrSettingImage}" WidthRequest="36" HeightRequest="36" HorizontalOptions="EndAndExpand"/>
-                    </StackLayout>
                     <Label x:Name="lableErrorMesage" HorizontalOptions="CenterAndExpand" Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="#FFAEC9" FontSize="15"></Label>
                 </StackLayout>
                 <RelativeLayout Grid.Row="1" x:Name="outerLayout">
@@ -127,7 +128,7 @@
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
-                                <Button BorderRadius="0" BackgroundColor="{StaticResource BlueBackgroundColor}" FontSize="12" x:Name="btnLoadMore" TextColor="White" Text="Load More..." IsVisible="{Binding HasMoreItems}" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" Clicked="OnLoadMoreClicked">
+                                <Button BorderRadius="0" BackgroundColor="{StaticResource BlueBackgroundColor}" FontSize="12" x:Name="btnLoadMore" TextColor="White" Text="Load More..." IsVisible="{Binding CanLoadMore}" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" Clicked="OnLoadMoreClicked">
                                     <Button.Margin>
                                         <OnPlatform x:TypeArguments="Thickness">
                                             <OnPlatform.WinPhone>0,0,0,20</OnPlatform.WinPhone>

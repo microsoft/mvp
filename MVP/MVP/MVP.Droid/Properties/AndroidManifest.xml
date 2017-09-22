@@ -3,7 +3,6 @@
 	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="24" />
 	<application android:label="Microsoft MVP Award" android:theme="@style/Theme.MyTheme" android:icon="@drawable/icon">
 		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDcpXiOwahx0aobNR2nheVwRT8chaB_D7A" />
-		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />

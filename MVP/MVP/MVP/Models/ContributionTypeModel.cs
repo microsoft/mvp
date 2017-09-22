@@ -1,5 +1,4 @@
-﻿using System; 
-using System.Collections.ObjectModel;
+﻿using MvvmHelpers;
 
 namespace Microsoft.Mvp.Models
 {
@@ -26,6 +25,6 @@ namespace Microsoft.Mvp.Models
 
     public class ContributionTypeDetail
     {  
-        public ObservableCollection<ContributionTypeModel> ContributionTypes { get; set; }
+        public ObservableRangeCollection<ContributionTypeModel> ContributionTypes { get; set; }
     }
 }

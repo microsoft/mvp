@@ -1,10 +1,13 @@
 ﻿using Microsoft.Mvp.ViewModels;
+using Microsoft.Mvpui.Helpers;
 using Xamarin.Forms;
 
 namespace Microsoft.Mvpui
 {
     public partial class App : Application
     {
+
+      
 
         #region Private Fields
 
@@ -74,11 +77,28 @@ namespace Microsoft.Mvpui
 
             if (LogOnViewModel.Instance.IsLoggedIn)
             {
-                MainPage = new MyProfile();
+                GoHome();
             }
             else
             {
                 MainPage = new LogOn();
+            }
+        }
+
+        public static void GoHome()
+        {
+            // The root page of your application
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    Current.MainPage = new MainTabPageiOS();
+                    break;
+                default:
+                    Current.MainPage = new MVPNavigationPage(new MainTabPage())
+                    {
+                        Title = "Microsoft MVP"
+                    };
+                    break;
             }
         }
 

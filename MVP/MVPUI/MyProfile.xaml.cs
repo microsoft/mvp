@@ -1,4 +1,5 @@
-﻿using Microsoft.Mvp.Models;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
 using Microsoft.Mvpui.Helpers;
 using System;
@@ -21,11 +22,12 @@ namespace Microsoft.Mvpui
             listView.ItemDisappearing += ListView_ItemDisappearing;
 
 
-            var settingsGesture = new TapGestureRecognizer();
-            settingsGesture.Tapped += SettingsGesture_Tapped;
-            imageSettings.GestureRecognizers.Add(settingsGesture);
+            ToolBarSettings.Command = new Command(async () =>
+            {
+                await Navigation.PushModalAsync(new Settings());
+            });
 
-            if (Device.OS == TargetPlatform.iOS)
+            if (Device.RuntimePlatform == Device.iOS)
             {
                 btnAdd.WidthRequest = 130;
                 btnLoadMore.HeightRequest = 25;
@@ -41,11 +43,6 @@ namespace Microsoft.Mvpui
         #endregion
 
         #region Private and Protected Methods
-
-        private async void SettingsGesture_Tapped(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new Settings());
-        }
 
         protected override bool OnBackButtonPressed()
         {
@@ -80,7 +77,7 @@ namespace Microsoft.Mvpui
                         }
                         else
                         {
-                            profile = await MvpService.GetProfile(LogOnViewModel.StoredToken);
+                            profile = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
 
                             cacheItem[CommonConstants.ProfileCacheKey] = Newtonsoft.Json.JsonConvert.SerializeObject(profile);
                             cacheItem[CommonConstants.ProfileCacheDateKey] = DateTime.Now;
@@ -90,7 +87,7 @@ namespace Microsoft.Mvpui
                     }
                     else
                     {
-                        profile = await MvpService.GetProfile(LogOnViewModel.StoredToken);
+                        profile = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
 
                         cacheItem.Add(CommonConstants.ProfileCacheKey, Newtonsoft.Json.JsonConvert.SerializeObject(profile));
                         cacheItem.Add(CommonConstants.ProfileCacheDateKey, DateTime.Now);
@@ -138,7 +135,7 @@ namespace Microsoft.Mvpui
                         }
                         else
                         {
-                            MyProfileViewModel.Instance.StoreImageBase64Str = await MvpService.GetPhoto(LogOnViewModel.StoredToken);
+                            MyProfileViewModel.Instance.StoreImageBase64Str = await MvpHelper.MvpService.GetPhoto(LogOnViewModel.StoredToken);
                             cacheItem[CommonConstants.ProfilePhotoCacheKey] = MyProfileViewModel.Instance.StoreImageBase64Str;
                             cacheItem[CommonConstants.ProfilePhotoCacheDateKey] = DateTime.Now;
                             cache[currentUserIdKey] = cacheItem;
@@ -146,7 +143,7 @@ namespace Microsoft.Mvpui
                     }
                     else
                     {
-                        MyProfileViewModel.Instance.StoreImageBase64Str = await MvpService.GetPhoto(LogOnViewModel.StoredToken);
+                        MyProfileViewModel.Instance.StoreImageBase64Str = await MvpHelper.MvpService.GetPhoto(LogOnViewModel.StoredToken);
                         cacheItem.Add(CommonConstants.ProfilePhotoCacheKey, MyProfileViewModel.Instance.StoreImageBase64Str);
                         cacheItem.Add(CommonConstants.ProfilePhotoCacheDateKey, DateTime.Now);
                         cache[currentUserIdKey] = cacheItem;
@@ -175,6 +172,9 @@ namespace Microsoft.Mvpui
 
         private void CheckCacheItem()
         {
+            if (!Application.Current.Properties.ContainsKey(CommonConstants.CurrentUserIdKey))
+                return;
+
             currentUserIdKey = Application.Current.Properties[CommonConstants.CurrentUserIdKey].ToString();
             if (cache.ContainsKey(currentUserIdKey))
             {
@@ -199,7 +199,7 @@ namespace Microsoft.Mvpui
             GetProfile();
             if (MyProfileViewModel.Instance.List == null || MyProfileViewModel.Instance.List.Count == 0)
             {
-                var contributions = await MvpService.GetContributions(-5, 10, LogOnViewModel.StoredToken);
+                var contributions = await MvpHelper.MvpService.GetContributions(-5, 10, LogOnViewModel.StoredToken);
                 MvpHelper.SetContributionInfoToProfileViewModel(contributions);
                 listView.HeightRequest = MyProfileViewModel.Instance.List.Count * 50;
             }
@@ -221,7 +221,7 @@ namespace Microsoft.Mvpui
         private void ListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             listView.HeightRequest = MyProfileViewModel.Instance.List.Count * 50;
-            MyProfileViewModel.Instance.OnPropertyChanged("HasMoreItems");
+            MyProfileViewModel.Instance.CanLoadMore = MyProfileViewModel.Instance.HasMoreItems;
         }
 
         private async void OnAddContributionClicked(object sender, EventArgs e)
@@ -233,15 +233,16 @@ namespace Microsoft.Mvpui
         {
             int start = MyProfileViewModel.Instance.List.Count;
 
-            var contributionInfo = await Helpers.MvpService.GetContributions(start, 5, LogOnViewModel.StoredToken);
+            var contributionInfo = await MvpHelper.MvpService.GetContributions(start, 5, LogOnViewModel.StoredToken);
 
             if (contributionInfo != null && contributionInfo.Contributions != null && contributionInfo.Contributions.Count > 0)
             {
-                foreach (var item in contributionInfo.Contributions)
+                var contributors = contributionInfo.Contributions.Select(c =>
                 {
-                    Helpers.MvpHelper.SetIconAndLabelTextOfContribution(item);
-                    MyProfileViewModel.Instance.List.Add(item);
-                }
+                    Helpers.MvpHelper.SetIconAndLabelTextOfContribution(c);
+                    return c;
+                });
+                MyProfileViewModel.Instance.List.AddRange(contributors);
 
                 MyProfileViewModel.Instance.TotalOfData = contributionInfo.TotalContributions;
 
@@ -282,7 +283,7 @@ namespace Microsoft.Mvpui
             var mi = ((MenuItem)sender);
             ContributionModel contribution = mi.CommandParameter as ContributionModel;
 
-            string result = await MvpService.DeleteContributionModel(Convert.ToInt32(contribution.ContributionId, System.Globalization.CultureInfo.InvariantCulture), LogOnViewModel.StoredToken);
+            string result = await MvpHelper.MvpService.DeleteContributionModel(Convert.ToInt32(contribution.ContributionId, System.Globalization.CultureInfo.InvariantCulture), LogOnViewModel.StoredToken);
             if (result == CommonConstants.OkResult)
             {
                 var modelToDelete = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == contribution.ContributionId).FirstOrDefault();

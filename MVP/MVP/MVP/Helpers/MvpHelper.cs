@@ -1,5 +1,7 @@
-﻿using Microsoft.Mvp.Models;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
+using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,8 @@ namespace Microsoft.Mvpui.Helpers
         {
 
         }
+
+        public static IMvpService MvpService => DependencyService.Get<IMvpService>();
 
         public static void RemoveProperties()
         {
@@ -67,12 +71,16 @@ namespace Microsoft.Mvpui.Helpers
             if (profile != null && profile.Contributions != null)
             {
                 MyProfileViewModel.Instance.TotalOfData = profile.TotalContributions;
-                MyProfileViewModel.Instance.List = new System.Collections.ObjectModel.ObservableCollection<ContributionModel>();
-                foreach (var contribution in profile.Contributions)
+                MyProfileViewModel.Instance.List = new ObservableRangeCollection<ContributionModel>();
+
+                var contributions = profile.Contributions.Select(c =>
                 {
-                    MvpHelper.SetIconAndLabelTextOfContribution(contribution);
-                    MyProfileViewModel.Instance.List.Add(contribution);
-                }
+                    SetIconAndLabelTextOfContribution(c);
+                    return c;
+                });
+
+
+                MyProfileViewModel.Instance.List.AddRange(contributions);
             }
         }
 
@@ -80,7 +88,6 @@ namespace Microsoft.Mvpui.Helpers
         {
             string icon = string.Empty;
             string labelText = string.Empty;
-            string StrWPResourcePath = (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows) ? CommonConstants.ImageFolderForWP : string.Empty;
             if (contribution.ContributionType == null)
             {
                 icon = CommonConstants.DefaultContributionIcon;
@@ -199,7 +206,7 @@ namespace Microsoft.Mvpui.Helpers
             }
 
             contribution.LabelTextOfContribution = labelText;
-            contribution.Icon = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, icon);
+            contribution.Icon = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", CommonConstants.BaseResourcePath, icon);
 
         }
     }

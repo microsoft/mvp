@@ -1,6 +1,8 @@
-﻿using Microsoft.Mvp.Models;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
 using Microsoft.Mvpui.Helpers;
+using MvvmHelpers;
 //using Plugin.Geolocator;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
@@ -214,10 +216,8 @@ namespace Microsoft.Mvpui
 
         private void SetImageSource()
         {
-
-            string StrWPResourcePath = (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows) ? CommonConstants.ImageFolderForWP : string.Empty;
-            btnCancel.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, "Cancel.png");
-            imgSave.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, "Right.png");
+            btnCancel.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", CommonConstants.BaseResourcePath, "Cancel.png");
+            imgSave.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", CommonConstants.BaseResourcePath, "Right.png");
         }
 
         public async void OnSaveClicked(object sender, EventArgs e)
@@ -262,7 +262,7 @@ namespace Microsoft.Mvpui
                         AnnualReach = Convert.ToInt32(entryAnnualReach.Text, System.Globalization.CultureInfo.InvariantCulture),
                         SecondAnnualQuantity = Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture)
                     };
-                    var result = await MvpService.AddContributionModel(model, LogOnViewModel.StoredToken);
+                    var result = await MvpHelper.MvpService.AddContributionModel(model, LogOnViewModel.StoredToken);
                     if (result != null && result.ContributionId != "0")
                     {
                         Helpers.MvpHelper.SetIconAndLabelTextOfContribution(result);
@@ -284,10 +284,10 @@ namespace Microsoft.Mvpui
                     ContributionViewModel.Instance.MyContribution.AnnualQuantity = Convert.ToInt32(entryAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
                     ContributionViewModel.Instance.MyContribution.AnnualReach = Convert.ToInt32(entryAnnualReach.Text, System.Globalization.CultureInfo.InvariantCulture);
                     ContributionViewModel.Instance.MyContribution.SecondAnnualQuantity = Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
-                    string result = await MvpService.EditContributionModel(ContributionViewModel.Instance.MyContribution, LogOnViewModel.StoredToken);
+                    string result = await MvpHelper.MvpService.EditContributionModel(ContributionViewModel.Instance.MyContribution, LogOnViewModel.StoredToken);
                     if (result == CommonConstants.OkResult)
                     {
-                        MyProfileViewModel.Instance.List = new ObservableCollection<ContributionModel>(MyProfileViewModel.Instance.List);
+                        MyProfileViewModel.Instance.List = new ObservableRangeCollection<ContributionModel>(MyProfileViewModel.Instance.List);
                     }
                     else
                     {
