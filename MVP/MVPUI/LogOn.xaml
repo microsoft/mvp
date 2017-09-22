@@ -1,32 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage BackgroundColor="{StaticResource BlueBackgroundColor}" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.LogOn">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Fill" BackgroundColor="{StaticResource BlueBackgroundColor}">
-            <StackLayout.Margin>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <OnPlatform.iOS>0,20,0,0</OnPlatform.iOS>
-                </OnPlatform>
-            </StackLayout.Margin>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5"></ColumnDefinition>
-                    <ColumnDefinition Width="5"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="50"></ColumnDefinition>
-                    <ColumnDefinition Width="45"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5"></RowDefinition>
-                    <RowDefinition Height="35"></RowDefinition>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition Height="200"></RowDefinition>
-                    <RowDefinition Height="45"></RowDefinition>
-                    <RowDefinition ></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Image Grid.ColumnSpan="5" Grid.Row="3" HeightRequest="200" Source="{Binding MvpBackgroundLogo}"></Image>
+        <Grid>
+            <StackLayout VerticalOptions="CenterAndExpand" Margin="0,-80,0,0">
+                <Image HeightRequest="200" Source="{Binding MvpBackgroundLogo}"></Image>
 
                 <Button TextColor="White"
                         BorderColor="White"
@@ -34,13 +13,13 @@
                         BorderRadius="5"
                         BorderWidth="2"
                         Clicked="ButtonSignIn_Clicked"
-                       Text="Sign in" 
-                       Grid.ColumnSpan="5"
-                       Grid.Row="4" 
-                       FontSize="Medium" 
-                       WidthRequest="150" 
-                       HorizontalOptions="Center"/>
-            </Grid>
-        </StackLayout>
+                        Text="Sign in"
+                        FontSize="Medium" 
+                        FontAttributes="Bold"
+                        WidthRequest="150" 
+                        HorizontalOptions="Center"/>
+
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

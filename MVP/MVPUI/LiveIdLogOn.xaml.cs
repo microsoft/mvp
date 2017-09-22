@@ -11,10 +11,12 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Microsoft.Mvp.Interfaces;
+using Microsoft.Mvpui.CustomControls;
 
 namespace Microsoft.Mvpui
 {
-    public partial class LiveIdLogOn : ContentPage
+    public partial class LiveIdLogOn : ModalPage
     {
 
         #region Constructor
@@ -23,6 +25,8 @@ namespace Microsoft.Mvpui
         {
             InitializeComponent();
             this.BindingContext = LiveIdLogOnViewModel.Instance;
+
+            //TODO: Perhaps remove toolbaritems on Android?
         }
 
         #endregion
@@ -38,7 +42,11 @@ namespace Microsoft.Mvpui
             browserInstance.Navigating += Browser_Navigating;
             browserInstance.Source = new UrlWebViewSource() { Url = LiveIdLogOnViewModel.Instance.LiveIdLogOnUrl };
             browserInstance.GoForward();
+        }
 
+        private async void ButtonClose_Clicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PopModalAsync(true);
         }
 
         private async void Browser_Navigating(object sender, WebNavigatingEventArgs e)

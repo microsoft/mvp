@@ -7,7 +7,7 @@ namespace Microsoft.Mvpui
     public partial class App : Application
     {
 
-      
+
 
         #region Private Fields
 
@@ -18,6 +18,8 @@ namespace Microsoft.Mvpui
         #endregion
 
         #region Public Fields
+
+        public static App Instance;
 
         public static ICookieHelper CookieHelper
         {
@@ -73,7 +75,9 @@ namespace Microsoft.Mvpui
 
         public App()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+
+            Instance = this;
 
             if (LogOnViewModel.Instance.IsLoggedIn)
             {

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.App">
@@ -12,6 +12,12 @@
             <Color x:Key="BlueBackgroundColor">#0072C6</Color>
             <Color x:Key="NormalTextColor">White</Color>
             <Color x:Key="NormalLabelTextColor">Black</Color>
+            
+            <Color x:Key="NavigationTintColor">#999fa5</Color>
+            <Color x:Key="NavigationTitleColor">#0a77b2</Color>
+            <Color x:Key="NavigationShadowColor">#f2f2f2</Color>
+            <Color x:Key="TabTintColor">#0a77b2</Color>
+            
             <!--<OnPlatform x:Key="NormalLabelTextColor" x:TypeArguments="Color" Android="Black" WinPhone="Black" iOS="Black"></OnPlatform>-->
             <!--set for different platform-->
             <OnPlatform x:Key="NormalLabelFontSize" x:TypeArguments="x:Double" Android="14" WinPhone="14" iOS="13"></OnPlatform>

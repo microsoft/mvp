@@ -40,9 +40,10 @@ namespace Microsoft.Mvp.ViewModels
                 ContributionViewModel.Instance.ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>(contributionTypeDetail.ContributionTypes);
 
             }
-            catch (TaskCanceledException tce) {
+            catch (TaskCanceledException tce)
+            {
                 ContributionViewModel.Instance.ErrorMessage = tce.Message;
-            }           
+            }
             return true;
         }
 
@@ -53,7 +54,7 @@ namespace Microsoft.Mvp.ViewModels
                 ContributionDetail contributionDetail = await MvpHelper.MvpService.GetContributionAreas(LogOnViewModel.StoredToken);
                 ContributionViewModel.Instance.ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(contributionDetail.ContributionArea);
             }
-            catch(TaskCanceledException tce)
+            catch (TaskCanceledException tce)
             {
                 ContributionViewModel.Instance.ErrorMessage = tce.Message;
             }
@@ -75,7 +76,7 @@ namespace Microsoft.Mvp.ViewModels
         private string _strMeImage = "Me.png";
         private string _strNotificationsImage = "Notifications.png";
         private string _strSupportImage = "Support.png";
-        private string _strSettingsImage = "Settings.png";
+        private string _strSettingsImage = "icon_settings.png";
 
         private string _personName = string.Empty;
         private string _awardCategoriesTip = "Award Categories:";
@@ -194,10 +195,10 @@ namespace Microsoft.Mvp.ViewModels
         public string Description
         {
             get => _description;
-            
+
 
             set => SetProperty(ref _description, value);
-            
+
         }
 
         public ObservableRangeCollection<ContributionModel> List
@@ -218,7 +219,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strBenefitsImage);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strBenefitsImage);
             }
 
             set
@@ -232,7 +233,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strMyNetworkImage);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strMyNetworkImage);
             }
 
             set
@@ -246,7 +247,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strMeImage);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strMeImage);
             }
 
             set
@@ -260,7 +261,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strNotificationsImage);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strNotificationsImage);
             }
 
             set
@@ -274,7 +275,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strSupportImage);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strSupportImage);
             }
 
             set
@@ -288,7 +289,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strSettingsImage);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strSettingsImage);
             }
 
             set
@@ -315,7 +316,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strAvatar);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strAvatar);
             }
 
             set
@@ -329,7 +330,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strAvatarBackground);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strAvatarBackground);
             }
 
             set
@@ -382,7 +383,7 @@ namespace Microsoft.Mvp.ViewModels
             get
             {
 
-                
+
                 ImageSource retSource = null;
                 bool useDefault = false;
                 if (StoreImageBase64Str != null)

@@ -9,14 +9,17 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Windows.Input;
 
 namespace Microsoft.Mvp.ViewModels
 {
     public class LiveIdLogOnViewModel
     {
         #region Singleton pattern and constructors
+
         private static LiveIdLogOnViewModel _instance = null;
         private static readonly object _synObject = new object();
+
         public static LiveIdLogOnViewModel Instance
         {
             get
@@ -44,6 +47,7 @@ namespace Microsoft.Mvp.ViewModels
         #endregion
 
         #region Private Members 
+
         string _liveIdLogOnUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.LiveIdLogOnUrlFormatString, CommonConstants.ClientId, CommonConstants.Scope);
         string _liveIdSignOutUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.LiveIdSignOutUrlFormatString, CommonConstants.ClientId);
         string _accessTokenUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.AccessTokenUrlFormatString, CommonConstants.ClientId, CommonConstants.ClientSecret);

@@ -59,12 +59,12 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer: 794858207@qq.com (3K7PT367PR)</CodesignKey>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <BuildIpa>True</BuildIpa>
@@ -142,6 +142,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <None Include="packages.config" />
+    <Compile Include="Renderers\NavigationBarRenderer.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Renderers\ContentPageRenderer.cs" />
+    <Compile Include="DependencyServices\StatusBar.cs" />
+    <Compile Include="Renderers\TabsRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default%402x.png" />
@@ -150,6 +155,20 @@
     <BundleResource Include="Resources\Default-Portrait.png" />
     <BundleResource Include="Resources\Default.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\icon_close%402x.png" />
+    <BundleResource Include="Resources\icon_close%403x.png" />
+    <BundleResource Include="Resources\icon_profile%402x.png" />
+    <BundleResource Include="Resources\icon_profile%403x.png" />
+    <BundleResource Include="Resources\icon_add%402x.png" />
+    <BundleResource Include="Resources\icon_add%403x.png" />
+    <BundleResource Include="Resources\icon_settings%402x.png" />
+    <BundleResource Include="Resources\icon_settings%403x.png" />
+    <BundleResource Include="Resources\icon_contribution_selected%402x.png" />
+    <BundleResource Include="Resources\icon_contribution_selected%403x.png" />
+    <BundleResource Include="Resources\icon_contribution%402x.png" />
+    <BundleResource Include="Resources\icon_contribution%403x.png" />
+    <BundleResource Include="Resources\icon_profile_selected%402x.png" />
+    <BundleResource Include="Resources\icon_profile_selected%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -266,9 +285,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Renders\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\SplashScreen.scale-1.png" />
@@ -421,6 +437,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-Small-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="DependencyServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
