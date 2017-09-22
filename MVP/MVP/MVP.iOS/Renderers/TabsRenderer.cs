@@ -14,7 +14,7 @@ namespace Microsoft.Mvp.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            UITabBar.Appearance.TintColor = ((Color)App.Instance.Resources["TabTintColor"]).ToUIColor();
+            UITabBar.Appearance.TintColor = ((Color)Xamarin.Forms.Application.Current.Resources["TabTintColor"]).ToUIColor();
         }
 
         public override void ViewWillAppear(bool animated)

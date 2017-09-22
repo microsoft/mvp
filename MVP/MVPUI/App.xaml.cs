@@ -19,8 +19,6 @@ namespace Microsoft.Mvpui
 
         #region Public Fields
 
-        public static App Instance;
-
         public static ICookieHelper CookieHelper
         {
             get
@@ -76,8 +74,6 @@ namespace Microsoft.Mvpui
         public App()
         {
             InitializeComponent();
-
-            Instance = this;
 
             if (LogOnViewModel.Instance.IsLoggedIn)
             {

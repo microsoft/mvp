@@ -18,12 +18,12 @@ namespace Microsoft.Mvp.iOS.Renderers
             // Some basic navigationbar styling.
             UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes()
             {
-                ForegroundColor = ((Color)App.Instance.Resources["NavigationTitleColor"]).ToUIColor(),
+                ForegroundColor = ((Color)Xamarin.Forms.Application.Current.Resources["NavigationTitleColor"]).ToUIColor(),
                 Font = UIFont.BoldSystemFontOfSize(16)
             };
 
-            UINavigationBar.Appearance.TintColor = ((Color)App.Instance.Resources["NavigationTintColor"]).ToUIColor();
-            UINavigationBar.Appearance.ShadowImage = ((Color)App.Instance.Resources["NavigationShadowColor"]).ToUIColor().ToUIImage(1, 1);
+            UINavigationBar.Appearance.TintColor = ((Color)Xamarin.Forms.Application.Current.Resources["NavigationTintColor"]).ToUIColor();
+            UINavigationBar.Appearance.ShadowImage = ((Color)Xamarin.Forms.Application.Current.Resources["NavigationShadowColor"]).ToUIColor().ToUIImage(1, 1);
             UINavigationBar.Appearance.BarTintColor = Color.White.ToUIColor();
         }
     }
