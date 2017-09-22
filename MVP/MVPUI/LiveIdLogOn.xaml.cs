@@ -1,4 +1,5 @@
-﻿using Microsoft.Mvp.Models;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
 using Microsoft.Mvpui.Helpers;
 using Newtonsoft.Json;

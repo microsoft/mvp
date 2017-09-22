@@ -1,7 +1,8 @@
-﻿using Microsoft.Mvp.Models;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Models;
 using Microsoft.Mvpui.Helpers;
+using MvvmHelpers;
 using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -30,17 +31,13 @@ namespace Microsoft.Mvp.ViewModels
                 return _instance;
             }
         }
-        public MyProfileViewModel()
-        {
-            StrWPResourcePath = (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows) ? CommonConstants.ImageFolderForWP : string.Empty;
-        }
 
         public async Task<bool> BindingContributionType()
         {
             try
             {
-                ContributionTypeDetail contributionTypeDetail = await MvpService.GetContributionTypes(LogOnViewModel.StoredToken);
-                ContributionViewModel.Instance.ContributionTypeNames = new ObservableCollection<ContributionTypeModel>(contributionTypeDetail.ContributionTypes);
+                ContributionTypeDetail contributionTypeDetail = await MvpHelper.MvpService.GetContributionTypes(LogOnViewModel.StoredToken);
+                ContributionViewModel.Instance.ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>(contributionTypeDetail.ContributionTypes);
 
             }
             catch (TaskCanceledException tce) {
@@ -53,8 +50,8 @@ namespace Microsoft.Mvp.ViewModels
         {
             try
             {
-                ContributionDetail contributionDetail = await MvpService.GetContributionAreas(LogOnViewModel.StoredToken);
-                ContributionViewModel.Instance.ContributionAreas = new ObservableCollection<ContributionTechnologyModel>(contributionDetail.ContributionArea);
+                ContributionDetail contributionDetail = await MvpHelper.MvpService.GetContributionAreas(LogOnViewModel.StoredToken);
+                ContributionViewModel.Instance.ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(contributionDetail.ContributionArea);
             }
             catch(TaskCanceledException tce)
             {
@@ -88,7 +85,7 @@ namespace Microsoft.Mvp.ViewModels
         private string _awardsCountTip = "Number of MVP Awards:";
         private string _awardsCountValue = string.Empty;
         private string _description = string.Empty;
-        private ObservableCollection<ContributionModel> _list = new ObservableCollection<ContributionModel>();
+        private ObservableRangeCollection<ContributionModel> _list = new ObservableRangeCollection<ContributionModel>();
         private int _totalOfData = 100;
         private string _storeImageBase64Str;
 
@@ -196,19 +193,14 @@ namespace Microsoft.Mvp.ViewModels
 
         public string Description
         {
-            get
-            {
-                return _description;
-            }
+            get => _description;
+            
 
-            set
-            {
-                _description = value;
-                OnPropertyChanged("Description");
-            }
+            set => SetProperty(ref _description, value);
+            
         }
 
-        public ObservableCollection<ContributionModel> List
+        public ObservableRangeCollection<ContributionModel> List
         {
             get
             {
@@ -217,9 +209,8 @@ namespace Microsoft.Mvp.ViewModels
 
             set
             {
-                _list = value;
-                OnPropertyChanged("List");
-                OnPropertyChanged("HasMoreItems");
+                SetProperty(ref _list, value);
+                CanLoadMore = HasMoreItems;
             }
         }
 
@@ -356,6 +347,7 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
+
         public int TotalOfData
         {
             get
@@ -366,7 +358,7 @@ namespace Microsoft.Mvp.ViewModels
             set
             {
                 _totalOfData = value;
-                OnPropertyChanged("HasMoreItems");
+                CanLoadMore = HasMoreItems;
             }
         }
 
@@ -389,14 +381,34 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
+
+                
                 ImageSource retSource = null;
+                bool useDefault = false;
                 if (StoreImageBase64Str != null)
                 {
+                    if (MvpHelper.MvpService is DesignMvpService)
+                    {
+                        retSource = ImageSource.FromUri(new Uri(StoreImageBase64Str));
+                        return retSource;
+                    }
 
-                    var bytes = Convert.FromBase64String(StoreImageBase64Str);
-                    retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes));
+                    try
+                    {
+                        var bytes2 = Convert.FromBase64String(StoreImageBase64Str);
+                        retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes2));
+                    }
+                    catch
+                    {
+                        useDefault = true;
+                    }
                 }
                 else
+                {
+                    useDefault = true;
+                }
+
+                if (useDefault)
                 {
                     var bytes = Convert.FromBase64String(CommonConstants.DefaultPhoto);
                     retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes));

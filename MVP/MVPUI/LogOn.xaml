@@ -26,14 +26,20 @@
                     <RowDefinition ></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <!--<StackLayout BackgroundColor="White" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal">
-                    <Image Margin="10,0,0,0" VerticalOptions="Center" Source="{Binding SearchIcon}" HeightRequest="25" ></Image>
-                    <Entry VerticalOptions="Fill" BackgroundColor="White" HorizontalOptions="FillAndExpand"  Placeholder="Find an MVP" FontSize="14"></Entry>
-                </StackLayout>-->
-                <!--<Image Source="{Binding SettingIcon}" Grid.Row="1" Grid.Column="4"></Image>-->
                 <Image Grid.ColumnSpan="5" Grid.Row="3" HeightRequest="200" Source="{Binding MvpBackgroundLogo}"></Image>
 
-                <Label TextColor="White" Text="Sign in" Grid.ColumnSpan="5" Grid.Row="4" FontSize="28" WidthRequest="110" Margin="30,0,0,0" HorizontalOptions="Center" x:Name="logOnBtn"></Label>
+                <Button TextColor="White"
+                        BorderColor="White"
+                        BackgroundColor="{StaticResource PrimaryDark}"
+                        BorderRadius="5"
+                        BorderWidth="2"
+                        Clicked="ButtonSignIn_Clicked"
+                       Text="Sign in" 
+                       Grid.ColumnSpan="5"
+                       Grid.Row="4" 
+                       FontSize="Medium" 
+                       WidthRequest="150" 
+                       HorizontalOptions="Center"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

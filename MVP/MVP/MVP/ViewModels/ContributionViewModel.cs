@@ -1,6 +1,7 @@
-﻿using Microsoft.Mvp.Models;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Models;
 using Microsoft.Mvpui.Helpers;
-using System.Collections.ObjectModel;
+using MvvmHelpers;
 
 namespace Microsoft.Mvp.ViewModels
 {
@@ -31,15 +32,15 @@ namespace Microsoft.Mvp.ViewModels
 
         public ContributionViewModel()
         {
-            ContributionTypeNames = new ObservableCollection<ContributionTypeModel>();
-            ContributionAreas = new ObservableCollection<ContributionTechnologyModel>(); 
+            ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>();
+            ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(); 
 
             VisibilityModel[] visibilityModels = new VisibilityModel[3] {
                   new VisibilityModel() { Description= "Everyone",Id=299600000,LocalizeKey=null },
                   new VisibilityModel() { Description= "MVP Community",Id=100000001,LocalizeKey=null },
                   new VisibilityModel() { Description=  "Microsoft" ,Id=100000000,LocalizeKey=null}
             };
-            PersonGroups = new ObservableCollection<VisibilityModel>(visibilityModels);
+            PersonGroups = new ObservableRangeCollection<VisibilityModel>(visibilityModels);
         }
 
 
@@ -129,10 +130,10 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public ObservableCollection<ContributionTypeModel> ContributionTypeNames { get; set; }
+        public ObservableRangeCollection<ContributionTypeModel> ContributionTypeNames { get; set; }
 
-        public ObservableCollection<ContributionTechnologyModel> ContributionAreas { get; set; }
-        public ObservableCollection<VisibilityModel> PersonGroups { get; set; }
+        public ObservableRangeCollection<ContributionTechnologyModel> ContributionAreas { get; set; }
+        public ObservableRangeCollection<VisibilityModel> PersonGroups { get; set; }
 
         public string ContributionAggregate
         {

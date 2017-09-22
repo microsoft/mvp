@@ -1,4 +1,5 @@
-﻿using Microsoft.Mvpui.Helpers;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvpui.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,7 @@ namespace Microsoft.Mvpui
         {
             InitializeComponent();
 
-            string StrWPResourcePath = (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows) ? CommonConstants.ImageFolderForWP : string.Empty;
-            btnCancel.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, "Cancel.png");
+            btnCancel.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", CommonConstants.BaseResourcePath, "Cancel.png");
 
             var tapGestureRecognizer = new TapGestureRecognizer();
             tapGestureRecognizer.Tapped += OnCloseClicked;

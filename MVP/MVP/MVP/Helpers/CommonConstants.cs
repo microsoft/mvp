@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
-namespace Microsoft.Mvpui.Helpers
+namespace Microsoft.Mvp.Helpers
 {
     public class CommonConstants
     {
@@ -81,6 +82,11 @@ namespace Microsoft.Mvpui.Helpers
         #endregion
 
         public const string ImageFolderForWP = "Resources/";
+
+        public static string BaseResourcePath { get; } =
+          (Device.RuntimePlatform == Device.WinPhone || Device.RuntimePlatform == Device.Windows) ? CommonConstants.ImageFolderForWP : string.Empty;
+
+
         #region Icon Names
         public const string BlogIcon = "Blog.png";
         public const string BookIcon = "Book.png";

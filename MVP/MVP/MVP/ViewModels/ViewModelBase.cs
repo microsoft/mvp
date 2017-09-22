@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvvmHelpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,15 +7,11 @@ using System.Text;
 
 namespace Microsoft.Mvp.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ViewModelBase : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Event for when IsBusy changes
-        /// </summary>
-        public event EventHandler IsBusyChanged;
-
         /// <summary>
         /// Event for when IsValid changes
         /// </summary>
@@ -35,18 +32,12 @@ namespace Microsoft.Mvp.ViewModels
         /// <summary>
         /// Returns true if the current state of the ViewModel is valid
         /// </summary>
-        public bool IsValid
-        {
-            get { return errors.Count == 0; }
-        }
+        public bool IsValid => errors.Count == 0; 
 
         /// <summary>
         /// A list of errors if IsValid is false
         /// </summary>
-        protected List<string> Errors
-        {
-            get { return errors; }
-        }
+        protected List<string> Errors => errors;
 
         /// <summary>
         /// Protected method for validating the ViewModel
@@ -55,10 +46,7 @@ namespace Microsoft.Mvp.ViewModels
         protected virtual void Validate()
         {
             OnPropertyChanged("IsValid");
-
-            var method = IsValidChanged;
-            if (method != null)
-                method(this, EventArgs.Empty);
+            IsValidChanged?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -76,45 +64,6 @@ namespace Microsoft.Mvp.ViewModels
             else
             {
                 Errors.Remove(myError);
-            }
-        }
-
-        /// <summary>
-        /// Value indicating if a spinner should be shown
-        /// </summary>
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set
-            {
-                if (isBusy != value)
-                {
-                    isBusy = value;
-
-                    OnPropertyChanged("IsBusy");
-                    OnIsBusyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Other viewmodels can override this if something should be done when busy
-        /// </summary>
-        protected virtual void OnIsBusyChanged()
-        {
-            var ev = IsBusyChanged;
-            if (ev != null)
-            {
-                ev(this, EventArgs.Empty);
-            }
-        }
-
-        public virtual void OnPropertyChanged(string name)
-        {
-            var ev = PropertyChanged;
-            if (ev != null)
-            {
-                ev(this, new PropertyChangedEventArgs(name));
             }
         }
     }

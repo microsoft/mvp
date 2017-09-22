@@ -1,4 +1,6 @@
-﻿using Microsoft.Mvpui.Helpers;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvpui.Helpers;
+using MvvmHelpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -87,7 +89,7 @@ namespace Microsoft.Mvp.ViewModels
             MyProfileViewModel.Instance.AwardsCountValue = string.Empty;
 
             MyProfileViewModel.Instance.StoreImageBase64Str = null;
-            MyProfileViewModel.Instance.List = new System.Collections.ObjectModel.ObservableCollection<Models.ContributionModel>();
+            MyProfileViewModel.Instance.List = new ObservableRangeCollection<Models.ContributionModel>();
 
         }
 

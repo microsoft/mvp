@@ -2,21 +2,20 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.Serialization;
 using System.Net.Http;
-using System.Collections.ObjectModel;
 using Microsoft.Mvp.ViewModels;
-using System.Runtime.InteropServices;
+using MvvmHelpers;
+using Plugin.Connectivity;
+using Microsoft.Mvp.Helpers;
+using Microsoft.Mvpui.Helpers;
+using Xamarin.Forms;
 
-namespace Microsoft.Mvpui.Helpers
+[assembly: Dependency(typeof(LiveMvpService))]
+namespace Microsoft.Mvp.Helpers
 {
-    public class MvpService : IDisposable
+    public class LiveMvpService : IDisposable, IMvpService
     {
         public enum HttpMethod
         {
@@ -32,7 +31,7 @@ namespace Microsoft.Mvpui.Helpers
         /// <param name="model">Instance of ContributionModel</param>
         /// <param name="httpMethod">Put/Post/Delete</param>
         /// <returns></returns>
-        public async static Task<string> DoWork(string url, Object model, HttpMethod httpMethod, string token, bool isImage, bool isRefreshedToken, bool isAddOrUpdateContribution = false)
+        async Task<string> DoWork(string url, Object model, HttpMethod httpMethod, string token, bool isImage, bool isRefreshedToken, bool isAddOrUpdateContribution = false)
         {
           
             MyProfileViewModel.Instance.ErrorMessage = string.Empty;
@@ -154,13 +153,9 @@ namespace Microsoft.Mvpui.Helpers
         }
 
 
-        public static  bool CheckInternetConnection()
-        {
-            bool isConnected = System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
-            return isConnected;
-        }
+        public static bool CheckInternetConnection() => CrossConnectivity.Current.IsConnected;
 
-        public static async Task<string> GetPhoto(string token)
+        public async Task<string> GetPhoto(string token)
         {
             string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfGetMvpProfileImage, CommonConstants.BaseUrl), null, HttpMethod.Get, token, false, false);
 
@@ -172,7 +167,7 @@ namespace Microsoft.Mvpui.Helpers
             return "";
         }
 
-        public static async Task<ProfileModel> GetProfile(string token)
+        public async Task<ProfileModel> GetProfile(string token)
         {
             string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfGetMvpProfile, CommonConstants.BaseUrl), null, HttpMethod.Get, token, false, false);
 
@@ -184,14 +179,14 @@ namespace Microsoft.Mvpui.Helpers
 
         }
 
-        public static async Task<ContributionTypeDetail> GetContributionTypes(string token)
+        public async Task<ContributionTypeDetail> GetContributionTypes(string token)
         {
             string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfGetContributionTypes, CommonConstants.BaseUrl), null, HttpMethod.Get, token, false, false);
 
             if (!string.IsNullOrEmpty(responseTxt))
             {
                 ContributionTypeDetail contributionTypeDetail = new ContributionTypeDetail();
-                contributionTypeDetail.ContributionTypes = JsonConvert.DeserializeObject<ObservableCollection<ContributionTypeModel>>(responseTxt);
+                contributionTypeDetail.ContributionTypes = JsonConvert.DeserializeObject<ObservableRangeCollection<ContributionTypeModel>>(responseTxt);
                 return contributionTypeDetail;
             }
             return null;
@@ -199,7 +194,7 @@ namespace Microsoft.Mvpui.Helpers
 
         }
 
-        public static async Task<ContributionDetail> GetContributionAreas(string token)
+        public async Task<ContributionDetail> GetContributionAreas(string token)
         {
             List<ContributionTechnologyModel> contributionModels = new List<ContributionTechnologyModel>();
 
@@ -229,7 +224,7 @@ namespace Microsoft.Mvpui.Helpers
 
         }
 
-        public static async Task<ContributionInfo> GetContributions(int start, int size, string token)
+        public async Task<ContributionInfo> GetContributions(int start, int size, string token)
         {
             string result = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfGetContributions, CommonConstants.BaseUrl, start, size), null, HttpMethod.Get, token, false, false);
             if (!string.IsNullOrEmpty(result))
@@ -240,7 +235,7 @@ namespace Microsoft.Mvpui.Helpers
 
         }
 
-        public static async Task<ContributionModel> GetContributionModel(int privateSiteId, string token)
+        public async Task<ContributionModel> GetContributionModel(int privateSiteId, string token)
         {
             string result = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfGetContributionById, privateSiteId), null, HttpMethod.Get, token, false, false);
 
@@ -252,7 +247,7 @@ namespace Microsoft.Mvpui.Helpers
 
         }
 
-        public static async Task<ContributionModel> AddContributionModel(ContributionModel model, string token)
+        public async Task<ContributionModel> AddContributionModel(ContributionModel model, string token)
         {
             string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfPutContribution, CommonConstants.BaseUrl), model, HttpMethod.Post, token, false, false,true);
             if (!string.IsNullOrEmpty(responseTxt))
@@ -266,14 +261,14 @@ namespace Microsoft.Mvpui.Helpers
 
         }
 
-        public static async Task<string> EditContributionModel(ContributionModel model, string token)
+        public async Task<string> EditContributionModel(ContributionModel model, string token)
         {
             string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfPostContribution, CommonConstants.BaseUrl), model, HttpMethod.Put, token, false, false,true);
 
             return responseTxt;
         }
 
-        public static async Task<string> DeleteContributionModel(int privateSiteId, string token)
+        public async Task<string> DeleteContributionModel(int privateSiteId, string token)
         {
             string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfDeleteContribution, CommonConstants.BaseUrl, privateSiteId), null, HttpMethod.Delete, token, false, false);
             return responseTxt;

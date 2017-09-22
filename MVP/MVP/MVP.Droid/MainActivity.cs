@@ -7,9 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Microsoft.Mvpui;
-//using Xamarin.Forms.Maps;
 using Plugin.Permissions;
-using Android.Gms.Common;
 
 namespace Microsoft.Mvp.Droid
 {
@@ -32,16 +30,6 @@ namespace Microsoft.Mvp.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        public static bool TestIfGooglePlayServicesIsInstalled()
-        {
-            int queryResult = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(Application.Context);
-            if (queryResult == ConnectionResult.Success)
-            { 
-                return true;
-            } 
-            return false;
         }
     }
 }

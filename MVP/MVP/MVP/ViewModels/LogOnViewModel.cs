@@ -1,4 +1,4 @@
-﻿using Microsoft.Mvpui.Helpers;
+﻿using Microsoft.Mvp.Helpers;
 using System;
 using Xamarin.Forms;
 
@@ -29,16 +29,11 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public LogOnViewModel()
-        {
-            _strWPResourcePath = (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows) ? CommonConstants.ImageFolderForWP : string.Empty;
-        }
 
         #endregion
 
         #region Private Members
-
-        private string _strWPResourcePath;
+        
         private string _strAvatarBackground = "mvplogo.png";
         private string _logOnImage = "LoginBtn.png";
         private string _settingIcon = "Settings.png";
@@ -51,7 +46,8 @@ namespace Microsoft.Mvp.ViewModels
         public bool IsLoggedIn
         {
             get
-            { 
+            {
+
                 string tokenAndExpiredTime = null;
                 if (Application.Current.Properties.ContainsKey(CommonConstants.TokenKey))
                 {
@@ -81,7 +77,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", _strWPResourcePath, _strAvatarBackground);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", CommonConstants.BaseResourcePath, _strAvatarBackground);
             }
             set
             {
@@ -94,7 +90,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", _strWPResourcePath, _logOnImage);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", CommonConstants.BaseResourcePath, _logOnImage);
             }
             set
             {
@@ -106,7 +102,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", _strWPResourcePath, _settingIcon);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", CommonConstants.BaseResourcePath, _settingIcon);
             }
             set
             {
@@ -118,7 +114,7 @@ namespace Microsoft.Mvp.ViewModels
         {
             get
             {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", _strWPResourcePath, _searchIcon);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", CommonConstants.BaseResourcePath, _searchIcon);
             }
             set
             {
