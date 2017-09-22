@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Microsoft.Mvpui.Converter
+namespace Microsoft.Mvpui.Converters
 {
+    // TODO: I think this doesn't get used, can be removed?
+
     public class UriToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

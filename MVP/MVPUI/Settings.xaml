@@ -4,25 +4,32 @@
              x:Class="Microsoft.Mvpui.Settings">
 
     
-    
- <!-- <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
   <StackLayout Orientation="Vertical" BackgroundColor="{StaticResource BlueBackgroundColor}" HorizontalOptions="FillAndExpand">
         <StackLayout.Margin>
             <OnPlatform x:TypeArguments="Thickness">
                 <OnPlatform.iOS>0,20,0,0</OnPlatform.iOS>
             </OnPlatform>
         </StackLayout.Margin>
-    <Image x:Name="btnCancel" WidthRequest="36" HeightRequest="36" HorizontalOptions="EndAndExpand" />
+    <Image WidthRequest="36" HeightRequest="36" HorizontalOptions="EndAndExpand">
+        <Image.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnCloseClicked" />
+        </Image.GestureRecognizers>
+        <Image.Source>
+            <OnPlatform x:TypeArguments="ImageSource">
+                <On Platform="iOS" Value="image_cancel.png" />
+                <On Platform="Android" Value="image_cancel.png" />
+                <On Platform="Windows" Value="Assets\image_cancel.png" />
+            </OnPlatform>
+        </Image.Source>
+    </Image>
     <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
       <Grid.RowDefinitions>
         <RowDefinition></RowDefinition>
         <RowDefinition></RowDefinition>
       </Grid.RowDefinitions>
-      <Button Grid.Row="0" TextColor="White" x:Name="btnAbout" Text="About" WidthRequest="150" BackgroundColor="{StaticResource BlueBackgroundColor}"  BorderColor="White" BorderWidth="1"></Button>
-      <Button Grid.Row="1" TextColor="White" x:Name="btnSignOut" Text="Sign Out" WidthRequest="150" BackgroundColor="{StaticResource BlueBackgroundColor}"  BorderColor="White" BorderWidth="1"></Button>
-    
+      <Button Grid.Row="0" TextColor="White" Clicked="BtnAbout_Clicked" Text="About" WidthRequest="150" BackgroundColor="{StaticResource BlueBackgroundColor}"  BorderColor="White" BorderWidth="1"></Button>
+      <Button Grid.Row="1" TextColor="White" Clicked="BtnSignOut_Clicked" Text="Sign Out" WidthRequest="150" BackgroundColor="{StaticResource BlueBackgroundColor}"  BorderColor="White" BorderWidth="1"></Button>
   </Grid>
-  </StackLayout>-->
-
-    
+  </StackLayout>
 </ContentPage>

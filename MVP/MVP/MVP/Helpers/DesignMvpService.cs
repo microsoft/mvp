@@ -7,7 +7,7 @@ using Microsoft.Mvp.Models;
 using Xamarin.Forms;
 using Microsoft.Mvp.Helpers;
 
-//[assembly: Dependency(typeof(DesignMvpService))]
+[assembly: Dependency(typeof(DesignMvpService))]
 namespace Microsoft.Mvp.Helpers
 {
     public class DesignMvpService : IMvpService
@@ -70,7 +70,7 @@ namespace Microsoft.Mvp.Helpers
                     Name = "Xamarin"
                 },
                 Description = "Awesome Description",
-                Icon = "Icon",
+                // Icon = "Icon",
                 IsBelongToLatestAwardCycle = true,
                 IsSystemCollected = true,
                 LabelTextOfContribution = "Contribution",
@@ -112,10 +112,9 @@ namespace Microsoft.Mvp.Helpers
                         {
                             EnglishName = "Xamarin",
                             Id = "Id",
-                            Name = "Xamarin"
+                            Name = "Conference (organizer)"
                         },
                         Description = "Awesome Description",
-                        Icon = "Icon",
                         IsBelongToLatestAwardCycle = true,
                         IsSystemCollected = true,
                         LabelTextOfContribution = "Contribution",

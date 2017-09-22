@@ -4,24 +4,27 @@
              x:Class="Microsoft.Mvpui.ContributionsPage"
              Title="Contributions">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Icon="toolbar_add" x:Name="ToolbarAddContribution"/>
+        <ToolbarItem Text="Add" Clicked="AddContribution_Clicked" Icon="toolbar_add.png" x:Name="ToolbarAddContribution" />
+            <!--<ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="iOS" Value="toolbar_add.png" />
+                    <On Platform="Android" Value="toolbar_add.png" />
+                    <On Platform="Windows" Value="Assets\toolbar_add.png" />
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>-->
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-    <ListView ItemsSource="{Binding List}"
-            HasUnevenRows="True"
-              RowHeight="-1"
-            CachingStrategy="RecycleElement">
+    <ListView x:Name="listView" ItemsSource="{Binding List}" HasUnevenRows="True" ItemSelected="OnItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
                     <ViewCell.ContextActions>
-                        <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
-                           Text="Edit" />
-                        <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                           Text="Delete" IsDestructive="True" />
+                        <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}" Text="Edit" />
+                        <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
                     <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
-                        <Image x:Name="image5" WidthRequest="45" HeightRequest="35" Source="{Binding Icon}"/>
+                        <Image WidthRequest="45" HeightRequest="35" Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}" />
                         <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
                             <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource CommonProfileLabelTextSecondColor}" VerticalTextAlignment="Center" FontAttributes="Bold">
                                 <Label.FontSize>

@@ -12,7 +12,7 @@ using Microsoft.Mvp.Helpers;
 using Microsoft.Mvpui.Helpers;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(LiveMvpService))]
+//[assembly: Dependency(typeof(LiveMvpService))]
 namespace Microsoft.Mvp.Helpers
 {
     public class LiveMvpService : IDisposable, IMvpService
@@ -33,7 +33,7 @@ namespace Microsoft.Mvp.Helpers
         /// <returns></returns>
         async Task<string> DoWork(string url, Object model, HttpMethod httpMethod, string token, bool isImage, bool isRefreshedToken, bool isAddOrUpdateContribution = false)
         {
-          
+
             MyProfileViewModel.Instance.ErrorMessage = string.Empty;
             ContributionViewModel.Instance.ErrorMessage = string.Empty;
             string errorMsg = "";
@@ -249,7 +249,7 @@ namespace Microsoft.Mvp.Helpers
 
         public async Task<ContributionModel> AddContributionModel(ContributionModel model, string token)
         {
-            string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfPutContribution, CommonConstants.BaseUrl), model, HttpMethod.Post, token, false, false,true);
+            string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfPutContribution, CommonConstants.BaseUrl), model, HttpMethod.Post, token, false, false, true);
             if (!string.IsNullOrEmpty(responseTxt))
             {
                 var item = JsonConvert.DeserializeObject<ContributionModel>(responseTxt);
@@ -263,7 +263,7 @@ namespace Microsoft.Mvp.Helpers
 
         public async Task<string> EditContributionModel(ContributionModel model, string token)
         {
-            string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfPostContribution, CommonConstants.BaseUrl), model, HttpMethod.Put, token, false, false,true);
+            string responseTxt = await DoWork(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.ApiUrlOfPostContribution, CommonConstants.BaseUrl), model, HttpMethod.Put, token, false, false, true);
 
             return responseTxt;
         }

@@ -7,23 +7,8 @@ namespace Microsoft.Mvp.Models
     public class ContributionModel
     {
         public string ContributionId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the contribution type.
-        /// </summary>
-        /// 
         public ContributionTypeModel ContributionType { get; set; }
-
-        public string Icon { get; set; }
-
-        /// <summary>
-        /// Gets or sets the contribution technology.
-        /// </summary>
         public ContributionTechnologyModel ContributionTechnology { get; set; }
-
-        /// <summary>
-        /// Gets or sets the start date.
-        /// </summary>
         public DateTime? StartDate { get; set; }
 
         public string DataFormat

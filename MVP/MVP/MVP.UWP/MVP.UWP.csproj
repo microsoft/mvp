@@ -162,31 +162,20 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="Resources\Benefits.png" />
-    <Content Include="Resources\Blog.png" />
-    <Content Include="Resources\Book.png" />
-    <Content Include="Resources\Cancel.png" />
-    <Content Include="Resources\Code.png" />
-    <Content Include="Resources\DefaultActivity.png" />
-    <Content Include="Resources\Discussion.png" />
-    <Content Include="Resources\Feedback.png" />
-    <Content Include="Resources\icon - Copy.png" />
-    <Content Include="Resources\icon.png" />
-    <Content Include="Resources\LoginBtn.png" />
-    <Content Include="Assets\logo1024.png" />
-    <Content Include="Resources\Me.png" />
-    <Content Include="Resources\mvplogo.png" />
-    <Content Include="Resources\mvplogoplus.png" />
-    <Content Include="Resources\MyNetwork.png" />
-    <Content Include="Resources\network.png" />
-    <Content Include="Resources\Notifications.png" />
-    <Content Include="Resources\Right.png" />
-    <Content Include="Resources\searchIcon.png" />
-    <Content Include="Resources\Settings.png" />
-    <Content Include="Resources\Speaker.png" />
-    <Content Include="Resources\Support.png" />
-    <Content Include="Resources\Video.png" />
-    <Content Include="Resources\visibility.png" />
+    <Content Include="Assets\image_benefits.png" />
+    <Content Include="Assets\image_blog.png" />
+    <Content Include="Assets\image_book.png" />
+    <Content Include="Assets\image_cancel.png" />
+    <Content Include="Assets\image_code.png" />
+    <Content Include="Assets\image_defaultactivity.png" />
+    <Content Include="Assets\image_discussion.png" />
+    <Content Include="Assets\image_feedback.png" />
+    <Content Include="Assets\icon.png" />
+    <Content Include="Assets\image_mvplogo.png" />
+    <Content Include="Assets\image_notifications.png" />
+    <Content Include="Assets\toolbar_settings.png" />
+    <Content Include="Assets\image_speaker.png" />
+    <Content Include="Assets\image_video.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -209,6 +198,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Assets\toolbar_add.png" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

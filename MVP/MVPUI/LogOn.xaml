@@ -5,7 +5,15 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout VerticalOptions="CenterAndExpand" Margin="0,-80,0,0">
-                <Image HeightRequest="200" Source="{Binding MvpBackgroundLogo}"></Image>
+                <Image HeightRequest="200">
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="iOS" Value="image_mvplogo.png" />
+                            <On Platform="Android" Value="image_mvplogo.png" />
+                            <On Platform="Windows" Value="Assets\image_mvplogo.png" />
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
 
                 <Button TextColor="White"
                         BorderColor="White"

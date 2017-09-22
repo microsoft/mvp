@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Microsoft.Mvpui.Converters;assembly=Mvpui"
              x:Class="Microsoft.Mvpui.App">
     <Application.Resources>
 
         <ResourceDictionary>
+            <local:ContributionToIconConverter x:Key="ContributionToIconConverter" />
 
             <Color x:Key="Primary">#2196F3</Color>
             <Color x:Key="PrimaryDark">#1976D2</Color>

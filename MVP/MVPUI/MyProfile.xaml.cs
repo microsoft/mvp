@@ -14,30 +14,16 @@ namespace Microsoft.Mvpui
     {
 
         #region Constructor
+
         public MyProfile()
         {
             InitializeComponent();
             this.BindingContext = MyProfileViewModel.Instance;
-            listView.ItemAppearing += ListView_ItemAppearing;
-            listView.ItemDisappearing += ListView_ItemDisappearing;
-
 
             ToolBarSettings.Command = new Command(async () =>
             {
                 await Navigation.PushModalAsync(new Settings());
             });
-
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                btnAdd.WidthRequest = 130;
-                btnLoadMore.HeightRequest = 25;
-            }
-            else
-            {
-                btnAdd.WidthRequest = 170;
-                btnLoadMore.HeightRequest = 35;
-            }
-
         }
 
         #endregion
@@ -114,7 +100,6 @@ namespace Microsoft.Mvpui
 
         }
 
-
         private async void GetPhoto()
         {
             if (string.IsNullOrEmpty(MyProfileViewModel.Instance.StoreImageBase64Str))
@@ -157,6 +142,7 @@ namespace Microsoft.Mvpui
                 }
             }
         }
+
         private void CheckCache()
         {
             if (Application.Current.Properties.ContainsKey(CommonConstants.ProfileCacheListKey))
@@ -168,7 +154,6 @@ namespace Microsoft.Mvpui
                 Application.Current.Properties.Add(CommonConstants.ProfileCacheListKey, cache);
             }
         }
-
 
         private void CheckCacheItem()
         {
@@ -189,8 +174,6 @@ namespace Microsoft.Mvpui
 
         protected async override void OnAppearing()
         {
-            listView.SelectedItem = null;
-            
             MyProfileViewModel.Instance.ErrorMessage = "";
             stkOveryLay.IsVisible = true;
 
@@ -201,7 +184,6 @@ namespace Microsoft.Mvpui
             {
                 var contributions = await MvpHelper.MvpService.GetContributions(-5, 10, LogOnViewModel.StoredToken);
                 MvpHelper.SetContributionInfoToProfileViewModel(contributions);
-                listView.HeightRequest = MyProfileViewModel.Instance.List.Count * 50;
             }
 
             if (string.Compare(CommonConstants.DefaultNetworkErrorString, MyProfileViewModel.Instance.ErrorMessage, StringComparison.OrdinalIgnoreCase) == 0)
@@ -211,22 +193,6 @@ namespace Microsoft.Mvpui
             }
 
             stkOveryLay.IsVisible = false;
-        }
-
-        private void ListView_ItemDisappearing(object sender, ItemVisibilityEventArgs e)
-        {
-            //listView.HeightRequest = MyProfileViewModel.Instance.List.Count * 50;
-        }
-
-        private void ListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
-        {
-            listView.HeightRequest = MyProfileViewModel.Instance.List.Count * 50;
-            MyProfileViewModel.Instance.CanLoadMore = MyProfileViewModel.Instance.HasMoreItems;
-        }
-
-        private async void OnAddContributionClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new ContributionDetail());
         }
 
         private async void OnLoadMoreClicked(object sender, EventArgs e)
@@ -239,59 +205,16 @@ namespace Microsoft.Mvpui
             {
                 var contributors = contributionInfo.Contributions.Select(c =>
                 {
-                    Helpers.MvpHelper.SetIconAndLabelTextOfContribution(c);
+                    Helpers.MvpHelper.SetLabelTextOfContribution(c);
                     return c;
                 });
                 MyProfileViewModel.Instance.List.AddRange(contributors);
 
                 MyProfileViewModel.Instance.TotalOfData = contributionInfo.TotalContributions;
 
-                listView.HeightRequest = MyProfileViewModel.Instance.List.Count * 50;
-            }
-
-        }
-
-        #endregion
-
-        #region Public Methods
-        public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            if (listView.SelectedItem!=null)
-            {
-                ContributionViewModel.Instance.MyContribution = e.SelectedItem as ContributionModel;
-                await Navigation.PushModalAsync(
-                    new ContributionDetail()
-                    {
-                        BindingContext = ContributionViewModel.Instance
-                    });
-            }          
-        }
-
-        public async void OnEdit(object sender, EventArgs eventArgs)
-        {
-            var mi = ((MenuItem)sender);
-            ContributionViewModel.Instance.MyContribution = mi.CommandParameter as ContributionModel;
-            await Navigation.PushModalAsync(
-                new ContributionDetail()
-                {
-                    BindingContext = ContributionViewModel.Instance
-                });
-        }
-
-        public async void OnDelete(object sender, EventArgs eventArgs)
-        {
-            var mi = ((MenuItem)sender);
-            ContributionModel contribution = mi.CommandParameter as ContributionModel;
-
-            string result = await MvpHelper.MvpService.DeleteContributionModel(Convert.ToInt32(contribution.ContributionId, System.Globalization.CultureInfo.InvariantCulture), LogOnViewModel.StoredToken);
-            if (result == CommonConstants.OkResult)
-            {
-                var modelToDelete = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == contribution.ContributionId).FirstOrDefault();
-                MyProfileViewModel.Instance.List.Remove(modelToDelete);
-
-                listView.HeightRequest = MyProfileViewModel.Instance.List.Count * 50;
             }
         }
+
         #endregion
 
     }

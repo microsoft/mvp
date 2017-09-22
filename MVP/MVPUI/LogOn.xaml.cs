@@ -1,4 +1,4 @@
-﻿//#define SKIP_LOGIN
+﻿#define SKIP_LOGIN
 
 using Microsoft.Mvp.ViewModels;
 using System;

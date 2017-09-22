@@ -180,6 +180,7 @@ namespace Microsoft.Mvp.ViewModels
                         {
                             Application.Current.Properties.Remove(CommonConstants.AccessTokenKey);
                             Application.Current.Properties.Add(CommonConstants.AccessTokenKey, tokenData[CommonConstants.AccessTokenKey]);
+
                             // refresh token
                             Application.Current.Properties.Remove(CommonConstants.RefreshTokenKey);
                             Application.Current.Properties.Add(CommonConstants.RefreshTokenKey, tokenData[CommonConstants.RefreshTokenKey]);
@@ -193,6 +194,7 @@ namespace Microsoft.Mvp.ViewModels
                 return string.Empty;
             }
         }
+
         #endregion
 
     }

@@ -15,6 +15,7 @@ namespace Microsoft.Mvp.Helpers
         }
 
         #region ContributionType
+
         public const string AT = "Article";
         public const string Bsp = "Blog Site Posts";
         public const string BA = "Book (Author)";
@@ -44,6 +45,7 @@ namespace Microsoft.Mvp.Helpers
         public const string VD = "Video";
         public const string WB = "Webcast";
         public const string WP = "WebSite Posts";
+
         #endregion
 
         public const string TokenKey = "Token";
@@ -79,23 +81,6 @@ namespace Microsoft.Mvp.Helpers
         #region Regex Pattern
         public const string UrlPattern = @"^((https?|ftp):\/\/)?(((([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-fA-F]{2})|[!\$&amp;'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-fA-F]{2})|[!\$&amp;'\(\)\*\+,;=]|:|@)+(\/(([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-fA-F]{2})|[!\$&amp;'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-fA-F]{2})|[!\$&amp;'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-fA-F]{2})|[!\$&amp;'\(\)\*\+,;=]|:|@)|\/|\?)*)?$";
         public const string NumberPattern = @"^[0-9]*$";
-        #endregion
-
-        public const string ImageFolderForWP = "Resources/";
-
-        public static string BaseResourcePath { get; } =
-          (Device.RuntimePlatform == Device.WinPhone || Device.RuntimePlatform == Device.Windows) ? CommonConstants.ImageFolderForWP : string.Empty;
-
-
-        #region Icon Names
-        public const string BlogIcon = "Blog.png";
-        public const string BookIcon = "Book.png";
-        public const string CodeIcon = "Code.png";
-        public const string SpeakerIcon = "Speaker.png";
-        public const string DiscussionIcon = "Discussion.png";
-        public const string DefaultContributionIcon = "DefaultActivity.png";
-        public const string FeedbackIcon = "Feedback.png";
-        public const string VideoIcon = "Video.png";
         #endregion
 
         #region Private Members for LiveIdLogOn 

@@ -11,6 +11,7 @@ namespace Microsoft.Mvp.ViewModels
     public class MyProfileViewModel : ViewModelBase
     {
         #region Singleton pattern and constructors
+
         private static MyProfileViewModel _instance = null;
         private static readonly object _synObject = new object();
         public static MyProfileViewModel Instance
@@ -38,7 +39,6 @@ namespace Microsoft.Mvp.ViewModels
             {
                 ContributionTypeDetail contributionTypeDetail = await MvpHelper.MvpService.GetContributionTypes(LogOnViewModel.StoredToken);
                 ContributionViewModel.Instance.ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>(contributionTypeDetail.ContributionTypes);
-
             }
             catch (TaskCanceledException tce)
             {
@@ -61,22 +61,9 @@ namespace Microsoft.Mvp.ViewModels
             return true;
         }
 
-
-
-
-
         #endregion
 
         #region Private Members
-        private string _strWPResourcePath;
-        private string _strAvatar = "user1.jpg";
-        private string _strAvatarBackground = "mvplogoplus.png";
-        private string _strBenefitsImage = "Benefits.png";
-        private string _strMyNetworkImage = "MyNetwork.png";
-        private string _strMeImage = "Me.png";
-        private string _strNotificationsImage = "Notifications.png";
-        private string _strSupportImage = "Support.png";
-        private string _strSettingsImage = "icon_settings.png";
 
         private string _personName = string.Empty;
         private string _awardCategoriesTip = "Award Categories:";
@@ -215,130 +202,6 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public string StrBenefitsImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strBenefitsImage);
-            }
-
-            set
-            {
-                _strBenefitsImage = value;
-                OnPropertyChanged("StrBenefitsImage");
-            }
-        }
-
-        public string StrMyNetworkImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strMyNetworkImage);
-            }
-
-            set
-            {
-                _strMyNetworkImage = value;
-                OnPropertyChanged("StrMyNetworkImage");
-            }
-        }
-
-        public string StrMeImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strMeImage);
-            }
-
-            set
-            {
-                _strMeImage = value;
-                OnPropertyChanged("StrMeImage");
-            }
-        }
-
-        public string StrNotificationsImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strNotificationsImage);
-            }
-
-            set
-            {
-                _strNotificationsImage = value;
-                OnPropertyChanged("StrNotificationsImage");
-            }
-        }
-
-        public string StrSupportImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strSupportImage);
-            }
-
-            set
-            {
-                _strSupportImage = value;
-                OnPropertyChanged("StrSupportImage");
-            }
-        }
-
-        public string StrSettingImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strSettingsImage);
-            }
-
-            set
-            {
-                _strSettingsImage = value;
-                OnPropertyChanged("StrSettingImage");
-            }
-        }
-
-        public string StrWPResourcePath
-        {
-            get
-            {
-                return _strWPResourcePath;
-            }
-
-            set
-            {
-                _strWPResourcePath = value;
-            }
-        }
-
-        public string StrAvatar
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strAvatar);
-            }
-
-            set
-            {
-                _strAvatar = value;
-                OnPropertyChanged("StrAvatar");
-            }
-        }
-
-        public string StrAvatarBackground
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", StrWPResourcePath, _strAvatarBackground);
-            }
-
-            set
-            {
-                _strAvatarBackground = value;
-                OnPropertyChanged("StrAvatarBackground");
-            }
-        }
 
         public bool HasMoreItems
         {
@@ -441,11 +304,6 @@ namespace Microsoft.Mvp.ViewModels
                 OnPropertyChanged("HasError");
             }
         }
-        #endregion
-
-        #region Methods
-
-
         #endregion
     }
 }

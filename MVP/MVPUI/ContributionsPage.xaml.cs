@@ -18,14 +18,27 @@ namespace Microsoft.Mvpui
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ContributionsPage : ContentPage
     {
-       
+
 
         public ContributionsPage()
         {
             InitializeComponent();
-            
+
 
             BindingContext = MyProfileViewModel.Instance;
+        }
+
+        public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (listView.SelectedItem != null)
+            {
+                ContributionViewModel.Instance.MyContribution = e.SelectedItem as ContributionModel;
+                await Navigation.PushModalAsync(
+                    new ContributionDetail()
+                    {
+                        BindingContext = ContributionViewModel.Instance
+                    });
+            }
         }
 
         public async void OnEdit(object sender, EventArgs eventArgs)
@@ -50,6 +63,11 @@ namespace Microsoft.Mvpui
                 var modelToDelete = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == contribution.ContributionId).FirstOrDefault();
                 MyProfileViewModel.Instance.List.Remove(modelToDelete);
             }
+        }
+
+        async void AddContribution_Clicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ContributionDetail());
         }
     }
 }

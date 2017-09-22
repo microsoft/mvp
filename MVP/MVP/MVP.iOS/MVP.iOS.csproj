@@ -216,64 +216,34 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Video.png" />
+    <BundleResource Include="Resources\image_video.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\visibility.png" />
+    <BundleResource Include="Resources\image_blog.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Benefits.png" />
+    <BundleResource Include="Resources\image_book.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Blog.png" />
+    <BundleResource Include="Resources\image_cancel.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Book.png" />
+    <BundleResource Include="Resources\image_code.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Cancel.png" />
+    <BundleResource Include="Resources\image_defaultactivity.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Code.png" />
+    <BundleResource Include="Resources\image_discussion.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\DefaultActivity.png" />
+    <BundleResource Include="Resources\image_feedback.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Discussion.png" />
+    <BundleResource Include="Resources\image_mvplogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Feedback.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Me.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\mvplogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\mvplogoplus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\MyNetwork.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\network.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Notifications.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\searchIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Speaker.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Support.png" />
+    <BundleResource Include="Resources\image_speaker.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json" />
@@ -293,12 +263,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logo512.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logo1024.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Renderers\" />
