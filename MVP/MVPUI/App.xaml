@@ -16,7 +16,7 @@
             <Color x:Key="NavigationTintColor">#999fa5</Color>
             <Color x:Key="NavigationTitleColor">#0a77b2</Color>
             <Color x:Key="NavigationShadowColor">#f2f2f2</Color>
-            <Color x:Key="TabTintColor">#0a77b2</Color>
+            <Color x:Key="TabTintColor">#0078d7</Color>
             
             <!--<OnPlatform x:Key="NormalLabelTextColor" x:TypeArguments="Color" Android="Black" WinPhone="Black" iOS="Black"></OnPlatform>-->
             <!--set for different platform-->

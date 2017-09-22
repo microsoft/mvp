@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Microsoft.Mvpui.CustomControls;assembly=Microsoft.Mvpui"
              x:Class="Microsoft.Mvpui.LiveIdLogOn">
   <ContentPage.ToolbarItems>
-    <ToolbarItem Icon="icon_close" Clicked="ButtonClose_Clicked" />
+    <ToolbarItem Icon="toolbar_close" Clicked="ButtonClose_Clicked" />
   </ContentPage.ToolbarItems>
   <ContentPage.Content>
       <WebView x:Name="browser">

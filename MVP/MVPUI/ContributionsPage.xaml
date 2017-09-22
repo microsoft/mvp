@@ -4,7 +4,7 @@
              x:Class="Microsoft.Mvpui.ContributionsPage"
              Title="Contributions">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Icon="icon_add" x:Name="ToolbarAddContribution"/>
+        <ToolbarItem Text="Add" Icon="toolbar_add" x:Name="ToolbarAddContribution"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
     <ListView ItemsSource="{Binding List}"

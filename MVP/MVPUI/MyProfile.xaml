@@ -5,7 +5,7 @@
              BackgroundColor="{StaticResource BlueBackgroundColor}"
              Title="My profile">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Settings" Icon="{Binding StrSettingImage}" x:Name="ToolBarSettings"/>
+        <ToolbarItem Text="Settings" Icon="toolbar_settings" x:Name="ToolBarSettings"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>

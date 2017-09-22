@@ -44,7 +44,7 @@ namespace Microsoft.Mvp.iOS.Renderers
             if (item?.SelectedImage?.AccessibilityIdentifier == icon)
                 return;
 
-            item.SelectedImage = UIImage.FromBundle(icon);
+            item.SelectedImage = UIImage.FromBundle(icon).ImageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal);
             item.SelectedImage.AccessibilityIdentifier = icon;
         }
     }
