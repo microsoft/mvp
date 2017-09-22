@@ -7,7 +7,7 @@ All image resources are placed in the platform specific folders for iOS/Android/
 1. Toolbar images should start with toolbar_NAME.png
 2. Tab images should start with tab_NAME.png
 3. All others: image_NAME.png
-4. UWP images should be places in the Resources folder.
+4. UWP images should be places in the Assets folder.
 
 For icon generation use the platform specific versions:
 * Android: https://romannurik.github.io/AndroidAssetStudio/ and https://materialdesignicons.com/
