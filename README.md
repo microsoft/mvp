@@ -1,2 +1,3 @@
 # MVP
-Microsoft MVP Program GitHub Repository
+
+Microsoft MVP API Showcase
