@@ -8,6 +8,7 @@
   </ContentPage.ToolbarItems>
   <ContentPage.Content>
       <WebView x:Name="browser">
+            
       </WebView>
   </ContentPage.Content>
 </local:ModalPage>

@@ -270,28 +270,10 @@
     <BundleResource Include="Resources\searchIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Speaker.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-5.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json" />

@@ -2,16 +2,13 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.MainTabPageiOS"
-            xmlns:local="clr-namespace:Microsoft.Mvpui;assembly=Mvpui">
-  <!--Pages can be added as references or inline-->
-    <NavigationPage Icon="tab_profile.png"
-      Title="My Profile">
+             xmlns:local="clr-namespace:Microsoft.Mvpui;assembly=Mvpui">
+    <NavigationPage Icon="tab_profile.png" Title="My Profile">
         <x:Arguments>
             <local:MyProfile/>
         </x:Arguments>
     </NavigationPage>
-    <NavigationPage Icon="tab_contribution.png"
-      Title="Contributions">
+    <NavigationPage Icon="tab_contribution.png" Title="Contributions">
         <x:Arguments>
             <local:ContributionsPage/>
         </x:Arguments>

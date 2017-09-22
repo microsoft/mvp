@@ -1,9 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Microsoft.Mvpui.Settings"
-   BackgroundColor="{StaticResource BlueBackgroundColor}">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+             x:Class="Microsoft.Mvpui.Settings">
+
+    
+    
+ <!-- <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
   <StackLayout Orientation="Vertical" BackgroundColor="{StaticResource BlueBackgroundColor}" HorizontalOptions="FillAndExpand">
         <StackLayout.Margin>
             <OnPlatform x:TypeArguments="Thickness">
@@ -20,5 +22,7 @@
       <Button Grid.Row="1" TextColor="White" x:Name="btnSignOut" Text="Sign Out" WidthRequest="150" BackgroundColor="{StaticResource BlueBackgroundColor}"  BorderColor="White" BorderWidth="1"></Button>
     
   </Grid>
-  </StackLayout>
+  </StackLayout>-->
+
+    
 </ContentPage>

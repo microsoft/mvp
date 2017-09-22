@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.Mvp.iOS.Renderers;
-using Microsoft.Mvpui;
+﻿using Microsoft.Mvp.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
