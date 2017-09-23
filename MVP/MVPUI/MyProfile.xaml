@@ -5,15 +5,7 @@
              BackgroundColor="{StaticResource BlueBackgroundColor}"
              Title="My profile">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Settings" x:Name="ToolBarSettings" Icon="toolbar_settings.png" /><!--
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="ImageSource">
-                    <On Platform="iOS" Value="toolbar_settings.png" />
-                    <On Platform="Android" Value="toolbar_settings.png" />
-                    <On Platform="Windows" Value="Assets\toolbar_settings.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>-->
+        <ToolbarItem Text="Settings" x:Name="ToolBarSettings" Icon="toolbar_settings.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>

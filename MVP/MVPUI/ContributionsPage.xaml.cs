@@ -24,8 +24,10 @@ namespace Microsoft.Mvpui
         {
             InitializeComponent();
 
-
             BindingContext = MyProfileViewModel.Instance;
+
+            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+                ToolbarAddContribution.Icon = "Assets\\toolbar_add.png";
         }
 
         public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)

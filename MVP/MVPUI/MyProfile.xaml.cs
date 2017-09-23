@@ -20,6 +20,9 @@ namespace Microsoft.Mvpui
             InitializeComponent();
             this.BindingContext = MyProfileViewModel.Instance;
 
+            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+                ToolBarSettings.Icon = "Assets\\toolbar_settings.png";
+
             ToolBarSettings.Command = new Command(async () =>
             {
                 await Navigation.PushModalAsync(new Settings());

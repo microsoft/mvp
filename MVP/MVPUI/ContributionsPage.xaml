@@ -5,14 +5,6 @@
              Title="Contributions">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddContribution_Clicked" Icon="toolbar_add.png" x:Name="ToolbarAddContribution" />
-            <!--<ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="ImageSource">
-                    <On Platform="iOS" Value="toolbar_add.png" />
-                    <On Platform="Android" Value="toolbar_add.png" />
-                    <On Platform="Windows" Value="Assets\toolbar_add.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>-->
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
     <ListView x:Name="listView" ItemsSource="{Binding List}" HasUnevenRows="True" ItemSelected="OnItemSelected">
