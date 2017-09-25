@@ -58,7 +58,6 @@
     <Compile Include="ContributionsPage.xaml.cs">
       <DependentUpon>ContributionsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\UriToStringConverter.cs" />
     <Compile Include="CustomControls\BorderDataPicker.cs" />
     <Compile Include="CustomControls\BorderEditor.cs" />
     <Compile Include="CustomControls\BorderEntry.cs" />
