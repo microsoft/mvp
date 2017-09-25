@@ -126,10 +126,6 @@
     <CodesignProvision>0bfc6c84-e899-49b7-9ea7-4f5d40dde765</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CustomControls\BordePickerRender.cs" />
-    <Compile Include="CustomControls\BorderDatePickerRender.cs" />
-    <Compile Include="CustomControls\BorderEditorRender.cs" />
-    <Compile Include="CustomControls\BorderEntryRender.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="CustomControls\CookieHelper.cs" />
