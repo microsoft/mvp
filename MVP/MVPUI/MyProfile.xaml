@@ -59,15 +59,15 @@
                                             </Label.FontSize>
                                         </Label>
                                         <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"   Orientation="Horizontal">
-                                            <Label Text="{Binding AwardCategoriesTip}" TextColor="{StaticResource CommonProfileLabelTextSecondColor}"  FontAttributes="Bold" FontSize="{StaticResource SmallProfileLabelFontSize}" ></Label>
+                                            <Label Text="Award Categories:" TextColor="{StaticResource CommonProfileLabelTextSecondColor}"  FontAttributes="Bold" FontSize="{StaticResource SmallProfileLabelFontSize}" ></Label>
                                             <Label Text="{Binding AwardCategoriesValue}" TextColor="{StaticResource CommonProfileLabelTextSecondColor}"  FontAttributes="Bold" FontSize="{StaticResource SmallProfileLabelFontSize}"></Label>
                                         </StackLayout>
                                         <StackLayout Grid.Row="2" HorizontalOptions="Center"  VerticalOptions="Center"  Orientation="Horizontal">
-                                            <Label Text="{Binding FirstAwardTip}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
+                                            <Label Text="First year awarded:" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                             <Label Text="{Binding FirstAwardValue}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                         </StackLayout>
                                         <StackLayout Grid.Row="3" HorizontalOptions="Center"   VerticalOptions="Center"  Orientation="Horizontal">
-                                            <Label Text="{Binding AwardsCountTip}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
+                                            <Label Text="Number of MVP Awards:" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                             <Label Text="{Binding AwardsCountValue}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                         </StackLayout>
                                         <Label Margin="20,0,20,20"  Grid.Row="4" Text="{Binding Description}" HorizontalTextAlignment="Start"  VerticalOptions="Center" TextColor="{StaticResource CommonProfileLabelTextColor}" FontAttributes="Bold" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>

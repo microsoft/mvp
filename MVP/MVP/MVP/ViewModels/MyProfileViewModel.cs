@@ -66,11 +66,8 @@ namespace Microsoft.Mvp.ViewModels
         #region Private Members
 
         private string _personName = string.Empty;
-        private string _awardCategoriesTip = "Award Categories:";
         private string _awardCategoriesValue = string.Empty;
-        private string _firstAwardTip = "First year awarded:";
         private string _firstAwardValue = string.Empty;
-        private string _awardsCountTip = "Number of MVP Awards:";
         private string _awardsCountValue = string.Empty;
         private string _description = string.Empty;
         private ObservableRangeCollection<ContributionModel> _list = new ObservableRangeCollection<ContributionModel>();
@@ -95,19 +92,7 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public string AwardCategoriesTip
-        {
-            get
-            {
-                return _awardCategoriesTip;
-            }
 
-            set
-            {
-                _awardCategoriesTip = value;
-                OnPropertyChanged("AwardCategoriesTip");
-            }
-        }
 
         public string AwardCategoriesValue
         {
@@ -123,19 +108,7 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public string FirstAwardTip
-        {
-            get
-            {
-                return _firstAwardTip;
-            }
 
-            set
-            {
-                _firstAwardTip = value;
-                OnPropertyChanged("FirstAwardTip");
-            }
-        }
 
         public string FirstAwardValue
         {
@@ -151,19 +124,6 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public string AwardsCountTip
-        {
-            get
-            {
-                return _awardsCountTip;
-            }
-
-            set
-            {
-                _awardsCountTip = value;
-                OnPropertyChanged("AwardsCountTip");
-            }
-        }
 
         public string AwardsCountValue
         {
