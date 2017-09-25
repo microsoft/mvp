@@ -1,4 +1,5 @@
-﻿using Microsoft.Mvp.ViewModels;
+﻿using Microsoft.Mvp.Interfaces;
+using Microsoft.Mvp.ViewModels;
 using Microsoft.Mvpui.Helpers;
 using Xamarin.Forms;
 

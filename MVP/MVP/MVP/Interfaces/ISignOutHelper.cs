@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.Mvpui
+namespace Microsoft.Mvp.Interfaces
 {
     public interface ISignOutHelper
     {

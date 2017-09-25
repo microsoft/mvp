@@ -51,7 +51,6 @@
     <Compile Include="Helpers\IMVPService.cs" />
     <Compile Include="Helpers\MvpHelper.cs" />
     <Compile Include="Helpers\LiveMvpService.cs" />
-    <Compile Include="ISignOutHelper.cs" />
     <Compile Include="Models\ContributionModel.cs" />
     <Compile Include="Models\ContributionTechnologyModel.cs" />
     <Compile Include="Models\ContributionTypeModel.cs" />
@@ -64,6 +63,7 @@
     <Compile Include="ViewModels\MyProfileViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Interfaces\IStatusBar.cs" />
+    <Compile Include="Interfaces\ISignOutHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
