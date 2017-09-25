@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Microsoft.Mvpui.Helpers
+namespace Microsoft.Mvp.Helpers
 {
     public class MvpHelper
     {

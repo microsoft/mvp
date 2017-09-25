@@ -9,7 +9,6 @@ using Microsoft.Mvp.ViewModels;
 using MvvmHelpers;
 using Plugin.Connectivity;
 using Microsoft.Mvp.Helpers;
-using Microsoft.Mvpui.Helpers;
 using Xamarin.Forms;
 
 //[assembly: Dependency(typeof(LiveMvpService))]

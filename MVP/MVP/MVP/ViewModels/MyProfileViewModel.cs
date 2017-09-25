@@ -1,9 +1,8 @@
-﻿using Microsoft.Mvp.Helpers;
-using Microsoft.Mvp.Models;
-using Microsoft.Mvpui.Helpers;
-using MvvmHelpers;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Models;
+using MvvmHelpers;
 using Xamarin.Forms;
 
 namespace Microsoft.Mvp.ViewModels

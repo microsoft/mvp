@@ -1,11 +1,9 @@
 ﻿using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
-using Microsoft.Mvpui.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Microsoft.Mvpui
@@ -208,7 +206,7 @@ namespace Microsoft.Mvpui
             {
                 var contributors = contributionInfo.Contributions.Select(c =>
                 {
-                    Helpers.MvpHelper.SetLabelTextOfContribution(c);
+                    MvpHelper.SetLabelTextOfContribution(c);
                     return c;
                 });
                 MyProfileViewModel.Instance.List.AddRange(contributors);

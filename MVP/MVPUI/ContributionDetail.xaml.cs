@@ -1,13 +1,9 @@
 ﻿using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
-using Microsoft.Mvpui.Helpers;
 using MvvmHelpers;
 //using Plugin.Geolocator;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,7 +20,6 @@ namespace Microsoft.Mvpui
         #region Private Fields
 
         private bool _isTapped = false;
-        //Geocoder geoCoder;
 
         #endregion
 
@@ -259,7 +254,7 @@ namespace Microsoft.Mvpui
                     var result = await MvpHelper.MvpService.AddContributionModel(model, LogOnViewModel.StoredToken);
                     if (result != null && result.ContributionId != "0")
                     {
-                        Helpers.MvpHelper.SetLabelTextOfContribution(result);
+                        MvpHelper.SetLabelTextOfContribution(result);
                         MyProfileViewModel.Instance.List.Insert(0, result);
                         MyProfileViewModel.Instance.TotalOfData += 1;
                     }

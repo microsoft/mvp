@@ -1,6 +1,5 @@
 ﻿using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
-using Microsoft.Mvpui.Helpers;
 using MvvmHelpers;
 
 namespace Microsoft.Mvp.ViewModels

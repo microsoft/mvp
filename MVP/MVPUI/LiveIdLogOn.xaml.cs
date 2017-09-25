@@ -1,17 +1,7 @@
 ﻿using Microsoft.Mvp.Helpers;
-using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
-using Microsoft.Mvpui.Helpers;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using Microsoft.Mvp.Interfaces;
 using Microsoft.Mvpui.CustomControls;
 
 namespace Microsoft.Mvpui

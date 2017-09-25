@@ -1,15 +1,13 @@
-﻿using Microsoft.Mvp.Helpers;
-using Microsoft.Mvpui.Helpers;
-using MvvmHelpers;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Mvp.Helpers;
+using MvvmHelpers;
+using Newtonsoft.Json;
 using Xamarin.Forms;
-using System.Windows.Input;
 
 namespace Microsoft.Mvp.ViewModels
 {
