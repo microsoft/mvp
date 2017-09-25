@@ -7,8 +7,11 @@ namespace Microsoft.Mvp.Models
     public class ContributionModel
     {
         public string ContributionId { get; set; }
+
         public ContributionTypeModel ContributionType { get; set; }
+
         public ContributionTechnologyModel ContributionTechnology { get; set; }
+
         public DateTime? StartDate { get; set; }
 
         public string Title { get; set; }
