@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.MyProfile"
-             BackgroundColor="{StaticResource BlueBackgroundColor}"
+			 xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             BackgroundColor="{StaticResource BackgroundColor}"
              Title="My profile">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Settings" x:Name="ToolBarSettings" Icon="toolbar_settings.png" />
@@ -30,7 +31,7 @@
 
                         <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" >
 
-                            <StackLayout Margin="5,0,5,0" Orientation="Vertical" BackgroundColor="{StaticResource BlueBackgroundColor}">
+                            <StackLayout Margin="5,0,5,0" Orientation="Vertical">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="150"></RowDefinition>
@@ -40,7 +41,12 @@
                                     </Grid.RowDefinitions>
 
                                     <Grid BackgroundColor="#FFF9F5F5" Grid.RowSpan="2" HeightRequest="69" VerticalOptions="EndAndExpand"></Grid>
-                                    <Image x:Name="imgAvatar" VerticalOptions="EndAndExpand" Grid.Row="0" HorizontalOptions="CenterAndExpand" WidthRequest="127"  HeightRequest="127" Source="{Binding ProfilePhoto}" />
+                                    <circle:CircleImage x:Name="imgAvatar" VerticalOptions="EndAndExpand" 
+														BorderColor="{StaticResource BlueBackgroundColor}"
+														BorderThickness="3"
+										   Grid.Row="0" HorizontalOptions="CenterAndExpand"
+										   WidthRequest="127"  HeightRequest="127"
+										   Source="{Binding ProfilePhoto}" />
                                     <Grid Grid.Row="2" Margin="0,-10,0,0" BackgroundColor="#FFF9F5F5" VerticalOptions="StartAndExpand">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="25"></RowDefinition>
@@ -70,7 +76,7 @@
                                             <Label Text="Number of MVP Awards:" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                             <Label Text="{Binding AwardsCountValue}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                         </StackLayout>
-                                        <Label Margin="20,0,20,20"  Grid.Row="4" Text="{Binding Description}" HorizontalTextAlignment="Start"  VerticalOptions="Center" TextColor="{StaticResource CommonProfileLabelTextColor}" FontAttributes="Bold" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
+                                        <Label Margin="20,0,20,20"  Grid.Row="4" Text="{Binding Description}" HorizontalTextAlignment="Start"  VerticalOptions="Center" TextColor="{StaticResource CommonProfileLabelTextColor}"  FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                     </Grid>
                                 </Grid>
                             </StackLayout>

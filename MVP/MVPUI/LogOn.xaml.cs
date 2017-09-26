@@ -15,7 +15,14 @@ namespace Microsoft.Mvpui
         public LogOn()
         {
             InitializeComponent();
-            BindingContext = LogOnViewModel.Instance;
+
+			ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
+
+			if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+				ToolbarClose.Icon = "Assets\\toolbar_close.png";
+
+
+			BindingContext = LogOnViewModel.Instance;
         }
         #endregion
 

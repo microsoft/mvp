@@ -10,7 +10,7 @@ namespace Microsoft.Mvp.Droid
 {
 
     [Activity(Label = "MVP",
-        Icon = "@drawable/icon",
+        Icon = "@mipmap/ic_launcher",
         Theme = "@style/SplashTheme",
         MainLauncher = true)]
     public class SplashActivity : AppCompatActivity

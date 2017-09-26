@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Microsoft.Mvpui.SettingsPage"
+			 BackgroundColor="{StaticResource BlueBackgroundColor}"
+			 Title="About MVP">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Close" x:Name="ToolbarClose" Icon="toolbar_close.png" />
+	</ContentPage.ToolbarItems>
+
+	<ScrollView Padding="20">
+		<StackLayout VerticalOptions="FillAndExpand" 
+					 HorizontalOptions="FillAndExpand">
+			<Image HeightRequest="200" HorizontalOptions="Center">
+				<Image.Source>
+					<OnPlatform x:TypeArguments="ImageSource">
+						<On Platform="iOS" Value="image_mvplogo.png" />
+						<On Platform="Android" Value="image_mvplogo.png" />
+						<On Platform="Windows" Value="Assets\image_mvplogo.png" />
+					</OnPlatform>
+				</Image.Source>
+			</Image>
+
+			<StackLayout
+                Grid.Row="2"
+                Grid.ColumnSpan="5"
+                Margin="0,0,0,8">
+				<Label 
+                HorizontalOptions="Center"
+                Text="{Binding Version}"
+                FontSize="Small"
+                TextColor="White"/>
+				<Label 
+                HorizontalOptions="Center"
+                Text="Built in C# with Xamarin"
+                FontSize="Micro"
+                TextColor="#CCCCCC"/>
+				<Label 
+                HorizontalOptions="Center"
+                Text="{Binding Copyright}"
+                FontSize="Micro"
+                TextColor="#CCCCCC"/>
+			</StackLayout>
+
+			<Label 
+				   Margin="10"
+				   Text="{Binding About}" 
+				   TextColor="White"
+				   VerticalTextAlignment="Center"
+				   VerticalOptions="Center" 
+				   HorizontalOptions="Center" />
+
+			<Button TextColor="White"
+                        BorderColor="White"
+                        BackgroundColor="{StaticResource PrimaryDark}"
+                        BorderRadius="5"
+                        BorderWidth="2"
+                        Clicked="ButtonSignoutClicked"
+                        Text="Sign Out"
+                        FontSize="Medium" 
+                        WidthRequest="150" 
+                        HorizontalOptions="Center"
+						VerticalOptions="EndAndExpand"/>
+
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

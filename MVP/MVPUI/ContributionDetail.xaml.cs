@@ -29,7 +29,13 @@ namespace Microsoft.Mvpui
         {
             InitializeComponent();
 
-            this.BindingContext = ContributionViewModel.Instance;
+			ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
+
+			if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+				ToolbarClose.Icon = "Assets\\toolbar_close.png";
+
+
+			this.BindingContext = ContributionViewModel.Instance;
 
             if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
             {
@@ -61,7 +67,6 @@ namespace Microsoft.Mvpui
             base.OnAppearing();
             try
             {
-                BindingGestureRecognizers();
                 InitContributionType();
                 await BindContributionAreas();
                 BindingSelectors();
@@ -96,16 +101,6 @@ namespace Microsoft.Mvpui
             BindingContributionType();
         }
 
-        private void BindingGestureRecognizers()
-        {
-            var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += OnCloseClicked;
-            btnCancel.GestureRecognizers.Add(tapGestureRecognizer);
-
-            var tapGestureRecognizerForSave = new TapGestureRecognizer();
-            tapGestureRecognizerForSave.Tapped += OnSaveClicked;
-            imgSave.GestureRecognizers.Add(tapGestureRecognizerForSave);
-        }
 
         private void BindingContributionType()
         {
@@ -209,7 +204,7 @@ namespace Microsoft.Mvpui
             }
         }
 
-        public async void OnSaveClicked(object sender, EventArgs e)
+        public async void ButtonSaveClicked(object sender, EventArgs e)
         {
 
             if (_isTapped == true)
