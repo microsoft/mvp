@@ -1,13 +1,9 @@
 ﻿using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
-using Microsoft.Mvpui.Helpers;
 using MvvmHelpers;
 //using Plugin.Geolocator;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using System;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,7 +20,6 @@ namespace Microsoft.Mvpui
         #region Private Fields
 
         private bool _isTapped = false;
-        //Geocoder geoCoder;
 
         #endregion
 
@@ -33,17 +28,17 @@ namespace Microsoft.Mvpui
         public ContributionDetail()
         {
             InitializeComponent();
-            //geoCoder = new Geocoder();
+
             this.BindingContext = ContributionViewModel.Instance;
-            SetImageSource();
-            if (Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.iOS)
+
+            if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
             {
                 PersonGroupSelector.HeightRequest = 40;
                 entrySecondAnnualQuantity.HeightRequest = 40;
                 entryAnnualReach.HeightRequest = 40;
                 entryAnnualQuantity.HeightRequest = 40;
 
-                if (Device.OS == TargetPlatform.iOS)
+                if (Device.RuntimePlatform == Device.iOS)
                 {
                     locationContainer.HeightRequest = 140;
                 }
@@ -58,6 +53,7 @@ namespace Microsoft.Mvpui
             Navigation.PushAsync(new MyProfile());
             return true;
         }
+
         protected async override void OnAppearing()
         {
             stkOveryLay.IsVisible = true;
@@ -204,7 +200,6 @@ namespace Microsoft.Mvpui
                 backup.ContributionId = contributionInfo.MyContribution.ContributionId;
                 backup.StartDate = contributionInfo.MyContribution.StartDate;
                 backup.Description = contributionInfo.MyContribution.Description;
-                backup.Icon = contributionInfo.MyContribution.Icon;
                 backup.IsBelongToLatestAwardCycle = contributionInfo.MyContribution.IsBelongToLatestAwardCycle;
                 backup.IsSystemCollected = contributionInfo.MyContribution.IsSystemCollected;
                 backup.LabelTextOfContribution = contributionInfo.MyContribution.LabelTextOfContribution;
@@ -212,12 +207,6 @@ namespace Microsoft.Mvpui
                 backup.Title = contributionInfo.MyContribution.Title;
                 contributionInfo.MyContributionBackup = backup;
             }
-        }
-
-        private void SetImageSource()
-        {
-            btnCancel.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", CommonConstants.BaseResourcePath, "Cancel.png");
-            imgSave.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", CommonConstants.BaseResourcePath, "Right.png");
         }
 
         public async void OnSaveClicked(object sender, EventArgs e)
@@ -265,7 +254,7 @@ namespace Microsoft.Mvpui
                     var result = await MvpHelper.MvpService.AddContributionModel(model, LogOnViewModel.StoredToken);
                     if (result != null && result.ContributionId != "0")
                     {
-                        Helpers.MvpHelper.SetIconAndLabelTextOfContribution(result);
+                        MvpHelper.SetLabelTextOfContribution(result);
                         MyProfileViewModel.Instance.List.Insert(0, result);
                         MyProfileViewModel.Instance.TotalOfData += 1;
                     }

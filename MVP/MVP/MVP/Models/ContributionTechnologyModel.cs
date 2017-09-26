@@ -4,23 +4,13 @@ using System.Collections.Generic;
 
 namespace Microsoft.Mvp.Models
 {
-    /// <summary>
-    /// The contribution technology model.
-    /// </summary>
     public class ContributionTechnologyModel
     {
-        /// <summary>
-        /// Gets or sets the id.
-        /// </summary>
-        //[Required(ErrorMessage = null, ErrorMessageResourceName = "RequiredFieldMessageText")]
         public string Id { get; set; }
 
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
         public string Name { get; set; }
 
-        public string AwardName { get; set; } 
+        public string AwardName { get; set; }
 
         public string Statuscode { get; set; }
 

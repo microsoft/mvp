@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.MyProfile"
              BackgroundColor="{StaticResource BlueBackgroundColor}"
-             Title="My Profile">
+             Title="My profile">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Settings" Icon="{Binding StrSettingImage}" x:Name="ToolBarSettings"/>
+        <ToolbarItem Text="Settings" x:Name="ToolBarSettings" Icon="toolbar_settings.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
@@ -15,11 +15,6 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Row="0" Orientation="Vertical">
-                    <StackLayout.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <OnPlatform.iOS>0,20,0,0</OnPlatform.iOS>
-                        </OnPlatform>
-                    </StackLayout.Margin>
                     <Label x:Name="lableErrorMesage" HorizontalOptions="CenterAndExpand" Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="#FFAEC9" FontSize="15"></Label>
                 </StackLayout>
                 <RelativeLayout Grid.Row="1" x:Name="outerLayout">
@@ -38,24 +33,20 @@
                             <StackLayout Margin="5,0,5,0" Orientation="Vertical" BackgroundColor="{StaticResource BlueBackgroundColor}">
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="198"></RowDefinition>
+                                        <RowDefinition Height="150"></RowDefinition>
                                         <RowDefinition Height="2"></RowDefinition>
                                         <RowDefinition Height="*">
                                         </RowDefinition>
                                     </Grid.RowDefinitions>
 
                                     <Grid BackgroundColor="#FFF9F5F5" Grid.RowSpan="2" HeightRequest="69" VerticalOptions="EndAndExpand"></Grid>
-                                    <Image x:Name="imgAvatar" VerticalOptions="EndAndExpand" Grid.Row="0" HorizontalOptions="CenterAndExpand" WidthRequest="127"  HeightRequest="127" Source="{Binding ProfilePhoto}" >
-                                    </Image>
-                                    <Image x:Name="imgAvatarBackground"  VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Grid.RowSpan="2" HeightRequest="200" WidthRequest="326" Source="{Binding StrAvatarBackground}">
-                                    </Image>
+                                    <Image x:Name="imgAvatar" VerticalOptions="EndAndExpand" Grid.Row="0" HorizontalOptions="CenterAndExpand" WidthRequest="127"  HeightRequest="127" Source="{Binding ProfilePhoto}" />
                                     <Grid Grid.Row="2" Margin="0,-10,0,0" BackgroundColor="#FFF9F5F5" VerticalOptions="StartAndExpand">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="25"></RowDefinition>
                                             <RowDefinition Height="18"></RowDefinition>
                                             <RowDefinition Height="18"></RowDefinition>
                                             <RowDefinition Height="18"></RowDefinition>
-                                            <RowDefinition Height="68"></RowDefinition>
                                             <RowDefinition Height="auto"></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Label Grid.Row="0" Text="{Binding PersonName}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="#3E3E3E" FontAttributes="Bold" >
@@ -68,80 +59,25 @@
                                             </Label.FontSize>
                                         </Label>
                                         <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"   Orientation="Horizontal">
-                                            <Label Text="{Binding AwardCategoriesTip}" TextColor="{StaticResource CommonProfileLabelTextSecondColor}"  FontAttributes="Bold" FontSize="{StaticResource SmallProfileLabelFontSize}" ></Label>
+                                            <Label Text="Award Categories:" TextColor="{StaticResource CommonProfileLabelTextSecondColor}"  FontAttributes="Bold" FontSize="{StaticResource SmallProfileLabelFontSize}" ></Label>
                                             <Label Text="{Binding AwardCategoriesValue}" TextColor="{StaticResource CommonProfileLabelTextSecondColor}"  FontAttributes="Bold" FontSize="{StaticResource SmallProfileLabelFontSize}"></Label>
                                         </StackLayout>
                                         <StackLayout Grid.Row="2" HorizontalOptions="Center"  VerticalOptions="Center"  Orientation="Horizontal">
-                                            <Label Text="{Binding FirstAwardTip}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
+                                            <Label Text="First year awarded:" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                             <Label Text="{Binding FirstAwardValue}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                         </StackLayout>
                                         <StackLayout Grid.Row="3" HorizontalOptions="Center"   VerticalOptions="Center"  Orientation="Horizontal">
-                                            <Label Text="{Binding AwardsCountTip}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
+                                            <Label Text="Number of MVP Awards:" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                             <Label Text="{Binding AwardsCountValue}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                         </StackLayout>
-                                        <StackLayout Grid.Row="4" Margin="0,15,0,10" Orientation="Horizontal" HorizontalOptions="Center"  VerticalOptions="Center"   >
-                                            <!--<Button x:Name="btnEdit" FontSize="{StaticResource ContributionBtnFontSize}"  HorizontalOptions="Fill" Text="Edit Profile"  BackgroundColor="White" TextColor="{StaticResource BlueBackgroundColor}"  BorderColor="{StaticResource BlueBackgroundColor}" BorderWidth="1"></Button>-->
-                                            <Button x:Name="btnAdd" FontSize="{StaticResource ContributionBtnFontSize}" Clicked="OnAddContributionClicked"    HorizontalOptions="CenterAndExpand" TextColor="White" Text="Submit Contribution"  BackgroundColor="{StaticResource BlueBackgroundColor}"  BorderColor="{StaticResource BlueBackgroundColor}" BorderWidth="1"></Button>
-                                        </StackLayout>
-                                        <Label Margin="20,0,20,20"  Grid.Row="5" Text="{Binding Description}" HorizontalTextAlignment="Start"  VerticalOptions="Center" TextColor="{StaticResource CommonProfileLabelTextColor}" FontAttributes="Bold" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
+                                        <Label Margin="20,0,20,20"  Grid.Row="4" Text="{Binding Description}" HorizontalTextAlignment="Start"  VerticalOptions="Center" TextColor="{StaticResource CommonProfileLabelTextColor}" FontAttributes="Bold" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
                                     </Grid>
                                 </Grid>
-
-                            </StackLayout>
-
-                            <StackLayout Margin="5,0,5,5"  Orientation="Vertical" BackgroundColor="White"  >
-                                <Label Margin="10,10,0,10"  Text="Activities" TextColor="Gray" FontSize="14"></Label>
-                                <ListView x:Name="listView" ItemsSource="{Binding List}"
-                        ItemSelected="OnItemSelected" IsPullToRefreshEnabled="True"
-                         VerticalOptions="FillAndExpand" RowHeight="50" Margin="0,0,0,10">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
-                                                <ViewCell.ContextActions>
-                                                    <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
-                           Text="Edit" />
-                                                    <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                           Text="Delete" IsDestructive="True" />
-                                                </ViewCell.ContextActions>
-                                                <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
-                                                    <Image x:Name="image5" WidthRequest="45" HeightRequest="35" Source="{Binding Icon}"/>
-                                                    <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                                                        <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource CommonProfileLabelTextSecondColor}" VerticalTextAlignment="Center" FontAttributes="Bold">
-                                                            <Label.FontSize>
-                                                                <OnPlatform x:TypeArguments="x:Double">
-                                                                    <OnPlatform.iOS>11</OnPlatform.iOS>
-                                                                    <OnPlatform.Android>14</OnPlatform.Android>
-                                                                    <OnPlatform.WinPhone>14</OnPlatform.WinPhone>
-                                                                </OnPlatform>
-                                                            </Label.FontSize>
-                                                        </Label>
-                                                        <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
-                                                            <Label Text="{Binding DataFormat}" TextColor="{StaticResource CommonProfileLabelTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
-                                                            <StackLayout Orientation="Horizontal">
-                                                                <Label  Text="{Binding LabelTextOfContribution}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" VerticalTextAlignment="Center"></Label>
-                                                                <Label Text="{Binding AnnualReach}" TextColor="{StaticResource CommonProfileLabelTextColor}"  VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
-                                                            </StackLayout>
-                                                        </StackLayout>
-                                                    </StackLayout >
-                                                </StackLayout>
-                                            </ViewCell>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                                <Button BorderRadius="0" BackgroundColor="{StaticResource BlueBackgroundColor}" FontSize="12" x:Name="btnLoadMore" TextColor="White" Text="Load More..." IsVisible="{Binding CanLoadMore}" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" Clicked="OnLoadMoreClicked">
-                                    <Button.Margin>
-                                        <OnPlatform x:TypeArguments="Thickness">
-                                            <OnPlatform.WinPhone>0,0,0,20</OnPlatform.WinPhone>
-                                        </OnPlatform>
-                                    </Button.Margin>
-
-                                </Button>
                             </StackLayout>
                         </StackLayout>
                     </ScrollView>
                 </RelativeLayout>
             </Grid>
-
 
             <Grid x:Name="stkOveryLay" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#F7F7F7">
                 <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
@@ -149,8 +85,6 @@
                     <Label TextColor="Black" Text="Loading ..."  FontSize="18"></Label>
                 </StackLayout>
             </Grid>
-
         </Grid>
-
     </ContentPage.Content>
 </ContentPage>

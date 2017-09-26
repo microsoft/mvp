@@ -1,11 +1,5 @@
-﻿using Microsoft.Mvp.Helpers;
-using Microsoft.Mvp.ViewModels;
-using Microsoft.Mvpui.Helpers;
+﻿using Microsoft.Mvp.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
@@ -18,16 +12,6 @@ namespace Microsoft.Mvpui
         public Settings()
         {
             InitializeComponent();
-
-            btnCancel.Source = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", CommonConstants.BaseResourcePath, "Cancel.png");
-
-            btnSignOut.Clicked += BtnSignOut_Clicked;
-            btnAbout.Clicked += BtnAbout_Clicked;
-
-            var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Tapped += OnCloseClicked;
-            btnCancel.GestureRecognizers.Add(tapGestureRecognizer);
-
         }
 
         #endregion
@@ -36,7 +20,6 @@ namespace Microsoft.Mvpui
 
         protected override bool OnBackButtonPressed()
         {
-            //Navigation.PushAsync(new MyProfile());
             Navigation.PopModalAsync();
             return true;
         }
@@ -56,7 +39,6 @@ namespace Microsoft.Mvpui
         private async void OnCloseClicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync(true);
-            //await Navigation.PushModalAsync(new MyProfile());
         }
 
         #endregion

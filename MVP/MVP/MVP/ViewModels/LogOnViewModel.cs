@@ -8,13 +8,14 @@ namespace Microsoft.Mvp.ViewModels
     {
 
         #region Singleton pattern and constructors
+
         private static LogOnViewModel _instance = null;
         private static readonly object _synObject = new object();
+
         public static LogOnViewModel Instance
         {
             get
             {
-                // Double-Checked Locking
                 if (null == _instance)
                 {
                     lock (_synObject)
@@ -29,20 +30,16 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-
         #endregion
 
         #region Private Members
-        
-        private string _strAvatarBackground = "mvplogo.png";
-        private string _logOnImage = "LoginBtn.png";
-        private string _settingIcon = "Settings.png";
-        private string _searchIcon = "searchIcon.png";
+
         private static string _storedToken;
-       
+
         #endregion
 
         #region Public Members
+
         public bool IsLoggedIn
         {
             get
@@ -56,7 +53,7 @@ namespace Microsoft.Mvp.ViewModels
 
                 if (!string.IsNullOrEmpty(tokenAndExpiredTime))
                 {
-                    var index = tokenAndExpiredTime.LastIndexOf(",",StringComparison.Ordinal);
+                    var index = tokenAndExpiredTime.LastIndexOf(",", StringComparison.Ordinal);
 
                     var expiredtime = Convert.ToDateTime(tokenAndExpiredTime.Substring(index + 1), System.Globalization.CultureInfo.CurrentCulture);
                     var token = tokenAndExpiredTime.Substring(0, index);
@@ -73,55 +70,7 @@ namespace Microsoft.Mvp.ViewModels
                 return !string.IsNullOrEmpty(LogOnViewModel.StoredToken);
             }
         }
-        public string MvpBackgroundLogo
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", CommonConstants.BaseResourcePath, _strAvatarBackground);
-            }
-            set
-            {
-                _strAvatarBackground = value;
-                OnPropertyChanged("MvpBackgroundLogo");
-            }
-        }
 
-        public string LogOnImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", CommonConstants.BaseResourcePath, _logOnImage);
-            }
-            set
-            {
-                _logOnImage = value;
-                OnPropertyChanged("LogOnImage");
-            }
-        }
-        public string SettingIcon
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", CommonConstants.BaseResourcePath, _settingIcon);
-            }
-            set
-            {
-                _logOnImage = value;
-                OnPropertyChanged("SettingIcon");
-            }
-        }
-        public string SearchIcon
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", CommonConstants.BaseResourcePath, _searchIcon);
-            }
-            set
-            {
-                _logOnImage = value;
-                OnPropertyChanged("SearchIcon");
-            }
-        }
         public static string StoredToken
         {
             get
@@ -135,7 +84,8 @@ namespace Microsoft.Mvp.ViewModels
 
             }
 
-        } 
+        }
+
         #endregion
 
     }

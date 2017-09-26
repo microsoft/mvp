@@ -1,31 +1,40 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using MvvmHelpers;
 using Microsoft.Mvp.ViewModels;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.Helpers;
-using Microsoft.Mvpui.Helpers;
 
 namespace Microsoft.Mvpui
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ContributionsPage : ContentPage
     {
-       
+
 
         public ContributionsPage()
         {
             InitializeComponent();
-            
 
             BindingContext = MyProfileViewModel.Instance;
+
+            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+                ToolbarAddContribution.Icon = "Assets\\toolbar_add.png";
+        }
+
+        public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (listView.SelectedItem != null)
+            {
+                ContributionViewModel.Instance.MyContribution = e.SelectedItem as ContributionModel;
+                await Navigation.PushModalAsync(
+                    new ContributionDetail()
+                    {
+                        BindingContext = ContributionViewModel.Instance
+                    });
+            }
         }
 
         public async void OnEdit(object sender, EventArgs eventArgs)
@@ -50,6 +59,11 @@ namespace Microsoft.Mvpui
                 var modelToDelete = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == contribution.ContributionId).FirstOrDefault();
                 MyProfileViewModel.Instance.List.Remove(modelToDelete);
             }
+        }
+
+        async void AddContribution_Clicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ContributionDetail());
         }
     }
 }

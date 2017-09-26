@@ -59,12 +59,12 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer: 794858207@qq.com (3K7PT367PR)</CodesignKey>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <BuildIpa>True</BuildIpa>
@@ -126,10 +126,6 @@
     <CodesignProvision>0bfc6c84-e899-49b7-9ea7-4f5d40dde765</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CustomControls\BordePickerRender.cs" />
-    <Compile Include="CustomControls\BorderDatePickerRender.cs" />
-    <Compile Include="CustomControls\BorderEditorRender.cs" />
-    <Compile Include="CustomControls\BorderEntryRender.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="CustomControls\CookieHelper.cs" />
@@ -142,14 +138,28 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <None Include="packages.config" />
+    <Compile Include="Renderers\NavigationBarRenderer.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Renderers\ContentPageRenderer.cs" />
+    <Compile Include="DependencyServices\StatusBar.cs" />
+    <Compile Include="Renderers\TabsRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Default%402x.png" />
-    <BundleResource Include="Resources\Default-568h%402x.png" />
-    <BundleResource Include="Resources\Default-Portrait%402x.png" />
-    <BundleResource Include="Resources\Default-Portrait.png" />
-    <BundleResource Include="Resources\Default.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\toolbar_close%402x.png" />
+    <BundleResource Include="Resources\toolbar_close%403x.png" />
+    <BundleResource Include="Resources\tab_profile%402x.png" />
+    <BundleResource Include="Resources\tab_profile%403x.png" />
+    <BundleResource Include="Resources\toolbar_add%402x.png" />
+    <BundleResource Include="Resources\toolbar_add%403x.png" />
+    <BundleResource Include="Resources\toolbar_settings%402x.png" />
+    <BundleResource Include="Resources\toolbar_settings%403x.png" />
+    <BundleResource Include="Resources\tab_contribution_selected%402x.png" />
+    <BundleResource Include="Resources\tab_contribution_selected%403x.png" />
+    <BundleResource Include="Resources\tab_contribution%402x.png" />
+    <BundleResource Include="Resources\tab_contribution%403x.png" />
+    <BundleResource Include="Resources\tab_profile_selected%402x.png" />
+    <BundleResource Include="Resources\tab_profile_selected%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -202,225 +212,58 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Video.png" />
+    <BundleResource Include="Resources\image_video.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\visibility.png" />
+    <BundleResource Include="Resources\image_blog.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Benefits.png" />
+    <BundleResource Include="Resources\image_book.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Blog.png" />
+    <BundleResource Include="Resources\image_cancel.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Book.png" />
+    <BundleResource Include="Resources\image_code.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Cancel.png" />
+    <BundleResource Include="Resources\image_defaultactivity.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Code.png" />
+    <BundleResource Include="Resources\image_discussion.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\DefaultActivity.png" />
+    <BundleResource Include="Resources\image_feedback.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Discussion.png" />
+    <BundleResource Include="Resources\image_mvplogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Feedback.png" />
+    <BundleResource Include="Resources\image_speaker.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\LoginBtn.png" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\iTunesArtwork%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Me.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\mvplogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\mvplogoplus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\MyNetwork.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\network.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Notifications.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\searchIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Speaker.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Support.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Renders\" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\SplashScreen.scale-5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60@2x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60@3x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5@2x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40@2x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small-40@3x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small@2x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-Small@3x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon76.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon76@2x.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\1024MVP.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\1536MVP.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\2048MVP.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\640-1136MVP.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\640img.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\768MVP.png">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\Contents.json">
-      <InProject>false</InProject>
-    </ImageAsset>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\640-1136MVP.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\640img.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\768MVP.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\1024MVP.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\1536MVP.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\2048MVP.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logo512.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logo1024.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small-50.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small-50%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-57%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-60%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-60%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-72.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-72%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-76.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-76%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-83.5%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small-40.png" />
+    <Folder Include="Renderers\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="DependencyServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

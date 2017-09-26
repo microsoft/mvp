@@ -1,13 +1,12 @@
-﻿using Microsoft.Mvp.Helpers;
-using Microsoft.Mvpui.Helpers;
-using MvvmHelpers;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Mvp.Helpers;
+using MvvmHelpers;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace Microsoft.Mvp.ViewModels
@@ -15,8 +14,10 @@ namespace Microsoft.Mvp.ViewModels
     public class LiveIdLogOnViewModel
     {
         #region Singleton pattern and constructors
+
         private static LiveIdLogOnViewModel _instance = null;
         private static readonly object _synObject = new object();
+
         public static LiveIdLogOnViewModel Instance
         {
             get
@@ -44,6 +45,7 @@ namespace Microsoft.Mvp.ViewModels
         #endregion
 
         #region Private Members 
+
         string _liveIdLogOnUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.LiveIdLogOnUrlFormatString, CommonConstants.ClientId, CommonConstants.Scope);
         string _liveIdSignOutUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.LiveIdSignOutUrlFormatString, CommonConstants.ClientId);
         string _accessTokenUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.AccessTokenUrlFormatString, CommonConstants.ClientId, CommonConstants.ClientSecret);
@@ -176,6 +178,7 @@ namespace Microsoft.Mvp.ViewModels
                         {
                             Application.Current.Properties.Remove(CommonConstants.AccessTokenKey);
                             Application.Current.Properties.Add(CommonConstants.AccessTokenKey, tokenData[CommonConstants.AccessTokenKey]);
+
                             // refresh token
                             Application.Current.Properties.Remove(CommonConstants.RefreshTokenKey);
                             Application.Current.Properties.Add(CommonConstants.RefreshTokenKey, tokenData[CommonConstants.RefreshTokenKey]);
@@ -189,6 +192,7 @@ namespace Microsoft.Mvp.ViewModels
                 return string.Empty;
             }
         }
+
         #endregion
 
     }

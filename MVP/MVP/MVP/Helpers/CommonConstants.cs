@@ -15,6 +15,7 @@ namespace Microsoft.Mvp.Helpers
         }
 
         #region ContributionType
+
         public const string AT = "Article";
         public const string Bsp = "Blog Site Posts";
         public const string BA = "Book (Author)";
@@ -44,6 +45,7 @@ namespace Microsoft.Mvp.Helpers
         public const string VD = "Video";
         public const string WB = "Webcast";
         public const string WP = "WebSite Posts";
+
         #endregion
 
         public const string TokenKey = "Token";
@@ -81,25 +83,7 @@ namespace Microsoft.Mvp.Helpers
         public const string NumberPattern = @"^[0-9]*$";
         #endregion
 
-        public const string ImageFolderForWP = "Resources/";
-
-        public static string BaseResourcePath { get; } =
-          (Device.RuntimePlatform == Device.WinPhone || Device.RuntimePlatform == Device.Windows) ? CommonConstants.ImageFolderForWP : string.Empty;
-
-
-        #region Icon Names
-        public const string BlogIcon = "Blog.png";
-        public const string BookIcon = "Book.png";
-        public const string CodeIcon = "Code.png";
-        public const string SpeakerIcon = "Speaker.png";
-        public const string DiscussionIcon = "Discussion.png";
-        public const string DefaultContributionIcon = "DefaultActivity.png";
-        public const string FeedbackIcon = "Feedback.png";
-        public const string VideoIcon = "Video.png";
-        #endregion
-
         #region Private Members for LiveIdLogOn 
-        //   private readonly string _liveIdLogOnUrl = "https://login.live.com/oauth20_authorize.srf?client_id=0000000048193351&scope=wl.basic%20wl.emails&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf";
         public const string Scope = "wl.emails%20wl.basic%20wl.offline_access%20wl.signin";
         public const string ClientId = ""; //<- this is my (Micah) client key ==> yours[0000000048193351]
         public const string ClientSecret = "";  // <- my (Micah) secret ), put yours in here

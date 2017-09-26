@@ -1,6 +1,5 @@
 ﻿using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
-using Microsoft.Mvpui.Helpers;
 using MvvmHelpers;
 
 namespace Microsoft.Mvp.ViewModels
@@ -9,6 +8,7 @@ namespace Microsoft.Mvp.ViewModels
     {
 
         #region Singleton pattern and constructors
+
         private static ContributionViewModel _instance = null;
         private static readonly object _synObject = new object();
         public static ContributionViewModel Instance
@@ -33,7 +33,7 @@ namespace Microsoft.Mvp.ViewModels
         public ContributionViewModel()
         {
             ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>();
-            ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(); 
+            ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>();
 
             VisibilityModel[] visibilityModels = new VisibilityModel[3] {
                   new VisibilityModel() { Description= "Everyone",Id=299600000,LocalizeKey=null },
@@ -47,6 +47,7 @@ namespace Microsoft.Mvp.ViewModels
         #endregion
 
         #region Private Members      
+
         private bool _isSecondAnnualQuantityVisible;
         private string _annualQuantityTipText = CommonConstants.InitialOfAnnualQuantityTipText;
         private string _secondAnnualQuantityTipText = string.Empty;
@@ -68,8 +69,8 @@ namespace Microsoft.Mvp.ViewModels
 
         private int _contributionTypeIndex = 0;
         private int _contributionAreaIndex = 0;
-        private int _vibilityIndex = 0; 
-  
+        private int _vibilityIndex = 0;
+
         private string _ErrorMessage;
 
         #endregion

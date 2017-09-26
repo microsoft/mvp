@@ -1,5 +1,5 @@
-﻿using Microsoft.Mvp.ViewModels;
-using Microsoft.Mvpui.Helpers;
+﻿using Microsoft.Mvp.Interfaces;
+using Microsoft.Mvp.ViewModels;
 using Xamarin.Forms;
 
 namespace Microsoft.Mvpui
@@ -7,7 +7,7 @@ namespace Microsoft.Mvpui
     public partial class App : Application
     {
 
-      
+
 
         #region Private Fields
 
@@ -73,7 +73,7 @@ namespace Microsoft.Mvpui
 
         public App()
         {
-            InitializeComponent(); 
+            InitializeComponent();
 
             if (LogOnViewModel.Instance.IsLoggedIn)
             {

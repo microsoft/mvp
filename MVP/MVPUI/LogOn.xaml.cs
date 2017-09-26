@@ -1,8 +1,9 @@
-﻿//#define SKIP_LOGIN
+﻿#define SKIP_LOGIN
 
 using Microsoft.Mvp.ViewModels;
 using System;
 using Xamarin.Forms;
+using Microsoft.Mvp.Interfaces;
 
 namespace Microsoft.Mvpui
 {
@@ -24,7 +25,6 @@ namespace Microsoft.Mvpui
         {
             base.OnAppearing();
 
-
             if (LogOnViewModel.Instance.IsLoggedIn)
             {
                 App.GoHome();
@@ -44,7 +44,7 @@ namespace Microsoft.Mvpui
             }
             else
             {
-                await Navigation.PushModalAsync(new LiveIdLogOn());
+                await Navigation.PushModalAsync(new NavigationPage(new LiveIdLogOn()));
             }
         }
 

@@ -1,9 +1,8 @@
-﻿using Microsoft.Mvp.Helpers;
-using Microsoft.Mvp.Models;
-using Microsoft.Mvpui.Helpers;
-using MvvmHelpers;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Models;
+using MvvmHelpers;
 using Xamarin.Forms;
 
 namespace Microsoft.Mvp.ViewModels
@@ -11,6 +10,7 @@ namespace Microsoft.Mvp.ViewModels
     public class MyProfileViewModel : ViewModelBase
     {
         #region Singleton pattern and constructors
+
         private static MyProfileViewModel _instance = null;
         private static readonly object _synObject = new object();
         public static MyProfileViewModel Instance
@@ -38,11 +38,11 @@ namespace Microsoft.Mvp.ViewModels
             {
                 ContributionTypeDetail contributionTypeDetail = await MvpHelper.MvpService.GetContributionTypes(LogOnViewModel.StoredToken);
                 ContributionViewModel.Instance.ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>(contributionTypeDetail.ContributionTypes);
-
             }
-            catch (TaskCanceledException tce) {
+            catch (TaskCanceledException tce)
+            {
                 ContributionViewModel.Instance.ErrorMessage = tce.Message;
-            }           
+            }
             return true;
         }
 
@@ -53,36 +53,20 @@ namespace Microsoft.Mvp.ViewModels
                 ContributionDetail contributionDetail = await MvpHelper.MvpService.GetContributionAreas(LogOnViewModel.StoredToken);
                 ContributionViewModel.Instance.ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(contributionDetail.ContributionArea);
             }
-            catch(TaskCanceledException tce)
+            catch (TaskCanceledException tce)
             {
                 ContributionViewModel.Instance.ErrorMessage = tce.Message;
             }
             return true;
         }
 
-
-
-
-
         #endregion
 
         #region Private Members
-        private string _strWPResourcePath;
-        private string _strAvatar = "user1.jpg";
-        private string _strAvatarBackground = "mvplogoplus.png";
-        private string _strBenefitsImage = "Benefits.png";
-        private string _strMyNetworkImage = "MyNetwork.png";
-        private string _strMeImage = "Me.png";
-        private string _strNotificationsImage = "Notifications.png";
-        private string _strSupportImage = "Support.png";
-        private string _strSettingsImage = "Settings.png";
 
         private string _personName = string.Empty;
-        private string _awardCategoriesTip = "Award Categories:";
         private string _awardCategoriesValue = string.Empty;
-        private string _firstAwardTip = "First year awarded:";
         private string _firstAwardValue = string.Empty;
-        private string _awardsCountTip = "Number of MVP Awards:";
         private string _awardsCountValue = string.Empty;
         private string _description = string.Empty;
         private ObservableRangeCollection<ContributionModel> _list = new ObservableRangeCollection<ContributionModel>();
@@ -107,19 +91,7 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public string AwardCategoriesTip
-        {
-            get
-            {
-                return _awardCategoriesTip;
-            }
 
-            set
-            {
-                _awardCategoriesTip = value;
-                OnPropertyChanged("AwardCategoriesTip");
-            }
-        }
 
         public string AwardCategoriesValue
         {
@@ -135,19 +107,7 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public string FirstAwardTip
-        {
-            get
-            {
-                return _firstAwardTip;
-            }
 
-            set
-            {
-                _firstAwardTip = value;
-                OnPropertyChanged("FirstAwardTip");
-            }
-        }
 
         public string FirstAwardValue
         {
@@ -163,19 +123,6 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public string AwardsCountTip
-        {
-            get
-            {
-                return _awardsCountTip;
-            }
-
-            set
-            {
-                _awardsCountTip = value;
-                OnPropertyChanged("AwardsCountTip");
-            }
-        }
 
         public string AwardsCountValue
         {
@@ -194,10 +141,10 @@ namespace Microsoft.Mvp.ViewModels
         public string Description
         {
             get => _description;
-            
+
 
             set => SetProperty(ref _description, value);
-            
+
         }
 
         public ObservableRangeCollection<ContributionModel> List
@@ -214,130 +161,6 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public string StrBenefitsImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strBenefitsImage);
-            }
-
-            set
-            {
-                _strBenefitsImage = value;
-                OnPropertyChanged("StrBenefitsImage");
-            }
-        }
-
-        public string StrMyNetworkImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strMyNetworkImage);
-            }
-
-            set
-            {
-                _strMyNetworkImage = value;
-                OnPropertyChanged("StrMyNetworkImage");
-            }
-        }
-
-        public string StrMeImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strMeImage);
-            }
-
-            set
-            {
-                _strMeImage = value;
-                OnPropertyChanged("StrMeImage");
-            }
-        }
-
-        public string StrNotificationsImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strNotificationsImage);
-            }
-
-            set
-            {
-                _strNotificationsImage = value;
-                OnPropertyChanged("StrNotificationsImage");
-            }
-        }
-
-        public string StrSupportImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strSupportImage);
-            }
-
-            set
-            {
-                _strSupportImage = value;
-                OnPropertyChanged("StrSupportImage");
-            }
-        }
-
-        public string StrSettingImage
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strSettingsImage);
-            }
-
-            set
-            {
-                _strSettingsImage = value;
-                OnPropertyChanged("StrSettingImage");
-            }
-        }
-
-        public string StrWPResourcePath
-        {
-            get
-            {
-                return _strWPResourcePath;
-            }
-
-            set
-            {
-                _strWPResourcePath = value;
-            }
-        }
-
-        public string StrAvatar
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strAvatar);
-            }
-
-            set
-            {
-                _strAvatar = value;
-                OnPropertyChanged("StrAvatar");
-            }
-        }
-
-        public string StrAvatarBackground
-        {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strAvatarBackground);
-            }
-
-            set
-            {
-                _strAvatarBackground = value;
-                OnPropertyChanged("StrAvatarBackground");
-            }
-        }
 
         public bool HasMoreItems
         {
@@ -382,7 +205,7 @@ namespace Microsoft.Mvp.ViewModels
             get
             {
 
-                
+
                 ImageSource retSource = null;
                 bool useDefault = false;
                 if (StoreImageBase64Str != null)
@@ -440,11 +263,6 @@ namespace Microsoft.Mvp.ViewModels
                 OnPropertyChanged("HasError");
             }
         }
-        #endregion
-
-        #region Methods
-
-
         #endregion
     }
 }
