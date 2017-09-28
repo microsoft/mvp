@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.ContributionDetail"
@@ -43,7 +43,7 @@
 									<RowDefinition Height="auto"></RowDefinition>
 									<RowDefinition Height="80"></RowDefinition>
 								</Grid.RowDefinitions>
-								<Label Text="Contribution Type" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource NormalLabelTextColor}"
+								<Label Text="Contribution Type" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}"
                      Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"
                      VerticalTextAlignment="End" ></Label>
 								<local:BorderPicker HeightRequest="40"  x:Name="contributionTypeSelector"
@@ -53,7 +53,7 @@
 
 								</local:BorderPicker>
 								<StackLayout  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-									<Label Text="Contribution Area " FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource NormalLabelTextColor}"
+									<Label Text="Contribution Area " FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}"
                     VerticalTextAlignment="End"   ></Label>
 								</StackLayout>
 								<local:BorderPicker HeightRequest="40"  x:Name="ContributionAreaSelector"
@@ -61,7 +61,7 @@
                                   Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
 								</local:BorderPicker>
 								<StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-									<Label Text="Date of contribution" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource NormalLabelTextColor}"
+									<Label Text="Date of contribution" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}"
                     VerticalTextAlignment="End"   ></Label>
 								</StackLayout>
 								<local:BorderDatePicker  x:Name="ContributionDateSelector"
@@ -69,7 +69,7 @@
                                        Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
 								</local:BorderDatePicker>
 								<StackLayout   Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-									<Label Text="Title of contribution " FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource NormalLabelTextColor}"
+									<Label Text="Title of contribution " FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}"
                     VerticalTextAlignment="End"   ></Label>
 									<Label Text="{Binding ErrorMessageForTitle}"  FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red"
                        VerticalTextAlignment="End"></Label>
@@ -77,7 +77,7 @@
 
 								<local:BorderEntry  x:Name="entryTitle" Text="{Binding MyContribution.Title}" TextColor="Black"
                                   Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"></local:BorderEntry>
-								<Label Text="Visibility:" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource NormalLabelTextColor}"
+								<Label Text="Visibility:" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}"
                      Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"
                      VerticalTextAlignment="End"  ></Label>
 
@@ -89,7 +89,7 @@
 
 								</local:BorderPicker>
 								<StackLayout   Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-									<Label Text="URL" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource NormalLabelTextColor}"
+									<Label Text="URL" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}"
                     VerticalTextAlignment="End"   ></Label>
 									<Label Text="{Binding ErrorMessageForUrl}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red"
                        IsVisible="{Binding IsNeededUrl}"
@@ -100,7 +100,7 @@
                                  Text="{Binding MyContribution.ReferenceUrl}"
                                  Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="3" ></local:BorderEntry>
 
-								<Label Text="Description" FontSize="{StaticResource NormalLabelFontSize}"  Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3"  TextColor="{StaticResource NormalLabelTextColor}"
+								<Label Text="Description" FontSize="{StaticResource NormalLabelFontSize}"  Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3"  TextColor="{StaticResource SecondaryTextColor}"
                     VerticalTextAlignment="End"   ></Label>
 
 								<local:BorderEditor HeightRequest="120" x:Name="entryDescription" TextColor="Black"
@@ -110,7 +110,7 @@
 								</local:BorderEditor>
 
 								<StackLayout Orientation="Vertical" x:Name="locationContainer"  Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="3">
-									<Label FontSize="{StaticResource NormalLabelFontSize}" Text="Location" TextColor="{StaticResource NormalLabelTextColor}"
+									<Label FontSize="{StaticResource NormalLabelFontSize}" Text="Location" TextColor="{StaticResource SecondaryTextColor}"
                          VerticalTextAlignment="End" ></Label>
 									<Label x:Name="labelLocation" TextColor="Black"
                        Text=""
@@ -121,7 +121,7 @@
                            Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="3">
 
 									<StackLayout  Orientation="Horizontal">
-										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualQuantityTipText}"  TextColor="{StaticResource NormalLabelTextColor}"
+										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualQuantityTipText}"  TextColor="{StaticResource SecondaryTextColor}"
                     VerticalTextAlignment="End"  ></Label>
 										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForAnnualQuantity}" TextColor="Red"
                          IsVisible="{Binding IsNeededAnnualQuantity}"
@@ -132,7 +132,7 @@
 								<StackLayout IsVisible="{Binding IsNeededSecondAnnualQuantity}" Orientation="Vertical"
                            Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="3">
 									<StackLayout Orientation="Horizontal">
-										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding SecondAnnualQuantityTipText}" TextColor="{StaticResource NormalLabelTextColor}"
+										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding SecondAnnualQuantityTipText}" TextColor="{StaticResource SecondaryTextColor}"
                        VerticalTextAlignment="End"   ></Label>
 
 										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForSecondAnnualQuantity}" TextColor="Red"
@@ -145,7 +145,7 @@
 								<StackLayout  Orientation="Vertical"
                              Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="3">
 									<StackLayout Orientation="Horizontal">
-										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualReachTipText}"  TextColor="{StaticResource NormalLabelTextColor}"
+										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualReachTipText}"  TextColor="{StaticResource SecondaryTextColor}"
                         VerticalTextAlignment="End"  ></Label>
 										<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForAnnualReach}" TextColor="Red"
                             VerticalTextAlignment="End"></Label>

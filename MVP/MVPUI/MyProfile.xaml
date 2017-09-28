@@ -3,94 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.MyProfile"
 			 xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
-             BackgroundColor="{StaticResource BackgroundColor}"
+             BackgroundColor="#FFFFFF"
              Title="My profile">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Settings" x:Name="ToolBarSettings" Icon="toolbar_settings.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0" Orientation="Vertical">
-                    <Label x:Name="lableErrorMesage" HorizontalOptions="CenterAndExpand" Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="#FFAEC9" FontSize="15"></Label>
-                </StackLayout>
-                <RelativeLayout Grid.Row="1" x:Name="outerLayout">
-                    <ScrollView
-            RelativeLayout.WidthConstraint="{ConstraintExpression
-                    Type=RelativeToParent,Property=Width,Factor=1}"
-            RelativeLayout.HeightConstraint="{ConstraintExpression
-                    Type=RelativeToParent,Property=Height,Factor=1,Constant=0}"
-            RelativeLayout.XConstraint="{ConstraintExpression
-                    Type=RelativeToParent,Property=Width,Factor=0,Constant=0}"
-            RelativeLayout.YConstraint="{ConstraintExpression
-                    Type=RelativeToParent,Property=Height,Factor=0,Constant=0}">
+        <Grid Margin="0" Padding="0">
+            <ScrollView Margin="0" Padding="0" BackgroundColor="{StaticResource BlueBackgroundColor}">
+                <StackLayout BackgroundColor="#FFFFFF" Padding="0,20,0,0" Spacing="0" Orientation="Vertical" VerticalOptions="StartAndExpand">
+                    <Label Grid.Row="0" Text="{Binding PersonName}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource SecondaryTextColor}" FontAttributes="Bold" Style="{StaticResource BoldLabel}">
+                        <Label.FontSize>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <OnPlatform.iOS>20</OnPlatform.iOS>
+                                <OnPlatform.Android>18</OnPlatform.Android>
+                                <OnPlatform.WinPhone>18</OnPlatform.WinPhone>
+                            </OnPlatform>
+                        </Label.FontSize>
+                    </Label>
 
-                        <StackLayout VerticalOptions="StartAndExpand" Orientation="Vertical" >
+                    <Label Text="MVP123456" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="12" />
+                    <circle:CircleImage x:Name="imgAvatar" VerticalOptions="EndAndExpand" Margin="0,20,0,20" HorizontalOptions="CenterAndExpand" WidthRequest="127"  HeightRequest="127" Source="{Binding ProfilePhoto}" />
 
-                            <StackLayout Margin="5,0,5,0" Orientation="Vertical">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="150"></RowDefinition>
-                                        <RowDefinition Height="2"></RowDefinition>
-                                        <RowDefinition Height="*">
-                                        </RowDefinition>
-                                    </Grid.RowDefinitions>
+                    <Label Text="AWARD CATEGORIES" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
+                    <Label Text="{Binding AwardCategoriesValue}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource SecondaryTextColor}" FontSize="14" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
 
-                                    <Grid BackgroundColor="#FFF9F5F5" Grid.RowSpan="2" HeightRequest="69" VerticalOptions="EndAndExpand"></Grid>
-                                    <circle:CircleImage x:Name="imgAvatar" VerticalOptions="EndAndExpand" 
-														BorderColor="{StaticResource BlueBackgroundColor}"
-														BorderThickness="3"
-										   Grid.Row="0" HorizontalOptions="CenterAndExpand"
-										   WidthRequest="127"  HeightRequest="127"
-										   Source="{Binding ProfilePhoto}" />
-                                    <Grid Grid.Row="2" Margin="0,-10,0,0" BackgroundColor="#FFF9F5F5" VerticalOptions="StartAndExpand">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="25"></RowDefinition>
-                                            <RowDefinition Height="18"></RowDefinition>
-                                            <RowDefinition Height="18"></RowDefinition>
-                                            <RowDefinition Height="18"></RowDefinition>
-                                            <RowDefinition Height="auto"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Label Grid.Row="0" Text="{Binding PersonName}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="#3E3E3E" FontAttributes="Bold" >
-                                            <Label.FontSize>
-                                                <OnPlatform x:TypeArguments="x:Double">
-                                                    <OnPlatform.iOS>14</OnPlatform.iOS>
-                                                    <OnPlatform.Android>18</OnPlatform.Android>
-                                                    <OnPlatform.WinPhone>18</OnPlatform.WinPhone>
-                                                </OnPlatform>
-                                            </Label.FontSize>
-                                        </Label>
-                                        <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"   Orientation="Horizontal">
-                                            <Label Text="Award Categories:" TextColor="{StaticResource CommonProfileLabelTextSecondColor}"  FontAttributes="Bold" FontSize="{StaticResource SmallProfileLabelFontSize}" ></Label>
-                                            <Label Text="{Binding AwardCategoriesValue}" TextColor="{StaticResource CommonProfileLabelTextSecondColor}"  FontAttributes="Bold" FontSize="{StaticResource SmallProfileLabelFontSize}"></Label>
-                                        </StackLayout>
-                                        <StackLayout Grid.Row="2" HorizontalOptions="Center"  VerticalOptions="Center"  Orientation="Horizontal">
-                                            <Label Text="First year awarded:" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
-                                            <Label Text="{Binding FirstAwardValue}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
-                                        </StackLayout>
-                                        <StackLayout Grid.Row="3" HorizontalOptions="Center"   VerticalOptions="Center"  Orientation="Horizontal">
-                                            <Label Text="Number of MVP Awards:" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
-                                            <Label Text="{Binding AwardsCountValue}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
-                                        </StackLayout>
-                                        <Label Margin="20,0,20,20"  Grid.Row="4" Text="{Binding Description}" HorizontalTextAlignment="Start"  VerticalOptions="Center" TextColor="{StaticResource CommonProfileLabelTextColor}"  FontSize="{StaticResource CommonProfileLabelFontSize}"></Label>
-                                    </Grid>
-                                </Grid>
-                            </StackLayout>
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Margin="30,0,0,0" Grid.Column="0" Spacing="0" Orientation="Vertical">
+                            <Label Text="FIRST AWARDED" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />    
+                            <Label Text="{Binding FirstAwardValue}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource SecondaryTextColor}" FontSize="24" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
                         </StackLayout>
-                    </ScrollView>
-                </RelativeLayout>
-            </Grid>
+                        <StackLayout Margin="0,0,30,0" Grid.Column="1" Spacing="0" Orientation="Vertical">
+                            <Label Text="# OF AWARDS" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />    
+                            <Label Text="{Binding AwardsCountValue}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource SecondaryTextColor}" FontSize="24" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
+                        </StackLayout>
+                    </Grid>
 
-            <Grid x:Name="stkOveryLay" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#F7F7F7">
+                    <ContentView Margin="0,40,0,0" Padding="0,20,0,20" BackgroundColor="{StaticResource BlueBackgroundColor}">
+                        <Label Margin="30,20,30,20" Text="{Binding Description}" HorizontalTextAlignment="Start" VerticalOptions="Center" TextColor="#FFFFFF" FontSize="14"></Label>
+                    </ContentView>
+                </StackLayout>
+            </ScrollView>
+            
+            <Grid IsVisible="{Binding IsLoading}" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#F7F7F7">
                 <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
-                    <ActivityIndicator WidthRequest="80" IsEnabled="True" x:Name="actives" IsRunning="True" Color="Black"  HorizontalOptions="Center" VerticalOptions="Center" ></ActivityIndicator>
-                    <Label TextColor="Black" Text="Loading ..."  FontSize="18"></Label>
+                    <ActivityIndicator WidthRequest="80" IsRunning="{Binding IsLoading}" Color="{Binding SecondaryTextColor}" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
+                    <Label TextColor="Black" Text="Loading ..."  FontSize="16"></Label>
                 </StackLayout>
             </Grid>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

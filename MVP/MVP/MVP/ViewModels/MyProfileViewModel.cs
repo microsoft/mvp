@@ -69,6 +69,7 @@ namespace Microsoft.Mvp.ViewModels
         private string _firstAwardValue = string.Empty;
         private string _awardsCountValue = string.Empty;
         private string _description = string.Empty;
+        private bool _isLoading = false;
         private ObservableRangeCollection<ContributionModel> _list = new ObservableRangeCollection<ContributionModel>();
         private int _totalOfData = 100;
         private string _storeImageBase64Str;
@@ -77,6 +78,7 @@ namespace Microsoft.Mvp.ViewModels
         #endregion
 
         #region Public Members
+
         public string PersonName
         {
             get
@@ -263,6 +265,23 @@ namespace Microsoft.Mvp.ViewModels
                 OnPropertyChanged("HasError");
             }
         }
+
+
+
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
+
         #endregion
     }
 }

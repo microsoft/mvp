@@ -88,7 +88,7 @@ namespace Microsoft.Mvpui
                     {
                         MyProfileViewModel.Instance.FirstAwardValue = profile.FirstAwardYear.ToString(System.Globalization.CultureInfo.CurrentCulture);
                         MyProfileViewModel.Instance.PersonName = profile.DisplayName;
-                        MyProfileViewModel.Instance.AwardCategoriesValue = profile.AwardCategoryDisplay;
+                        MyProfileViewModel.Instance.AwardCategoriesValue = profile.AwardCategoryDisplay.Replace(",", Environment.NewLine);
                         MyProfileViewModel.Instance.Description = profile.Biography;
                         MyProfileViewModel.Instance.AwardsCountValue = profile.YearsAsMVP.ToString(System.Globalization.CultureInfo.CurrentCulture);
                     }
@@ -176,7 +176,7 @@ namespace Microsoft.Mvpui
         protected async override void OnAppearing()
         {
             MyProfileViewModel.Instance.ErrorMessage = "";
-            stkOveryLay.IsVisible = true;
+            MyProfileViewModel.Instance.IsLoading = true;
 
             base.OnAppearing();
             GetPhoto();
@@ -193,7 +193,7 @@ namespace Microsoft.Mvpui
                 MyProfileViewModel.Instance.ErrorMessage = CommonConstants.DefaultNetworkErrorString;
             }
 
-            stkOveryLay.IsVisible = false;
+            MyProfileViewModel.Instance.IsLoading = false;
         }
 
         private async void OnLoadMoreClicked(object sender, EventArgs e)
