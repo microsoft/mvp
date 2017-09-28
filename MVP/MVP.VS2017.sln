@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP.Droid", "MVP\MVP.Droid\MVP.Droid.csproj", "{7DFD474C-1D7C-4644-B4AB-F076987D7A09}"
 EndProject
@@ -12,6 +12,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVPUI", "MVPUI\MVPUI.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP.UWP", "MVP\MVP.UWP\MVP.UWP.csproj", "{3CBF5059-BA08-4E06-B60B-B779947A094D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{75F4541E-5A1C-4A23-AF6C-5020837F06CE}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +133,7 @@ Global
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Debug|Any CPU.ActiveCfg = Debug|iPhone
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Debug|iPhone.Build.0 = Debug|iPhone
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Debug|x64.ActiveCfg = Debug|iPhone
@@ -139,7 +146,6 @@ Global
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Release|x64.ActiveCfg = Release|iPhone
 		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Release|x86.ActiveCfg = Release|iPhone
-		{951E841E-FAE4-496C-98FC-F4C6307FF9BC}.Debug|iPhone.Build.0 = Debug|iPhone
 		{1F21E748-7254-48BE-A2EB-0D4806223C22}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{1F21E748-7254-48BE-A2EB-0D4806223C22}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{1F21E748-7254-48BE-A2EB-0D4806223C22}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
@@ -303,29 +309,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://seiya1213.visualstudio.com/
-		SccProjectUniqueName0 = MVP\\MVP.Droid\\MVP.Droid.csproj
-		SccProjectName0 = MVP/MVP.Droid
-		SccAuxPath0 = https://seiya1213.visualstudio.com
-		SccLocalPath0 = MVP\\MVP.Droid
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName1 = MVP\\MVP.iOS\\MVP.iOS.csproj
-		SccProjectName1 = MVP/MVP.iOS
-		SccAuxPath1 = https://seiya1213.visualstudio.com
-		SccLocalPath1 = MVP\\MVP.iOS
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName2 = MVP\\MVP\\MVP.csproj
-		SccProjectName2 = MVP/MVP
-		SccAuxPath2 = https://seiya1213.visualstudio.com
-		SccLocalPath2 = MVP\\MVP
-		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName3 = MVPUI\\MVPUI.csproj
-		SccProjectName3 = MVPUI
-		SccAuxPath3 = https://seiya1213.visualstudio.com
-		SccLocalPath3 = MVPUI
-		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C01D788-72A7-495E-8412-337921DF7BB1}
 	EndGlobalSection
 EndGlobal

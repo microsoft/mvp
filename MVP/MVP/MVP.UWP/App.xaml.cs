@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ImageCircle.Forms.Plugin.UWP;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -55,8 +57,12 @@ namespace MVP.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
-                Xamarin.Forms.Forms.Init(e);
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+				var rendererAssemblies = new[]
+				{
+					typeof(ImageCircleRenderer).GetTypeInfo().Assembly
+				};
+				Xamarin.Forms.Forms.Init(e, rendererAssemblies);
+				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
                 }

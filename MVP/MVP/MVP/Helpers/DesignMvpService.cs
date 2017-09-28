@@ -152,7 +152,7 @@ namespace Microsoft.Mvp.Helpers
 
         public Task<string> GetPhoto(string token)
         {
-            return Task.FromResult("https://avatars1.githubusercontent.com/u/1676321?v=4&s=460");
+            return Task.FromResult("https://s.gravatar.com/avatar/5df4d86308e585c879c19e5f909d8bfe?s=200");
         }
 
         public Task<ProfileModel> GetProfile(string token)

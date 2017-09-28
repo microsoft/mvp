@@ -4,6 +4,8 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using Microsoft.Mvpui;
+using Xamarin.Forms.Platform.iOS;
+using Social;
 
 namespace Microsoft.Mvp.iOS
 {
@@ -22,7 +24,26 @@ namespace Microsoft.Mvp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+			var tint = UIColor.FromRGB(0,79,138);
+			// Some basic navigationbar styling.
+			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(250, 250, 250); //bar background
+			UINavigationBar.Appearance.TintColor = tint; //Tint color of button items
+
+			UIBarButtonItem.Appearance.TintColor = tint; //Tint color of button items
+
+			UITabBar.Appearance.TintColor = tint;
+
+			UISwitch.Appearance.OnTintColor = tint;
+
+			UIAlertView.Appearance.TintColor = tint;
+
+			UIView.AppearanceWhenContainedIn(typeof(UIAlertController)).TintColor = tint;
+			UIView.AppearanceWhenContainedIn(typeof(UIActivityViewController)).TintColor = tint;
+			UIView.AppearanceWhenContainedIn(typeof(SLComposeViewController)).TintColor = tint;
+
+			global::Xamarin.Forms.Forms.Init();
+
+			ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
             //Xamarin.FormsMaps.Init();
             LoadApplication(new App());
 
