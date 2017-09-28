@@ -26,26 +26,31 @@ namespace Microsoft.Mvpui
 
         public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (listView.SelectedItem != null)
+            if (ListViewContributions.SelectedItem != null)
             {
                 ContributionViewModel.Instance.MyContribution = e.SelectedItem as ContributionModel;
-                await Navigation.PushModalAsync(
+                await Navigation.PushModalAsync(new MVPNavigationPage(
                     new ContributionDetail()
                     {
-                        BindingContext = ContributionViewModel.Instance
-                    });
-            }
+                        BindingContext = ContributionViewModel.Instance,
+						Title = "Edit Contribution"
+                    }));
+
+				ListViewContributions.SelectedItem = null;
+
+			}
         }
 
         public async void OnEdit(object sender, EventArgs eventArgs)
         {
             var mi = ((MenuItem)sender);
             ContributionViewModel.Instance.MyContribution = mi.CommandParameter as ContributionModel;
-            await Navigation.PushModalAsync(
-                new ContributionDetail()
+            await Navigation.PushModalAsync(new MVPNavigationPage(
+				new ContributionDetail()
                 {
-                    BindingContext = ContributionViewModel.Instance
-                });
+                    BindingContext = ContributionViewModel.Instance,
+					Title = "Edit Contribution"
+                }));
         }
 
         public async void OnDelete(object sender, EventArgs eventArgs)
@@ -63,7 +68,12 @@ namespace Microsoft.Mvpui
 
         async void AddContribution_Clicked(object sender, System.EventArgs e)
         {
-            await Navigation.PushModalAsync(new ContributionDetail());
+            await Navigation.PushModalAsync(new MVPNavigationPage(new ContributionDetail()));
         }
-    }
+
+		private void OnItemTapped(object sender, ItemTappedEventArgs e)
+		{
+			ListViewContributions.SelectedItem = null;
+		}
+	}
 }

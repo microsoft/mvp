@@ -7,7 +7,11 @@
         <ToolbarItem Text="Add" Clicked="AddContribution_Clicked" Icon="toolbar_add.png" x:Name="ToolbarAddContribution" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-    <ListView x:Name="listView" ItemsSource="{Binding List}" HasUnevenRows="True" ItemSelected="OnItemSelected">
+		<ListView x:Name="ListViewContributions" ItemsSource="{Binding List}"
+			  HasUnevenRows="True" 
+				RowHeight="50"
+			  ItemSelected="OnItemSelected"
+			  ItemTapped="OnItemTapped">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
@@ -18,7 +22,7 @@
                     <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
                         <Image WidthRequest="45" HeightRequest="35" Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}" />
                         <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                            <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource CommonProfileLabelTextSecondColor}" VerticalTextAlignment="Center" FontAttributes="Bold">
+                            <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource CommonProfileLabelTextSecondColor}" VerticalTextAlignment="Center">
                                 <Label.FontSize>
                                     <OnPlatform x:TypeArguments="x:Double">
                                         <OnPlatform.iOS>11</OnPlatform.iOS>

@@ -11,8 +11,17 @@ namespace Microsoft.Mvpui
     {
         public MVPNavigationPage(Page root) : base(root)
         {
-            BarTextColor = Color.White;
-            BarBackgroundColor = (Color)Application.Current.Resources["Primary"];
+			if (Device.RuntimePlatform == Device.iOS)
+			{
+
+				BarTextColor = (Color)Application.Current.Resources["PrimaryDark"]; ;
+				BarBackgroundColor = (Color)Application.Current.Resources["BackgroundColor"];
+			}
+			else
+			{
+				BarTextColor = Color.White;
+				BarBackgroundColor = (Color)Application.Current.Resources["Primary"];
+			}
         }
     }
 }

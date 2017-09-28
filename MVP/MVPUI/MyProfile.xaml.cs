@@ -23,7 +23,7 @@ namespace Microsoft.Mvpui
 
             ToolBarSettings.Command = new Command(async () =>
             {
-                await Navigation.PushModalAsync(new Settings());
+                await Navigation.PushModalAsync(new MVPNavigationPage(new SettingsPage()));
             });
         }
 

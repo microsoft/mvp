@@ -8,11 +8,12 @@
         <ResourceDictionary>
             <local:ContributionToIconConverter x:Key="ContributionToIconConverter" />
 
-            <Color x:Key="Primary">#2196F3</Color>
-            <Color x:Key="PrimaryDark">#1976D2</Color>
-            <Color x:Key="Accent">#FFC107</Color>
-            <Color x:Key="BlueBackgroundColor">#0072C6</Color>
-            <Color x:Key="NormalTextColor">White</Color>
+			<Color x:Key="Primary">#0072C6</Color>
+			<Color x:Key="PrimaryDark">#004f8a</Color>
+			<Color x:Key="Accent">#FFC107</Color>
+			<Color x:Key="BlueBackgroundColor">#0072C6</Color>
+			<Color x:Key="BackgroundColor">#F5F5F5</Color>
+			<Color x:Key="NormalTextColor">White</Color>
             <Color x:Key="NormalLabelTextColor">Black</Color>
             
             <Color x:Key="NavigationTintColor">#999fa5</Color>
