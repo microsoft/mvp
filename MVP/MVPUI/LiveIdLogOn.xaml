@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<local:ModalPage Title="Sign in" xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage Title="Sign in" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Microsoft.Mvpui.CustomControls;assembly=Microsoft.Mvpui"
              x:Class="Microsoft.Mvpui.LiveIdLogOn">
   <ContentPage.ToolbarItems>
     <ToolbarItem Icon="toolbar_close" Clicked="ButtonClose_Clicked" />
@@ -11,4 +10,4 @@
             
       </WebView>
   </ContentPage.Content>
-</local:ModalPage>
+</ContentPage>

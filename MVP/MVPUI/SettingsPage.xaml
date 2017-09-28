@@ -45,8 +45,8 @@
 			<Label 
 				   Margin="10"
 				   Text="{Binding About}" 
+				   FontSize="Small"
 				   TextColor="White"
-				   VerticalTextAlignment="Center"
 				   VerticalOptions="Center" 
 				   HorizontalOptions="Center" />
 
@@ -56,7 +56,7 @@
                         BorderRadius="5"
                         BorderWidth="2"
                         Clicked="ButtonSignoutClicked"
-                        Text="Sign Out"
+                        Text="Sign out"
                         FontSize="Medium" 
                         WidthRequest="150" 
                         HorizontalOptions="Center"

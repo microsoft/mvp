@@ -138,9 +138,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <None Include="packages.config" />
-    <Compile Include="Renderers\NavigationBarRenderer.cs" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Renderers\ContentPageRenderer.cs" />
     <Compile Include="DependencyServices\StatusBar.cs" />
     <Compile Include="Renderers\TabsRenderer.cs" />
   </ItemGroup>

@@ -7,8 +7,9 @@
         <ToolbarItem Text="Add" Clicked="AddContribution_Clicked" Icon="toolbar_add.png" x:Name="ToolbarAddContribution" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-    <ListView x:Name="ListViewContributions" ItemsSource="{Binding List}"
+		<ListView x:Name="ListViewContributions" ItemsSource="{Binding List}"
 			  HasUnevenRows="True" 
+				RowHeight="50"
 			  ItemSelected="OnItemSelected"
 			  ItemTapped="OnItemTapped">
         <ListView.ItemTemplate>

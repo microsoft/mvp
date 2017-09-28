@@ -81,7 +81,6 @@
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\ModalPage.cs" />
     <Compile Include="Converters\ContributionToIconConverter.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,11 +2,10 @@
 using Microsoft.Mvp.ViewModels;
 using System;
 using Xamarin.Forms;
-using Microsoft.Mvpui.CustomControls;
 
 namespace Microsoft.Mvpui
 {
-    public partial class LiveIdLogOn : ModalPage
+    public partial class LiveIdLogOn : ContentPage
     {
 
         #region Constructor
