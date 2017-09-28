@@ -38,6 +38,7 @@
     <IOSDebuggerPort>10000</IOSDebuggerPort>
     <CodesignProvision>
     </CodesignProvision>
+    <MtouchExtraArgs>--linkskip=ImageCircle.Forms.Plugin.iOS --linkskip=ImageCircle.Forms.Plugin.Abstractions</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -124,6 +125,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AppStore|iPhoneSimulator'">
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignProvision>0bfc6c84-e899-49b7-9ea7-4f5d40dde765</CodesignProvision>
+    <MtouchExtraArgs>--linkskip=ImageCircle.Forms.Plugin.iOS --linkskip=ImageCircle.Forms.Plugin.Abstractions</MtouchExtraArgs>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />

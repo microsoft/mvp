@@ -42,6 +42,8 @@ namespace Microsoft.Mvp.iOS
 			UIView.AppearanceWhenContainedIn(typeof(SLComposeViewController)).TintColor = tint;
 
 			global::Xamarin.Forms.Forms.Init();
+
+			ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
             //Xamarin.FormsMaps.Init();
             LoadApplication(new App());
 

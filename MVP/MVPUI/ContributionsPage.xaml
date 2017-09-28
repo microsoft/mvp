@@ -9,7 +9,7 @@
     <ContentPage.Content>
 		<ListView x:Name="ListViewContributions" ItemsSource="{Binding List}"
 			  HasUnevenRows="True" 
-				RowHeight="50"
+				RowHeight="70"
 			  ItemSelected="OnItemSelected"
 			  ItemTapped="OnItemTapped">
         <ListView.ItemTemplate>
@@ -20,7 +20,7 @@
                         <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
                     <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
-                        <Image WidthRequest="45" HeightRequest="35" Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}" />
+                        <Image WidthRequest="45" HeightRequest="45" Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}" />
                         <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
                             <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource CommonProfileLabelTextSecondColor}" VerticalTextAlignment="Center">
                                 <Label.FontSize>
