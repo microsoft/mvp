@@ -141,7 +141,6 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <None Include="packages.config" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="DependencyServices\StatusBar.cs" />
     <Compile Include="Renderers\TabsRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
