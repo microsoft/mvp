@@ -22,7 +22,7 @@
                         </Label.FontSize>
                     </Label>
 
-                    <Label Text="MVP123456" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="12" />
+                    <Label Text="{Binding MvpNumber}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="12" />
                     <circle:CircleImage x:Name="imgAvatar" VerticalOptions="EndAndExpand" Margin="0,20,0,20" HorizontalOptions="CenterAndExpand" WidthRequest="127"  HeightRequest="127" Source="{Binding ProfilePhoto}" />
 
                     <Label Text="AWARD CATEGORIES" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
@@ -52,7 +52,7 @@
             <Grid IsVisible="{Binding IsBusy}" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#F7F7F7">
                 <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
                     <ActivityIndicator WidthRequest="80" IsRunning="{Binding IsLoading}" Color="{Binding SecondaryTextColor}" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
-                    <Label TextColor="Black" Text="Loading ..."  FontSize="16"></Label>
+                    <Label TextColor="Black" Text="Loading..."  FontSize="16"></Label>
                 </StackLayout>
             </Grid>
             

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.ContributionDetail"
@@ -176,7 +176,7 @@
 			<Grid x:Name="stkOveryLay" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#F7F7F7">
 				<StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
 					<ActivityIndicator WidthRequest="80" IsEnabled="True" x:Name="active1s" IsRunning="True" Color="Black"  HorizontalOptions="Center" VerticalOptions="Center" ></ActivityIndicator>
-					<Label TextColor="Black" x:Name="progressText" Text="Loading ..."  FontSize="18"></Label>
+					<Label TextColor="Black" x:Name="progressText" Text="Loading..."  FontSize="16"></Label>
 				</StackLayout>
 			</Grid>
 		</Grid>

@@ -47,14 +47,6 @@ namespace Microsoft.Mvp.iOS
 
             LoadApplication(new App());
 
-            foreach (NSString family in UIFont.FamilyNames)
-            {
-                foreach (NSString font in UIFont.FontNamesForFamilyName(family))
-                {
-                    Console.WriteLine(@"{0}", font);
-                }
-            }
-
             return base.FinishedLaunching(app, options);
         }
     }

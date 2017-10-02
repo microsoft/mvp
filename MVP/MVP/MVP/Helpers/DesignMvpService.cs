@@ -165,7 +165,8 @@ namespace Microsoft.Mvp.Helpers
                 ContributionCount = 10000000,
                 DisplayName = "James Montemagno",
                 FirstAwardYear = 2015,
-                YearsAsMVP = 2
+                YearsAsMVP = 2,
+                MvpNumber = 12345678
             });
         }
     }

@@ -65,6 +65,7 @@ namespace Microsoft.Mvp.ViewModels
         #region Private Members
 
         private string _personName = string.Empty;
+        private string _mvpNumber = string.Empty;
         private string _awardCategoriesValue = string.Empty;
         private string _firstAwardValue = string.Empty;
         private string _awardsCountValue = string.Empty;
@@ -93,7 +94,19 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
+        public string MvpNumber
+        {
+            get
+            {
+                return _mvpNumber;
+            }
 
+            set
+            {
+                _mvpNumber = value;
+                OnPropertyChanged("MvpNumber");
+            }
+        }
 
         public string AwardCategoriesValue
         {

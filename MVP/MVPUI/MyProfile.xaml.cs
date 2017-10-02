@@ -88,6 +88,7 @@ namespace Microsoft.Mvpui
                     {
                         MyProfileViewModel.Instance.FirstAwardValue = profile.FirstAwardYear.ToString(System.Globalization.CultureInfo.CurrentCulture);
                         MyProfileViewModel.Instance.PersonName = profile.DisplayName;
+                        MyProfileViewModel.Instance.MvpNumber = $"MVP{profile.MvpNumber}";
                         MyProfileViewModel.Instance.AwardCategoriesValue = profile.AwardCategoryDisplay.Replace(",", Environment.NewLine);
                         MyProfileViewModel.Instance.Description = profile.Biography;
                         MyProfileViewModel.Instance.AwardsCountValue = profile.YearsAsMVP.ToString(System.Globalization.CultureInfo.CurrentCulture);
