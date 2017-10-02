@@ -266,22 +266,6 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-
-
-        public bool IsLoading
-        {
-            get
-            {
-                return _isLoading;
-            }
-
-            set
-            {
-                _isLoading = value;
-                OnPropertyChanged(nameof(IsLoading));
-            }
-        }
-
         #endregion
     }
 }

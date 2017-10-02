@@ -176,7 +176,7 @@ namespace Microsoft.Mvpui
         protected async override void OnAppearing()
         {
             MyProfileViewModel.Instance.ErrorMessage = "";
-            MyProfileViewModel.Instance.IsLoading = true;
+            MyProfileViewModel.Instance.IsBusy = true;
 
             base.OnAppearing();
             GetPhoto();
@@ -193,7 +193,7 @@ namespace Microsoft.Mvpui
                 MyProfileViewModel.Instance.ErrorMessage = CommonConstants.DefaultNetworkErrorString;
             }
 
-            MyProfileViewModel.Instance.IsLoading = false;
+            MyProfileViewModel.Instance.IsBusy = false;
         }
 
         private async void OnLoadMoreClicked(object sender, EventArgs e)
