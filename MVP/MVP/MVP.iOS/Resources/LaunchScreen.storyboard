@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,16 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" image="icon02.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" misplaced="YES">
-                                <rect key="frame" x="270" y="270" width="60" height="60"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="image_mvplaunch.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" misplaced="YES">
+                                <rect key="frame" x="0.0" y="224" width="600" height="151"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="0" blue="0" alpha="0"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" customColorSpace="sRGB" colorSpace="calibratedRGB" red="0.058823529411764705" green="0.46274509803921571" blue="0.803921568627451" alpha="1"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.094117647058823528" green="0.35686274509803922" blue="0.72156862745098038" alpha="1"/>
                         <constraints>
                             <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
                             <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
+                            <constraint id="243" firstItem="23" firstAttribute="width" secondItem="yd7-JS-zBw" secondAttribute="width"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,53 +37,24 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1024MVP.png" width="1024" height="768"/>
-        <image name="1536MVP.png" width="1536" height="2048"/>
-        <image name="2048MVP.png" width="2048" height="1536"/>
-        <image name="640-1136MVP.png" width="640" height="1136"/>
-        <image name="640img.png" width="640" height="960"/>
-        <image name="768MVP.png" width="768" height="1024"/>
-        <image name="Benefits.png" width="48" height="48"/>
-        <image name="Blog.png" width="48" height="48"/>
-        <image name="Book.png" width="48" height="48"/>
-        <image name="Cancel.png" width="48" height="48"/>
-        <image name="Code.png" width="48" height="48"/>
-        <image name="Default-568h.png" width="320" height="568"/>
-        <image name="Default-Portrait.png" width="768" height="1004"/>
-        <image name="Default.png" width="320" height="480"/>
-        <image name="DefaultActivity.png" width="48" height="48"/>
-        <image name="Discussion.png" width="48" height="48"/>
-        <image name="Feedback.png" width="48" height="48"/>
-        <image name="Icon-57.png" width="57" height="57"/>
-        <image name="Icon-72.png" width="72" height="72"/>
-        <image name="Icon-76.png" width="76" height="76"/>
-        <image name="Icon-83.5.png" width="83.5" height="83.5"/>
-        <image name="Icon-Small-40.png" width="40" height="40"/>
-        <image name="Icon-Small-50.png" width="50" height="50"/>
-        <image name="Icon-Small.png" width="29" height="29"/>
-        <image name="icon - Copy.png" width="108" height="108"/>
-        <image name="icon.png" width="57" height="57"/>
-        <image name="Icon.png" width="57" height="57"/>
-        <image name="LoginBtn.png" width="100" height="40"/>
-        <image name="Me.png" width="48" height="48"/>
-        <image name="mvplogo.png" width="751" height="303"/>
-        <image name="mvplogoplus.png" width="750" height="461"/>
-        <image name="MyNetwork.png" width="48" height="48"/>
-        <image name="network.png" width="65" height="56"/>
-        <image name="Notifications.png" width="48" height="48"/>
-        <image name="Right.png" width="48" height="48"/>
-        <image name="searchIcon.png" width="68" height="61"/>
-        <image name="Settings.png" width="48" height="48"/>
-        <image name="Speaker.png" width="48" height="48"/>
-        <image name="SplashScreen.scale-1.png" width="320" height="480"/>
-        <image name="SplashScreen.scale-2.png" width="640" height="960"/>
-        <image name="SplashScreen.scale-3.png" width="640" height="1136"/>
-        <image name="SplashScreen.scale-4.png" width="768" height="1024"/>
-        <image name="SplashScreen.scale-5.png" width="1536" height="2008"/>
-        <image name="Support.png" width="48" height="48"/>
-        <image name="Video.png" width="48" height="48"/>
-        <image name="visibility.png" width="24" height="24"/>
-        <image name="Icon-60.png" width="60" height="60"/>
-        <image name="icon02.png" width="58" height="58"/>
+        <image name="toolbar_close.png" width="25" height="25"/>
+        <image name="tab_profile.png" width="25" height="25"/>
+        <image name="toolbar_add.png" width="25" height="25"/>
+        <image name="toolbar_settings.png" width="25" height="25"/>
+        <image name="tab_contribution_selected.png" width="25" height="25"/>
+        <image name="tab_contribution.png" width="25" height="25"/>
+        <image name="tab_profile_selected.png" width="25" height="25"/>
+        <image name="image_video.png" width="48" height="48"/>
+        <image name="image_blog.png" width="48" height="48"/>
+        <image name="image_book.png" width="48" height="48"/>
+        <image name="image_cancel.png" width="48" height="48"/>
+        <image name="image_code.png" width="48" height="48"/>
+        <image name="image_defaultactivity.png" width="48" height="48"/>
+        <image name="image_discussion.png" width="48" height="48"/>
+        <image name="image_feedback.png" width="48" height="48"/>
+        <image name="image_mvplogo.png" width="751" height="303"/>
+        <image name="image_speaker.png" width="48" height="48"/>
+        <image name="image_mvplaunch.png" width="751" height="303"/>
     </resources>
+    <color key="tintColor" colorSpace="calibratedRGB" red="0.0392156862745098" green="0.34901960784313724" blue="0.70196078431372544" alpha="1"/>
 </document>

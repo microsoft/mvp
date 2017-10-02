@@ -141,7 +141,6 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <None Include="packages.config" />
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="DependencyServices\StatusBar.cs" />
     <Compile Include="Renderers\TabsRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +159,7 @@
     <BundleResource Include="Resources\tab_contribution%403x.png" />
     <BundleResource Include="Resources\tab_profile_selected%402x.png" />
     <BundleResource Include="Resources\tab_profile_selected%403x.png" />
+    <BundleResource Include="Resources\image_mvplaunch.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ImageCircle.Forms.Plugin.Abstractions, Version=1.8.2.19, Culture=neutral, processorArchitecture=MSIL">

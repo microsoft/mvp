@@ -160,12 +160,13 @@ namespace Microsoft.Mvp.Helpers
             return Task.FromResult(new ProfileModel
             {
                 Abstract = "Live, love, bike, and code. Principal Program Manager, Mobile Developer Tools @Microsoft",
-                AwardCategoryDisplay = "Xamarin",
+                AwardCategoryDisplay = "Xamarin,Other cool stuff",
                 Biography = "James Montemagno is a Principal Program Manager for Mobile Developer Tools at Microsoft. He has been a .NET developer since 2005, working in a wide range of industries including game development, printer software, and web services. Prior to becoming a Principal Program Manager, James was a professional mobile developer and has now been crafting apps since 2011 with Xamarin. In his spare time, he is most likely cycling around Seattle or guzzling gallons of coffee at a local coffee shop. He can be found on Twitter @JamesMontemagno, blogs code regularly on his personal blog http://www.montemagno.com, and co-hosts the weekly development podcast Merge Conflict http://mergeconflict.fm.",
                 ContributionCount = 10000000,
                 DisplayName = "James Montemagno",
                 FirstAwardYear = 2015,
-                YearsAsMVP = 2
+                YearsAsMVP = 2,
+                MvpNumber = 12345678
             });
         }
     }

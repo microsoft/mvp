@@ -26,11 +26,13 @@ namespace Microsoft.Mvp.Models
         public long YearsAsMVP { get; set; }
 
         [DataMember]
-        public string Abstract { get; set; }      
+        public string Abstract { get; set; }
 
         [DataMember]
         public int ContributionCount { get; set; }
 
+        [DataMember]
+        public int MvpNumber { get; set; }
     }
 
     public class ContributionInfo

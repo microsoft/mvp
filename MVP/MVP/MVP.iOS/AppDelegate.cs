@@ -24,27 +24,27 @@ namespace Microsoft.Mvp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-			var tint = UIColor.FromRGB(0,79,138);
-			// Some basic navigationbar styling.
-			UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(250, 250, 250); //bar background
-			UINavigationBar.Appearance.TintColor = tint; //Tint color of button items
+            var tint = UIColor.FromRGB(0, 79, 138);
+            // Some basic navigationbar styling.
+            UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(250, 250, 250); //bar background
+            UINavigationBar.Appearance.TintColor = tint; //Tint color of button items
 
-			UIBarButtonItem.Appearance.TintColor = tint; //Tint color of button items
+            UIBarButtonItem.Appearance.TintColor = tint; //Tint color of button items
 
-			UITabBar.Appearance.TintColor = tint;
+            UITabBar.Appearance.TintColor = tint;
 
-			UISwitch.Appearance.OnTintColor = tint;
+            UISwitch.Appearance.OnTintColor = tint;
 
-			UIAlertView.Appearance.TintColor = tint;
+            UIAlertView.Appearance.TintColor = tint;
 
-			UIView.AppearanceWhenContainedIn(typeof(UIAlertController)).TintColor = tint;
-			UIView.AppearanceWhenContainedIn(typeof(UIActivityViewController)).TintColor = tint;
-			UIView.AppearanceWhenContainedIn(typeof(SLComposeViewController)).TintColor = tint;
+            UIView.AppearanceWhenContainedIn(typeof(UIAlertController)).TintColor = tint;
+            UIView.AppearanceWhenContainedIn(typeof(UIActivityViewController)).TintColor = tint;
+            UIView.AppearanceWhenContainedIn(typeof(SLComposeViewController)).TintColor = tint;
 
-			global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.Forms.Forms.Init();
 
-			ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
-            //Xamarin.FormsMaps.Init();
+            ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

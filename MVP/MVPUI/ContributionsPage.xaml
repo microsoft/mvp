@@ -21,21 +21,15 @@
                     </ViewCell.ContextActions>
                     <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
                         <Image WidthRequest="45" HeightRequest="45" Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}" />
-                        <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Vertical">
-                            <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource CommonProfileLabelTextSecondColor}" VerticalTextAlignment="Center">
-                                <Label.FontSize>
-                                    <OnPlatform x:TypeArguments="x:Double">
-                                        <OnPlatform.iOS>11</OnPlatform.iOS>
-                                        <OnPlatform.Android>14</OnPlatform.Android>
-                                        <OnPlatform.WinPhone>14</OnPlatform.WinPhone>
-                                    </OnPlatform>
-                                </Label.FontSize>
-                            </Label>
-                            <StackLayout Padding="5,0,0,0" VerticalOptions="StartAndExpand" Orientation="Horizontal">
-                                <Label Text="{Binding DataFormat}" TextColor="{StaticResource CommonProfileLabelTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+                        <StackLayout Padding="5,0,0,0" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                            <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
+                               
+                            <StackLayout VerticalOptions="StartAndExpand" Orientation="Horizontal">
+                                <Label Text="{Binding DataFormat}" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+                                <Label Text="|" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label  Text="{Binding LabelTextOfContribution}" TextColor="{StaticResource CommonProfileLabelTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" VerticalTextAlignment="Center"></Label>
-                                    <Label Text="{Binding AnnualReach}" TextColor="{StaticResource CommonProfileLabelTextColor}"  VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+                                    <Label Text="{Binding LabelTextOfContribution, StringFormat='{0}:'}" TextColor="{StaticResource PrimaryTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" VerticalTextAlignment="Center"></Label>
+                                    <Label Text="{Binding AnnualReach}" TextColor="{StaticResource PrimaryTextColor}"  VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout >

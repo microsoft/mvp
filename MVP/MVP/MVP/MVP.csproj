@@ -63,7 +63,6 @@
     <Compile Include="ViewModels\MyProfileViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Interfaces\IStatusBar.cs" />
     <Compile Include="Interfaces\ISignOutHelper.cs" />
   </ItemGroup>
   <ItemGroup>
