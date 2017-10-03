@@ -10,7 +10,7 @@
 	</ContentPage.ToolbarItems>
 
 		<Grid>
-			<StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+			<StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand" Padding="10" Spacing="0">
 
 				<Label x:Name="lableErrorMesage" HorizontalOptions="CenterAndExpand" Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="#FFAEC9" FontSize="15"></Label>
 				
@@ -155,7 +155,14 @@
 							</Grid>
 						</StackLayout>
 
-					<Button TextColor="White"
+
+						
+					</StackLayout>
+
+
+				</ScrollView>
+
+			<Button TextColor="White"
                         BorderColor="White"
                         BackgroundColor="{StaticResource PrimaryDark}"
                         BorderRadius="5"
@@ -165,13 +172,9 @@
                         FontSize="Medium" 
                         WidthRequest="150" 
                         HorizontalOptions="Center"
-						VerticalOptions="EndAndExpand"/>
-						
-					</StackLayout>
-
-
-				</ScrollView>
-			</StackLayout>
+						VerticalOptions="EndAndExpand"
+						Margin="0,10,0,0"/>
+		</StackLayout>
 
 			<Grid x:Name="stkOveryLay" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#F7F7F7">
 				<StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
