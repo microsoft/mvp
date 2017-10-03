@@ -25,6 +25,7 @@ namespace Microsoft.Mvp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             var tint = UIColor.FromRGB(0, 79, 138);
+
             // Some basic navigationbar styling.
             UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(250, 250, 250); //bar background
             UINavigationBar.Appearance.TintColor = tint; //Tint color of button items

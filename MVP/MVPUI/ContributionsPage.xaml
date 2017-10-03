@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.ContributionsPage"
              xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"
-			 Title="Contributions">
+             Title="Activities">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddContribution_Clicked" Icon="toolbar_add.png" x:Name="ToolbarAddContribution" />
     </ContentPage.ToolbarItems>
@@ -16,17 +16,16 @@
 					  ItemTapped="OnItemTapped"
 						  AbsoluteLayout.LayoutFlags="All"
 						  AbsoluteLayout.LayoutBounds="0,0,1,1">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
-							<ViewCell.ContextActions>
-								<MenuItem Clicked="OnEdit" CommandParameter="{Binding .}" Text="Edit" />
-								<MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
-							</ViewCell.ContextActions>
-							<StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
-								<Image WidthRequest="45" HeightRequest="45" Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}" />
-								<StackLayout Padding="5,0,0,0" VerticalOptions="CenterAndExpand" Orientation="Vertical">
-									<Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
+                    <ViewCell.ContextActions>
+                        <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
+                    </ViewCell.ContextActions>
+                    <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
+                        <Image WidthRequest="45" HeightRequest="45" Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}" />
+                        <StackLayout Padding="5,0,0,0" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                            <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
                                
 									<StackLayout VerticalOptions="StartAndExpand" Orientation="Horizontal">
 										<Label Text="{Binding DataFormat}" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
