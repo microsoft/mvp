@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.ContributionsPage"
-             Title="Contributions">
+             Title="Activities">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddContribution_Clicked" Icon="toolbar_add.png" x:Name="ToolbarAddContribution" />
     </ContentPage.ToolbarItems>
@@ -16,7 +16,6 @@
             <DataTemplate>
                 <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
                     <ViewCell.ContextActions>
-                        <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}" Text="Edit" />
                         <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
                     <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">

@@ -8,10 +8,7 @@
 		<ToolbarItem Text="Cancel" x:Name="ToolbarClose" Icon="toolbar_close.png" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="CenterAndExpand" 
-						 Padding="10,80"
-						Spacing="20"
-						 HorizontalOptions="Center">
+		<StackLayout VerticalOptions="CenterAndExpand" Padding="10,80" Spacing="20" HorizontalOptions="Center">
 			<Image HeightRequest="200">
 				<Image.Source>
 					<OnPlatform x:TypeArguments="ImageSource">
@@ -22,18 +19,8 @@
 				</Image.Source>
 			</Image>
 
-			<Button TextColor="White"
-                        BorderColor="White"
-                        BackgroundColor="{StaticResource PrimaryDark}"
-                        BorderRadius="5"
-                        BorderWidth="2"
-                        Clicked="ButtonSignIn_Clicked"
-                        Text="Sign in"
-                        FontSize="Medium" 
-                        WidthRequest="150" 
-						
-                        HorizontalOptions="Center"/>
-
+			<Button TextColor="White" BorderColor="White" BackgroundColor="{StaticResource PrimaryDark}" BorderRadius="5" BorderWidth="2"
+                    Clicked="ButtonSignIn_Clicked" Text="Sign in" FontSize="Medium" WidthRequest="150" HorizontalOptions="Center"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

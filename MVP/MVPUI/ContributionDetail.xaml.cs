@@ -29,13 +29,13 @@ namespace Microsoft.Mvpui
         {
             InitializeComponent();
 
-			ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
+            ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
 
-			if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
-				ToolbarClose.Icon = "Assets\\toolbar_close.png";
+            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+                ToolbarClose.Icon = "Assets\\toolbar_close.png";
 
 
-			this.BindingContext = ContributionViewModel.Instance;
+            this.BindingContext = ContributionViewModel.Instance;
 
             if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
             {
@@ -43,13 +43,9 @@ namespace Microsoft.Mvpui
                 entrySecondAnnualQuantity.HeightRequest = 40;
                 entryAnnualReach.HeightRequest = 40;
                 entryAnnualQuantity.HeightRequest = 40;
-
-                if (Device.RuntimePlatform == Device.iOS)
-                {
-                    locationContainer.HeightRequest = 140;
-                }
             }
         }
+
         #endregion
 
         #region Private and Protected Methods
@@ -62,7 +58,7 @@ namespace Microsoft.Mvpui
 
         protected async override void OnAppearing()
         {
-            stkOveryLay.IsVisible = true;
+            IsBusy = true;
             ContributionViewModel.Instance.ErrorMessage = "";
             base.OnAppearing();
             try
@@ -73,7 +69,7 @@ namespace Microsoft.Mvpui
             }
             finally
             {
-                stkOveryLay.IsVisible = false;
+                IsBusy = false;
             }
         }
 
@@ -228,8 +224,10 @@ namespace Microsoft.Mvpui
                 {
                     return;
                 }
-                stkOveryLay.IsVisible = true;
+
+                IsBusy = true;
                 progressText.Text = "Saving ...";
+
                 if (ContributionViewModel.Instance.MyContribution == null)
                 {
                     var model = new ContributionModel()
@@ -302,15 +300,11 @@ namespace Microsoft.Mvpui
                 {
                     _isTapped = false;
                 }
-                stkOveryLay.IsVisible = false;
+                IsBusy = false;
                 progressText.Text = "Loading ...";
             }
         }
 
-        /// <summary>
-        /// Form Validation
-        /// </summary>
-        /// <returns></returns>
         private bool CheckData()
         {
             bool isValid = true;
@@ -644,7 +638,6 @@ namespace Microsoft.Mvpui
         }
 
         #endregion
-
 
     }
 }
