@@ -16,7 +16,6 @@
             <DataTemplate>
                 <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
                     <ViewCell.ContextActions>
-                        <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}" Text="Edit" />
                         <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
                     </ViewCell.ContextActions>
                     <StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
