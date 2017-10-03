@@ -12,9 +12,14 @@
 			<Color x:Key="PrimaryDark">#004f8a</Color>
 			<Color x:Key="Accent">#FFC107</Color>
 			<Color x:Key="BlueBackgroundColor">#0072C6</Color>
-			<Color x:Key="BackgroundColor">#F5F5F5</Color>
-            
-            <Color x:Key="NavigationTintColor">#999fa5</Color>
+
+			<OnPlatform x:Key="BackgroundColor" x:TypeArguments="Color">
+				<On Platform="iOS" Value="#FFFFFF" />
+				<On Platform="Android" Value="#F5F5F5" />
+				<On Platform="UWP" Value="#F5F5F5" />
+			</OnPlatform>
+
+			<Color x:Key="NavigationTintColor">#999fa5</Color>
             <Color x:Key="NavigationTitleColor">#0a77b2</Color>
             <Color x:Key="NavigationShadowColor">#f2f2f2</Color>
             <Color x:Key="TabTintColor">#0078d7</Color>
