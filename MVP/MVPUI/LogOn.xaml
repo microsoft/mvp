@@ -8,19 +8,27 @@
 		<ToolbarItem Text="Cancel" x:Name="ToolbarClose" Icon="toolbar_close.png" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="CenterAndExpand" Padding="10,80" Spacing="20" HorizontalOptions="Center">
-			<Image HeightRequest="200">
+		<StackLayout VerticalOptions="FillAndExpand" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+			<Image HeightRequest="200" Margin="20" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
 				<Image.Source>
 					<OnPlatform x:TypeArguments="ImageSource">
 						<On Platform="iOS" Value="image_mvplogo.png" />
 						<On Platform="Android" Value="image_mvplogo.png" />
-						<On Platform="Windows" Value="Assets\image_mvplogo.png" />
+						<On Platform="UWP" Value="Assets\image_mvplogo.png" />
 					</OnPlatform>
 				</Image.Source>
 			</Image>
 
-			<Button TextColor="White" BorderColor="White" BackgroundColor="{StaticResource PrimaryDark}" BorderRadius="5" BorderWidth="2"
-                    Clicked="ButtonSignIn_Clicked" Text="Sign in" FontSize="Medium" WidthRequest="150" HorizontalOptions="Center"/>
+			<Button TextColor="White"
+                        BackgroundColor="{StaticResource PrimaryDark}"
+                        BorderRadius="0"
+                        Clicked="ButtonSignIn_Clicked"
+                        Text="Sign in"
+                        WidthRequest="150"						
+                        HorizontalOptions="FillAndExpand"
+						VerticalOptions="End"/>
+
+
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

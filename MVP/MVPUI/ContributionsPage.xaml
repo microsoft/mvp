@@ -2,16 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.ContributionsPage"
+             xmlns:fab="clr-namespace:Refractored.FabControl;assembly=Refractored.FabControl"
              Title="Activities">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddContribution_Clicked" Icon="toolbar_add.png" x:Name="ToolbarAddContribution" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-		<ListView x:Name="ListViewContributions" ItemsSource="{Binding List}"
-			  HasUnevenRows="True" 
-				RowHeight="70"
-			  ItemSelected="OnItemSelected"
-			  ItemTapped="OnItemTapped">
+		<AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+				<ListView x:Name="ListViewContributions" ItemsSource="{Binding List}"
+					  HasUnevenRows="True" 
+						RowHeight="70"
+					  ItemSelected="OnItemSelected"
+					  ItemTapped="OnItemTapped"
+						  AbsoluteLayout.LayoutFlags="All"
+						  AbsoluteLayout.LayoutBounds="0,0,1,1">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">
@@ -23,20 +27,29 @@
                         <StackLayout Padding="5,0,0,0" VerticalOptions="CenterAndExpand" Orientation="Vertical">
                             <Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
                                
-                            <StackLayout VerticalOptions="StartAndExpand" Orientation="Horizontal">
-                                <Label Text="{Binding DataFormat}" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
-                                <Label Text="|" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding LabelTextOfContribution, StringFormat='{0}:'}" TextColor="{StaticResource PrimaryTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" VerticalTextAlignment="Center"></Label>
-                                    <Label Text="{Binding AnnualReach}" TextColor="{StaticResource PrimaryTextColor}"  VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
-                                </StackLayout>
-                            </StackLayout>
-                        </StackLayout >
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-
-    </ContentPage.Content>
+									<StackLayout VerticalOptions="StartAndExpand" Orientation="Horizontal">
+										<Label Text="{Binding DataFormat}" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+										<Label Text="|" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+										<StackLayout Orientation="Horizontal">
+											<Label Text="{Binding LabelTextOfContribution, StringFormat='{0}:'}" TextColor="{StaticResource PrimaryTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" VerticalTextAlignment="Center"></Label>
+											<Label Text="{Binding AnnualReach}" TextColor="{StaticResource PrimaryTextColor}"  VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+										</StackLayout>
+									</StackLayout>
+								</StackLayout >
+							</StackLayout>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+			<fab:FloatingActionButtonView
+				ImageName="toolbar_add.png"
+				ColorNormal="{StaticResource Primary}"
+				ColorPressed="{StaticResource PrimaryDark}"
+				ColorRipple="{StaticResource PrimaryDark}"
+				x:Name="FloatingActionButtonAdd"
+				IsVisible="False"
+				AbsoluteLayout.LayoutFlags="PositionProportional"
+				AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"/>
+		</AbsoluteLayout>
+	</ContentPage.Content>
 </ContentPage>

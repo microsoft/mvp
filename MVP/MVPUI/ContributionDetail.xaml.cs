@@ -31,9 +31,8 @@ namespace Microsoft.Mvpui
 
             ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
 
-            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
-                ToolbarClose.Icon = "Assets\\toolbar_close.png";
-
+			      if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
+				      ToolbarClose.Icon = "Assets\\toolbar_close.png";
 
             this.BindingContext = ContributionViewModel.Instance;
 
