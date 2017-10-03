@@ -18,16 +18,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="image_mvplaunch.png" translatesAutoresizingMaskIntoConstraints="NO" id="23" misplaced="YES">
-                                <rect key="frame" x="0.0" y="224" width="600" height="151"/>
+                                <rect key="frame" x="206" y="224" width="201" height="151"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <constraints>
+                                    <constraint id="646" firstItem="23" firstAttribute="height" constant="151"/>
+                                    <constraint id="647" firstItem="23" firstAttribute="width" constant="150"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0.094117647058823528" green="0.35686274509803922" blue="0.72156862745098038" alpha="1"/>
                         <constraints>
                             <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
                             <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
-                            <constraint id="243" firstItem="23" firstAttribute="width" secondItem="yd7-JS-zBw" secondAttribute="width"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -54,7 +57,7 @@
         <image name="image_feedback.png" width="48" height="48"/>
         <image name="image_mvplogo.png" width="751" height="303"/>
         <image name="image_speaker.png" width="48" height="48"/>
-        <image name="image_mvplaunch.png" width="751" height="303"/>
+        <image name="image_mvplaunch.png" width="303" height="303"/>
     </resources>
     <color key="tintColor" colorSpace="calibratedRGB" red="0.0392156862745098" green="0.34901960784313724" blue="0.70196078431372544" alpha="1"/>
 </document>

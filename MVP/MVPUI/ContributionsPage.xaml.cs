@@ -13,7 +13,6 @@ namespace Microsoft.Mvpui
     public partial class ContributionsPage : ContentPage
     {
 
-
         public ContributionsPage()
         {
             InitializeComponent();
