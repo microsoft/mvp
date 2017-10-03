@@ -33,12 +33,12 @@ namespace Microsoft.Mvpui
                     new ContributionDetail()
                     {
                         BindingContext = ContributionViewModel.Instance,
-						Title = "Edit Contribution"
+                        Title = "Edit an activity"
                     }));
 
-				ListViewContributions.SelectedItem = null;
+                ListViewContributions.SelectedItem = null;
 
-			}
+            }
         }
 
         public async void OnEdit(object sender, EventArgs eventArgs)
@@ -46,10 +46,10 @@ namespace Microsoft.Mvpui
             var mi = ((MenuItem)sender);
             ContributionViewModel.Instance.MyContribution = mi.CommandParameter as ContributionModel;
             await Navigation.PushModalAsync(new MVPNavigationPage(
-				new ContributionDetail()
+                new ContributionDetail()
                 {
                     BindingContext = ContributionViewModel.Instance,
-					Title = "Edit Contribution"
+                    Title = "Edit an activity"
                 }));
         }
 
@@ -71,9 +71,9 @@ namespace Microsoft.Mvpui
             await Navigation.PushModalAsync(new MVPNavigationPage(new ContributionDetail()));
         }
 
-		private void OnItemTapped(object sender, ItemTappedEventArgs e)
-		{
-			ListViewContributions.SelectedItem = null;
-		}
-	}
+        private void OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            ListViewContributions.SelectedItem = null;
+        }
+    }
 }
