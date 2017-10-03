@@ -8,88 +8,80 @@
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Close" x:Name="ToolbarClose" Icon="toolbar_close.png" />
 	</ContentPage.ToolbarItems>
-        <Grid>
+	<Grid>
+		<StackLayout Spacing="0">
 			<ScrollView Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
-                <StackLayout>
-                    <StackLayout Padding="20">
+				<StackLayout>
+					<StackLayout Padding="20">
 
-                        <Label Text="Activity type" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                        <local:BorderPicker HeightRequest="40" x:Name="contributionTypeSelector" SelectedIndexChanged="OnContributionTypeSelectedIndexChanged" />
-                    
-                        <Label Text="Contribution Area" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                        <local:BorderPicker HeightRequest="40"  x:Name="ContributionAreaSelector" TextColor="Black" />
+						<Label Text="Activity type" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<local:BorderPicker HeightRequest="40" x:Name="contributionTypeSelector" SelectedIndexChanged="OnContributionTypeSelectedIndexChanged" />
 
-                        <Label Text="Date of activity" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                        <local:BorderDatePicker x:Name="ContributionDateSelector" Date="{Binding MyContribution.StartDate}" TextColor="Black" />
+						<Label Text="Contribution Area" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<local:BorderPicker HeightRequest="40"  x:Name="ContributionAreaSelector" TextColor="Black" />
 
-                        <StackLayout Spacing="0" Orientation="Horizontal">
-                            <Label Text="Title of activity" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                            <Label Text="{Binding ErrorMessageForTitle}"  FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" VerticalTextAlignment="End" />
-                        </StackLayout>
-                        <local:BorderEntry  x:Name="entryTitle" Text="{Binding MyContribution.Title}" TextColor="Black" />
+						<Label Text="Date of activity" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<local:BorderDatePicker x:Name="ContributionDateSelector" Date="{Binding MyContribution.StartDate}" TextColor="Black" />
 
-                        <Label Text="Visibility" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                        <local:BorderPicker x:Name="PersonGroupSelector" TextColor="Black" />
+						<StackLayout Spacing="0" Orientation="Horizontal">
+							<Label Text="Title of activity" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+							<Label Text="{Binding ErrorMessageForTitle}"  FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" VerticalTextAlignment="End" />
+						</StackLayout>
+						<local:BorderEntry  x:Name="entryTitle" Text="{Binding MyContribution.Title}" TextColor="Black" />
 
-                        <StackLayout Spacing="0" Orientation="Horizontal">
-                            <Label Text="URL" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                            <Label Text="{Binding ErrorMessageForUrl}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" IsVisible="{Binding IsNeededUrl}" VerticalTextAlignment="End" />
-                        </StackLayout>
-                        <local:BorderEntry x:Name="entryURL" TextColor="Black" Text="{Binding MyContribution.ReferenceUrl}" />
+						<Label Text="Visibility" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<local:BorderPicker x:Name="PersonGroupSelector" TextColor="Black" />
 
-                        <Label Text="Description" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                        <local:BorderEditor HeightRequest="120" x:Name="entryDescription" TextColor="Black" Text="{Binding MyContribution.Description}" />
+						<StackLayout Spacing="0" Orientation="Horizontal">
+							<Label Text="URL" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+							<Label Text="{Binding ErrorMessageForUrl}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" IsVisible="{Binding IsNeededUrl}" VerticalTextAlignment="End" />
+						</StackLayout>
+						<local:BorderEntry x:Name="entryURL" TextColor="Black" Text="{Binding MyContribution.ReferenceUrl}" />
 
-                        <StackLayout Spacing="0" Orientation="Horizontal">
-                            <Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualQuantityTipText}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                            <Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForAnnualQuantity}" TextColor="Red" IsVisible="{Binding IsNeededAnnualQuantity}" VerticalTextAlignment="End" />
-                        </StackLayout>
-                        <local:BorderEntry x:Name="entryAnnualQuantity" TextColor="Black" Text="{Binding MyContribution.AnnualQuantity}" />
+						<Label Text="Description" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<local:BorderEditor HeightRequest="120" x:Name="entryDescription" TextColor="Black" Text="{Binding MyContribution.Description}" />
 
-                        <StackLayout IsVisible="{Binding IsNeededSecondAnnualQuantity}">
-                            <StackLayout Spacing="0" Orientation="Horizontal">
-                                <Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding SecondAnnualQuantityTipText}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                                <Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForSecondAnnualQuantity}" TextColor="Red" VerticalTextAlignment="End" />
-                            </StackLayout>
-                            <local:BorderEntry x:Name="entrySecondAnnualQuantity" TextColor="Black" Text="{Binding MyContribution.SecondAnnualQuantity}" />
-                        </StackLayout>
-                    
-                        <StackLayout Spacing="0" Orientation="Horizontal">
-                            <Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualReachTipText}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-                            <Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForAnnualReach}" TextColor="Red" VerticalTextAlignment="End" />
-                        </StackLayout>
-                        <local:BorderEntry x:Name="entryAnnualReach" TextColor="Black" Text="{Binding MyContribution.AnnualReach}" />
+						<StackLayout Spacing="0" Orientation="Horizontal">
+							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualQuantityTipText}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForAnnualQuantity}" TextColor="Red" IsVisible="{Binding IsNeededAnnualQuantity}" VerticalTextAlignment="End" />
+						</StackLayout>
+						<local:BorderEntry x:Name="entryAnnualQuantity" TextColor="Black" Text="{Binding MyContribution.AnnualQuantity}" />
 
-                    </StackLayout>
+						<StackLayout IsVisible="{Binding IsNeededSecondAnnualQuantity}">
+							<StackLayout Spacing="0" Orientation="Horizontal">
+								<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding SecondAnnualQuantityTipText}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+								<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForSecondAnnualQuantity}" TextColor="Red" VerticalTextAlignment="End" />
+							</StackLayout>
+							<local:BorderEntry x:Name="entrySecondAnnualQuantity" TextColor="Black" Text="{Binding MyContribution.SecondAnnualQuantity}" />
+						</StackLayout>
 
-                    <Button TextColor="White" BorderColor="White" BackgroundColor="{StaticResource PrimaryDark}" BorderRadius="5" BorderWidth="2" Clicked="ButtonSaveClicked" Text="Save"
-                        FontSize="Medium" WidthRequest="150" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
-                        <Button.HorizontalOptions>
-                            <OnPlatform x:TypeArguments="LayoutOptions">
-                                <On Platform="iOS" Value="Fill" />
-                            </OnPlatform>
-                        </Button.HorizontalOptions>
-                        <Button.BorderRadius>
-                            <OnPlatform x:TypeArguments="x:Int32">
-                                <On Platform="iOS" Value="0" />
-                            </OnPlatform>
-                        </Button.BorderRadius>
-                        <Button.BorderWidth>
-                            <OnPlatform x:TypeArguments="x:Double">
-                                <On Platform="iOS" Value="0" />
-                            </OnPlatform>
-                        </Button.BorderWidth>
-                    </Button>
+						<StackLayout Spacing="0" Orientation="Horizontal">
+							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualReachTipText}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForAnnualReach}" TextColor="Red" VerticalTextAlignment="End" />
+						</StackLayout>
+						<local:BorderEntry x:Name="entryAnnualReach" TextColor="Black" Text="{Binding MyContribution.AnnualReach}" />
 
-                </StackLayout>
-			</ScrollView>
-		
-			<Grid IsVisible="{Binding IsBusy}" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#FFFFFF">
-				<StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
-					<ActivityIndicator WidthRequest="80" IsEnabled="True" x:Name="active1s" IsRunning="{Binding IsBusy}" Color="Black" HorizontalOptions="Center" VerticalOptions="Center" />
-					<Label TextColor="Black" x:Name="progressText" Text="Loading..." FontSize="16"></Label>
+					</StackLayout>
+
+
+
 				</StackLayout>
-			</Grid>
+
+			</ScrollView>
+			<Button TextColor="White"
+					BorderRadius="0"
+					BackgroundColor="{StaticResource PrimaryDark}"  
+					Clicked="ButtonSaveClicked" Text="Save"
+                    HorizontalOptions="FillAndExpand" />
+		</StackLayout>
+
+
+		<Grid IsVisible="{Binding IsBusy}" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#FFFFFF">
+			<StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+				<ActivityIndicator WidthRequest="80" IsEnabled="True" x:Name="active1s" IsRunning="{Binding IsBusy}" Color="Black" HorizontalOptions="Center" VerticalOptions="Center" />
+				<Label TextColor="Black" x:Name="progressText" Text="Loading..." FontSize="16"></Label>
+			</StackLayout>
 		</Grid>
+	</Grid>
 
 </ContentPage>
