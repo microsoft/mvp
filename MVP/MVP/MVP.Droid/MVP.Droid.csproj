@@ -103,6 +103,15 @@
     <Reference Include="Plugin.VersionTracking.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Plugin.VersionTracking.1.0.1\lib\MonoAndroid10\Plugin.VersionTracking.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Refractored.Fab, Version=2.0.0.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Refractored.FloatingActionButton.2.0.0.9\lib\MonoAndroid10\Refractored.Fab.dll</HintPath>
+    </Reference>
+    <Reference Include="Refractored.FabControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Refractored.FloatingActionButtonForms.2.0.0.9\lib\MonoAndroid10\Refractored.FabControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Refractored.FabControl.Droid, Version=2.0.0.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Refractored.FloatingActionButtonForms.2.0.0.9\lib\MonoAndroid10\Refractored.FabControl.Droid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Json" />

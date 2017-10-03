@@ -194,6 +194,9 @@
     <Reference Include="Plugin.VersionTracking.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Plugin.VersionTracking.1.0.1\lib\Xamarin.iOS10\Plugin.VersionTracking.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Refractored.FabControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Refractored.FloatingActionButtonForms.2.0.0.9\lib\netstandard1.0\Refractored.FabControl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />

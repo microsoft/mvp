@@ -57,7 +57,6 @@
                         BorderWidth="2"
                         Clicked="ButtonSignoutClicked"
                         Text="Sign out"
-                        FontSize="Medium" 
                         WidthRequest="150" 
                         HorizontalOptions="Center"
 						VerticalOptions="EndAndExpand"/>

@@ -169,7 +169,6 @@
                         BorderWidth="2"
                         Clicked="ButtonSaveClicked"
                         Text="Save"
-                        FontSize="Medium" 
                         WidthRequest="150" 
                         HorizontalOptions="Center"
 						VerticalOptions="EndAndExpand"

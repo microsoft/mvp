@@ -22,9 +22,22 @@ namespace Microsoft.Mvpui
 
             if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
                 ToolbarAddContribution.Icon = "Assets\\toolbar_add.png";
-        }
 
-        public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+
+			if(Device.RuntimePlatform == Device.Android)
+			{
+
+				ToolbarItems.Remove(ToolbarAddContribution);
+				FloatingActionButtonAdd.IsVisible = true;
+				FloatingActionButtonAdd.Clicked += (sender, args) =>
+				{
+					AddContribution_Clicked(null, null);
+				};
+
+			}
+		}
+
+		public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (ListViewContributions.SelectedItem != null)
             {

@@ -29,9 +29,7 @@
                         BorderWidth="2"
                         Clicked="ButtonSignIn_Clicked"
                         Text="Sign in"
-                        FontSize="Medium" 
-                        WidthRequest="150" 
-						
+                        WidthRequest="150"						
                         HorizontalOptions="Center"/>
 
 		</StackLayout>
