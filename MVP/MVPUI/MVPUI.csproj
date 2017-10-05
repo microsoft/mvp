@@ -55,10 +55,6 @@
     <Compile Include="ContributionsPage.xaml.cs">
       <DependentUpon>ContributionsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\BorderDataPicker.cs" />
-    <Compile Include="CustomControls\BorderEditor.cs" />
-    <Compile Include="CustomControls\BorderEntry.cs" />
-    <Compile Include="CustomControls\BorderPicker.cs" />
     <Compile Include="CustomControls\ICookieHelper.cs" />
     <Compile Include="CustomControls\ILocationHelper.cs" />
     <Compile Include="CustomControls\MVPNavigationPage.cs" />
