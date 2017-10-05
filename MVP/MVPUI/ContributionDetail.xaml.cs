@@ -20,12 +20,15 @@ namespace Microsoft.Mvpui
         #region Private Fields
 
         private bool _isTapped = false;
+		ContributionViewModel viewModel;
+		ContributionViewModel ViewModel
+			=> viewModel ?? (viewModel = BindingContext as ContributionViewModel);
+	
+		#endregion
 
-        #endregion
+		#region Constructor
 
-        #region Constructor
-
-        public ContributionDetail()
+		public ContributionDetail()
         {
             InitializeComponent();
 
@@ -34,7 +37,7 @@ namespace Microsoft.Mvpui
 			      if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
 				      ToolbarClose.Icon = "Assets\\toolbar_close.png";
 
-            this.BindingContext = ContributionViewModel.Instance;
+            this.BindingContext = new ContributionViewModel();
 
             if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
             {
@@ -57,8 +60,9 @@ namespace Microsoft.Mvpui
 
         protected async override void OnAppearing()
         {
-            IsBusy = true;
-            ContributionViewModel.Instance.ErrorMessage = "";
+			
+			IsBusy = true;
+			ViewModel.ErrorMessage = "";
             base.OnAppearing();
             try
             {
@@ -80,17 +84,17 @@ namespace Microsoft.Mvpui
 
         private async Task BindContributionAreas()
         {
-            if (ContributionViewModel.Instance.ContributionAreas == null || ContributionViewModel.Instance.ContributionAreas.Count == 0)
+            if (ViewModel.ContributionAreas == null || ViewModel.ContributionAreas.Count == 0)
             {
-                await MyProfileViewModel.Instance.BindingAreas();
+                await ViewModel.BindingAreas();
             }
         }
 
         private async Task BindContributionType()
         {
-            if (ContributionViewModel.Instance.ContributionTypeNames == null || ContributionViewModel.Instance.ContributionTypeNames.Count == 0)
+            if (ViewModel.ContributionTypeNames == null || ViewModel.ContributionTypeNames.Count == 0)
             {
-                await MyProfileViewModel.Instance.BindingContributionType();
+                await ViewModel.BindingContributionType();
             }
 
             BindingContributionType();
@@ -101,17 +105,17 @@ namespace Microsoft.Mvpui
         {
             contributionTypeSelector.Items.Clear();
 
-            foreach (var item in ContributionViewModel.Instance.ContributionTypeNames)
+            foreach (var item in ViewModel.ContributionTypeNames)
             {
                 contributionTypeSelector.Items.Add(item.Name);
             }
 
-            if (ContributionViewModel.Instance.MyContribution != null)
+            if (ViewModel.MyContribution != null)
             {
-                if (ContributionViewModel.Instance.ContributionTypeNames.Count > 0)
+                if (ViewModel.ContributionTypeNames.Count > 0)
                 {
-                    var activeContributionType = ContributionViewModel.Instance.ContributionTypeNames.Where(item => item.Id == ContributionViewModel.Instance.MyContribution.ContributionType.Id).FirstOrDefault();
-                    ContributionViewModel.Instance.ContributionTypeIndex = ContributionViewModel.Instance.ContributionTypeNames.IndexOf(activeContributionType);
+                    var activeContributionType = ViewModel.ContributionTypeNames.Where(item => item.Id == ViewModel.MyContribution.ContributionType.Id).FirstOrDefault();
+                    ViewModel.ContributionTypeIndex = ViewModel.ContributionTypeNames.IndexOf(activeContributionType);
                 }
             }
 
@@ -121,7 +125,7 @@ namespace Microsoft.Mvpui
             }
             else
             {
-                contributionTypeSelector.SelectedIndex = ContributionViewModel.Instance.ContributionTypeIndex;
+                contributionTypeSelector.SelectedIndex = ViewModel.ContributionTypeIndex;
             }
         }
 
@@ -131,28 +135,28 @@ namespace Microsoft.Mvpui
             ContributionAreaSelector.Items.Clear();
             PersonGroupSelector.Items.Clear();
 
-            foreach (var item in ContributionViewModel.Instance.ContributionAreas)
+            foreach (var item in ViewModel.ContributionAreas)
             {
                 ContributionAreaSelector.Items.Add(item.Name);
             }
-            foreach (var item in ContributionViewModel.Instance.PersonGroups)
+            foreach (var item in ViewModel.PersonGroups)
             {
                 PersonGroupSelector.Items.Add(item.Description);
             }
 
-            if (ContributionViewModel.Instance.MyContribution != null)
+            if (ViewModel.MyContribution != null)
             {
 
-                if (ContributionViewModel.Instance.ContributionAreas.Count > 0)
+                if (ViewModel.ContributionAreas.Count > 0)
                 {
-                    var activeContributionArea = ContributionViewModel.Instance.ContributionAreas.Where(item => item.Id == ContributionViewModel.Instance.MyContribution.ContributionTechnology.Id).FirstOrDefault();
-                    ContributionViewModel.Instance.ContributionAreaIndex = ContributionViewModel.Instance.ContributionAreas.IndexOf(activeContributionArea);
+                    var activeContributionArea = ViewModel.ContributionAreas.Where(item => item.Id == ViewModel.MyContribution.ContributionTechnology.Id).FirstOrDefault();
+                    ViewModel.ContributionAreaIndex = ViewModel.ContributionAreas.IndexOf(activeContributionArea);
                 }
 
-                if (ContributionViewModel.Instance.PersonGroups.Count > 0)
+                if (ViewModel.PersonGroups.Count > 0)
                 {
-                    var activeVisibility = ContributionViewModel.Instance.PersonGroups.Where(item => item.Id == ContributionViewModel.Instance.MyContribution.Visibility.Id).FirstOrDefault();
-                    ContributionViewModel.Instance.VibilityIndex = ContributionViewModel.Instance.PersonGroups.IndexOf(activeVisibility);
+                    var activeVisibility = ViewModel.PersonGroups.Where(item => item.Id == ViewModel.MyContribution.Visibility.Id).FirstOrDefault();
+                    ViewModel.VibilityIndex = ViewModel.PersonGroups.IndexOf(activeVisibility);
                 }
             }
 
@@ -160,15 +164,15 @@ namespace Microsoft.Mvpui
             {
 
                 //ContributionAreaSelector.SelectedIndex = 0;
-                var activeContributionType = ContributionViewModel.Instance.ContributionAreas.Where(item => string.Compare(item.AwardName, MyProfileViewModel.Instance.AwardCategoriesValue, StringComparison.CurrentCultureIgnoreCase) == 0).FirstOrDefault();
-                ContributionAreaSelector.SelectedIndex = ContributionViewModel.Instance.ContributionAreas.IndexOf(activeContributionType);
+                var activeContributionType = ViewModel.ContributionAreas.Where(item => string.Compare(item.AwardName, MyProfileViewModel.Instance.AwardCategoriesValue, StringComparison.CurrentCultureIgnoreCase) == 0).FirstOrDefault();
+                ContributionAreaSelector.SelectedIndex = ViewModel.ContributionAreas.IndexOf(activeContributionType);
             }
             else
             {
-                ContributionAreaSelector.SelectedIndex = ContributionViewModel.Instance.ContributionAreaIndex;
+                ContributionAreaSelector.SelectedIndex = ViewModel.ContributionAreaIndex;
             }
 
-            PersonGroupSelector.SelectedIndex = ContributionViewModel.Instance.VibilityIndex;
+            PersonGroupSelector.SelectedIndex = ViewModel.VibilityIndex;
         }
 
         protected override void OnBindingContextChanged()
@@ -227,14 +231,14 @@ namespace Microsoft.Mvpui
                 IsBusy = true;
                 progressText.Text = "Saving ...";
 
-                if (ContributionViewModel.Instance.MyContribution == null)
+                if (ViewModel.MyContribution == null)
                 {
                     var model = new ContributionModel()
                     {
                         ContributionId = "0",
-                        ContributionType = ContributionViewModel.Instance.ContributionTypeNames[contributionTypeSelector.SelectedIndex],
-                        ContributionTechnology = ContributionViewModel.Instance.ContributionAreas[ContributionAreaSelector.SelectedIndex],
-                        Visibility = ContributionViewModel.Instance.PersonGroups[PersonGroupSelector.SelectedIndex],
+                        ContributionType = ViewModel.ContributionTypeNames[contributionTypeSelector.SelectedIndex],
+                        ContributionTechnology = ViewModel.ContributionAreas[ContributionAreaSelector.SelectedIndex],
+                        Visibility = ViewModel.PersonGroups[PersonGroupSelector.SelectedIndex],
                         StartDate = ContributionDateSelector.Date.ToUniversalTime(),
                         Title = entryTitle.Text,
                         ReferenceUrl = entryURL.Text,
@@ -258,40 +262,40 @@ namespace Microsoft.Mvpui
                 else
                 {
 
-                    ContributionViewModel.Instance.MyContribution.ContributionType = ContributionViewModel.Instance.ContributionTypeNames[contributionTypeSelector.SelectedIndex];
-                    ContributionViewModel.Instance.MyContribution.ContributionTechnology = ContributionViewModel.Instance.ContributionAreas[ContributionAreaSelector.SelectedIndex];
-                    ContributionViewModel.Instance.MyContribution.Visibility = ContributionViewModel.Instance.PersonGroups[PersonGroupSelector.SelectedIndex];
-                    ContributionViewModel.Instance.MyContribution.StartDate = ContributionDateSelector.Date.ToUniversalTime();
-                    ContributionViewModel.Instance.MyContribution.AnnualQuantity = Convert.ToInt32(entryAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
-                    ContributionViewModel.Instance.MyContribution.AnnualReach = Convert.ToInt32(entryAnnualReach.Text, System.Globalization.CultureInfo.InvariantCulture);
-                    ContributionViewModel.Instance.MyContribution.SecondAnnualQuantity = Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
-                    string result = await MvpHelper.MvpService.EditContributionModel(ContributionViewModel.Instance.MyContribution, LogOnViewModel.StoredToken);
+                    ViewModel.MyContribution.ContributionType = ViewModel.ContributionTypeNames[contributionTypeSelector.SelectedIndex];
+                    ViewModel.MyContribution.ContributionTechnology = ViewModel.ContributionAreas[ContributionAreaSelector.SelectedIndex];
+                    ViewModel.MyContribution.Visibility = ViewModel.PersonGroups[PersonGroupSelector.SelectedIndex];
+                    ViewModel.MyContribution.StartDate = ContributionDateSelector.Date.ToUniversalTime();
+                    ViewModel.MyContribution.AnnualQuantity = Convert.ToInt32(entryAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
+                    ViewModel.MyContribution.AnnualReach = Convert.ToInt32(entryAnnualReach.Text, System.Globalization.CultureInfo.InvariantCulture);
+                    ViewModel.MyContribution.SecondAnnualQuantity = Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
+                    string result = await MvpHelper.MvpService.EditContributionModel(ViewModel.MyContribution, LogOnViewModel.StoredToken);
                     if (result == CommonConstants.OkResult)
                     {
                         MyProfileViewModel.Instance.List = new ObservableRangeCollection<ContributionModel>(MyProfileViewModel.Instance.List);
                     }
                     else
                     {
-                        var currentContribution = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == ContributionViewModel.Instance.MyContribution.ContributionId).FirstOrDefault();
+                        var currentContribution = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == ViewModel.MyContribution.ContributionId).FirstOrDefault();
                         int index = MyProfileViewModel.Instance.List.IndexOf(currentContribution);
                         MyProfileViewModel.Instance.List.Remove(currentContribution);
-                        MyProfileViewModel.Instance.List.Insert(index, ContributionViewModel.Instance.MyContributionBackup);
+                        MyProfileViewModel.Instance.List.Insert(index, ViewModel.MyContributionBackup);
                         return;
                     }
                 }
 
-                ContributionViewModel.Instance.MyContribution = null;
+                ViewModel.MyContribution = null;
 
                 await Navigation.PopModalAsync();
 
             }
             catch (WebException ex)
             {
-                ContributionViewModel.Instance.ErrorMessage = ex.Message;
+                ViewModel.ErrorMessage = ex.Message;
             }
             catch (HttpRequestException ex)
             {
-                ContributionViewModel.Instance.ErrorMessage = ex.Message;
+                ViewModel.ErrorMessage = ex.Message;
             }
             finally
             {
@@ -316,51 +320,51 @@ namespace Microsoft.Mvpui
 
             if (string.IsNullOrEmpty(title))
             {
-                ContributionViewModel.Instance.ErrorMessageForTitle = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
+                ViewModel.ErrorMessageForTitle = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
                 isValid = false;
             }
-            if (ContributionViewModel.Instance.IsNeededUrl)
+            if (ViewModel.IsNeededUrl)
             {
                 if (string.IsNullOrEmpty(url))
                 {
-                    ContributionViewModel.Instance.ErrorMessageForUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.InvalidUrlMessageText);
+                    ViewModel.ErrorMessageForUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.InvalidUrlMessageText);
                     isValid = false;
                 }
                 else if (!Regex.IsMatch(url, CommonConstants.UrlPattern))
                 {
-                    ContributionViewModel.Instance.ErrorMessageForUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.InvalidUrlMessageText);
+                    ViewModel.ErrorMessageForUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.InvalidUrlMessageText);
                     isValid = false;
                 }
             }
-            if (ContributionViewModel.Instance.IsNeededAnnualQuantity)
+            if (ViewModel.IsNeededAnnualQuantity)
             {
                 if (annualQuantity != null)
                 {
                     if (!Regex.IsMatch(annualQuantity, CommonConstants.NumberPattern))
                     {
-                        ContributionViewModel.Instance.ErrorMessageForAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.FieldMustbeNumberMessageText);
+                        ViewModel.ErrorMessageForAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.FieldMustbeNumberMessageText);
                         isValid = false;
                     }
                 }
                 else
                 {
-                    ContributionViewModel.Instance.ErrorMessageForAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
+                    ViewModel.ErrorMessageForAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
                     isValid = false;
                 }
             }
-            if (ContributionViewModel.Instance.IsNeededSecondAnnualQuantity)
+            if (ViewModel.IsNeededSecondAnnualQuantity)
             {
                 if (secondAnnualQuantity != null)
                 {
                     if (!Regex.IsMatch(secondAnnualQuantity, CommonConstants.NumberPattern))
                     {
-                        ContributionViewModel.Instance.ErrorMessageForSecondAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.FieldMustbeNumberMessageText);
+                        ViewModel.ErrorMessageForSecondAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.FieldMustbeNumberMessageText);
                         isValid = false;
                     }
                 }
                 else
                 {
-                    ContributionViewModel.Instance.ErrorMessageForSecondAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
+                    ViewModel.ErrorMessageForSecondAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
                     isValid = false;
                 }
             }
@@ -368,7 +372,7 @@ namespace Microsoft.Mvpui
             {
                 if (!Regex.IsMatch(annualReach, CommonConstants.NumberPattern))
                 {
-                    ContributionViewModel.Instance.ErrorMessageForAnnualReach = CommonConstants.FieldMustbeNumberMessageText;
+                    ViewModel.ErrorMessageForAnnualReach = CommonConstants.FieldMustbeNumberMessageText;
                     isValid = false;
                 }
             }
@@ -381,16 +385,16 @@ namespace Microsoft.Mvpui
 
         public async void OnCloseClicked(object sender, EventArgs e)
         {
-            if (ContributionViewModel.Instance.MyContribution != null)
+            if (ViewModel.MyContribution != null)
             {
-                var currentContribution = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == ContributionViewModel.Instance.MyContribution.ContributionId).FirstOrDefault();
+                var currentContribution = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == ViewModel.MyContribution.ContributionId).FirstOrDefault();
                 int index = MyProfileViewModel.Instance.List.IndexOf(currentContribution);
                 MyProfileViewModel.Instance.List.Remove(currentContribution);
-                MyProfileViewModel.Instance.List.Insert(index, ContributionViewModel.Instance.MyContributionBackup);
-                //MyProfileViewModel.Instance.List[index] = ContributionViewModel.Instance.MyContributionBackup;
+                MyProfileViewModel.Instance.List.Insert(index, ViewModel.MyContributionBackup);
+                //MyProfileViewModel.Instance.List[index] = viewModel.MyContributionBackup;
             }
 
-            ContributionViewModel.Instance.MyContribution = null;
+            ViewModel.MyContribution = null;
             await Navigation.PopModalAsync();
         }
 
@@ -401,234 +405,234 @@ namespace Microsoft.Mvpui
 
                 //Method call every time when picker selection changed.
                 var selectedValue = contributionTypeSelector.Items[contributionTypeSelector.SelectedIndex];
-                ContributionViewModel.Instance.ErrorMessageForTitle = CommonConstants.HighlightMessageText;
-                ContributionViewModel.Instance.ErrorMessageForUrl = CommonConstants.HighlightMessageText;
-                ContributionViewModel.Instance.ErrorMessageForAnnualQuantity = CommonConstants.HighlightMessageText;
-                ContributionViewModel.Instance.ErrorMessageForSecondAnnualQuantity = CommonConstants.HighlightMessageText;
-                ContributionViewModel.Instance.ErrorMessageForAnnualReach = "";
+                ViewModel.ErrorMessageForTitle = CommonConstants.HighlightMessageText;
+                ViewModel.ErrorMessageForUrl = CommonConstants.HighlightMessageText;
+                ViewModel.ErrorMessageForAnnualQuantity = CommonConstants.HighlightMessageText;
+                ViewModel.ErrorMessageForSecondAnnualQuantity = CommonConstants.HighlightMessageText;
+                ViewModel.ErrorMessageForAnnualReach = "";
 
                 switch (selectedValue)
                 {
                     case CommonConstants.AT:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Articles";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Views";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Articles";
+                        ViewModel.AnnualReachTipText = "Number of Views";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Bsp:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = true;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Posts";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Annual Unique Visitors";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = "Number of Subscribers";
-                        ContributionViewModel.Instance.IsNeededUrl = true;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = true;
+                        ViewModel.AnnualQuantityTipText = "Number of Posts";
+                        ViewModel.AnnualReachTipText = "Annual Unique Visitors";
+                        ViewModel.SecondAnnualQuantityTipText = "Number of Subscribers";
+                        ViewModel.IsNeededUrl = true;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.BA:
                     case CommonConstants.Bca:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Books";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Copies sold";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Books";
+                        ViewModel.AnnualReachTipText = "Copies sold";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.CS:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Samples";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Downloads";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = true;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Samples";
+                        ViewModel.AnnualReachTipText = "Number of Downloads";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = true;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Cpt:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Projects";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Downloads";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = true;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Projects";
+                        ViewModel.AnnualReachTipText = "Number of Downloads";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = true;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Cbp:
                     case CommonConstants.CO:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Conferences";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Visitors";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Conferences";
+                        ViewModel.AnnualReachTipText = "Number of Visitors";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.FM:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Threads moderated";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Annual reach";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Threads moderated";
+                        ViewModel.AnnualReachTipText = "Annual reach";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.FP:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = true;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Answers";
-                        ContributionViewModel.Instance.AnnualReachTipText = "View of answers";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = "Number of Posts";
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = false;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = true;
+                        ViewModel.IsSecondAnnualQuantityVisible = true;
+                        ViewModel.AnnualQuantityTipText = "Number of Answers";
+                        ViewModel.AnnualReachTipText = "View of answers";
+                        ViewModel.SecondAnnualQuantityTipText = "Number of Posts";
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = false;
+                        ViewModel.IsNeededSecondAnnualQuantity = true;
                         break;
                     case CommonConstants.Fpmf:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = true;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Answers";
-                        ContributionViewModel.Instance.AnnualReachTipText = "View of answers";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = "Number of Posts";
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = true;
+                        ViewModel.AnnualQuantityTipText = "Number of Answers";
+                        ViewModel.AnnualReachTipText = "View of answers";
+                        ViewModel.SecondAnnualQuantityTipText = "Number of Posts";
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.MS:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Mentees";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Annual reach";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Mentees";
+                        ViewModel.AnnualReachTipText = "Annual reach";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Osp:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Projects";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Commits";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Projects";
+                        ViewModel.AnnualReachTipText = "Commits";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.OT:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Annual quantity";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Annual reach";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Annual quantity";
+                        ViewModel.AnnualReachTipText = "Annual reach";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Pcf:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Events provided";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Feedbacks provided";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Events provided";
+                        ViewModel.AnnualReachTipText = "Number of Feedbacks provided";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Pgf:
                     case CommonConstants.Pgfg:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Events provided";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Feedbacks provided";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Events provided";
+                        ViewModel.AnnualReachTipText = "Number of Feedbacks provided";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Pgi:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Events provided";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Feedbacks provided";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Events provided";
+                        ViewModel.AnnualReachTipText = "Number of Feedbacks provided";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Ptdp:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Events provided";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Feedbacks provided";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Events provided";
+                        ViewModel.AnnualReachTipText = "Number of Feedbacks provided";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.SO:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Posts";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Visitors";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Posts";
+                        ViewModel.AnnualReachTipText = "Visitors";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.SC:
                     case CommonConstants.SL:
                     case CommonConstants.Sug:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Talks";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Attendees of talks";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Talks";
+                        ViewModel.AnnualReachTipText = "Attendees of talks";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Tsm:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Posts";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Followers";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = true;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Posts";
+                        ViewModel.AnnualReachTipText = "Number of Followers";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = true;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Trfe:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Annual quantity";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Annual reach";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Annual quantity";
+                        ViewModel.AnnualReachTipText = "Annual reach";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Ugo:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Meetings";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Members";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Meetings";
+                        ViewModel.AnnualReachTipText = "Members";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.VD:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Videos";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Views";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = true;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Videos";
+                        ViewModel.AnnualReachTipText = "Number of Views";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = true;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.WB:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = false;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Videos";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Number of Views";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = string.Empty;
-                        ContributionViewModel.Instance.IsNeededUrl = false;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = false;
+                        ViewModel.AnnualQuantityTipText = "Number of Videos";
+                        ViewModel.AnnualReachTipText = "Number of Views";
+                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+                        ViewModel.IsNeededUrl = false;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.WP:
-                        ContributionViewModel.Instance.IsSecondAnnualQuantityVisible = true;
-                        ContributionViewModel.Instance.AnnualQuantityTipText = "Number of Posts";
-                        ContributionViewModel.Instance.AnnualReachTipText = "Annual Unique Visitors";
-                        ContributionViewModel.Instance.SecondAnnualQuantityTipText = "Number of Subscribers";
-                        ContributionViewModel.Instance.IsNeededUrl = true;
-                        ContributionViewModel.Instance.IsNeededAnnualQuantity = true;
-                        ContributionViewModel.Instance.IsNeededSecondAnnualQuantity = false;
+                        ViewModel.IsSecondAnnualQuantityVisible = true;
+                        ViewModel.AnnualQuantityTipText = "Number of Posts";
+                        ViewModel.AnnualReachTipText = "Annual Unique Visitors";
+                        ViewModel.SecondAnnualQuantityTipText = "Number of Subscribers";
+                        ViewModel.IsNeededUrl = true;
+                        ViewModel.IsNeededAnnualQuantity = true;
+                        ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     default:
                         break;

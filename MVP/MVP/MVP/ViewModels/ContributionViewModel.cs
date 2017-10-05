@@ -1,6 +1,7 @@
 ﻿using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using MvvmHelpers;
+using System.Threading.Tasks;
 
 namespace Microsoft.Mvp.ViewModels
 {
@@ -8,27 +9,6 @@ namespace Microsoft.Mvp.ViewModels
     {
 
         #region Singleton pattern and constructors
-
-        private static ContributionViewModel _instance = null;
-        private static readonly object _synObject = new object();
-        public static ContributionViewModel Instance
-        {
-            get
-            {
-                // Double-Checked Locking
-                if (null == _instance)
-                {
-                    lock (_synObject)
-                    {
-                        if (null == _instance)
-                        {
-                            _instance = new ContributionViewModel();
-                        }
-                    }
-                }
-                return _instance;
-            }
-        }
 
         public ContributionViewModel()
         {
@@ -379,6 +359,34 @@ namespace Microsoft.Mvp.ViewModels
                 OnPropertyChanged("HasError");
             }
         }
-        #endregion
-    }
+
+		public async Task<bool> BindingContributionType()
+		{
+			try
+			{
+				var contributionTypeDetail = await MvpHelper.MvpService.GetContributionTypes(LogOnViewModel.StoredToken);
+				ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>(contributionTypeDetail.ContributionTypes);
+			}
+			catch (TaskCanceledException tce)
+			{
+				ErrorMessage = tce.Message;
+			}
+			return true;
+		}
+
+		public async Task<bool> BindingAreas()
+		{
+			try
+			{
+				var contributionDetail = await MvpHelper.MvpService.GetContributionAreas(LogOnViewModel.StoredToken);
+				ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(contributionDetail.ContributionArea);
+			}
+			catch (TaskCanceledException tce)
+			{
+				ErrorMessage = tce.Message;
+			}
+			return true;
+		}
+		#endregion
+	}
 }

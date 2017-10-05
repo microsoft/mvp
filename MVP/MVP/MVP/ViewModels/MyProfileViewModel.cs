@@ -32,33 +32,7 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        public async Task<bool> BindingContributionType()
-        {
-            try
-            {
-                ContributionTypeDetail contributionTypeDetail = await MvpHelper.MvpService.GetContributionTypes(LogOnViewModel.StoredToken);
-                ContributionViewModel.Instance.ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>(contributionTypeDetail.ContributionTypes);
-            }
-            catch (TaskCanceledException tce)
-            {
-                ContributionViewModel.Instance.ErrorMessage = tce.Message;
-            }
-            return true;
-        }
-
-        public async Task<bool> BindingAreas()
-        {
-            try
-            {
-                ContributionDetail contributionDetail = await MvpHelper.MvpService.GetContributionAreas(LogOnViewModel.StoredToken);
-                ContributionViewModel.Instance.ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(contributionDetail.ContributionArea);
-            }
-            catch (TaskCanceledException tce)
-            {
-                ContributionViewModel.Instance.ErrorMessage = tce.Message;
-            }
-            return true;
-        }
+        
 
         #endregion
 
@@ -70,7 +44,6 @@ namespace Microsoft.Mvp.ViewModels
         private string _firstAwardValue = string.Empty;
         private string _awardsCountValue = string.Empty;
         private string _description = string.Empty;
-        private bool _isLoading = false;
         private ObservableRangeCollection<ContributionModel> _list = new ObservableRangeCollection<ContributionModel>();
         private int _totalOfData = 100;
         private string _storeImageBase64Str;
