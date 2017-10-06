@@ -120,5 +120,7 @@ namespace Microsoft.Mvp.Helpers
         public const string OkResult = "OK";
         public const string NetworkErrorFormatString = "NetworkError:{0}";
         public const string DefaultNetworkErrorString = "NetworkError:Please check your network and try again";
+
+        public const string LearnMoreUrl = "https://mvp.microsoft.com/";
     }
 }
