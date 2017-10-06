@@ -8,27 +8,69 @@
 		<ToolbarItem Text="Cancel" x:Name="ToolbarClose" Icon="toolbar_close.png" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="FillAndExpand" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
-			<Image HeightRequest="200" Margin="20" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-				<Image.Source>
-					<OnPlatform x:TypeArguments="ImageSource">
-						<On Platform="iOS" Value="image_mvplogo.png" />
-						<On Platform="Android" Value="image_mvplogo.png" />
-						<On Platform="UWP" Value="Assets\image_mvplogo.png" />
-					</OnPlatform>
-				</Image.Source>
-			</Image>
+        <Grid Padding="15" RowSpacing="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
 
-			<Button TextColor="White"
-                        BackgroundColor="{StaticResource PrimaryDark}"
-                        BorderRadius="0"
-                        Clicked="ButtonSignIn_Clicked"
-                        Text="Sign in"
-                        WidthRequest="150"						
-                        HorizontalOptions="FillAndExpand"
-						VerticalOptions="End"/>
+            <Image 
+                x:Name="logo" 
+                Opacity="0" 
+                Margin="50" 
+                HorizontalOptions="Center" 
+                VerticalOptions="CenterAndExpand">
+                <Image.Source>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="iOS" Value="image_mvplogo.png" />
+                        <On Platform="Android" Value="image_mvplogo.png" />
+                        <On Platform="UWP" Value="Assets\image_mvplogo.png" />
+                    </OnPlatform>
+                </Image.Source>
+            </Image>
 
+            <Label
+                x:Name="title"
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                Opacity="0"
+                TextColor="White"
+                FontSize="46"
+                HorizontalTextAlignment="Center"
+                VerticalOptions="Center"
+                Text="Welcome" />
 
-		</StackLayout>
+            <Button Grid.Row="2" 
+                TextColor="{StaticResource Primary}"
+                BackgroundColor="White"
+                FontAttributes="None"
+                FontSize="18"
+                BorderRadius="4"
+                Clicked="ButtonSignIn_Clicked"
+                Text="Sign in to your MVP account">
+                <Button.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <OnPlatform.iOS>HelveticaNeue</OnPlatform.iOS>
+                    </OnPlatform>
+                </Button.FontFamily>
+            </Button>
+
+            <Button Grid.Row="3" 
+                TextColor="White"
+                BackgroundColor="#33FFFFFF"
+                FontAttributes="None"
+                BorderRadius="4"
+                Clicked="ButtonLearnMore_Clicked"
+                Text="Learn more about the program">
+                <Button.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <OnPlatform.iOS>HelveticaNeue</OnPlatform.iOS>
+                    </OnPlatform>
+                </Button.FontFamily>
+                </Button>
+            
+        </Grid>
 	</ContentPage.Content>
 </ContentPage>
