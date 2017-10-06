@@ -34,7 +34,6 @@ namespace Microsoft.Mvp.Helpers
         {
 
             MyProfileViewModel.Instance.ErrorMessage = string.Empty;
-            ContributionViewModel.Instance.ErrorMessage = string.Empty;
             string errorMsg = "";
             try
             {
@@ -146,7 +145,6 @@ namespace Microsoft.Mvp.Helpers
             if (!string.IsNullOrEmpty(errorMsg))
             {
                 MyProfileViewModel.Instance.ErrorMessage = errorMsg;
-                ContributionViewModel.Instance.ErrorMessage = errorMsg;
             }
             return null;
         }

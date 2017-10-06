@@ -52,7 +52,20 @@ namespace Microsoft.Mvpui
                 string auth_code = System.Text.RegularExpressions.Regex.Split(liveUrl.AbsoluteUri, "code=")[1];
                 Application.Current.Properties.Add(CommonConstants.AuthCodeKey, auth_code);
                 await LiveIdLogOnViewModel.Instance.GetAccessToken();
-                await Navigation.PushModalAsync(new MyProfile());
+
+				var profileTest = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
+				if(profileTest == null || string.IsNullOrWhiteSpace(profileTest.DisplayName))
+				{
+					await DisplayAlert(string.Empty, "Unable to validate MVP status, please login again with your MVP credentials.", "OK");
+					App.CookieHelper.ClearCookie();
+					LiveIdLogOnViewModel.Instance.SignOut();
+					await Navigation.PopModalAsync(true);
+				}
+				else
+				{
+					await Navigation.PushModalAsync(new MyProfile());
+				}
+
             }
         }
 
