@@ -95,118 +95,55 @@ namespace Microsoft.Mvp.ViewModels
         #region Public Members
         public string PersonName
         {
-            get
-            {
-                return _personName;
-            }
-
-            set
-            {
-                _personName = value;
-                OnPropertyChanged("PersonName");
-            }
+            get => _personName;
+            set => SetProperty<string>(ref _personName, value);
         }
 
         public string AwardCategoriesTip
         {
-            get
-            {
-                return _awardCategoriesTip;
-            }
-
-            set
-            {
-                _awardCategoriesTip = value;
-                OnPropertyChanged("AwardCategoriesTip");
-            }
+            get => _awardCategoriesTip;
+            set => SetProperty<string>(ref _awardCategoriesTip, value);
         }
 
         public string AwardCategoriesValue
         {
-            get
-            {
-                return _awardCategoriesValue;
-            }
-
-            set
-            {
-                _awardCategoriesValue = value;
-                OnPropertyChanged("AwardCategoriesValue");
-            }
+            get => _awardCategoriesValue;
+            set => SetProperty<string>(ref _awardCategoriesValue, value);
         }
 
         public string FirstAwardTip
         {
-            get
-            {
-                return _firstAwardTip;
-            }
-
-            set
-            {
-                _firstAwardTip = value;
-                OnPropertyChanged("FirstAwardTip");
-            }
+            get => _firstAwardTip;
+            set => SetProperty<string>(ref _firstAwardTip, value);
         }
 
         public string FirstAwardValue
         {
-            get
-            {
-                return _firstAwardValue;
-            }
-
-            set
-            {
-                _firstAwardValue = value;
-                OnPropertyChanged("FirstAwardValue");
-            }
+            get => _firstAwardValue;
+            set => SetProperty<string>(ref _firstAwardValue, value);
         }
 
         public string AwardsCountTip
         {
-            get
-            {
-                return _awardsCountTip;
-            }
-
-            set
-            {
-                _awardsCountTip = value;
-                OnPropertyChanged("AwardsCountTip");
-            }
+            get => _awardsCountTip;
+            set => SetProperty<string>(ref _awardsCountTip, value);
         }
 
         public string AwardsCountValue
         {
-            get
-            {
-                return _awardsCountValue;
-            }
-
-            set
-            {
-                _awardsCountValue = value;
-                OnPropertyChanged("AwardsCountValue");
-            }
+            get => _awardsCountValue;
+            set => SetProperty<string>(ref _awardsCountValue, value);
         }
 
         public string Description
         {
             get => _description;
-            
-
             set => SetProperty(ref _description, value);
-            
         }
 
         public ObservableRangeCollection<ContributionModel> List
         {
-            get
-            {
-                return _list;
-            }
-
+            get => _list;
             set
             {
                 SetProperty(ref _list, value);
@@ -216,145 +153,68 @@ namespace Microsoft.Mvp.ViewModels
 
         public string StrBenefitsImage
         {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strBenefitsImage);
-            }
-
-            set
-            {
-                _strBenefitsImage = value;
-                OnPropertyChanged("StrBenefitsImage");
-            }
+            get => string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strBenefitsImage);
+            set => SetProperty<string>(ref _strBenefitsImage, value);
         }
 
         public string StrMyNetworkImage
         {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strMyNetworkImage);
-            }
-
-            set
-            {
-                _strMyNetworkImage = value;
-                OnPropertyChanged("StrMyNetworkImage");
-            }
+            get => string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strMyNetworkImage);
+            set => SetProperty<string>(ref _strMyNetworkImage, value);
         }
 
         public string StrMeImage
         {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strMeImage);
-            }
-
-            set
-            {
-                _strMeImage = value;
-                OnPropertyChanged("StrMeImage");
-            }
+            get => string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strMeImage);
+            set => SetProperty<string>(ref _strMeImage, value);
         }
 
         public string StrNotificationsImage
         {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strNotificationsImage);
-            }
-
-            set
-            {
-                _strNotificationsImage = value;
-                OnPropertyChanged("StrNotificationsImage");
-            }
+            get => string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strNotificationsImage);
+            set => SetProperty<string>(ref _strNotificationsImage, value);
         }
 
         public string StrSupportImage
         {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strSupportImage);
-            }
-
-            set
-            {
-                _strSupportImage = value;
-                OnPropertyChanged("StrSupportImage");
-            }
+            get => string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strSupportImage);
+            set => SetProperty<string>(ref _strSupportImage, value);
         }
 
         public string StrSettingImage
         {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strSettingsImage);
-            }
-
-            set
-            {
-                _strSettingsImage = value;
-                OnPropertyChanged("StrSettingImage");
-            }
+            get => string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strSettingsImage);
+            set => SetProperty<string>(ref _strSettingsImage, value);
         }
 
         public string StrWPResourcePath
         {
-            get
-            {
-                return _strWPResourcePath;
-            }
-
+            get => _strWPResourcePath;
             set
             {
                 _strWPResourcePath = value;
+
+                //TODO: No property change notification in original code? Why?
             }
         }
 
         public string StrAvatar
         {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strAvatar);
-            }
-
-            set
-            {
-                _strAvatar = value;
-                OnPropertyChanged("StrAvatar");
-            }
+            get => string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strAvatar);
+            set => SetProperty<string>(ref _strAvatar, value);
         }
 
         public string StrAvatarBackground
         {
-            get
-            {
-                return string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strAvatarBackground);
-            }
-
-            set
-            {
-                _strAvatarBackground = value;
-                OnPropertyChanged("StrAvatarBackground");
-            }
+            get => string.Format(System.Globalization.CultureInfo.InvariantCulture,"{0}{1}", StrWPResourcePath, _strAvatarBackground);
+            set => SetProperty<string>(ref _strAvatarBackground, value);
         }
 
-        public bool HasMoreItems
-        {
-            get
-            {
-                return List.Count < TotalOfData;
-            }
-        }
-
+        public bool HasMoreItems => List.Count < TotalOfData;
 
         public int TotalOfData
         {
-            get
-            {
-                return _totalOfData;
-            }
-
+            get => _totalOfData;
             set
             {
                 _totalOfData = value;
@@ -364,25 +224,14 @@ namespace Microsoft.Mvp.ViewModels
 
         public string StoreImageBase64Str
         {
-            get
-            {
-                return _storeImageBase64Str;
-            }
-
-            set
-            {
-                _storeImageBase64Str = value;
-                OnPropertyChanged("ProfilePhoto");
-            }
-
+            get => _storeImageBase64Str;
+            set => SetProperty<string>(ref _storeImageBase64Str, value);
         }
 
         public ImageSource ProfilePhoto
         {
             get
             {
-
-                
                 ImageSource retSource = null;
                 bool useDefault = false;
                 if (StoreImageBase64Str != null)
@@ -418,21 +267,11 @@ namespace Microsoft.Mvp.ViewModels
 
         }
 
-        public bool HasError
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(ErrorMessage);
-            }
-        }
+        public bool HasError => !string.IsNullOrEmpty(ErrorMessage);
 
         public string ErrorMessage
         {
-            get
-            {
-                return _ErrorMessage;
-            }
-
+            get => _ErrorMessage;
             set
             {
                 _ErrorMessage = value;
