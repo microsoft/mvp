@@ -32,8 +32,6 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        
-
         #endregion
 
         #region Private Members
@@ -49,151 +47,78 @@ namespace Microsoft.Mvp.ViewModels
         private string _storeImageBase64Str;
 
         private string _ErrorMessage = string.Empty;
-        #endregion
+		#endregion
 
-        #region Public Members
+		#region Public Members
 
-        public string PersonName
-        {
-            get
-            {
-                return _personName;
-            }
-
-            set
-            {
-                _personName = value;
-                OnPropertyChanged("PersonName");
-            }
-        }
+		public string PersonName
+		{
+			get => _personName;
+			set => SetProperty<string>(ref _personName, value);
+		}
 
         public string MvpNumber
         {
-            get
-            {
-                return _mvpNumber;
-            }
-
-            set
-            {
-                _mvpNumber = value;
-                OnPropertyChanged("MvpNumber");
-            }
+            get => _mvpNumber;
+            set => SetProperty<string>(ref _mvpNumber, value);
         }
 
-        public string AwardCategoriesValue
-        {
-            get
-            {
-                return _awardCategoriesValue;
-            }
+		public string AwardCategoriesValue
+		{
+			get => _awardCategoriesValue;
+			set => SetProperty<string>(ref _awardCategoriesValue, value);
+		}
 
-            set
-            {
-                _awardCategoriesValue = value;
-                OnPropertyChanged("AwardCategoriesValue");
-            }
-        }
+		public string FirstAwardValue
+		{
+			get => _firstAwardValue;
+			set => SetProperty<string>(ref _firstAwardValue, value);
+		}
 
-
-
-        public string FirstAwardValue
-        {
-            get
-            {
-                return _firstAwardValue;
-            }
-
-            set
-            {
-                _firstAwardValue = value;
-                OnPropertyChanged("FirstAwardValue");
-            }
-        }
-
-
-        public string AwardsCountValue
-        {
-            get
-            {
-                return _awardsCountValue;
-            }
-
-            set
-            {
-                _awardsCountValue = value;
-                OnPropertyChanged("AwardsCountValue");
-            }
-        }
+		public string AwardsCountValue
+		{
+			get => _awardsCountValue;
+			set => SetProperty<string>(ref _awardsCountValue, value);
+		}
 
         public string Description
         {
             get => _description;
-
-
             set => SetProperty(ref _description, value);
-
         }
 
-        public ObservableRangeCollection<ContributionModel> List
-        {
-            get
-            {
-                return _list;
-            }
+		public ObservableRangeCollection<ContributionModel> List
+		{
+			get => _list;
+			set
+			{
+				SetProperty(ref _list, value);
+				CanLoadMore = HasMoreItems;
+			}
+		}
 
-            set
-            {
-                SetProperty(ref _list, value);
-                CanLoadMore = HasMoreItems;
-            }
-        }
+        public bool HasMoreItems => List.Count < TotalOfData;
 
+		public int TotalOfData
+		{
+			get => _totalOfData;
+			set
+			{
+				_totalOfData = value;
+				CanLoadMore = HasMoreItems;
+			}
+		}
 
-        public bool HasMoreItems
-        {
-            get
-            {
-                return List.Count < TotalOfData;
-            }
-        }
-
-
-        public int TotalOfData
-        {
-            get
-            {
-                return _totalOfData;
-            }
-
-            set
-            {
-                _totalOfData = value;
-                CanLoadMore = HasMoreItems;
-            }
-        }
-
-        public string StoreImageBase64Str
-        {
-            get
-            {
-                return _storeImageBase64Str;
-            }
-
-            set
-            {
-                _storeImageBase64Str = value;
-                OnPropertyChanged("ProfilePhoto");
-            }
-
-        }
+		public string StoreImageBase64Str
+		{
+			get => _storeImageBase64Str;
+			set => SetProperty<string>(ref _storeImageBase64Str, value);
+		}
 
         public ImageSource ProfilePhoto
         {
             get
             {
-
-
                 ImageSource retSource = null;
                 bool useDefault = false;
                 if (StoreImageBase64Str != null)
@@ -226,24 +151,13 @@ namespace Microsoft.Mvp.ViewModels
                 }
                 return retSource;
             }
-
         }
 
-        public bool HasError
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(ErrorMessage);
-            }
-        }
+        public bool HasError => !string.IsNullOrEmpty(ErrorMessage);
 
         public string ErrorMessage
         {
-            get
-            {
-                return _ErrorMessage;
-            }
-
+            get => _ErrorMessage;
             set
             {
                 _ErrorMessage = value;
