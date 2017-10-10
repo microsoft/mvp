@@ -76,7 +76,7 @@ namespace Microsoft.Mvpui.Converters
             }
 
             // For Windows platforms we need an Assets folder.
-            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+            if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
                 icon = $"Assets\\{icon}";
 
             return icon;

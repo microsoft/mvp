@@ -1,6 +1,7 @@
 ﻿using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using MvvmHelpers;
+using System.Threading.Tasks;
 
 namespace Microsoft.Mvp.ViewModels
 {
@@ -8,27 +9,6 @@ namespace Microsoft.Mvp.ViewModels
     {
 
         #region Singleton pattern and constructors
-
-        private static ContributionViewModel _instance = null;
-        private static readonly object _synObject = new object();
-        public static ContributionViewModel Instance
-        {
-            get
-            {
-                // Double-Checked Locking
-                if (null == _instance)
-                {
-                    lock (_synObject)
-                    {
-                        if (null == _instance)
-                        {
-                            _instance = new ContributionViewModel();
-                        }
-                    }
-                }
-                return _instance;
-            }
-        }
 
         public ContributionViewModel()
         {
@@ -42,7 +22,6 @@ namespace Microsoft.Mvp.ViewModels
             };
             PersonGroups = new ObservableRangeCollection<VisibilityModel>(visibilityModels);
         }
-
 
         #endregion
 
@@ -80,86 +59,49 @@ namespace Microsoft.Mvp.ViewModels
 
         public bool IsSecondAnnualQuantityVisible
         {
-            get
-            {
-                return _isSecondAnnualQuantityVisible;
-            }
-
-            set
-            {
-                _isSecondAnnualQuantityVisible = value;
-                OnPropertyChanged("IsSecondAnnualQuantityVisible");
-            }
+            get => _isSecondAnnualQuantityVisible;
+            set => SetProperty<bool>(ref _isSecondAnnualQuantityVisible, value);
         }
+
         public string AnnualQuantityTipText
         {
-            get
-            {
-                return _annualQuantityTipText;
-            }
-
-            set
-            {
-                _annualQuantityTipText = value;
-                OnPropertyChanged("AnnualQuantityTipText");
-            }
+            get => _annualQuantityTipText;
+            set => SetProperty<string>(ref _annualQuantityTipText, value);
         }
+
         public string SecondAnnualQuantityTipText
         {
-            get
-            {
-                return _secondAnnualQuantityTipText;
-            }
-
-            set
-            {
-                _secondAnnualQuantityTipText = value;
-                OnPropertyChanged("SecondAnnualQuantityTipText");
-            }
+            get => _secondAnnualQuantityTipText;
+            set => SetProperty<string>(ref _secondAnnualQuantityTipText, value);
         }
+
         public string AnnualReachTipText
         {
-            get
-            {
-                return _annualReachTipText;
-            }
-
-            set
-            {
-                _annualReachTipText = value;
-                OnPropertyChanged("AnnualReachTipText");
-            }
+            get => _annualReachTipText;
+            set => SetProperty<string>(ref _annualReachTipText, value);
         }
 
         public ObservableRangeCollection<ContributionTypeModel> ContributionTypeNames { get; set; }
 
         public ObservableRangeCollection<ContributionTechnologyModel> ContributionAreas { get; set; }
+
         public ObservableRangeCollection<VisibilityModel> PersonGroups { get; set; }
 
         public string ContributionAggregate
         {
-            get
-            {
-                return _contributionAggregate;
-            }
+            get => _contributionAggregate;
+            set => _contributionAggregate = value;
 
-            set
-            {
-                _contributionAggregate = value;
-            }
+            //TODO: Original code has no notifypropchanged? Why?
         }
 
         public ContributionModel MyContribution
         {
-            get
-            {
-                return _myContribution;
-            }
+            get => _myContribution;
 
             set
             {
-                _myContribution = value;
-                OnPropertyChanged("MyContribution");
+                SetProperty<ContributionModel>(ref _myContribution, value);
 
                 if (value == null)
                 {
@@ -175,202 +117,99 @@ namespace Microsoft.Mvp.ViewModels
         private string _contributionActionType = "Add a new contribution";
         public string ContributionActionType
         {
-
-            get
-            {
-                return _contributionActionType;
-            }
-
-            set
-            {
-                _contributionActionType = value;
-                OnPropertyChanged("ContributionActionType");
-            }
-
+            get => _contributionActionType;
+            set => SetProperty<string>(ref _contributionActionType, value);
         }
 
         public ContributionModel MyContributionBackup
         {
-            get
-            {
-                return _myContributionBackup;
-            }
-
+            get => _myContributionBackup;
             set
             {
-                if (_myContributionBackup != value)
-                {
-                    _myContributionBackup = value;
-                    OnPropertyChanged("MyContributionBackup");
-                }
+				if (_myContributionBackup != value)
+				{
+					SetProperty<ContributionModel>(ref _myContributionBackup, value);
+				}
             }
         }
 
         public bool IsNeededUrl
         {
-            get
-            {
-                return _isNeededUrl;
-            }
-
-            set
-            {
-                _isNeededUrl = value;
-                OnPropertyChanged("IsNeededUrl");
-            }
+            get => _isNeededUrl;
+            set => SetProperty<bool>(ref _isNeededUrl, value);
         }
 
         public bool IsNeededAnnualQuantity
         {
-            get
-            {
-                return _isNeededAnnualQuantity;
-            }
-
-            set
-            {
-                _isNeededAnnualQuantity = value;
-                OnPropertyChanged("IsNeededAnnualQuantity");
-            }
+            get => _isNeededAnnualQuantity;
+            set => SetProperty<bool>(ref _isNeededAnnualQuantity, value);
         }
 
         public bool IsNeededSecondAnnualQuantity
         {
-            get
-            {
-                return _iNeededSecondAnnualQuantity;
-            }
-
-            set
-            {
-                _iNeededSecondAnnualQuantity = value;
-                OnPropertyChanged("IsNeededSecondAnnualQuantity");
-            }
+            get => _iNeededSecondAnnualQuantity;
+            set => SetProperty<bool>(ref _iNeededSecondAnnualQuantity, value);
         }
 
         public int ContributionTypeIndex
         {
-            get
-            {
-                return _contributionTypeIndex;
-            }
+            get => _contributionTypeIndex;
+            set => _contributionTypeIndex = value;
 
-            set
-            {
-                _contributionTypeIndex = value;
-            }
-        }
+			//TODO: Original code has no notifypropchanged? Why?
+		}
 
         public int ContributionAreaIndex
         {
-            get
-            {
-                return _contributionAreaIndex;
-            }
+            get => _contributionAreaIndex;
+            set => _contributionAreaIndex = value;
 
-            set
-            {
-                _contributionAreaIndex = value;
-            }
-        }
+			//TODO: Original code has no notifypropchanged? Why?
+		}
 
         public int VibilityIndex
         {
-            get
-            {
-                return _vibilityIndex;
-            }
+            get => _vibilityIndex;
+            set => _vibilityIndex = value;
 
-            set
-            {
-                _vibilityIndex = value;
-            }
-        }
+			//TODO: Original code has no notifypropchanged? Why?
+		}
 
         public string ErrorMessageForTitle
         {
-            get
-            {
-                return _errorMessageForTitle;
-            }
-
-            set
-            {
-                _errorMessageForTitle = value;
-                OnPropertyChanged("ErrorMessageForTitle");
-            }
+            get => _errorMessageForTitle;
+            set => SetProperty<string>(ref _errorMessageForTitle, value);
         }
 
         public string ErrorMessageForUrl
         {
-            get
-            {
-                return _errorMessageForUrl;
-            }
-
-            set
-            {
-                _errorMessageForUrl = value;
-                OnPropertyChanged("ErrorMessageForUrl");
-            }
+            get => _errorMessageForUrl;
+            set => SetProperty<string>(ref _errorMessageForUrl, value);
         }
 
         public string ErrorMessageForAnnualQuantity
         {
-            get
-            {
-                return _errorMessageForAnnualQuantity;
-            }
-
-            set
-            {
-                _errorMessageForAnnualQuantity = value;
-                OnPropertyChanged("ErrorMessageForAnnualQuantity");
-            }
+            get => _errorMessageForAnnualQuantity;
+            set => SetProperty<string>(ref _errorMessageForAnnualQuantity, value);
         }
 
         public string ErrorMessageForSecondAnnualQuantity
         {
-            get
-            {
-                return _errorMessageForSecondAnnualQuantity;
-            }
-
-            set
-            {
-                _errorMessageForSecondAnnualQuantity = value;
-                OnPropertyChanged("ErrorMessageForSecondAnnualQuantity");
-            }
+            get => _errorMessageForSecondAnnualQuantity;
+            set => SetProperty<string>(ref _errorMessageForSecondAnnualQuantity, value);
         }
 
         public string ErrorMessageForAnnualReach
         {
-            get
-            {
-                return _errorMessageForAnnualReach;
-            }
-
-            set
-            {
-                _errorMessageForAnnualReach = value;
-                OnPropertyChanged("ErrorMessageForAnnualReach");
-            }
+            get => _errorMessageForAnnualReach;
+            set => SetProperty<string>(ref _errorMessageForAnnualReach, value);
         }
 
-        public bool HasError
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(ErrorMessage);
-            }
-        }
+        public bool HasError => !string.IsNullOrEmpty(ErrorMessage);
 
         public string ErrorMessage
         {
-            get
-            {
-                return _ErrorMessage;
-            }
+            get => _ErrorMessage;
 
             set
             {
@@ -379,6 +218,34 @@ namespace Microsoft.Mvp.ViewModels
                 OnPropertyChanged("HasError");
             }
         }
-        #endregion
-    }
+
+		public async Task<bool> BindingContributionType()
+		{
+			try
+			{
+				var contributionTypeDetail = await MvpHelper.MvpService.GetContributionTypes(LogOnViewModel.StoredToken);
+				ContributionTypeNames = new ObservableRangeCollection<ContributionTypeModel>(contributionTypeDetail.ContributionTypes);
+			}
+			catch (TaskCanceledException tce)
+			{
+				ErrorMessage = tce.Message;
+			}
+			return true;
+		}
+
+		public async Task<bool> BindingAreas()
+		{
+			try
+			{
+				var contributionDetail = await MvpHelper.MvpService.GetContributionAreas(LogOnViewModel.StoredToken);
+				ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(contributionDetail.ContributionArea);
+			}
+			catch (TaskCanceledException tce)
+			{
+				ErrorMessage = tce.Message;
+			}
+			return true;
+		}
+		#endregion
+	}
 }

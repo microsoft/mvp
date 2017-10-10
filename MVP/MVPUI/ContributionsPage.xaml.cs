@@ -19,19 +19,33 @@ namespace Microsoft.Mvpui
 
             BindingContext = MyProfileViewModel.Instance;
 
-            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+            if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
                 ToolbarAddContribution.Icon = "Assets\\toolbar_add.png";
-        }
 
-        public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+
+			if(Device.RuntimePlatform == Device.Android)
+			{
+
+				ToolbarItems.Remove(ToolbarAddContribution);
+				FloatingActionButtonAdd.IsVisible = true;
+				FloatingActionButtonAdd.Clicked += (sender, args) =>
+				{
+					AddContribution_Clicked(null, null);
+				};
+
+			}
+		}
+
+		public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (ListViewContributions.SelectedItem != null)
             {
-                ContributionViewModel.Instance.MyContribution = e.SelectedItem as ContributionModel;
+				var viewModel = new ContributionViewModel();
+				viewModel.MyContribution = e.SelectedItem as ContributionModel;
                 await Navigation.PushModalAsync(new MVPNavigationPage(
                     new ContributionDetail()
                     {
-                        BindingContext = ContributionViewModel.Instance,
+                        BindingContext = viewModel,
                         Title = "Edit an activity"
                     }));
 
@@ -43,11 +57,13 @@ namespace Microsoft.Mvpui
         public async void OnEdit(object sender, EventArgs eventArgs)
         {
             var mi = ((MenuItem)sender);
-            ContributionViewModel.Instance.MyContribution = mi.CommandParameter as ContributionModel;
+
+			var viewModel = new ContributionViewModel();
+			viewModel.MyContribution = mi.CommandParameter as ContributionModel;
             await Navigation.PushModalAsync(new MVPNavigationPage(
                 new ContributionDetail()
                 {
-                    BindingContext = ContributionViewModel.Instance,
+                    BindingContext = viewModel,
                     Title = "Edit an activity"
                 }));
         }
