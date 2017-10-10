@@ -32,7 +32,7 @@ namespace Microsoft.Mvp.Models
         public int ContributionCount { get; set; }
 
         [DataMember]
-        public int MvpNumber { get; set; }
+        public int MvpId { get; set; }
     }
 
     public class ContributionInfo
