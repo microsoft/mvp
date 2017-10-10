@@ -29,6 +29,8 @@
 				<On Platform="Android" Value="14" />
 				<On Platform="UWP" Value="14" />
 			</OnPlatform>
+
+            
 			<OnPlatform x:Key="BottomMenuLabelFontSize" x:TypeArguments="x:Double">
 				<On Platform="iOS" Value="10" />
 				<On Platform="Android" Value="12" />

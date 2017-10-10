@@ -53,18 +53,29 @@ namespace Microsoft.Mvpui
                 Application.Current.Properties.Add(CommonConstants.AuthCodeKey, auth_code);
                 await LiveIdLogOnViewModel.Instance.GetAccessToken();
 
-				var profileTest = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
-				if(profileTest == null || string.IsNullOrWhiteSpace(profileTest.DisplayName))
-				{
-					await DisplayAlert(string.Empty, "Unable to validate MVP status, please login again with your MVP credentials.", "OK");
-					App.CookieHelper.ClearCookie();
-					LiveIdLogOnViewModel.Instance.SignOut();
-					await Navigation.PopModalAsync(true);
-				}
-				else
-				{
-					await Navigation.PushModalAsync(new MyProfile());
-				}
+                var profileTest = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
+                if (profileTest == null || string.IsNullOrWhiteSpace(profileTest.DisplayName))
+                {
+                    await DisplayAlert(string.Empty, "Unable to validate MVP status, please login again with your MVP credentials.", "OK");
+                    App.CookieHelper.ClearCookie();
+                    LiveIdLogOnViewModel.Instance.SignOut();
+                    await Navigation.PopModalAsync(true);
+                }
+                else
+                {
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.iOS:
+                            Application.Current.MainPage = new MainTabPageiOS();
+                            break;
+                        default:
+                            Application.Current.MainPage = new MVPNavigationPage(new MainTabPage())
+                            {
+                                Title = "Microsoft MVP"
+                            };
+                            break;
+                    }
+                }
 
             }
         }
