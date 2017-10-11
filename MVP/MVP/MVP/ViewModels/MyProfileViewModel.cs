@@ -112,7 +112,11 @@ namespace Microsoft.Mvp.ViewModels
 		public string StoreImageBase64Str
 		{
 			get => _storeImageBase64Str;
-			set => SetProperty<string>(ref _storeImageBase64Str, value);
+			set
+            {
+                SetProperty<string>(ref _storeImageBase64Str, value);
+                OnPropertyChanged(nameof(ProfilePhoto));
+            }
 		}
 
         public ImageSource ProfilePhoto
