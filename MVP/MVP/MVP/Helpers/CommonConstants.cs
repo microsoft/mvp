@@ -84,15 +84,15 @@ namespace Microsoft.Mvp.Helpers
 		#endregion
 
 		#region Mobile Center
-		public const string MobileCenteriOS = "";
-		public const string MobileCenterAndroid = "";
-		public const string MobileCenterUWP = "";
+		public const string MobileCenteriOS = "MC_IOS";
+		public const string MobileCenterAndroid = "MC_ANDROID";
+		public const string MobileCenterUWP = "MC_UWP";
 		#endregion
 
 		#region Private Members for LiveIdLogOn 
 		public const string Scope = "wl.emails%20wl.basic%20wl.offline_access%20wl.signin";
-        public const string ClientId = ""; //<- this is my (Micah) client key ==> yours[0000000048193351]
-        public const string ClientSecret = "";  // <- my (Micah) secret ), put yours in here
+        public const string ClientId = "LIVE_ID"; //<- this is my (Micah) client key ==> yours[0000000048193351]
+        public const string ClientSecret = "LIVE_SECRET";  // <- my (Micah) secret ), put yours in here
         public const string LiveIdLogOnUrlFormatString = @"https://login.live.com/oauth20_authorize.srf?client_id={0}&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code&scope={1}";
         public const string LiveIdSignOutUrlFormatString = "https://login.live.com/oauth20_logout.srf?client_id={0}&redirect_uri=https://login.live.com/oauth20_desktop.srf";
         public const string AccessTokenUrlFormatString = @"https://login.live.com/oauth20_token.srf?client_id={0}&client_secret={1}&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=authorization_code&code=";

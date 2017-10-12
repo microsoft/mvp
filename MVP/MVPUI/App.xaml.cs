@@ -80,10 +80,10 @@ namespace Microsoft.Mvpui
         {
             InitializeComponent();
 
-#if !DEBUG
-			if ((Device.RuntimePlatform == Device.Android && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenterAndroid)) ||
-				(Device.RuntimePlatform == Device.iOS && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenteriOS)) ||
-				(Device.RuntimePlatform == Device.UWP && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenterUWP)))
+#if DEBUG
+			if ((Device.RuntimePlatform == Device.Android && CommonConstants.MobileCenterAndroid != "MC_ANDROID") ||
+				(Device.RuntimePlatform == Device.iOS && CommonConstants.MobileCenteriOS != "MC_IOS") ||
+				(Device.RuntimePlatform == Device.UWP && CommonConstants.MobileCenterUWP != "MC_UWP"))
 			{
 				MobileCenter.Start($"android={CommonConstants.MobileCenterAndroid};" +
 				   $"uwp={CommonConstants.MobileCenterUWP};" +
