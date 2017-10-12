@@ -166,7 +166,7 @@ namespace Microsoft.Mvp.Helpers
                 DisplayName = "James Montemagno",
                 FirstAwardYear = 2015,
                 YearsAsMVP = 2,
-                MvpNumber = 12345678
+                MvpId = 12345678
             });
         }
     }

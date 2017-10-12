@@ -18,7 +18,6 @@ namespace Microsoft.Mvp.ViewModels
         public event EventHandler IsValidChanged;
 
         readonly List<string> errors = new List<string>();
-        bool isBusy = false;
 
         /// <summary>
         /// Default constructor

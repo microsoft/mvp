@@ -15,7 +15,7 @@ namespace Microsoft.Mvpui
             {
 
                 BarTextColor = (Color)Application.Current.Resources["PrimaryDark"]; ;
-                //BarBackgroundColor = (Color)Application.Current.Resources["BackgroundColor"];
+                BarBackgroundColor = (Color)Application.Current.Resources["BackgroundColoriOS"];
             }
             else
             {

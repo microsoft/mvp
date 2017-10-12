@@ -1,6 +1,11 @@
-﻿using Microsoft.Mvp.Interfaces;
+﻿using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
+using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.Interfaces;
 using Microsoft.Mvp.ViewModels;
 using Xamarin.Forms;
+using Device = Xamarin.Forms.Device;
 
 namespace Microsoft.Mvpui
 {
@@ -75,7 +80,19 @@ namespace Microsoft.Mvpui
         {
             InitializeComponent();
 
-            if (LogOnViewModel.Instance.IsLoggedIn)
+#if !DEBUG
+			if ((Device.RuntimePlatform == Device.Android && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenterAndroid)) ||
+				(Device.RuntimePlatform == Device.iOS && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenteriOS)) ||
+				(Device.RuntimePlatform == Device.UWP && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenterUWP)))
+			{
+				MobileCenter.Start($"android={CommonConstants.MobileCenterAndroid};" +
+				   $"uwp={CommonConstants.MobileCenterUWP};" +
+				   $"ios={CommonConstants.MobileCenteriOS}",
+				   typeof(Analytics), typeof(Crashes));
+			}
+#endif
+
+			if (LogOnViewModel.Instance.IsLoggedIn)
             {
                 GoHome();
             }
