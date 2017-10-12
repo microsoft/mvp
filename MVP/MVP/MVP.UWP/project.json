@@ -1,7 +1,9 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
-    "Plugin.VersionTracking": "1.0.1",
+    "Microsoft.Azure.Mobile.Analytics": "0.16.0",
+    "Microsoft.Azure.Mobile.Crashes": "0.16.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3",
+    "Plugin.VersionTracking": "2.0.1",
     "Refractored.FloatingActionButtonForms": "2.0.0.9",
     "Refractored.MvvmHelpers": "1.3.0",
     "Xam.Plugin.Connectivity": "4.0.0-beta139",

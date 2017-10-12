@@ -49,7 +49,7 @@
                 FontSize="18"
                 BorderRadius="4"
                 Clicked="ButtonSignIn_Clicked"
-                Text="Sign in to your MVP account">
+                Text="Sign in to MVP account">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <OnPlatform.iOS>HelveticaNeue</OnPlatform.iOS>
@@ -63,7 +63,7 @@
                 FontAttributes="None"
                 BorderRadius="4"
                 Clicked="ButtonLearnMore_Clicked"
-                Text="Learn more about the program">
+                Text="Learn about MVP program">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <OnPlatform.iOS>HelveticaNeue</OnPlatform.iOS>
