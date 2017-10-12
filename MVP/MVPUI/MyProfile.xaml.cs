@@ -23,19 +23,16 @@ namespace Microsoft.Mvpui
 
             ToolBarSettings.Command = new Command(async () =>
             {
-                await Navigation.PushModalAsync(new MVPNavigationPage(new SettingsPage()));
+				if (Device.RuntimePlatform == Device.iOS)
+					await Navigation.PushModalAsync(new MVPNavigationPage(new SettingsPage()));
+				else
+					await Navigation.PushAsync(new SettingsPage());
             });
         }
 
         #endregion
 
         #region Private and Protected Methods
-
-        protected override bool OnBackButtonPressed()
-        {
-            App.SignOutHelper.CloseApp();
-            return true;
-        }
 
         Dictionary<string, object> cache = new Dictionary<string, object>();
         string currentUserIdKey = string.Empty;

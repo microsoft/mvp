@@ -18,6 +18,10 @@ namespace Microsoft.Mvpui
             if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
                 ToolbarClose.Icon = "Assets\\toolbar_close.png";
 
+			//Don't need toolbar on UWP/Android as we pushed.
+			if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.Android)
+				ToolbarItems.Clear();
+
             BindingContext = new SettingsViewModel();
         }
 
@@ -28,9 +32,15 @@ namespace Microsoft.Mvpui
 
         private async void ButtonSignoutClicked(object sender, EventArgs e)
         {
+			var confirm = await DisplayAlert("Sign out?", "Are you sure you want to sign out?", "Yes, sign out", "Cancel");
+			if (!confirm)
+				return;
+
             App.CookieHelper.ClearCookie();
             LiveIdLogOnViewModel.Instance.SignOut();
-            await Navigation.PushModalAsync(new LogOn());
+
+			await Navigation.PopToRootAsync();
+            App.Current.MainPage = new LogOn();
         }
 
         #endregion
