@@ -1,4 +1,4 @@
-﻿#define SKIP_LOGIN
+﻿
 
 using Microsoft.Mvp.ViewModels;
 using System;
@@ -46,10 +46,12 @@ namespace Microsoft.Mvpui
 
         private async void ButtonSignIn_Clicked(object sender, EventArgs e)
         {
-#if SKIP_LOGIN
-            App.GoHome();
-            return;
-#endif
+			if (CommonConstants.ClientId == "LIVE_ID")
+			{
+				App.GoHome();
+				return;
+			}
+
 
             if (LogOnViewModel.Instance.IsLoggedIn)
             {

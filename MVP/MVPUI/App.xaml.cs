@@ -80,7 +80,7 @@ namespace Microsoft.Mvpui
         {
             InitializeComponent();
 
-#if DEBUG
+#if !DEBUG
 			if ((Device.RuntimePlatform == Device.Android && CommonConstants.MobileCenterAndroid != "MC_ANDROID") ||
 				(Device.RuntimePlatform == Device.iOS && CommonConstants.MobileCenteriOS != "MC_IOS") ||
 				(Device.RuntimePlatform == Device.UWP && CommonConstants.MobileCenterUWP != "MC_UWP"))
@@ -91,6 +91,12 @@ namespace Microsoft.Mvpui
 				   typeof(Analytics), typeof(Crashes));
 			}
 #endif
+
+			//if design register the actual service, else mock
+			if (CommonConstants.ClientId == "LIVE_ID")
+				DependencyService.Register<IMvpService, DesignMvpService>();
+			else
+				DependencyService.Register<IMvpService, LiveMvpService>();
 
 			if (LogOnViewModel.Instance.IsLoggedIn)
             {

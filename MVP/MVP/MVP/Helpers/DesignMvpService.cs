@@ -7,7 +7,6 @@ using Microsoft.Mvp.Models;
 using Xamarin.Forms;
 using Microsoft.Mvp.Helpers;
 
-[assembly: Dependency(typeof(DesignMvpService))]
 namespace Microsoft.Mvp.Helpers
 {
     public class DesignMvpService : IMvpService
