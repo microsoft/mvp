@@ -67,8 +67,15 @@ namespace Microsoft.Mvpui
         {
             try
             {
-                var uri = new Uri(CommonConstants.LearnMoreUrl);
-                Device.OpenUri(uri);
+				await Plugin.Share.CrossShare.Current.OpenBrowser(CommonConstants.LearnMoreUrl, new Plugin.Share.Abstractions.BrowserOptions
+				{
+					ChromeShowTitle = true,
+					ChromeToolbarColor = new Plugin.Share.Abstractions.ShareColor { R = 3, G = 169, B = 244, A = 255 },
+					SafariBarTintColor = new Plugin.Share.Abstractions.ShareColor { R = 3, G = 169, B = 244, A = 255 },
+					UseSafariWebViewController = true,
+					SafariControlTintColor = new Plugin.Share.Abstractions.ShareColor { R = 255, G = 255, B = 255, A = 255 },
+					UseSafariReaderMode = false
+				});
             }
             catch (Exception ex)
             {

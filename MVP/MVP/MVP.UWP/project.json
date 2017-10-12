@@ -5,6 +5,7 @@
     "Microsoft.Azure.Mobile.Crashes": "0.16.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3",
     "Newtonsoft.Json": "9.0.1",
+    "Plugin.Share": "7.0.2-beta27",
     "Plugin.VersionTracking": "2.0.1",
     "Refractored.FloatingActionButtonForms": "2.0.0.9",
     "Refractored.MvvmHelpers": "1.3.0",
