@@ -22,10 +22,10 @@ namespace Microsoft.Mvp.Helpers
 
         public static void RemoveProperties()
         {
-            Application.Current.Properties.Remove(CommonConstants.TokenKey);
-            Application.Current.Properties.Remove(CommonConstants.AccessTokenKey);
-            Application.Current.Properties.Remove(CommonConstants.RefreshTokenKey);
-            Application.Current.Properties.Remove(CommonConstants.AuthCodeKey);
+			Settings.SetSetting(CommonConstants.TokenKey, string.Empty);
+			Settings.SetSetting(CommonConstants.AccessTokenKey, string.Empty);
+			Settings.SetSetting(CommonConstants.RefreshTokenKey, string.Empty);
+			Settings.SetSetting(CommonConstants.AuthCodeKey, string.Empty);
         }
 
         public static void SetContributionInfoToProfileViewModel(ContributionInfo profile)

@@ -46,9 +46,9 @@ namespace Microsoft.Mvp.ViewModels
             {
 
                 string tokenAndExpiredTime = null;
-                if (Application.Current.Properties.ContainsKey(CommonConstants.TokenKey))
+                if (Settings.GetSetting(CommonConstants.TokenKey) != string.Empty)
                 {
-                    tokenAndExpiredTime = Application.Current.Properties[CommonConstants.TokenKey].ToString();
+                    tokenAndExpiredTime = Settings.GetSetting(CommonConstants.TokenKey);
                 }
 
                 if (!string.IsNullOrEmpty(tokenAndExpiredTime))

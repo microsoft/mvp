@@ -61,18 +61,29 @@ namespace Microsoft.Mvpui
 
         protected async override void OnAppearing()
         {
-			
+			if (IsBusy)
+				return;
+
 			IsBusy = true;
 			ViewModel.ErrorMessage = "";
             base.OnAppearing();
+			IProgressDialog progress = null;
             try
             {
-                InitContributionType();
+				progress = UserDialogs.Instance.Loading("Loading...", maskType: MaskType.Clear);
+				progress.Show();
+
+				InitContributionType();
                 await BindContributionAreas();
                 BindingSelectors();
             }
+			catch
+			{
+
+			}
             finally
             {
+				progress?.Hide();
                 IsBusy = false;
             }
         }

@@ -12,6 +12,7 @@
     "Refractored.MvvmHelpers": "1.3.0",
     "Xam.Plugin.Connectivity": "4.0.0-beta139",
     "Xam.Plugins.Forms.ImageCircle": "1.8.2.19-beta",
+    "Xam.Plugins.Settings": "3.0.1",
     "Xamarin.Forms": "2.4.0.282"
   },
   "frameworks": {

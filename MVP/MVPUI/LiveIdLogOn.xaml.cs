@@ -44,14 +44,13 @@ namespace Microsoft.Mvpui
             Uri liveUrl = new Uri(e.Url, UriKind.Absolute);
             if (liveUrl.AbsoluteUri.Contains("code="))
             {
-                if (Application.Current.Properties.ContainsKey(CommonConstants.AuthCodeKey))
+                if (Settings.GetSetting(CommonConstants.AuthCodeKey) != string.Empty)
                 {
-                    //Application.Current.Properties.Clear();
                     MvpHelper.RemoveProperties();
                 }
 
                 string auth_code = System.Text.RegularExpressions.Regex.Split(liveUrl.AbsoluteUri, "code=")[1];
-                Application.Current.Properties.Add(CommonConstants.AuthCodeKey, auth_code);
+				Settings.SetSetting(CommonConstants.AuthCodeKey, auth_code);
                 await LiveIdLogOnViewModel.Instance.GetAccessToken();
 
                 var profileTest = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
