@@ -1,4 +1,5 @@
-﻿using Microsoft.Mvp.Helpers;
+﻿using Acr.UserDialogs;
+using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
 using System;
@@ -40,11 +41,15 @@ namespace Microsoft.Mvpui
 
         private async void GetProfile()
         {
+			IProgressDialog progress = null;
             if (string.IsNullOrEmpty(MyProfileViewModel.Instance.FirstAwardValue))
             {
                 try
                 {
-                    ProfileModel profile = null;
+
+					progress = UserDialogs.Instance.Loading("Saving...", maskType: MaskType.Clear);
+					progress.Show();
+					ProfileModel profile = null;
 
                     CheckCache();
 
@@ -91,10 +96,17 @@ namespace Microsoft.Mvpui
                         MyProfileViewModel.Instance.AwardsCountValue = profile.YearsAsMVP.ToString(System.Globalization.CultureInfo.CurrentCulture);
                     }
                 }
-                finally
-                {
+				catch (Exception ex)
+				{
+					progress?.Hide();
+					await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection.. Error: " + ex.Message, "Unable to load", "OK");
 
-                }
+				}
+				finally
+                {
+					progress?.Hide();
+
+				}
             }
 
         }

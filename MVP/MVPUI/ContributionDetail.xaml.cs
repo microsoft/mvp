@@ -227,7 +227,7 @@ namespace Microsoft.Mvpui
 
 				if (!CrossConnectivity.Current.IsConnected)
 				{
-					await DisplayAlert("Check Connectivity", "Please check connectivity to submit activity.", "OK");
+					await UserDialogs.Instance.AlertAsync("Please check connectivity to submit activity.", "Check Connectivity", "OK");
 
 					return;
 				}
@@ -298,15 +298,16 @@ namespace Microsoft.Mvpui
 
 				progress?.Hide();
 
-				await UserDialogs.Instance.AlertAsync("Saved!", "MVP activity has been saved successfully. Thank you for your contribution.", "OK");
+				await UserDialogs.Instance.AlertAsync("MVP activity has been saved successfully. Thank you for your contribution.", "Saved!", "OK");
 
                 await Navigation.PopModalAsync();
 
             }
             catch (Exception ex)
             {
-                ViewModel.ErrorMessage = ex.Message;
-				await UserDialogs.Instance.AlertAsync("Unable to save", "Looks like something went wrong. Please check your connection and submit again. Error: " + ex.Message, "OK");
+				progress?.Hide();
+				ViewModel.ErrorMessage = ex.Message;
+				await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection and submit again. Error: " + ex.Message, "Unable to save", "OK");
 
 			}
 			finally
