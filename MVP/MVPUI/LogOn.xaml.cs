@@ -5,6 +5,7 @@ using System;
 using Xamarin.Forms;
 using Microsoft.Mvp.Interfaces;
 using Microsoft.Mvp.Helpers;
+using Plugin.Connectivity;
 
 namespace Microsoft.Mvpui
 {
@@ -57,7 +58,11 @@ namespace Microsoft.Mvpui
             {
                 App.GoHome();
             }
-            else
+            else if(!CrossConnectivity.Current.IsConnected)
+			{
+				await DisplayAlert("Check Connectivity", "Please check connectivity to proceed to MVP account sign in.", "OK");
+			}
+			else
             {
                 await Navigation.PushModalAsync(new NavigationPage(new LiveIdLogOn()));
             }
@@ -79,7 +84,7 @@ namespace Microsoft.Mvpui
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", "Failed to open your browser", "OK");
+                await DisplayAlert("Error", "Failed to open your browser.", "OK");
             }
         }
 

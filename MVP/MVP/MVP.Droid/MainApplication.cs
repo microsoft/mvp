@@ -20,6 +20,8 @@ namespace Microsoft.Mvp.Droid
         {
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);
+            Acr.UserDialogs.UserDialogs.Init(() => CrossCurrentActivity.Current.Activity);
+
             //A great place to initialize Xamarin.Insights and Dependency Services!
         }
 

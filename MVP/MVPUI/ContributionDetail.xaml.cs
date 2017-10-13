@@ -1,7 +1,9 @@
-﻿using Microsoft.Mvp.Helpers;
+﻿using Acr.UserDialogs;
+using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
 using MvvmHelpers;
+using Plugin.Connectivity;
 //using Plugin.Geolocator;
 using System;
 using System.Linq;
@@ -46,7 +48,12 @@ namespace Microsoft.Mvpui
                 entryAnnualReach.HeightRequest = 40;
                 entryAnnualQuantity.HeightRequest = 40;
             }
-        }
+
+			ContributionDateSelector.Date = DateTime.Today;
+
+
+
+		}
 
         #endregion
 
@@ -205,31 +212,30 @@ namespace Microsoft.Mvpui
 
         public async void ButtonSaveClicked(object sender, EventArgs e)
         {
+			
 
-            if (_isTapped == true)
-            {
-                return;
-            }
-            var imageButton = sender as Image;
+			IProgressDialog progress = null;
             try
             {
 
-                _isTapped = true;
-
-                if (imageButton != null)
-                {
-                    imageButton.Opacity = 0.5;
-                    await imageButton.FadeTo(1);
-                }
-
+               
                 bool isValid = CheckData();
                 if (!isValid)
                 {
                     return;
                 }
 
-                IsBusy = true;
-                progressText.Text = "Saving ...";
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await DisplayAlert("Check Connectivity", "Please check connectivity to submit activity.", "OK");
+
+					return;
+				}
+
+				IsBusy = true;
+				progress = UserDialogs.Instance.Loading("Saving...", maskType: MaskType.Clear);
+				progress.Show();
+                
 
                 if (ViewModel.MyContribution == null)
                 {
@@ -286,25 +292,28 @@ namespace Microsoft.Mvpui
 
                 ViewModel.MyContribution = null;
 
+#if DEBUG
+				await Task.Delay(3000);
+#endif
+
+				progress?.Hide();
+
+				await UserDialogs.Instance.AlertAsync("Saved!", "MVP activity has been saved successfully. Thank you for your contribution.", "OK");
+
                 await Navigation.PopModalAsync();
 
             }
-            catch (WebException ex)
+            catch (Exception ex)
             {
                 ViewModel.ErrorMessage = ex.Message;
-            }
-            catch (HttpRequestException ex)
+				await UserDialogs.Instance.AlertAsync("Unable to save", "Looks like something went wrong. Please check your connection and submit again. Error: " + ex.Message, "OK");
+
+			}
+			finally
             {
-                ViewModel.ErrorMessage = ex.Message;
-            }
-            finally
-            {
-                if (imageButton != null)
-                {
-                    _isTapped = false;
-                }
+				if(progress?.IsShowing ?? false)
+					progress?.Hide();
                 IsBusy = false;
-                progressText.Text = "Loading ...";
             }
         }
 

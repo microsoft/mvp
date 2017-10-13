@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Acr.UserDialogs": "6.5.1",
     "Microsoft.Azure.Mobile": "0.16.0",
     "Microsoft.Azure.Mobile.Analytics": "0.16.0",
     "Microsoft.Azure.Mobile.Crashes": "0.16.0",
