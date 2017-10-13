@@ -18,12 +18,12 @@ namespace Microsoft.Mvp.Helpers
 
         public Task<string> DeleteContributionModel(int privateSiteId, string token)
         {
-            return Task.FromResult("Success");
+            return Task.FromResult("OK");
         }
 
         public Task<string> EditContributionModel(ContributionModel model, string token)
         {
-            return Task.FromResult("Success");
+            return Task.FromResult("OK");
         }
 
         public Task<ContributionDetail> GetContributionAreas(string token)
