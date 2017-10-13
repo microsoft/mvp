@@ -49,6 +49,7 @@
     <Compile Include="Helpers\CommonConstants.cs" />
     <Compile Include="Helpers\DesignMvpService.cs" />
     <Compile Include="Helpers\IMVPService.cs" />
+    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Helpers\MvpHelper.cs" />
     <Compile Include="Helpers\LiveMvpService.cs" />
     <Compile Include="Models\ContributionModel.cs" />

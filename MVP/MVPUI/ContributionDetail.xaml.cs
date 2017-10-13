@@ -20,8 +20,7 @@ namespace Microsoft.Mvpui
     {
 
         #region Private Fields
-
-        private bool _isTapped = false;
+		
 		ContributionViewModel viewModel;
 		ContributionViewModel ViewModel
 			=> viewModel ?? (viewModel = BindingContext as ContributionViewModel);
@@ -31,13 +30,14 @@ namespace Microsoft.Mvpui
 		#region Constructor
 
 		public ContributionDetail()
-        {
-            InitializeComponent();
+		{
+			Logger.Log("Page-ContributionDetail");
+			InitializeComponent();
 
             ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
 
-			      if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
-				      ToolbarClose.Icon = "Assets\\toolbar_close.png";
+			if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
+				ToolbarClose.Icon = "Assets\\toolbar_close.png";
 
             this.BindingContext = new ContributionViewModel();
 
@@ -58,12 +58,6 @@ namespace Microsoft.Mvpui
         #endregion
 
         #region Private and Protected Methods
-
-        protected override bool OnBackButtonPressed()
-        {
-            Navigation.PushAsync(new MyProfile());
-            return true;
-        }
 
         protected async override void OnAppearing()
         {
@@ -256,7 +250,9 @@ namespace Microsoft.Mvpui
                     var result = await MvpHelper.MvpService.AddContributionModel(model, LogOnViewModel.StoredToken);
                     if (result != null && result.ContributionId != "0")
                     {
-                        MvpHelper.SetLabelTextOfContribution(result);
+
+						Logger.Log("Activity-Added");
+						MvpHelper.SetLabelTextOfContribution(result);
                         MyProfileViewModel.Instance.List.Insert(0, result);
                         MyProfileViewModel.Instance.TotalOfData += 1;
                     }
@@ -277,8 +273,9 @@ namespace Microsoft.Mvpui
                     ViewModel.MyContribution.SecondAnnualQuantity = Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
                     string result = await MvpHelper.MvpService.EditContributionModel(ViewModel.MyContribution, LogOnViewModel.StoredToken);
                     if (result == CommonConstants.OkResult)
-                    {
-                        MyProfileViewModel.Instance.List = new ObservableRangeCollection<ContributionModel>(MyProfileViewModel.Instance.List);
+					{
+						Logger.Log("Activity-Edit");
+						MyProfileViewModel.Instance.List = new ObservableRangeCollection<ContributionModel>(MyProfileViewModel.Instance.List);
                     }
                     else
                     {

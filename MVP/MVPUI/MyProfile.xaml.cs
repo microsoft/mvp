@@ -15,8 +15,9 @@ namespace Microsoft.Mvpui
         #region Constructor
 
         public MyProfile()
-        {
-            InitializeComponent();
+		{
+			Logger.Log("Page-Profile");
+			InitializeComponent();
             this.BindingContext = MyProfileViewModel.Instance;
 
             if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
