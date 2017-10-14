@@ -111,7 +111,7 @@ namespace Microsoft.Mvp.Helpers
                             }
                             else
                             {
-                                string newAccessToken = await Mvp.ViewModels.LiveIdLogOnViewModel.Instance.GetNewAccessToken();
+                                string newAccessToken = await LiveIdLogOnViewModel.GetNewAccessToken();
                                 string result = await DoWork(url, model, httpMethod, newAccessToken, isImage, true, isAddOrUpdateContribution);
                                 return result;
                             }
@@ -120,7 +120,7 @@ namespace Microsoft.Mvp.Helpers
                         {
                             if (CheckInternetConnection())
                             {
-                                string newAccessToken = await Mvp.ViewModels.LiveIdLogOnViewModel.Instance.GetNewAccessToken();
+                                string newAccessToken = await LiveIdLogOnViewModel.GetNewAccessToken();
                                 string result = await DoWork(url, model, httpMethod, newAccessToken, isImage, true, isAddOrUpdateContribution);
                                 return result;
                             }

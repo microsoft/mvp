@@ -59,11 +59,11 @@ namespace Microsoft.Mvp.ViewModels
                     var token = tokenAndExpiredTime.Substring(0, index);
                     if (DateTime.Now.AddHours(-7) < expiredtime)
                     {
-                        LogOnViewModel.StoredToken = token;
+						StoredToken = token;
                     }
                     else
                     {
-                        LogOnViewModel.StoredToken = "";
+						StoredToken = "";
                     }
                 }
 

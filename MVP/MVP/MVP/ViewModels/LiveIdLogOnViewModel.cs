@@ -115,7 +115,7 @@ namespace Microsoft.Mvp.ViewModels
                         var tokenData = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseTxt);
                         if (tokenData.ContainsKey(CommonConstants.AccessTokenKey))
                         {
-                            Application.Current.Properties.Add(CommonConstants.AccessTokenKey, tokenData[CommonConstants.AccessTokenKey]);
+							Settings.SetSetting(CommonConstants.AccessTokenKey, tokenData[CommonConstants.AccessTokenKey]);
                             LogOnViewModel.StoredToken = tokenData[CommonConstants.AccessTokenKey];
 
 							// refresh token
@@ -144,7 +144,7 @@ namespace Microsoft.Mvp.ViewModels
 
         // TODO: this is example on how code is executed.  Should be refactored to be called when
         // we get a Forbidden response from API
-        public async Task<string> GetNewAccessToken()
+        public static async Task<string> GetNewAccessToken()
         {
             string refreshToken = Settings.GetSetting(CommonConstants.RefreshTokenKey);
             var handler = new HttpClientHandler

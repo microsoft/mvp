@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Microsoft.Mvp.Interfaces;
 using Microsoft.Mvp.Helpers;
 using Plugin.Connectivity;
+using Acr.UserDialogs;
 
 namespace Microsoft.Mvpui
 {
@@ -26,13 +27,37 @@ namespace Microsoft.Mvpui
 
 			BindingContext = LogOnViewModel.Instance;
         }
-        #endregion
+		#endregion
 
-        #region Private and Protected Methods
-
+		#region Private and Protected Methods
+		
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+			if (IsBusy)
+				return;
+
+			if (Settings.GetSetting(CommonConstants.TokenKey) != string.Empty)
+			{
+				IProgressDialog progress = null;
+				try
+				{
+					IsBusy = true;
+					progress = UserDialogs.Instance.Loading("Refreshing tokens...");
+					await LiveIdLogOnViewModel.GetNewAccessToken();
+					
+				}
+				catch (Exception)
+				{
+					
+				}
+				finally
+				{
+					progress?.Hide();
+					IsBusy = false;
+				}
+			}
 
             if (LogOnViewModel.Instance.IsLoggedIn)
             {
