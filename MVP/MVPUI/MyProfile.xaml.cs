@@ -48,7 +48,7 @@ namespace Microsoft.Mvpui
                 try
                 {
 
-					progress = UserDialogs.Instance.Loading("Saving...", maskType: MaskType.Clear);
+					progress = UserDialogs.Instance.Loading("Loading...", maskType: MaskType.Clear);
 					progress.Show();
 					ProfileModel profile = null;
 
