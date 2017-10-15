@@ -82,7 +82,11 @@ namespace Microsoft.Mvp.ViewModels
         public void SignOut()
         {
             MvpHelper.RemoveProperties();
-            LogOnViewModel.StoredToken = string.Empty;
+
+			if (Application.Current.Properties.ContainsKey(CommonConstants.ProfileCacheListKey))
+				Application.Current.Properties.Remove(CommonConstants.ProfileCacheListKey);
+
+			LogOnViewModel.StoredToken = string.Empty;
             MyProfileViewModel.Instance.FirstAwardValue = string.Empty;
             MyProfileViewModel.Instance.PersonName = string.Empty;
             MyProfileViewModel.Instance.AwardCategoriesValue = string.Empty;
