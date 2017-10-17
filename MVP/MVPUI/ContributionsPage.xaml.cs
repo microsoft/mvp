@@ -82,9 +82,17 @@ namespace Microsoft.Mvpui
             }
         }
 
+		bool navigating;
         async void AddContribution_Clicked(object sender, System.EventArgs e)
         {
+			if(navigating)
+				return;
+				
+			navigating = true;
+		
             await Navigation.PushModalAsync(new MVPNavigationPage(new ContributionDetail()));
+			
+			navigating = false;
         }
 
         private void OnItemTapped(object sender, ItemTappedEventArgs e)
