@@ -1,4 +1,5 @@
-﻿using Microsoft.Mvp.ViewModels;
+﻿using Microsoft.Mvp.Helpers;
+using Microsoft.Mvp.ViewModels;
 using System;
 
 using Xamarin.Forms;
@@ -12,8 +13,9 @@ namespace Microsoft.Mvpui
 		public SettingsPage()
         {
             InitializeComponent();
+			Logger.Log("Page-Settings");
 
-            ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
+			ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
 
             if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
                 ToolbarClose.Icon = "Assets\\toolbar_close.png";
@@ -36,7 +38,10 @@ namespace Microsoft.Mvpui
 			if (!confirm)
 				return;
 
-            App.CookieHelper.ClearCookie();
+
+			Logger.Log("Logout");
+
+			App.CookieHelper.ClearCookie();
             LiveIdLogOnViewModel.Instance.SignOut();
 
 			await Navigation.PopToRootAsync();

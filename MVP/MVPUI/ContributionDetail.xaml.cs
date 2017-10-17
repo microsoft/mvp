@@ -1,7 +1,9 @@
-﻿using Microsoft.Mvp.Helpers;
+﻿using Acr.UserDialogs;
+using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
 using MvvmHelpers;
+using Plugin.Connectivity;
 //using Plugin.Geolocator;
 using System;
 using System.Linq;
@@ -18,8 +20,7 @@ namespace Microsoft.Mvpui
     {
 
         #region Private Fields
-
-        private bool _isTapped = false;
+		
 		ContributionViewModel viewModel;
 		ContributionViewModel ViewModel
 			=> viewModel ?? (viewModel = BindingContext as ContributionViewModel);
@@ -29,13 +30,14 @@ namespace Microsoft.Mvpui
 		#region Constructor
 
 		public ContributionDetail()
-        {
-            InitializeComponent();
+		{
+			Logger.Log("Page-ContributionDetail");
+			InitializeComponent();
 
             ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
 
-			      if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
-				      ToolbarClose.Icon = "Assets\\toolbar_close.png";
+			if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
+				ToolbarClose.Icon = "Assets\\toolbar_close.png";
 
             this.BindingContext = new ContributionViewModel();
 
@@ -46,32 +48,42 @@ namespace Microsoft.Mvpui
                 entryAnnualReach.HeightRequest = 40;
                 entryAnnualQuantity.HeightRequest = 40;
             }
-        }
+
+			ContributionDateSelector.Date = DateTime.Today;
+
+
+
+		}
 
         #endregion
 
         #region Private and Protected Methods
 
-        protected override bool OnBackButtonPressed()
-        {
-            Navigation.PushAsync(new MyProfile());
-            return true;
-        }
-
         protected async override void OnAppearing()
         {
-			
+			if (IsBusy)
+				return;
+
 			IsBusy = true;
 			ViewModel.ErrorMessage = "";
             base.OnAppearing();
+			IProgressDialog progress = null;
             try
             {
-                InitContributionType();
+				progress = UserDialogs.Instance.Loading("Loading...", maskType: MaskType.Clear);
+				progress.Show();
+
+				InitContributionType();
                 await BindContributionAreas();
                 BindingSelectors();
             }
+			catch
+			{
+
+			}
             finally
             {
+				progress?.Hide();
                 IsBusy = false;
             }
         }
@@ -205,31 +217,30 @@ namespace Microsoft.Mvpui
 
         public async void ButtonSaveClicked(object sender, EventArgs e)
         {
+			
 
-            if (_isTapped == true)
-            {
-                return;
-            }
-            var imageButton = sender as Image;
+			IProgressDialog progress = null;
             try
             {
 
-                _isTapped = true;
-
-                if (imageButton != null)
-                {
-                    imageButton.Opacity = 0.5;
-                    await imageButton.FadeTo(1);
-                }
-
+               
                 bool isValid = CheckData();
                 if (!isValid)
                 {
                     return;
                 }
 
-                IsBusy = true;
-                progressText.Text = "Saving ...";
+				if (!CrossConnectivity.Current.IsConnected)
+				{
+					await UserDialogs.Instance.AlertAsync("Please check connectivity to submit activity.", "Check Connectivity", "OK");
+
+					return;
+				}
+
+				IsBusy = true;
+				progress = UserDialogs.Instance.Loading("Saving...", maskType: MaskType.Clear);
+				progress.Show();
+                
 
                 if (ViewModel.MyContribution == null)
                 {
@@ -250,7 +261,9 @@ namespace Microsoft.Mvpui
                     var result = await MvpHelper.MvpService.AddContributionModel(model, LogOnViewModel.StoredToken);
                     if (result != null && result.ContributionId != "0")
                     {
-                        MvpHelper.SetLabelTextOfContribution(result);
+
+						Logger.Log("Activity-Added");
+						MvpHelper.SetLabelTextOfContribution(result);
                         MyProfileViewModel.Instance.List.Insert(0, result);
                         MyProfileViewModel.Instance.TotalOfData += 1;
                     }
@@ -271,8 +284,9 @@ namespace Microsoft.Mvpui
                     ViewModel.MyContribution.SecondAnnualQuantity = Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
                     string result = await MvpHelper.MvpService.EditContributionModel(ViewModel.MyContribution, LogOnViewModel.StoredToken);
                     if (result == CommonConstants.OkResult)
-                    {
-                        MyProfileViewModel.Instance.List = new ObservableRangeCollection<ContributionModel>(MyProfileViewModel.Instance.List);
+					{
+						Logger.Log("Activity-Edit");
+						MyProfileViewModel.Instance.List = new ObservableRangeCollection<ContributionModel>(MyProfileViewModel.Instance.List);
                     }
                     else
                     {
@@ -286,25 +300,29 @@ namespace Microsoft.Mvpui
 
                 ViewModel.MyContribution = null;
 
+#if DEBUG
+				await Task.Delay(3000);
+#endif
+
+				progress?.Hide();
+
+				await UserDialogs.Instance.AlertAsync("MVP activity has been saved successfully. Thank you for your contribution.", "Saved!", "OK");
+
                 await Navigation.PopModalAsync();
 
             }
-            catch (WebException ex)
+            catch (Exception ex)
             {
-                ViewModel.ErrorMessage = ex.Message;
-            }
-            catch (HttpRequestException ex)
+				progress?.Hide();
+				ViewModel.ErrorMessage = ex.Message;
+				await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection and submit again. Error: " + ex.Message, "Unable to save", "OK");
+
+			}
+			finally
             {
-                ViewModel.ErrorMessage = ex.Message;
-            }
-            finally
-            {
-                if (imageButton != null)
-                {
-                    _isTapped = false;
-                }
+				if(progress?.IsShowing ?? false)
+					progress?.Hide();
                 IsBusy = false;
-                progressText.Text = "Loading ...";
             }
         }
 

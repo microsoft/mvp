@@ -11,8 +11,9 @@ namespace Microsoft.Mvpui
         #region Constructor
 
         public LiveIdLogOn()
-        {
-            InitializeComponent();
+		{
+			Logger.Log("Page-LiveIdLogOn");
+			InitializeComponent();
             this.BindingContext = LiveIdLogOnViewModel.Instance;
 
             //TODO: Perhaps remove toolbaritems on Android?
@@ -43,27 +44,29 @@ namespace Microsoft.Mvpui
             Uri liveUrl = new Uri(e.Url, UriKind.Absolute);
             if (liveUrl.AbsoluteUri.Contains("code="))
             {
-                if (Application.Current.Properties.ContainsKey(CommonConstants.AuthCodeKey))
+                if (Settings.GetSetting(CommonConstants.AuthCodeKey) != string.Empty)
                 {
-                    //Application.Current.Properties.Clear();
                     MvpHelper.RemoveProperties();
                 }
 
                 string auth_code = System.Text.RegularExpressions.Regex.Split(liveUrl.AbsoluteUri, "code=")[1];
-                Application.Current.Properties.Add(CommonConstants.AuthCodeKey, auth_code);
+				Settings.SetSetting(CommonConstants.AuthCodeKey, auth_code);
                 await LiveIdLogOnViewModel.Instance.GetAccessToken();
 
                 var profileTest = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
                 if (profileTest == null || string.IsNullOrWhiteSpace(profileTest.DisplayName))
                 {
+					Logger.Log("Login-Invalid");
                     await DisplayAlert(string.Empty, "Unable to validate MVP status, please login again with your MVP credentials.", "OK");
                     App.CookieHelper.ClearCookie();
                     LiveIdLogOnViewModel.Instance.SignOut();
                     await Navigation.PopModalAsync(true);
                 }
                 else
-                {
-                    switch (Device.RuntimePlatform)
+				{
+					Logger.Log("Login-Valid");
+
+					switch (Device.RuntimePlatform)
                     {
                         case Device.iOS:
                             Application.Current.MainPage = new MainTabPageiOS();

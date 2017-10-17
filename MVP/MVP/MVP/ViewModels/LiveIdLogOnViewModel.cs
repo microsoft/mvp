@@ -73,17 +73,20 @@ namespace Microsoft.Mvp.ViewModels
 
         public async Task GetAccessToken()
         {
-            if (Application.Current.Properties.ContainsKey(CommonConstants.AuthCodeKey))
+            if (Settings.GetSetting(CommonConstants.AuthCodeKey) != string.Empty)
             {
-                await MakeAccessTokenRequest(_accessTokenUrl + Application.Current.Properties[CommonConstants.AuthCodeKey]);
+                await MakeAccessTokenRequest(_accessTokenUrl + Settings.GetSetting(CommonConstants.AuthCodeKey));
             }
         }
 
         public void SignOut()
         {
-            //Application.Current.Properties.Clear();
             MvpHelper.RemoveProperties();
-            LogOnViewModel.StoredToken = string.Empty;
+
+			if (Application.Current.Properties.ContainsKey(CommonConstants.ProfileCacheListKey))
+				Application.Current.Properties.Remove(CommonConstants.ProfileCacheListKey);
+
+			LogOnViewModel.StoredToken = string.Empty;
             MyProfileViewModel.Instance.FirstAwardValue = string.Empty;
             MyProfileViewModel.Instance.PersonName = string.Empty;
             MyProfileViewModel.Instance.AwardCategoriesValue = string.Empty;
@@ -116,19 +119,19 @@ namespace Microsoft.Mvp.ViewModels
                         var tokenData = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseTxt);
                         if (tokenData.ContainsKey(CommonConstants.AccessTokenKey))
                         {
-                            Application.Current.Properties.Add(CommonConstants.AccessTokenKey, tokenData[CommonConstants.AccessTokenKey]);
+							Settings.SetSetting(CommonConstants.AccessTokenKey, tokenData[CommonConstants.AccessTokenKey]);
                             LogOnViewModel.StoredToken = tokenData[CommonConstants.AccessTokenKey];
 
-                            // refresh token
-                            Application.Current.Properties.Add(CommonConstants.RefreshTokenKey, tokenData[CommonConstants.RefreshTokenKey]);
+							// refresh token
+							Settings.SetSetting(CommonConstants.RefreshTokenKey, tokenData[CommonConstants.RefreshTokenKey]);
 
-                            Application.Current.Properties[CommonConstants.TokenKey] = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1}", LogOnViewModel.StoredToken, DateTime.Now);
+							Settings.SetSetting(CommonConstants.TokenKey, string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1}", LogOnViewModel.StoredToken, DateTime.Now));
 
                         }
 
                         if (tokenData.ContainsKey(CommonConstants.CurrentUserIdKey))
                         {
-                            Application.Current.Properties[CommonConstants.CurrentUserIdKey] = tokenData[CommonConstants.CurrentUserIdKey];
+							Settings.SetSetting(CommonConstants.CurrentUserIdKey, tokenData[CommonConstants.CurrentUserIdKey]);
                         }
                     }
                 }
@@ -145,9 +148,9 @@ namespace Microsoft.Mvp.ViewModels
 
         // TODO: this is example on how code is executed.  Should be refactored to be called when
         // we get a Forbidden response from API
-        public async Task<string> GetNewAccessToken()
+        public static async Task<string> GetNewAccessToken()
         {
-            string refreshToken = Application.Current.Properties[CommonConstants.RefreshTokenKey].ToString();
+            string refreshToken = Settings.GetSetting(CommonConstants.RefreshTokenKey);
             var handler = new HttpClientHandler
             {
                 UseDefaultCredentials = false,
@@ -176,12 +179,10 @@ namespace Microsoft.Mvp.ViewModels
 
                         if (tokenData.ContainsKey(CommonConstants.AccessTokenKey))
                         {
-                            Application.Current.Properties.Remove(CommonConstants.AccessTokenKey);
-                            Application.Current.Properties.Add(CommonConstants.AccessTokenKey, tokenData[CommonConstants.AccessTokenKey]);
+							Settings.SetSetting(CommonConstants.AccessTokenKey, tokenData[CommonConstants.AccessTokenKey]);
 
-                            // refresh token
-                            Application.Current.Properties.Remove(CommonConstants.RefreshTokenKey);
-                            Application.Current.Properties.Add(CommonConstants.RefreshTokenKey, tokenData[CommonConstants.RefreshTokenKey]);
+							// refresh token
+							Settings.SetSetting(CommonConstants.RefreshTokenKey, tokenData[CommonConstants.RefreshTokenKey]);
 
                         }
                         return tokenData[CommonConstants.AccessTokenKey];

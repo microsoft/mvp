@@ -46,9 +46,9 @@ namespace Microsoft.Mvp.ViewModels
             {
 
                 string tokenAndExpiredTime = null;
-                if (Application.Current.Properties.ContainsKey(CommonConstants.TokenKey))
+                if (Settings.GetSetting(CommonConstants.TokenKey) != string.Empty)
                 {
-                    tokenAndExpiredTime = Application.Current.Properties[CommonConstants.TokenKey].ToString();
+                    tokenAndExpiredTime = Settings.GetSetting(CommonConstants.TokenKey);
                 }
 
                 if (!string.IsNullOrEmpty(tokenAndExpiredTime))
@@ -59,11 +59,11 @@ namespace Microsoft.Mvp.ViewModels
                     var token = tokenAndExpiredTime.Substring(0, index);
                     if (DateTime.Now.AddHours(-7) < expiredtime)
                     {
-                        LogOnViewModel.StoredToken = token;
+						StoredToken = token;
                     }
                     else
                     {
-                        LogOnViewModel.StoredToken = "";
+						StoredToken = "";
                     }
                 }
 

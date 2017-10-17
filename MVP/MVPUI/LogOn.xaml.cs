@@ -1,10 +1,12 @@
-﻿#define SKIP_LOGIN
+﻿
 
 using Microsoft.Mvp.ViewModels;
 using System;
 using Xamarin.Forms;
 using Microsoft.Mvp.Interfaces;
 using Microsoft.Mvp.Helpers;
+using Plugin.Connectivity;
+using Acr.UserDialogs;
 
 namespace Microsoft.Mvpui
 {
@@ -25,13 +27,37 @@ namespace Microsoft.Mvpui
 
 			BindingContext = LogOnViewModel.Instance;
         }
-        #endregion
+		#endregion
 
-        #region Private and Protected Methods
-
+		#region Private and Protected Methods
+		
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+			if (IsBusy)
+				return;
+
+			if (Settings.GetSetting(CommonConstants.TokenKey) != string.Empty)
+			{
+				IProgressDialog progress = null;
+				try
+				{
+					IsBusy = true;
+					progress = UserDialogs.Instance.Loading("Refreshing tokens...");
+					await LiveIdLogOnViewModel.GetNewAccessToken();
+					
+				}
+				catch (Exception)
+				{
+					
+				}
+				finally
+				{
+					progress?.Hide();
+					IsBusy = false;
+				}
+			}
 
             if (LogOnViewModel.Instance.IsLoggedIn)
             {
@@ -46,16 +72,22 @@ namespace Microsoft.Mvpui
 
         private async void ButtonSignIn_Clicked(object sender, EventArgs e)
         {
-#if SKIP_LOGIN
-            App.GoHome();
-            return;
-#endif
+			if (CommonConstants.ClientId == "LIVE_ID")
+			{
+				App.GoHome();
+				return;
+			}
+
 
             if (LogOnViewModel.Instance.IsLoggedIn)
             {
                 App.GoHome();
             }
-            else
+            else if(!CrossConnectivity.Current.IsConnected)
+			{
+				await DisplayAlert("Check Connectivity", "Please check connectivity to proceed to MVP account sign in.", "OK");
+			}
+			else
             {
                 await Navigation.PushModalAsync(new NavigationPage(new LiveIdLogOn()));
             }
@@ -65,12 +97,19 @@ namespace Microsoft.Mvpui
         {
             try
             {
-                var uri = new Uri(CommonConstants.LearnMoreUrl);
-                Device.OpenUri(uri);
+				await Plugin.Share.CrossShare.Current.OpenBrowser(CommonConstants.LearnMoreUrl, new Plugin.Share.Abstractions.BrowserOptions
+				{
+					ChromeShowTitle = true,
+					ChromeToolbarColor = new Plugin.Share.Abstractions.ShareColor { R = 3, G = 169, B = 244, A = 255 },
+					SafariBarTintColor = new Plugin.Share.Abstractions.ShareColor { R = 3, G = 169, B = 244, A = 255 },
+					UseSafariWebViewController = true,
+					SafariControlTintColor = new Plugin.Share.Abstractions.ShareColor { R = 255, G = 255, B = 255, A = 255 },
+					UseSafariReaderMode = false
+				});
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", "Failed to open your browser", "OK");
+                await DisplayAlert("Error", "Failed to open your browser.", "OK");
             }
         }
 

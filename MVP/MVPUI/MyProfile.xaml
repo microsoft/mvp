@@ -48,14 +48,6 @@
                     </ContentView>
                 </StackLayout>
             </ScrollView>
-            
-            <Grid IsVisible="{Binding IsBusy}" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#F7F7F7">
-                <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
-                    <ActivityIndicator WidthRequest="80" IsRunning="{Binding IsLoading}" Color="{Binding SecondaryTextColor}" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
-                    <Label TextColor="Black" Text="Loading..."  FontSize="16"></Label>
-                </StackLayout>
-            </Grid>
-            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

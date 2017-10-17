@@ -70,17 +70,10 @@
 			<Button TextColor="White"
 					BorderRadius="0"
 					BackgroundColor="{StaticResource PrimaryDark}"  
+					IsEnabled="{Binding IsNotBusy}"
 					Clicked="ButtonSaveClicked" Text="Save"
                     HorizontalOptions="FillAndExpand" />
 		</StackLayout>
-
-
-		<Grid IsVisible="{Binding IsBusy}" HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="#FFFFFF">
-			<StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
-				<ActivityIndicator WidthRequest="80" IsEnabled="True" x:Name="active1s" IsRunning="{Binding IsBusy}" Color="Black" HorizontalOptions="Center" VerticalOptions="Center" />
-				<Label TextColor="Black" x:Name="progressText" Text="Loading..." FontSize="16"></Label>
-			</StackLayout>
-		</Grid>
 	</Grid>
 
 </ContentPage>

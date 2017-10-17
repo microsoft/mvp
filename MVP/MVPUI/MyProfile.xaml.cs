@@ -1,4 +1,5 @@
-﻿using Microsoft.Mvp.Helpers;
+﻿using Acr.UserDialogs;
+using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.ViewModels;
 using System;
@@ -14,8 +15,9 @@ namespace Microsoft.Mvpui
         #region Constructor
 
         public MyProfile()
-        {
-            InitializeComponent();
+		{
+			Logger.Log("Page-Profile");
+			InitializeComponent();
             this.BindingContext = MyProfileViewModel.Instance;
 
             if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
@@ -40,11 +42,15 @@ namespace Microsoft.Mvpui
 
         private async void GetProfile()
         {
+			IProgressDialog progress = null;
             if (string.IsNullOrEmpty(MyProfileViewModel.Instance.FirstAwardValue))
             {
                 try
                 {
-                    ProfileModel profile = null;
+
+					progress = UserDialogs.Instance.Loading("Loading...", maskType: MaskType.Clear);
+					progress.Show();
+					ProfileModel profile = null;
 
                     CheckCache();
 
@@ -91,55 +97,64 @@ namespace Microsoft.Mvpui
                         MyProfileViewModel.Instance.AwardsCountValue = profile.YearsAsMVP.ToString(System.Globalization.CultureInfo.CurrentCulture);
                     }
                 }
-                finally
-                {
+				catch (Exception ex)
+				{
+					progress?.Hide();
+					await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection.. Error: " + ex.Message, "Unable to load", "OK");
 
-                }
+				}
+				finally
+                {
+					progress?.Hide();
+
+				}
             }
 
         }
 
-        private async void GetPhoto()
+		private async void GetPhoto()
         {
-            if (string.IsNullOrEmpty(MyProfileViewModel.Instance.StoreImageBase64Str))
-            {
-                try
-                {
-                    CheckCache();
+			
+			if (string.IsNullOrEmpty(MyProfileViewModel.Instance.StoreImageBase64Str))
+			{
+				try
+				{
+					CheckCache();
 
-                    CheckCacheItem();
+					CheckCacheItem();
 
-                    if (cacheItem.ContainsKey(CommonConstants.ProfilePhotoCacheKey))
-                    {
-                        DateTime cachedDate = DateTime.Parse(cacheItem[CommonConstants.ProfilePhotoCacheDateKey].ToString());
-                        DateTime ExpiredDate = cachedDate.AddHours(24);
-                        if (DateTime.Compare(ExpiredDate, DateTime.Now) > 0) //Valid data.
-                        {
-                            MyProfileViewModel.Instance.StoreImageBase64Str = cacheItem[CommonConstants.ProfilePhotoCacheKey].ToString();
-                        }
-                        else
-                        {
-                            MyProfileViewModel.Instance.StoreImageBase64Str = await MvpHelper.MvpService.GetPhoto(LogOnViewModel.StoredToken);
-                            cacheItem[CommonConstants.ProfilePhotoCacheKey] = MyProfileViewModel.Instance.StoreImageBase64Str;
-                            cacheItem[CommonConstants.ProfilePhotoCacheDateKey] = DateTime.Now;
-                            cache[currentUserIdKey] = cacheItem;
-                        }
-                    }
-                    else
-                    {
-                        MyProfileViewModel.Instance.StoreImageBase64Str = await MvpHelper.MvpService.GetPhoto(LogOnViewModel.StoredToken);
-                        cacheItem.Add(CommonConstants.ProfilePhotoCacheKey, MyProfileViewModel.Instance.StoreImageBase64Str);
-                        cacheItem.Add(CommonConstants.ProfilePhotoCacheDateKey, DateTime.Now);
-                        cache[currentUserIdKey] = cacheItem;
-                    }
+					if (cacheItem.ContainsKey(CommonConstants.ProfilePhotoCacheKey))
+					{
+						DateTime cachedDate = DateTime.Parse(cacheItem[CommonConstants.ProfilePhotoCacheDateKey].ToString());
+						DateTime ExpiredDate = cachedDate.AddHours(24);
+						if (DateTime.Compare(ExpiredDate, DateTime.Now) > 0) //Valid data.
+						{
+							MyProfileViewModel.Instance.StoreImageBase64Str = cacheItem[CommonConstants.ProfilePhotoCacheKey].ToString();
+						}
+						else
+						{
+							MyProfileViewModel.Instance.StoreImageBase64Str = await MvpHelper.MvpService.GetPhoto(LogOnViewModel.StoredToken);
+							cacheItem[CommonConstants.ProfilePhotoCacheKey] = MyProfileViewModel.Instance.StoreImageBase64Str;
+							cacheItem[CommonConstants.ProfilePhotoCacheDateKey] = DateTime.Now;
+							cache[currentUserIdKey] = cacheItem;
+						}
+					}
+					else
+					{
+						MyProfileViewModel.Instance.StoreImageBase64Str = await MvpHelper.MvpService.GetPhoto(LogOnViewModel.StoredToken);
+						cacheItem.Add(CommonConstants.ProfilePhotoCacheKey, MyProfileViewModel.Instance.StoreImageBase64Str);
+						cacheItem.Add(CommonConstants.ProfilePhotoCacheDateKey, DateTime.Now);
+						cache[currentUserIdKey] = cacheItem;
+					}
 
-                    Application.Current.Properties[CommonConstants.ProfileCacheListKey] = cache;
-                }
-                finally
-                {
+					Application.Current.Properties[CommonConstants.ProfileCacheListKey] = cache;
+				}
+				finally
+				{
 
-                }
-            }
+				}
+			}
+			
         }
 
         private void CheckCache()
@@ -156,10 +171,10 @@ namespace Microsoft.Mvpui
 
         private void CheckCacheItem()
         {
-            if (!Application.Current.Properties.ContainsKey(CommonConstants.CurrentUserIdKey))
+            if (Settings.GetSetting(CommonConstants.CurrentUserIdKey) == string.Empty)
                 return;
 
-            currentUserIdKey = Application.Current.Properties[CommonConstants.CurrentUserIdKey].ToString();
+            currentUserIdKey = Settings.GetSetting(CommonConstants.CurrentUserIdKey);
             if (cache.ContainsKey(currentUserIdKey))
             {
                 cacheItem = (Dictionary<string, object>)cache[currentUserIdKey];
@@ -170,13 +185,18 @@ namespace Microsoft.Mvpui
                 Application.Current.Properties[CommonConstants.ProfileCacheListKey] = cache;
             }
         }
-
+		
         protected async override void OnAppearing()
         {
+            base.OnAppearing();
+
+			if (MyProfileViewModel.Instance.IsBusy)
+				return;
+
+			
             MyProfileViewModel.Instance.ErrorMessage = "";
             MyProfileViewModel.Instance.IsBusy = true;
 
-            base.OnAppearing();
             GetPhoto();
             GetProfile();
             if (MyProfileViewModel.Instance.List == null || MyProfileViewModel.Instance.List.Count == 0)

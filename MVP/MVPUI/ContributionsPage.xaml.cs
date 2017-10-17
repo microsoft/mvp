@@ -14,8 +14,9 @@ namespace Microsoft.Mvpui
     {
 
         public ContributionsPage()
-        {
-            InitializeComponent();
+		{
+			Logger.Log("Page-ContributionsPage");
+			InitializeComponent();
 
             BindingContext = MyProfileViewModel.Instance;
 

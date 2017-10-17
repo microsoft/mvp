@@ -21,6 +21,8 @@ namespace Microsoft.Mvp.ViewModels
                   new VisibilityModel() { Description=  "Microsoft" ,Id=100000000,LocalizeKey=null}
             };
             PersonGroups = new ObservableRangeCollection<VisibilityModel>(visibilityModels);
+
+			
         }
 
         #endregion

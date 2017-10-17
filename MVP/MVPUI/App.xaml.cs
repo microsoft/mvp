@@ -81,15 +81,28 @@ namespace Microsoft.Mvpui
             InitializeComponent();
 
 #if !DEBUG
-			if ((Device.RuntimePlatform == Device.Android && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenterAndroid)) ||
-				(Device.RuntimePlatform == Device.iOS && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenteriOS)) ||
-				(Device.RuntimePlatform == Device.UWP && !string.IsNullOrWhiteSpace(CommonConstants.MobileCenterUWP)))
+			if ((Device.RuntimePlatform == Device.Android && CommonConstants.MobileCenterAndroid != "MC_ANDROID") ||
+				(Device.RuntimePlatform == Device.iOS && CommonConstants.MobileCenteriOS != "MC_IOS") ||
+				(Device.RuntimePlatform == Device.UWP && CommonConstants.MobileCenterUWP != "MC_UWP"))
 			{
 				MobileCenter.Start($"android={CommonConstants.MobileCenterAndroid};" +
 				   $"uwp={CommonConstants.MobileCenterUWP};" +
 				   $"ios={CommonConstants.MobileCenteriOS}",
 				   typeof(Analytics), typeof(Crashes));
 			}
+#endif
+
+#if DEBUG
+			//if design register the actual service, else mock
+			if (CommonConstants.ClientId == "LIVE_ID")
+				DependencyService.Register<IMvpService, DesignMvpService>();
+			else
+				DependencyService.Register<IMvpService, LiveMvpService>();
+#else
+			if (CommonConstants.ClientId == "LIVE_ID")
+				throw new System.InvalidOperationException("Invalid configuration, please fill in proper Ids.");
+
+			DependencyService.Register<IMvpService, LiveMvpService>();
 #endif
 
 			if (LogOnViewModel.Instance.IsLoggedIn)
@@ -119,9 +132,9 @@ namespace Microsoft.Mvpui
             }
         }
 
-        #endregion
+#endregion
 
-        #region Private and Protected Methods
+#region Private and Protected Methods
 
 
         protected override void OnStart()
@@ -139,7 +152,7 @@ namespace Microsoft.Mvpui
             // Handle when your app resumes
         }
 
-        #endregion
+#endregion
 
     }
 }
