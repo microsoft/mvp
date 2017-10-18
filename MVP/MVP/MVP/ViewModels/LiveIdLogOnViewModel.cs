@@ -184,8 +184,17 @@ namespace Microsoft.Mvp.ViewModels
 							// refresh token
 							Settings.SetSetting(CommonConstants.RefreshTokenKey, tokenData[CommonConstants.RefreshTokenKey]);
 
-                        }
-                        return tokenData[CommonConstants.AccessTokenKey];
+							LogOnViewModel.StoredToken = Settings.GetSetting(CommonConstants.AccessTokenKey);
+
+							Settings.SetSetting(CommonConstants.TokenKey, string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0},{1}", LogOnViewModel.StoredToken, DateTime.Now));
+
+						}
+
+						if (tokenData.ContainsKey(CommonConstants.CurrentUserIdKey))
+						{
+							Settings.SetSetting(CommonConstants.CurrentUserIdKey, tokenData[CommonConstants.CurrentUserIdKey]);
+						}
+						return tokenData[CommonConstants.AccessTokenKey];
                     }
 
                 }
