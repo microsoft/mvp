@@ -7,6 +7,7 @@ using Microsoft.Mvp.Interfaces;
 using Microsoft.Mvp.Helpers;
 using Plugin.Connectivity;
 using Acr.UserDialogs;
+using System.Diagnostics;
 
 namespace Microsoft.Mvpui
 {
@@ -48,9 +49,9 @@ namespace Microsoft.Mvpui
 					await LiveIdLogOnViewModel.GetNewAccessToken();
 					
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
-					
+					Debug.WriteLine($"Unable to refresh token: {ex}");
 				}
 				finally
 				{
