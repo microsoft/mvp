@@ -96,6 +96,9 @@ namespace Microsoft.Mvpui
 
         private async Task BindContributionAreas()
         {
+			if(ViewModel == null)
+				return;
+				
             if (ViewModel.ContributionAreas == null || ViewModel.ContributionAreas.Count == 0)
             {
                 await ViewModel.BindingAreas();
@@ -104,6 +107,9 @@ namespace Microsoft.Mvpui
 
         private async Task BindContributionType()
         {
+			if(ViewModel == null)
+				return;
+				
             if (ViewModel.ContributionTypeNames == null || ViewModel.ContributionTypeNames.Count == 0)
             {
                 await ViewModel.BindingContributionType();
