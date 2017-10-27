@@ -108,9 +108,24 @@ namespace Microsoft.Mvpui
             }
         }
 
+        public async void OnRefreshing(object sender, System.EventArgs e)
+        {
+            var contributions = await MvpHelper.MvpService.GetContributions(-5, 50, LogOnViewModel.StoredToken);
+            MvpHelper.SetContributionInfoToProfileViewModel(contributions);
+
+            ListViewContributions.IsRefreshing = false;
+        }
+		    bool navigating;
         async void AddContribution_Clicked(object sender, System.EventArgs e)
         {
+			    if(navigating)
+				    return;
+				
+			      navigating = true;
+		
             await Navigation.PushModalAsync(new MVPNavigationPage(new ContributionDetail()));
+			
+			      navigating = false;
         }
 
         private void OnItemTapped(object sender, ItemTappedEventArgs e)
