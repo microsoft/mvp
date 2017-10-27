@@ -82,6 +82,32 @@ namespace Microsoft.Mvpui
             }
         }
 
+        private bool _allContributionsLoaded = false;
+        public async void OnItemAppearing(object sender, ItemVisibilityEventArgs eventArgs)
+        {
+            if (!_allContributionsLoaded && !ListViewContributions.IsRefreshing)
+            {
+                ListViewContributions.IsRefreshing = true;
+                var viewCellDetails = eventArgs.Item as ContributionModel;
+                var viewCellIndex = MyProfileViewModel.Instance.List.IndexOf(viewCellDetails);
+                if (MyProfileViewModel.Instance.List.Count() - 2 <= viewCellIndex)
+                {
+                    var contributions = await MvpHelper.MvpService.GetContributions(MyProfileViewModel.Instance.List.Count(), 50, LogOnViewModel.StoredToken);
+
+                    if (contributions.Contributions.Count > 0)
+                    {
+                        MyProfileViewModel.Instance.List.AddRange(contributions.Contributions);
+                    }
+                    else
+                    {
+                        _allContributionsLoaded = true;
+                    }
+
+                }
+                ListViewContributions.IsRefreshing = false;
+            }
+        }
+
         async void AddContribution_Clicked(object sender, System.EventArgs e)
         {
             await Navigation.PushModalAsync(new MVPNavigationPage(new ContributionDetail()));
