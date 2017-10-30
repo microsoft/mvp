@@ -54,7 +54,7 @@ namespace Microsoft.Mvpui
                 await LiveIdLogOnViewModel.Instance.GetAccessToken();
 
                 var profileTest = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
-                if (profileTest == null || string.IsNullOrWhiteSpace(profileTest.DisplayName))
+                if (profileTest == null || profileTest.MvpId == 0)
                 {
 					Logger.Log("Login-Invalid");
                     await DisplayAlert(string.Empty, "Unable to validate MVP status, please login again with your MVP credentials.", "OK");
