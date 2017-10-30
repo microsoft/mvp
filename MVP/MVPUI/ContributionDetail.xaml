@@ -38,7 +38,7 @@
 						<Entry x:Name="entryURL" Keyboard="Url" TextColor="Black" Text="{Binding MyContribution.ReferenceUrl}" />
 
 						<Label Text="Description" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-						<Editor HeightRequest="120" x:Name="entryDescription" TextColor="Black" Text="{Binding MyContribution.Description}" />
+						<Editor HeightRequest="180" BackgroundColor="#10000000" x:Name="entryDescription" TextColor="Black" Text="{Binding MyContribution.Description}" />
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
 							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualQuantityTipText}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />

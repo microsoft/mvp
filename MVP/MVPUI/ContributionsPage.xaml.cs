@@ -82,9 +82,50 @@ namespace Microsoft.Mvpui
             }
         }
 
+        private bool _allContributionsLoaded = false;
+        public async void OnItemAppearing(object sender, ItemVisibilityEventArgs eventArgs)
+        {
+            if (!_allContributionsLoaded && !ListViewContributions.IsRefreshing)
+            {
+                ListViewContributions.IsRefreshing = true;
+                var viewCellDetails = eventArgs.Item as ContributionModel;
+                var viewCellIndex = MyProfileViewModel.Instance.List.IndexOf(viewCellDetails);
+                if (MyProfileViewModel.Instance.List.Count() - 2 <= viewCellIndex)
+                {
+                    var contributions = await MvpHelper.MvpService.GetContributions(MyProfileViewModel.Instance.List.Count(), 50, LogOnViewModel.StoredToken);
+
+                    if (contributions.Contributions.Count > 0)
+                    {
+                        MyProfileViewModel.Instance.List.AddRange(contributions.Contributions);
+                    }
+                    else
+                    {
+                        _allContributionsLoaded = true;
+                    }
+
+                }
+                ListViewContributions.IsRefreshing = false;
+            }
+        }
+
+        public async void OnRefreshing(object sender, System.EventArgs e)
+        {
+            var contributions = await MvpHelper.MvpService.GetContributions(-5, 50, LogOnViewModel.StoredToken);
+            MvpHelper.SetContributionInfoToProfileViewModel(contributions);
+
+            ListViewContributions.IsRefreshing = false;
+        }
+		    bool navigating;
         async void AddContribution_Clicked(object sender, System.EventArgs e)
         {
+			    if(navigating)
+				    return;
+				
+			      navigating = true;
+		
             await Navigation.PushModalAsync(new MVPNavigationPage(new ContributionDetail()));
+			
+			      navigating = false;
         }
 
         private void OnItemTapped(object sender, ItemTappedEventArgs e)
