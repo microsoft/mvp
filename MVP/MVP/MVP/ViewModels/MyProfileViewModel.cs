@@ -390,7 +390,7 @@ namespace Microsoft.Mvp.ViewModels
 
 			IProgressDialog progress = null;
 			IsBusy = true;
-			var index = List.Count == 0;
+			var index = List.Count;
 
 
 			try
