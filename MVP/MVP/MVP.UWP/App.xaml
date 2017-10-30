@@ -4,5 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MVP.UWP"
     RequestedTheme="Light">
-
+	<Application.Resources>
+		<ResourceDictionary>
+			<Style TargetType="PivotItem">
+				<Setter Property="Margin" Value="0" />
+			</Style>
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>

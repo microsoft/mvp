@@ -5,6 +5,7 @@ using Microsoft.Mvp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Microsoft.Mvpui
@@ -40,7 +41,7 @@ namespace Microsoft.Mvpui
         string currentUserIdKey = string.Empty;
         Dictionary<string, object> cacheItem = new Dictionary<string, object>();
 
-        private async void GetProfile()
+        private async Task GetProfile()
         {
 			IProgressDialog progress = null;
             if (string.IsNullOrEmpty(MyProfileViewModel.Instance.FirstAwardValue))
@@ -112,7 +113,8 @@ namespace Microsoft.Mvpui
 
         }
 
-		private async void GetPhoto()
+		
+		private async Task GetPhoto()
         {
 			
 			if (string.IsNullOrEmpty(MyProfileViewModel.Instance.StoreImageBase64Str))
@@ -197,8 +199,8 @@ namespace Microsoft.Mvpui
             MyProfileViewModel.Instance.ErrorMessage = "";
             MyProfileViewModel.Instance.IsBusy = true;
 
-            GetPhoto();
-            GetProfile();
+            await GetPhoto();
+            await GetProfile();
             if (MyProfileViewModel.Instance.List == null || MyProfileViewModel.Instance.List.Count == 0)
             {
                 var contributions = await MvpHelper.MvpService.GetContributions(-5, 10, LogOnViewModel.StoredToken);
