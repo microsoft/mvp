@@ -74,6 +74,10 @@ namespace Microsoft.Mvpui
             var mi = ((MenuItem)sender);
             ContributionModel contribution = mi.CommandParameter as ContributionModel;
 
+			var remove = await DisplayAlert("Delete Activity?", "Are you sure you want to delete this activity?", "Yes, Delete", "Cancel");
+			if (!remove)
+				return;
+
             string result = await MvpHelper.MvpService.DeleteContributionModel(Convert.ToInt32(contribution.ContributionId, System.Globalization.CultureInfo.InvariantCulture), LogOnViewModel.StoredToken);
             if (result == CommonConstants.OkResult)
             {
