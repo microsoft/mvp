@@ -8,17 +8,20 @@
         <ToolbarItem Text="Add" Clicked="AddContribution_Clicked" Icon="toolbar_add.png" x:Name="ToolbarAddContribution" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-		<AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-				<ListView x:Name="ListViewContributions" ItemsSource="{Binding List}"
-					  HasUnevenRows="True" 
-						RowHeight="70"
-					  ItemSelected="OnItemSelected"
-					  ItemTapped="OnItemTapped"
+		<AbsoluteLayout VerticalOptions="FillAndExpand" 
+						HorizontalOptions="FillAndExpand">
+				<ListView x:Name="ListViewContributions" 
+						  ItemsSource="{Binding List}"
+						  HasUnevenRows="True" 
+						  RowHeight="70"
+						  ItemSelected="OnItemSelected"
+					      ItemTapped="OnItemTapped"
 						  AbsoluteLayout.LayoutFlags="All"
 						  AbsoluteLayout.LayoutBounds="0,0,1,1"
-                ItemAppearing="OnItemAppearing">
-                IsPullToRefreshEnabled="true"
-                Refreshing="OnRefreshing">
+						  ItemAppearing="OnItemAppearing"
+						  IsPullToRefreshEnabled="true"
+						  RefreshCommand="{Binding RefreshCommand}"
+						  IsRefreshing="{Binding IsBusy, Mode=OneWay}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell IsEnabled="{Binding ContributionEnableEditDelete}">

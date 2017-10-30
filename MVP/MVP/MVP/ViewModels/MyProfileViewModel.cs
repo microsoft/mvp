@@ -4,6 +4,10 @@ using Microsoft.Mvp.Helpers;
 using Microsoft.Mvp.Models;
 using MvvmHelpers;
 using Xamarin.Forms;
+using System.Windows.Input;
+using System.Linq;
+using Acr.UserDialogs;
+using System.Collections.Generic;
 
 namespace Microsoft.Mvp.ViewModels
 {
@@ -170,6 +174,248 @@ namespace Microsoft.Mvp.ViewModels
             }
         }
 
-        #endregion
-    }
+		Command<ContributionModel> deleteCommand;
+		public ICommand DeleteCommand => deleteCommand ?? (deleteCommand = new Command<ContributionModel>(async (c) => await ExecuteDeleteCommand(c)));
+
+		async Task ExecuteDeleteCommand(ContributionModel contribution)
+		{
+			var remove = await Application.Current.MainPage.DisplayAlert("Delete Activity?", "Are you sure you want to delete this activity?", "Yes, Delete", "Cancel");
+			if (!remove)
+				return;
+
+			string result = await MvpHelper.MvpService.DeleteContributionModel(Convert.ToInt32(contribution.ContributionId, System.Globalization.CultureInfo.InvariantCulture), LogOnViewModel.StoredToken);
+			if (result == CommonConstants.OkResult)
+			{
+				var modelToDelete = List.Where(item => item.ContributionId == contribution.ContributionId).FirstOrDefault();
+				List.Remove(modelToDelete);
+			}
+		}
+
+		Command loadProfileCommand;
+		public ICommand LoadProfileCommand => loadProfileCommand ?? (loadProfileCommand = new Command(async () => await ExecuteLoadProfileCommand()));
+
+		bool loadedProfile;
+		async Task ExecuteLoadProfileCommand()
+		{
+			if (MyProfileViewModel.Instance.IsBusy || loadedProfile)
+				return;
+
+
+			ErrorMessage = "";
+			IsBusy = true;
+			IProgressDialog progress = null;
+			try
+			{
+				progress = UserDialogs.Instance.Loading("Loading profile...", maskType: MaskType.Clear);
+				progress.Show();
+
+				await GetPhoto();
+				await GetProfile();
+
+				if (string.Compare(CommonConstants.DefaultNetworkErrorString, ErrorMessage, StringComparison.OrdinalIgnoreCase) == 0)
+				{
+					StoreImageBase64Str = CommonConstants.DefaultPhoto;
+					ErrorMessage = CommonConstants.DefaultNetworkErrorString;
+				}
+			}
+			catch (Exception ex)
+			{
+				progress?.Hide();
+				await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection.. Error: " + ex.Message, "Unable to load", "OK");
+
+			}
+			finally
+			{
+				progress?.Hide();
+				IsBusy = false;
+			}
+		}
+
+
+		Dictionary<string, object> cache = new Dictionary<string, object>();
+		string currentUserIdKey = string.Empty;
+		Dictionary<string, object> cacheItem = new Dictionary<string, object>();
+
+		private async Task GetProfile()
+		{
+			
+			if (string.IsNullOrEmpty(MyProfileViewModel.Instance.FirstAwardValue))
+			{
+				
+				ProfileModel profile = null;
+
+				CheckCache();
+
+				CheckCacheItem();
+
+				if (cacheItem.ContainsKey(CommonConstants.ProfileCacheKey))
+				{
+					var cachedDate = DateTime.Parse(cacheItem[CommonConstants.ProfileCacheDateKey].ToString());
+					var ExpiredDate = cachedDate.AddHours(24);
+					if (DateTime.Compare(ExpiredDate, DateTime.Now) > 0) //Valid data.
+					{
+						string profileString = cacheItem[CommonConstants.ProfileCacheKey].ToString();
+						profile = Newtonsoft.Json.JsonConvert.DeserializeObject<ProfileModel>(profileString);
+					}
+					else
+					{
+						profile = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
+
+						cacheItem[CommonConstants.ProfileCacheKey] = Newtonsoft.Json.JsonConvert.SerializeObject(profile);
+						cacheItem[CommonConstants.ProfileCacheDateKey] = DateTime.Now;
+
+						cache[currentUserIdKey] = cacheItem;
+					}
+				}
+				else
+				{
+					profile = await MvpHelper.MvpService.GetProfile(LogOnViewModel.StoredToken);
+
+					cacheItem.Add(CommonConstants.ProfileCacheKey, Newtonsoft.Json.JsonConvert.SerializeObject(profile));
+					cacheItem.Add(CommonConstants.ProfileCacheDateKey, DateTime.Now);
+
+					cache[currentUserIdKey] = cacheItem;
+				}
+
+				Application.Current.Properties[CommonConstants.ProfileCacheListKey] = cache;
+
+				if (profile != null)
+				{
+					FirstAwardValue = profile.FirstAwardYear.ToString(System.Globalization.CultureInfo.CurrentCulture);
+					PersonName = profile.DisplayName;
+					MvpNumber = $"MVP {profile.MvpId}";
+					AwardCategoriesValue = profile.AwardCategoryDisplay.Replace(",", Environment.NewLine);
+					Description = profile.Biography;
+					AwardsCountValue = profile.YearsAsMVP.ToString(System.Globalization.CultureInfo.CurrentCulture);
+				}
+				
+			}
+
+		}
+
+
+		private async Task GetPhoto()
+		{
+
+			if (string.IsNullOrEmpty(StoreImageBase64Str))
+			{
+				try
+				{
+					CheckCache();
+
+					CheckCacheItem();
+
+					if (cacheItem.ContainsKey(CommonConstants.ProfilePhotoCacheKey))
+					{
+						var cachedDate = DateTime.Parse(cacheItem[CommonConstants.ProfilePhotoCacheDateKey].ToString());
+						var ExpiredDate = cachedDate.AddHours(24);
+						if (DateTime.Compare(ExpiredDate, DateTime.Now) > 0) //Valid data.
+						{
+							StoreImageBase64Str = cacheItem[CommonConstants.ProfilePhotoCacheKey].ToString();
+						}
+						else
+						{
+							StoreImageBase64Str = await MvpHelper.MvpService.GetPhoto(LogOnViewModel.StoredToken);
+							cacheItem[CommonConstants.ProfilePhotoCacheKey] = MyProfileViewModel.Instance.StoreImageBase64Str;
+							cacheItem[CommonConstants.ProfilePhotoCacheDateKey] = DateTime.Now;
+							cache[currentUserIdKey] = cacheItem;
+						}
+					}
+					else
+					{
+						StoreImageBase64Str = await MvpHelper.MvpService.GetPhoto(LogOnViewModel.StoredToken);
+						cacheItem.Add(CommonConstants.ProfilePhotoCacheKey, MyProfileViewModel.Instance.StoreImageBase64Str);
+						cacheItem.Add(CommonConstants.ProfilePhotoCacheDateKey, DateTime.Now);
+						cache[currentUserIdKey] = cacheItem;
+					}
+
+					Application.Current.Properties[CommonConstants.ProfileCacheListKey] = cache;
+				}
+				finally
+				{
+
+				}
+			}
+
+		}
+
+		private void CheckCache()
+		{
+			if (Application.Current.Properties.ContainsKey(CommonConstants.ProfileCacheListKey))
+			{
+				cache = (Dictionary<string, object>)Application.Current.Properties[CommonConstants.ProfileCacheListKey];
+			}
+			else
+			{
+				Application.Current.Properties.Add(CommonConstants.ProfileCacheListKey, cache);
+			}
+		}
+
+		private void CheckCacheItem()
+		{
+			if (Settings.GetSetting(CommonConstants.CurrentUserIdKey) == string.Empty)
+				return;
+
+			currentUserIdKey = Settings.GetSetting(CommonConstants.CurrentUserIdKey);
+			if (cache.ContainsKey(currentUserIdKey))
+			{
+				cacheItem = (Dictionary<string, object>)cache[currentUserIdKey];
+			}
+			else
+			{
+				cache.Add(currentUserIdKey, cacheItem);
+				Application.Current.Properties[CommonConstants.ProfileCacheListKey] = cache;
+			}
+		}
+
+		Command refreshCommand;
+		public ICommand RefreshCommand => refreshCommand ?? (refreshCommand = new Command(async () => await ExecuteRefreshCommand()));
+
+		public async Task ExecuteRefreshCommand()
+		{
+			if (IsBusy)
+				return;
+
+			List.Clear();
+			OnPropertyChanged("IsBusy");
+			CanLoadMore = true;
+			await ExecuteLoadMoreCommand();
+		}
+		
+		public async Task ExecuteLoadMoreCommand()
+		{
+			if (!CanLoadMore || IsBusy)
+				return;
+
+
+			IProgressDialog progress = null;
+			IsBusy = true;
+			var index = List.Count == 0;
+
+
+			try
+			{
+				progress = UserDialogs.Instance.Loading("Loading Activities...", maskType: MaskType.Clear);
+				progress?.Show();
+
+				var contributions = await MvpHelper.MvpService.GetContributions(index, 50, LogOnViewModel.StoredToken);
+				
+				if (contributions.Contributions.Count != 0)
+				{
+					List.AddRange(contributions.Contributions);
+				}
+				CanLoadMore = contributions.Contributions.Count == 50;				
+			}
+			catch (Exception ex)
+			{
+			}
+			finally
+			{
+				progress?.Hide();
+				IsBusy = false;
+			}
+		}
+
+		#endregion
+	}
 }

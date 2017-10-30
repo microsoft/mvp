@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 using Microsoft.Mvp.ViewModels;
 using Microsoft.Mvp.Models;
 using Microsoft.Mvp.Helpers;
+using System.Threading.Tasks;
 
 namespace Microsoft.Mvpui
 {
@@ -33,8 +34,14 @@ namespace Microsoft.Mvpui
 				{
 					AddContribution_Clicked(null, null);
 				};
-
 			}
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			if (MyProfileViewModel.Instance.List.Count == 0)
+				MyProfileViewModel.Instance.RefreshCommand.Execute(null);
 		}
 
 		public async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -69,56 +76,30 @@ namespace Microsoft.Mvpui
 				}));
 		}
 
-		public async void OnDelete(object sender, EventArgs eventArgs)
+		public void OnDelete(object sender, EventArgs eventArgs)
 		{
 			var mi = ((MenuItem)sender);
-			ContributionModel contribution = mi.CommandParameter as ContributionModel;
-
-			var remove = await DisplayAlert("Delete Activity?", "Are you sure you want to delete this activity?", "Yes, Delete", "Cancel");
-			if (!remove)
+			var contribution = mi.CommandParameter as ContributionModel;
+			if (contribution == null)
 				return;
 
-			string result = await MvpHelper.MvpService.DeleteContributionModel(Convert.ToInt32(contribution.ContributionId, System.Globalization.CultureInfo.InvariantCulture), LogOnViewModel.StoredToken);
-			if (result == CommonConstants.OkResult)
+			MyProfileViewModel.Instance.DeleteCommand.Execute(contribution);
+		}
+		
+		public void OnItemAppearing(object sender, ItemVisibilityEventArgs eventArgs)
+		{
+			if (MyProfileViewModel.Instance.IsBusy || !MyProfileViewModel.Instance.CanLoadMore)
+				return;
+			
+			var viewCellDetails = eventArgs.Item as ContributionModel;
+			var viewCellIndex = MyProfileViewModel.Instance.List.IndexOf(viewCellDetails);
+			if (MyProfileViewModel.Instance.List.Count() - 2 <= viewCellIndex)
 			{
-				var modelToDelete = MyProfileViewModel.Instance.List.Where(item => item.ContributionId == contribution.ContributionId).FirstOrDefault();
-				MyProfileViewModel.Instance.List.Remove(modelToDelete);
+				MyProfileViewModel.Instance.ExecuteLoadMoreCommand().ContinueWith((results) => { }, TaskScheduler.FromCurrentSynchronizationContext());
 			}
 		}
 
-		private bool _allContributionsLoaded = false;
-		public async void OnItemAppearing(object sender, ItemVisibilityEventArgs eventArgs)
-		{
-			if (!_allContributionsLoaded && !ListViewContributions.IsRefreshing)
-			{
-				ListViewContributions.IsRefreshing = true;
-				var viewCellDetails = eventArgs.Item as ContributionModel;
-				var viewCellIndex = MyProfileViewModel.Instance.List.IndexOf(viewCellDetails);
-				if (MyProfileViewModel.Instance.List.Count() - 2 <= viewCellIndex)
-				{
-					var contributions = await MvpHelper.MvpService.GetContributions(MyProfileViewModel.Instance.List.Count(), 50, LogOnViewModel.StoredToken);
-
-					if (contributions.Contributions.Count > 0)
-					{
-						MyProfileViewModel.Instance.List.AddRange(contributions.Contributions);
-					}
-					else
-					{
-						_allContributionsLoaded = true;
-					}
-
-				}
-				ListViewContributions.IsRefreshing = false;
-			}
-		}
-
-		public async void OnRefreshing(object sender, System.EventArgs e)
-		{
-			var contributions = await MvpHelper.MvpService.GetContributions(-5, 50, LogOnViewModel.StoredToken);
-			MvpHelper.SetContributionInfoToProfileViewModel(contributions);
-
-			ListViewContributions.IsRefreshing = false;
-		}
+		
 		bool navigating;
 		async void AddContribution_Clicked(object sender, System.EventArgs e)
 		{
