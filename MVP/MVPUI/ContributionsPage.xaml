@@ -16,6 +16,7 @@
 					  ItemTapped="OnItemTapped"
 						  AbsoluteLayout.LayoutFlags="All"
 						  AbsoluteLayout.LayoutBounds="0,0,1,1"
+                ItemAppearing="OnItemAppearing">
                 IsPullToRefreshEnabled="true"
                 Refreshing="OnRefreshing">
         <ListView.ItemTemplate>
