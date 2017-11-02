@@ -55,7 +55,7 @@ namespace Microsoft.Mvp.ViewModels
                 {
                     var index = tokenAndExpiredTime.LastIndexOf(",", StringComparison.Ordinal);
 
-                    var expiredtime = Convert.ToDateTime(tokenAndExpiredTime.Substring(index + 1), System.Globalization.CultureInfo.CurrentCulture);
+                    var expiredtime = Convert.ToDateTime(tokenAndExpiredTime.Substring(index + 1), System.Globalization.CultureInfo.InvariantCulture);
                     var token = tokenAndExpiredTime.Substring(0, index);
                     if (DateTime.Now.AddHours(-7) < expiredtime)
                     {
