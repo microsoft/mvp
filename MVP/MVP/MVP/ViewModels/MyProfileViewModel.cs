@@ -179,7 +179,7 @@ namespace Microsoft.Mvp.ViewModels
 
 		async Task ExecuteDeleteCommand(ContributionModel contribution)
 		{
-			var remove = await Application.Current.MainPage.DisplayAlert("Delete Activity?", "Are you sure you want to delete this activity?", "Yes, Delete", "Cancel");
+			var remove = await Application.Current.MainPage.DisplayAlert("Delete Contribution?", "Are you sure you want to delete this contribution?", "Yes, Delete", "Cancel");
 			if (!remove)
 				return;
 
@@ -395,7 +395,7 @@ namespace Microsoft.Mvp.ViewModels
 
 			try
 			{
-				progress = UserDialogs.Instance.Loading("Loading Activities...", maskType: MaskType.Clear);
+				progress = UserDialogs.Instance.Loading("Loading Contributions...", maskType: MaskType.Clear);
 				progress?.Show();
 
 				var contributions = await MvpHelper.MvpService.GetContributions(index, 50, LogOnViewModel.StoredToken);

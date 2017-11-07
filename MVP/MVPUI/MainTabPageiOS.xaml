@@ -8,7 +8,7 @@
             <local:MyProfile/>
         </x:Arguments>
     </local:MVPNavigationPage>
-    <local:MVPNavigationPage Icon="tab_contribution.png" Title="Activities">
+    <local:MVPNavigationPage Icon="tab_contribution.png" Title="Contributions">
         <x:Arguments>
             <local:ContributionsPage/>
         </x:Arguments>

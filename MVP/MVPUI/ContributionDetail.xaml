@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.ContributionDetail"
              BackgroundColor="#FFFFFF"
-			 Title="Add a new activity">
+			 Title="Add a new contribution">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Close" x:Name="ToolbarClose" Icon="toolbar_close.png" />
 	</ContentPage.ToolbarItems>
@@ -13,17 +13,17 @@
 				<StackLayout>
 					<StackLayout Padding="20">
 
-						<Label Text="Activity type" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="Contribution type" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<Picker HeightRequest="40" x:Name="contributionTypeSelector" SelectedIndexChanged="OnContributionTypeSelectedIndexChanged" />
 
 						<Label Text="Contribution Area" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<Picker HeightRequest="40"  x:Name="ContributionAreaSelector" TextColor="Black" />
 
-						<Label Text="Date of activity" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="Date of contribution" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<DatePicker x:Name="ContributionDateSelector" Date="{Binding MyContribution.StartDate}" TextColor="Black" />
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
-							<Label Text="Title of activity" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+							<Label Text="Title of contribution" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 							<Label Text="{Binding ErrorMessageForTitle}"  FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" VerticalTextAlignment="End" />
 						</StackLayout>
 						<Entry  x:Name="entryTitle" Text="{Binding MyContribution.Title}" TextColor="Black" />
