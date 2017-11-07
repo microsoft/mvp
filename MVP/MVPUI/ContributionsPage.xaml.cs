@@ -54,7 +54,7 @@ namespace Microsoft.Mvpui
 					new ContributionDetail()
 					{
 						BindingContext = viewModel,
-						Title = "Edit an activity"
+						Title = "Edit a contribution"
 					}));
 
 				ListViewContributions.SelectedItem = null;
@@ -72,7 +72,7 @@ namespace Microsoft.Mvpui
 				new ContributionDetail()
 				{
 					BindingContext = viewModel,
-					Title = "Edit an activity"
+					Title = "Edit a contribution"
 				}));
 		}
 

@@ -238,7 +238,7 @@ namespace Microsoft.Mvpui
 
 				if (!CrossConnectivity.Current.IsConnected)
 				{
-					await UserDialogs.Instance.AlertAsync("Please check connectivity to submit activity.", "Check Connectivity", "OK");
+					await UserDialogs.Instance.AlertAsync("Please check connectivity to submit contribution.", "Check Connectivity", "OK");
 
 					return;
 				}
@@ -312,7 +312,7 @@ namespace Microsoft.Mvpui
 
 				progress?.Hide();
 
-				await UserDialogs.Instance.AlertAsync("MVP activity has been saved successfully. Thank you for your contribution.", "Saved!", "OK");
+				await UserDialogs.Instance.AlertAsync("MVP contribution has been saved successfully. Thank you for your contribution.", "Saved!", "OK");
 
                 await Navigation.PopModalAsync();
 
