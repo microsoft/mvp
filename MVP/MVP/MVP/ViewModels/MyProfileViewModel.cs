@@ -47,7 +47,7 @@ namespace Microsoft.Mvp.ViewModels
         private string _awardsCountValue = string.Empty;
         private string _description = string.Empty;
         private ObservableRangeCollection<ContributionModel> _list = new ObservableRangeCollection<ContributionModel>();
-        private int _totalOfData = 100;
+
         private string _storeImageBase64Str;
 
         private string _ErrorMessage = string.Empty;
@@ -97,19 +97,6 @@ namespace Microsoft.Mvp.ViewModels
 			set
 			{
 				SetProperty(ref _list, value);
-				CanLoadMore = HasMoreItems;
-			}
-		}
-
-        public bool HasMoreItems => List.Count < TotalOfData;
-
-		public int TotalOfData
-		{
-			get => _totalOfData;
-			set
-			{
-				_totalOfData = value;
-				CanLoadMore = HasMoreItems;
 			}
 		}
 
@@ -402,7 +389,13 @@ namespace Microsoft.Mvp.ViewModels
 				
 				if (contributions.Contributions.Count != 0)
 				{
-					List.AddRange(contributions.Contributions);
+					var finalList = contributions.Contributions.Select(c =>
+					{
+						MvpHelper.SetLabelTextOfContribution(c);
+						return c;
+					});
+					
+					List.AddRange(finalList);
 				}
 				CanLoadMore = contributions.Contributions.Count == 50;				
 			}

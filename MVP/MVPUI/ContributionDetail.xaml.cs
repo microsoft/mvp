@@ -271,11 +271,10 @@ namespace Microsoft.Mvpui
 						Logger.Log("Activity-Added");
 						MvpHelper.SetLabelTextOfContribution(result);
                         MyProfileViewModel.Instance.List.Insert(0, result);
-                        MyProfileViewModel.Instance.TotalOfData += 1;
                     }
                     else
                     {
-                        return;
+						return;
                     }
                 }
                 else
@@ -334,13 +333,13 @@ namespace Microsoft.Mvpui
 
         private bool CheckData()
         {
-            bool isValid = true;
+            var isValid = true;
 
-            string title = entryTitle.Text;
-            string url = entryURL.Text;
-            string annualQuantity = entryAnnualQuantity.Text;
-            string secondAnnualQuantity = entrySecondAnnualQuantity.Text;
-            string annualReach = entryAnnualReach.Text;
+            var title = entryTitle.Text;
+            var url = entryURL.Text;
+            var annualQuantity = entryAnnualQuantity.Text;
+            var secondAnnualQuantity = entrySecondAnnualQuantity.Text;
+            var annualReach = entryAnnualReach.Text;
 
             if (string.IsNullOrEmpty(title))
             {

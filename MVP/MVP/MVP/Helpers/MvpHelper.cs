@@ -28,24 +28,6 @@ namespace Microsoft.Mvp.Helpers
 			Settings.SetSetting(CommonConstants.AuthCodeKey, string.Empty);
         }
 
-        public static void SetContributionInfoToProfileViewModel(ContributionInfo profile)
-        {
-
-            if (profile != null && profile.Contributions != null)
-            {
-                MyProfileViewModel.Instance.TotalOfData = profile.TotalContributions;
-                MyProfileViewModel.Instance.List = new ObservableRangeCollection<ContributionModel>();
-
-                var contributions = profile.Contributions.Select(c =>
-                {
-                    SetLabelTextOfContribution(c);
-                    return c;
-                });
-
-                MyProfileViewModel.Instance.List.AddRange(contributions);
-            }
-        }
-
         public static void SetLabelTextOfContribution(ContributionModel contribution)
         {
             string icon = string.Empty;
