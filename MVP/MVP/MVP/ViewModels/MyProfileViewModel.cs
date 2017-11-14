@@ -113,39 +113,35 @@ namespace Microsoft.Mvp.ViewModels
         public ImageSource ProfilePhoto
         {
             get
-            {
-                ImageSource retSource = null;
-                bool useDefault = false;
-                if (StoreImageBase64Str != null)
-                {
-                    if (MvpHelper.MvpService is DesignMvpService)
-                    {
-                        retSource = ImageSource.FromUri(new Uri(StoreImageBase64Str));
-                        return retSource;
-                    }
+            {				
+				ImageSource retSource = null;
+				bool useDefault = false;
+				byte[] bytes=default(byte[]);
 
-                    try
-                    {
-                        var bytes2 = Convert.FromBase64String(StoreImageBase64Str);
-                        retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes2));
-                    }
-                    catch
-                    {
-                        useDefault = true;
-                    }
-                }
-                else
-                {
-                    useDefault = true;
-                }
+				if (StoreImageBase64Str != null)
+				{				
+					try
+					{
+						bytes = Convert.FromBase64String(StoreImageBase64Str); 
+					}
+					catch
+					{
+						useDefault = true;
+					}
+				}
+				else
+				{
+					useDefault = true;
+				}
 
-                if (useDefault)
-                {
-                    var bytes = Convert.FromBase64String(CommonConstants.DefaultPhoto);
-                    retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes));
-                }
-                return retSource;
-            }
+				if (useDefault)
+				{
+					bytes = Convert.FromBase64String(CommonConstants.DefaultPhoto);				
+				}
+
+				retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes));
+				return retSource;
+			}
         }
 
         public bool HasError => !string.IsNullOrEmpty(ErrorMessage);
