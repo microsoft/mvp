@@ -91,9 +91,12 @@ namespace Microsoft.Mvp.Helpers
 
 		#region Private Members for LiveIdLogOn 
 		public const string Scope = "wl.emails%20wl.basic%20wl.offline_access%20wl.signin";
-        public const string ClientId = "LIVE_ID"; //<- this is my (Micah) client key ==> yours[0000000048193351]
-        public const string ClientSecret = "LIVE_SECRET";  // <- my (Micah) secret ), put yours in here
-        public const string LiveIdLogOnUrlFormatString = @"https://login.live.com/oauth20_authorize.srf?client_id={0}&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code&scope={1}";
+		public const string ClientId = "LIVE_ID"; //<- this is my (Micah) client key ==> yours[0000000048193351]
+		public const string ClientSecret = "LIVE_SECRET";  // <- my (Micah) secret ), put yours in here
+		//public const string ClientId = "00000000400FA908"; //<- this is my (Seiya) client key ==> put yours in here 
+		//public const string ClientSecret = "ta3oGLEAGYP74zNin4I9hm7PvtSNRJJZ";  // <- my (Seiya) secret ), put yours in here 
+
+		public const string LiveIdLogOnUrlFormatString = @"https://login.live.com/oauth20_authorize.srf?client_id={0}&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code&scope={1}";
         public const string LiveIdSignOutUrlFormatString = "https://login.live.com/oauth20_logout.srf?client_id={0}&redirect_uri=https://login.live.com/oauth20_desktop.srf";
         public const string AccessTokenUrlFormatString = @"https://login.live.com/oauth20_token.srf?client_id={0}&client_secret={1}&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=authorization_code&code=";
 

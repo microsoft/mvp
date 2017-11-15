@@ -274,7 +274,7 @@ namespace Microsoft.Mvpui
                     }
                     else
                     {
-						return;
+						throw new Exception(MyProfileViewModel.Instance.ErrorMessage); 
                     }
                 }
                 else
@@ -299,8 +299,8 @@ namespace Microsoft.Mvpui
                         int index = MyProfileViewModel.Instance.List.IndexOf(currentContribution);
                         MyProfileViewModel.Instance.List.Remove(currentContribution);
                         MyProfileViewModel.Instance.List.Insert(index, ViewModel.MyContributionBackup);
-                        return;
-                    }
+						throw new Exception(MyProfileViewModel.Instance.ErrorMessage);
+					}
                 }
 
                 ViewModel.MyContribution = null;
