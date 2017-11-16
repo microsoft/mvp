@@ -381,7 +381,7 @@ namespace Microsoft.Mvp.ViewModels
 				progress = UserDialogs.Instance.Loading("Loading Contributions...", maskType: MaskType.Clear);
 				progress?.Show();
 
-				var contributions = await MvpHelper.MvpService.GetContributions(index, 50, LogOnViewModel.StoredToken);
+				var contributions = await MvpHelper.MvpService.GetContributions(index, 20, LogOnViewModel.StoredToken);
 				
 				if (contributions.Contributions.Count != 0)
 				{
@@ -393,10 +393,11 @@ namespace Microsoft.Mvp.ViewModels
 					
 					List.AddRange(finalList);
 				}
-				CanLoadMore = contributions.Contributions.Count == 50;				
+				CanLoadMore = contributions.Contributions.Count == 20;				
 			}
 			catch (Exception ex)
 			{
+				await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection.. Error: " + ex.Message, "Unable to load", "OK");
 			}
 			finally
 			{

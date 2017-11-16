@@ -77,9 +77,9 @@ namespace Microsoft.Mvpui
                 await BindContributionAreas();
                 BindingSelectors();
             }
-			catch
+			catch(Exception ex)
 			{
-
+				await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection.. Error: " + ex.Message, "Unable to load", "OK");
 			}
             finally
             {
@@ -90,7 +90,13 @@ namespace Microsoft.Mvpui
 
         private async void InitContributionType()
         {
-            await BindContributionType();
+			try
+			{
+				await BindContributionType();
+			}
+			catch (Exception ex)
+			{ }
+
         }
 
 
