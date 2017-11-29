@@ -100,14 +100,14 @@ namespace Microsoft.Mvp.Helpers
 							}
 							else
 							{
-								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.NetworkErrorFormatString, response.StatusCode.ToString()));
+								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, TranslateServices.GetResourceString(CommonConstants.NetworkErrorFormatString), response.StatusCode.ToString()));
 							}
 						}
 						else if (response.StatusCode == HttpStatusCode.Forbidden)
 						{
 							if (isRefreshedToken)
 							{
-								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.NetworkErrorFormatString, response.StatusCode.ToString()));
+								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, TranslateServices.GetResourceString(CommonConstants.NetworkErrorFormatString), response.StatusCode.ToString()));
 							}
 							else
 							{
@@ -126,7 +126,7 @@ namespace Microsoft.Mvp.Helpers
 							}
 							else
 							{
-								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.NetworkErrorFormatString, response.StatusCode.ToString()));
+								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, TranslateServices.GetResourceString(CommonConstants.NetworkErrorFormatString), response.StatusCode.ToString()));
 							}
 
 						}
@@ -135,14 +135,14 @@ namespace Microsoft.Mvp.Helpers
 			}
 			catch (WebException ex)
 			{
-				errorMsg = CommonConstants.DefaultNetworkErrorString;
+				errorMsg = TranslateServices.GetResourceString(CommonConstants.DefaultNetworkErrorString);
 			}
 			catch (HttpRequestException ex)
 			{
-				errorMsg = CommonConstants.DefaultNetworkErrorString;
+				errorMsg = TranslateServices.GetResourceString(CommonConstants.DefaultNetworkErrorString);
 			}
 			catch (Exception ex) {
-				errorMsg = CommonConstants.DefaultNetworkErrorString;
+				errorMsg = TranslateServices.GetResourceString(CommonConstants.DefaultNetworkErrorString);
 			}
 
             if (!string.IsNullOrEmpty(errorMsg))

@@ -34,7 +34,7 @@ namespace Microsoft.Mvpui
 
         private async void ButtonSignoutClicked(object sender, EventArgs e)
         {
-			var confirm = await DisplayAlert("Sign out?", "Are you sure you want to sign out?", "Yes, sign out", "Cancel");
+			var confirm = await DisplayAlert(TranslateServices.GetResourceString(CommonConstants.DialogTitleForSignout), TranslateServices.GetResourceString(CommonConstants.DialogForSignoutConfirmTipText), TranslateServices.GetResourceString(CommonConstants.DialogForSignoutOKText), TranslateServices.GetResourceString(CommonConstants.DialogCancel));
 			if (!confirm)
 				return;
 

@@ -54,7 +54,7 @@ namespace Microsoft.Mvpui
 					new ContributionDetail()
 					{
 						BindingContext = viewModel,
-						Title = "Edit a contribution"
+						Title = TranslateServices.GetResourceString(CommonConstants.ContributionDetailTitleForEditing)
 					}));
 
 				ListViewContributions.SelectedItem = null;
@@ -72,7 +72,7 @@ namespace Microsoft.Mvpui
 				new ContributionDetail()
 				{
 					BindingContext = viewModel,
-					Title = "Edit a contribution"
+					Title = TranslateServices.GetResourceString(CommonConstants.ContributionDetailTitleForEditing)
 				}));
 		}
 

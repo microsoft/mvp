@@ -3,9 +3,9 @@
 			 xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.LogOn"
-			 Title="Sign In">
+			 Title="{Binding PageTitleForLogOn}">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Cancel" x:Name="ToolbarClose" Icon="toolbar_close.png" />
+		<ToolbarItem Text="{Binding CancelButton}" x:Name="ToolbarClose" Icon="toolbar_close.png" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
         <Grid Padding="15" RowSpacing="15">
@@ -40,7 +40,7 @@
                 FontSize="46"
                 HorizontalTextAlignment="Center"
                 VerticalOptions="Center"
-                Text="Welcome" />
+                Text="{Binding Welcome}" />
 
             <Button Grid.Row="2" 
                 TextColor="{StaticResource Primary}"
@@ -49,7 +49,7 @@
                 FontSize="18"
                 BorderRadius="4"
                 Clicked="ButtonSignIn_Clicked"
-                Text="Sign in to MVP account">
+                Text="{Binding SigninTo}">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <OnPlatform.iOS>HelveticaNeue</OnPlatform.iOS>
@@ -63,7 +63,7 @@
                 FontAttributes="None"
                 BorderRadius="4"
                 Clicked="ButtonLearnMore_Clicked"
-                Text="Learn about MVP program">
+                Text="{Binding LearnMore}">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String">
                         <OnPlatform.iOS>HelveticaNeue</OnPlatform.iOS>

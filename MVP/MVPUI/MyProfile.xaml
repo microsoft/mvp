@@ -4,9 +4,9 @@
              x:Class="Microsoft.Mvpui.MyProfile"
 			 xmlns:circle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              BackgroundColor="{StaticResource BackgroundColor}"
-             Title="My profile">
+             Title="{Binding TabTitleForProfile}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Settings" x:Name="ToolBarSettings" Icon="toolbar_settings.png" />
+		<ToolbarItem Text="{Binding SettingsButton}" x:Name="ToolBarSettings" Icon="toolbar_settings.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid Margin="0" Padding="0">
@@ -25,7 +25,7 @@
                     <Label Text="{Binding MvpNumber}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="12" />
                     <circle:CircleImage x:Name="imgAvatar" Aspect="AspectFill" BorderThickness="3" BorderColor="{StaticResource PrimaryDark}" VerticalOptions="EndAndExpand" Margin="0,20,0,20" HorizontalOptions="CenterAndExpand" WidthRequest="127"  HeightRequest="127" Source="{Binding ProfilePhoto}" />
 
-                    <Label Text="AWARD CATEGORIES" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
+					<Label Text="{Binding LabelForAwardCategories}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
                     <Label Text="{Binding AwardCategoriesValue}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource SecondaryTextColor}" FontSize="14" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
 
                     <Grid Margin="0,20,0,0">
@@ -34,11 +34,11 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <StackLayout Margin="30,0,0,0" Grid.Column="0" Spacing="0" Orientation="Vertical">
-                            <Label Text="FIRST AWARDED" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />    
+							<Label Text="{Binding LabelForFirstAward}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />    
                             <Label Text="{Binding FirstAwardValue}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource SecondaryTextColor}" FontSize="24" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
                         </StackLayout>
                         <StackLayout Margin="0,0,30,0" Grid.Column="1" Spacing="0" Orientation="Vertical">
-                            <Label Text="# OF AWARDS" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />    
+							<Label Text="{Binding LabelForNumberOfAward}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource PrimaryTextColor}" FontSize="10" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />    
                             <Label Text="{Binding AwardsCountValue}" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="{StaticResource SecondaryTextColor}" FontSize="24" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
                         </StackLayout>
                     </Grid>

@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.SettingsPage"
 			 BackgroundColor="{StaticResource BlueBackgroundColor}"
-			 Title="About MVP">
+			 Title="{Binding PageTitleForSetting}">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Close" x:Name="ToolbarClose" Icon="toolbar_close.png" />
+		<ToolbarItem Text="{Binding CloseButton}" x:Name="ToolbarClose" Icon="toolbar_close.png" />
 	</ContentPage.ToolbarItems>
 	<StackLayout Spacing="0">
 	<ScrollView>
@@ -33,7 +33,7 @@
                 TextColor="White"/>
 				<Label 
                 HorizontalOptions="Center"
-                Text="Built in C# with Xamarin"
+                Text="{Binding DevToolsInfo}"
                 FontSize="Micro"
                 TextColor="#CCCCCC"/>
 				<Label 
@@ -60,7 +60,7 @@
                         BackgroundColor="{StaticResource PrimaryDark}"
                         BorderRadius="0"
                         Clicked="ButtonSignoutClicked"
-                        Text="Sign out" 
+                        Text="{Binding Signout}" 
                         HorizontalOptions="FillAndExpand"
 						VerticalOptions="EndAndExpand"/>
 	</StackLayout>
