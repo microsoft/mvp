@@ -1,6 +1,18 @@
-# MVP
-Microsoft MVP Program GitHub Repository
+# Microsoft MVP Award Program
 
+<p >
+  &ensp;&ensp;&ensp;&ensp; <img alt="VS Code in action" src="images/platform.png">
+</p>
+
+&ensp;&ensp;&ensp;&ensp;&ensp;IOS&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Android&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Windows
+
+<a target="_blank"  href="https://itunes.apple.com/us/app/microsoft-mvp-award/id1231154942?mt=8 ">iTunes App Store</a>&ensp;&ensp;&ensp;&ensp;
+<a target="_blank"  href="javascript:void(0)">Play App Store</a>&ensp;&ensp;&ensp;&ensp;
+<a target="_blank"  href="https://www.microsoft.com/en-sg/store/p/microsoft-mvp-award-program/9p95296j0xh1">Windows Store</a>
+
+
+<br/>
+<br/>
 
 ## Mobile App Build Status
 
