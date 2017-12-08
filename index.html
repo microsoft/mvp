@@ -45,6 +45,60 @@
                 background-position-x: 61%;
             }
         };
+		
+		.card-content ul{
+			list-style: none;
+			margin:0px;
+			padding:0px;
+		}
+		
+		.card-content li{
+			list-style-type:none;
+			margin:0px;
+			padding:0px;
+			flex-grow: 1;
+			text-align: center
+		}
+		
+		.app_links {
+			display: flex;
+			flex-wrap:wrap;
+			margin-bottom: 30px;
+			justify-content: space-between;
+			margin-left: 0;
+		}
+		
+		.app_links .icons {
+			background: url(images/platform_sprite.png) no-repeat 18px 0;
+			height: 60px;
+			margin: 0 auto;
+			width: 65px;
+		}
+		.app_links .icons.android {
+			background-position: -127px 0;
+		}	
+		
+		.app_links .icons.wp {
+			background-position: -301px 0;
+		}
+		
+		.app_links .platforms {
+			flex-grow: 1;
+			color: #333333;
+			font-size: 16px;
+			padding-bottom: 10px;
+			font-family: "SegoeWPSemibold", "Helvetica Neue", Helvetica, Arial sans-serif;
+		}
+		
+		.app_links div {
+			text-align: center;
+			vertical-align: top;
+		}
+		
+		
+		
+	
+
     </style>
 </head>
 <body>
@@ -82,6 +136,29 @@
                                 </a>
                             </div>
                             <div class="card-content">
+								<ul class="app_links">
+								  <li class="firstIcon">
+									<div class="icons iphone"></div>
+									<div class="platforms">
+									  iOS
+									</div>
+									<a target="_blank" class="get-app" href="https://itunes.apple.com/us/app/microsoft-mvp-award/id1231154942?mt=8 ">iTunes App Store</a>
+								  </li>
+								  <!-- <li> -->
+									<!-- <div class="icons android"></div> -->
+									<!-- <div class="platforms"> -->
+									  <!-- Android -->
+									<!-- </div> -->
+									<!-- <a target="_blank" class="get-app" href="#" title="coming soon...">Play App Store</a> -->
+								  <!-- </li> -->
+								  <li>
+									<div class="icons wp"></div>
+									<div class="platforms">
+									  Windows 10
+									</div>
+									<a target="_blank" class="get-app" href="https://www.microsoft.com/en-sg/store/p/microsoft-mvp-award-program/9p95296j0xh1">Windows Store</a>
+								  </li>
+								</ul>
                                 Native apps for the Microsoft MVP to manage contributions.<p><a href="https://github.com/Microsoft/mvp/tree/master/MVP" target="_blank">Browse code</a></p>
                             </div>
                         </div>
