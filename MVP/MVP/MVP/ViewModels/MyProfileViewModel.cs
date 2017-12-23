@@ -185,7 +185,6 @@ namespace Microsoft.Mvp.ViewModels
 			if (MyProfileViewModel.Instance.IsBusy || loadedProfile)
 				return;
 
-
 			ErrorMessage = "";
 			IsBusy = true;
 			IProgressDialog progress = null;
@@ -223,14 +222,11 @@ namespace Microsoft.Mvp.ViewModels
 
 		private async Task GetProfile()
 		{
-
 			if (string.IsNullOrEmpty(MyProfileViewModel.Instance.FirstAwardValue))
 			{
-
 				ProfileModel profile = null;
 
 				CheckCache();
-
 				CheckCacheItem();
 
 				if (cacheItem.ContainsKey(CommonConstants.ProfileCacheKey))
@@ -273,21 +269,16 @@ namespace Microsoft.Mvp.ViewModels
 					Description = profile.Biography;
 					AwardsCountValue = profile.YearsAsMVP.ToString(System.Globalization.CultureInfo.CurrentCulture);
 				}
-
 			}
-
 		}
-
 
 		private async Task GetPhoto()
 		{
-
 			if (string.IsNullOrEmpty(StoreImageBase64Str))
 			{
 				try
 				{
 					CheckCache();
-
 					CheckCacheItem();
 
 					if (cacheItem.ContainsKey(CommonConstants.ProfilePhotoCacheKey))
@@ -321,7 +312,6 @@ namespace Microsoft.Mvp.ViewModels
 
 				}
 			}
-
 		}
 
 		private void CheckCache()
@@ -375,8 +365,6 @@ namespace Microsoft.Mvp.ViewModels
 
 		public string SettingsButton { get; } = TranslateServices.GetResourceString(CommonConstants.SettingsButton);
 
-
-
 		public async Task ExecuteRefreshCommand()
 		{
 			if (IsBusy)
@@ -393,11 +381,8 @@ namespace Microsoft.Mvp.ViewModels
 			if (!CanLoadMore || IsBusy)
 				return;
 
-
 			IProgressDialog progress = null;
-			IsBusy = true;
 			var index = List.Count;
-
 
 			try
 			{
@@ -425,7 +410,6 @@ namespace Microsoft.Mvp.ViewModels
 			finally
 			{
 				progress?.Hide();
-				IsBusy = false;
 			}
 		}
 
