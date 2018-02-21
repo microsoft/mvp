@@ -14,7 +14,6 @@
 						HorizontalOptions="FillAndExpand">
 			<ListView x:Name="ListViewContributions" 
 						  ItemsSource="{Binding List}"
-						  HasUnevenRows="True" 
 						  RowHeight="70"
 						  ItemSelected="OnItemSelected"
 					      ItemTapped="OnItemTapped"
@@ -30,27 +29,47 @@
 							<ViewCell.ContextActions>
 								<MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="{Binding BindingContext.DeleteButton,Source= {x:Reference contributionsPage} }" IsDestructive="True" />
 							</ViewCell.ContextActions>
-							<StackLayout HorizontalOptions="StartAndExpand" Margin="12,8,0,0" Orientation="Horizontal">
-								<Image WidthRequest="45" HeightRequest="45" Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}" />
-								<StackLayout Padding="5,0,0,0" VerticalOptions="CenterAndExpand" Orientation="Vertical">
-									<Label Text="{Binding TitleDisplay}" LineBreakMode="TailTruncation" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="Center" FontSize="16" FontAttributes="Bold" Style="{StaticResource BoldLabel}" />
+							<Grid RowSpacing="0" ColumnSpacing="0">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="65" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
 
-									<StackLayout VerticalOptions="StartAndExpand" Orientation="Horizontal">
-										<Label Text="{Binding DataFormat}" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
-										<Label Text="|" TextColor="{StaticResource PrimaryTextColor}" VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+								<Image WidthRequest="45" HeightRequest="45"
+									   VerticalOptions="Center" HorizontalOptions="Center"
+									   Source="{Binding ., Converter={StaticResource ContributionToIconConverter}}"
+									   Grid.Column="0"/>
+
+								<Grid Grid.Column="1" Margin="0,0,10,0"
+									  RowSpacing="5" ColumnSpacing="0">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*" />
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="*" />
+									</Grid.RowDefinitions>
+
+									<Label Text="{Binding Title}" LineBreakMode="TailTruncation"
+										   TextColor="{StaticResource SecondaryTextColor}" 
+										   FontSize="16" FontAttributes="Bold"
+										   Style="{StaticResource BoldLabel}"
+										   Grid.Row="1"/>
+
+									<StackLayout Orientation="Horizontal"
+												 Grid.Row="2">
+										<Label Text="{Binding DataFormat}" TextColor="{StaticResource PrimaryTextColor}"
+											   FontSize="{StaticResource XSmallProfileLabelFontSize}" />
+										<Label Text="|" TextColor="{StaticResource PrimaryTextColor}"
+											   FontSize="{StaticResource XSmallProfileLabelFontSize}" />
 										<StackLayout Orientation="Horizontal">
-											<!--Text="{i18n:Translate Text=LabelTextOfContribution StringFormat='{0}:'}"-->
-											<!--Text="{Binding LabelTextOfContribution, StringFormat='{0}:'}"-->
-											<!--Text="{i18n:Translate Text=LabelTextOfContribution, StringFormat='{0}:'}"-->
 											<Label Text="{Binding LabelTextOfContribution, Converter={StaticResource TranslateExtensionConverter}}"
-												   TextColor="{StaticResource PrimaryTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" VerticalTextAlignment="Center">
-												 
-											</Label>
-											<Label Text="{Binding AnnualReach}" TextColor="{StaticResource PrimaryTextColor}"  VerticalTextAlignment="Center" FontSize="{StaticResource XSmallProfileLabelFontSize}"></Label>
+												   TextColor="{StaticResource PrimaryTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" />
+											<Label Text="{Binding AnnualReach}" TextColor="{StaticResource PrimaryTextColor}"
+												   FontSize="{StaticResource XSmallProfileLabelFontSize}" />
 										</StackLayout>
 									</StackLayout>
-								</StackLayout >
-							</StackLayout>
+								</Grid>
+							</Grid>
 						</ViewCell>
 					</DataTemplate>
 				</ListView.ItemTemplate>
