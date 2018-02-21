@@ -137,6 +137,7 @@
     <OutputPath>bin\iPhoneSimulator\AppStore</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Localize.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

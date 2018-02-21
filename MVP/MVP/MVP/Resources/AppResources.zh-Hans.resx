@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnnualQuantityTipTextDefault" xml:space="preserve">
+    <value>主题数</value>
+  </data>
+  <data name="AnnualQuantityTipTextForArticle" xml:space="preserve">
+    <value>主题数</value>
+    <comment>主题数</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForBook" xml:space="preserve">
+    <value>书籍数量</value>
+    <comment>书籍数量</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForConference" xml:space="preserve">
+    <value>会议数</value>
+    <comment>Number of Conferences</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForFeedback" xml:space="preserve">
+    <value>提供的活动数</value>
+    <comment>Number of Events provided</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForForumModerator" xml:space="preserve">
+    <value>支持的Threads数</value>
+    <comment>Number of Threads moderated</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForMentorship" xml:space="preserve">
+    <value>受指导者数</value>
+    <comment>Number of Mentees</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForOpenSource" xml:space="preserve">
+    <value>项目</value>
+    <comment>Projects</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForOther" xml:space="preserve">
+    <value>年度数量</value>
+    <comment>Annual quantity</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForPosts" xml:space="preserve">
+    <value>发帖数</value>
+    <comment>Number of Posts</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForProject" xml:space="preserve">
+    <value>项目数</value>
+    <comment>Number of Projects</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForSamples" xml:space="preserve">
+    <value>示例数</value>
+    <comment>Number of Samples</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForSiteOwner" xml:space="preserve">
+    <value>帖子</value>
+    <comment>Posts</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForSocialMedia" xml:space="preserve">
+    <value>帖子数</value>
+    <comment>Number of Posts</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForSpeaking" xml:space="preserve">
+    <value>讲演</value>
+    <comment>Talks</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForTranslationReviewFeedbackEditing" xml:space="preserve">
+    <value>年度数量</value>
+    <comment>Annual quantity</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForForumParticipation" xml:space="preserve">
+    <value>回答数</value>
+    <comment>Number of Answers</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForUserGroupOwner" xml:space="preserve">
+    <value>会议</value>
+    <comment>Meetings</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForVideo" xml:space="preserve">
+    <value>视频数</value>
+    <comment>Number of Videos</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForWebcast" xml:space="preserve">
+    <value>视频数</value>
+    <comment>Number of Videos</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForWebsitePosts" xml:space="preserve">
+    <value>发帖数</value>
+    <comment>Number of Posts</comment>
+  </data>
+  <data name="AnnualReachTipTextDefault" xml:space="preserve">
+    <value>浏览量</value>
+  </data>
+  <data name="AnnualReachTipTextForArticle" xml:space="preserve">
+    <value>浏览量</value>
+    <comment>Number of Views</comment>
+  </data>
+  <data name="AnnualReachTipTextForBook" xml:space="preserve">
+    <value>售出数目</value>
+    <comment>Copies sold</comment>
+  </data>
+  <data name="AnnualReachTipTextForConference" xml:space="preserve">
+    <value>参与的访客数量</value>
+    <comment>参与的访客数量</comment>
+  </data>
+  <data name="AnnualReachTipTextForFeedback" xml:space="preserve">
+    <value>提供的反馈数量</value>
+    <comment>Number of Feedbacks provided</comment>
+  </data>
+  <data name="AnnualReachTipTextForForumModerator" xml:space="preserve">
+    <value>年度目标</value>
+    <comment>Annual reach</comment>
+  </data>
+  <data name="AnnualReachTipTextForMentorship" xml:space="preserve">
+    <value>年度目标</value>
+    <comment>Annual reach</comment>
+  </data>
+  <data name="AnnualReachTipTextForOpenSource" xml:space="preserve">
+    <value>提交的次数</value>
+    <comment>Commits</comment>
+  </data>
+  <data name="AnnualReachTipTextForOther" xml:space="preserve">
+    <value>年度目标</value>
+    <comment>Annual reach</comment>
+  </data>
+  <data name="AnnualReachTipTextForPosts" xml:space="preserve">
+    <value>年度总访客数</value>
+    <comment>年度总访客数</comment>
+  </data>
+  <data name="AnnualReachTipTextForProject" xml:space="preserve">
+    <value>下载数</value>
+    <comment>下载数</comment>
+  </data>
+  <data name="AnnualReachTipTextForSamples" xml:space="preserve">
+    <value>下载数</value>
+    <comment>下载数</comment>
+  </data>
+  <data name="AnnualReachTipTextForSiteOwner" xml:space="preserve">
+    <value>访客</value>
+    <comment>访客</comment>
+  </data>
+  <data name="AnnualReachTipTextForSocialMedia" xml:space="preserve">
+    <value>关注者数</value>
+    <comment>关注者数</comment>
+  </data>
+  <data name="AnnualReachTipTextForSpeaking" xml:space="preserve">
+    <value>会谈的与会者</value>
+    <comment>Attendees of talks</comment>
+  </data>
+  <data name="AnnualReachTipTextForTranslationReviewFeedbackEditing" xml:space="preserve">
+    <value>年度目标</value>
+    <comment>Annual reach</comment>
+  </data>
+  <data name="AnnualReachTipTextForForumParticipation" xml:space="preserve">
+    <value>回答数</value>
+    <comment>View of answers</comment>
+  </data>
+  <data name="AnnualReachTipTextForUserGroupOwner" xml:space="preserve">
+    <value>成员</value>
+    <comment>Members</comment>
+  </data>
+  <data name="AnnualReachTipTextForVideo" xml:space="preserve">
+    <value>浏览数</value>
+    <comment>浏览数</comment>
+  </data>
+  <data name="AnnualReachTipTextForWebcast" xml:space="preserve">
+    <value>浏览数</value>
+    <comment>浏览数</comment>
+  </data>
+  <data name="AnnualReachTipTextForWebsitePosts" xml:space="preserve">
+    <value>年度总访客数</value>
+    <comment>年度总访客数</comment>
+  </data>
+  <data name="DefaultNetworkErrorString" xml:space="preserve">
+    <value>网络异常: 请检查你的网络并重试</value>
+  </data>
+  <data name="FieldMustbeNumberMessageText" xml:space="preserve">
+    <value>这是一个数值字段</value>
+  </data>
+  <data name="InvalidUrlMessageText" xml:space="preserve">
+    <value>输入一个有效的url</value>
+  </data>
+  <data name="MaxLengthMessageText" xml:space="preserve">
+    <value>超过了最大长度</value>
+  </data>
+  <data name="NetworkErrorFormatString" xml:space="preserve">
+    <value>网络异常:{0}</value>
+  </data>
+  <data name="RequiredFieldMessageText" xml:space="preserve">
+    <value>此项必填</value>
+  </data>
+  <data name="SecondAnnualQuantityTipTextForPosts" xml:space="preserve">
+    <value>订阅者数量</value>
+    <comment>订阅者数量</comment>
+  </data>
+  <data name="SecondAnnualQuantityTipTextForForumParticipation" xml:space="preserve">
+    <value>发帖数</value>
+    <comment>发帖数</comment>
+  </data>
+  <data name="SecondAnnualQuantityTipTextForWebsitePosts" xml:space="preserve">
+    <value>订阅者数</value>
+    <comment>订阅者数</comment>
+  </data>
+  <data name="DialogTitleForSignout" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>这是官方的微软最有价值专家奖应用。微软最有价值专家奖颁发给那些分享他们的技术，热情，专业技能以及真实世界的微软产品等给他人的杰出的独立社区领袖。微软 mvp 可以使用这个应用程序来访问他们的个人资料, 贡献数据, 以及自动化的几个不同的任务, 创造效率的日常任务。</value>
+  </data>
+  <data name="ContributionDetailTitleForEditing" xml:space="preserve">
+    <value>编辑贡献</value>
+  </data>
+  <data name="ContributionDetailTitleForNew" xml:space="preserve">
+    <value>新增贡献</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>版权 {0} 微软</value>
+  </data>
+  <data name="DialogDescriptionForCheckNetwork" xml:space="preserve">
+    <value>请检查连接以使MVP账号登录</value>
+  </data>
+  <data name="DialogDescriptionForCheckNetworkFormat" xml:space="preserve">
+    <value>看起来出了问题。 请检查您的连接.。错误：{0}无法加载</value>
+  </data>
+  <data name="DialogDescriptionForCheckNetworkFormat1" xml:space="preserve">
+    <value>想要提交贡献，请检查连接。</value>
+  </data>
+  <data name="DialogDescriptionForError" xml:space="preserve">
+    <value>无法打开您的浏览器。</value>
+  </data>
+  <data name="DialogDescriptionForInvalidCredentials" xml:space="preserve">
+    <value>无法验证MVP状态，请用你的MVP凭据重新登录。</value>
+  </data>
+  <data name="DialogDescriptionForSaved" xml:space="preserve">
+    <value>MVP贡献已成功保存。感谢您的贡献。</value>
+  </data>
+  <data name="DialogDescriptionForUnableSave" xml:space="preserve">
+    <value>看起来出了问题。 请检查您的连接并重新提交。错误：{0}无法保存"</value>
+  </data>
+  <data name="DialogLoading" xml:space="preserve">
+    <value>加载中...</value>
+  </data>
+  <data name="DialogOK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="DialogSaving" xml:space="preserve">
+    <value>保存中...</value>
+  </data>
+  <data name="DialogTitleForCheckNetwork" xml:space="preserve">
+    <value>检查网络连接</value>
+  </data>
+  <data name="DialogTitleForError" xml:space="preserve">
+    <value>异常</value>
+  </data>
+  <data name="DialogTitleForSaved" xml:space="preserve">
+    <value>已保存！</value>
+  </data>
+  <data name="RefreshTokenExceptionTip" xml:space="preserve">
+    <value>$"无法刷新令牌: {0}"</value>
+  </data>
+  <data name="RefreshTokenTip" xml:space="preserve">
+    <value>刷新令牌中……</value>
+  </data>
+  <data name="DialogCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="DialogForSignoutConfirmTipText" xml:space="preserve">
+    <value>你确定要退出嘛？</value>
+  </data>
+  <data name="DialogForSignoutOKText" xml:space="preserve">
+    <value>是的，退出</value>
+  </data>
+  <data name="VersionFormat" xml:space="preserve">
+    <value>版本: {0}</value>
+  </data>
+  <data name="DialogConfirmTextForDelete" xml:space="preserve">
+    <value>是，删除</value>
+  </data>
+  <data name="DialogDescriptionForDelete" xml:space="preserve">
+    <value>是否确定要删除此贡献？</value>
+  </data>
+  <data name="DialogTitleForDelete" xml:space="preserve">
+    <value>删除贡献？</value>
+  </data>
+  <data name="DialogTitleForLoadingContribution" xml:space="preserve">
+    <value>加载贡献...</value>
+  </data>
+  <data name="DialogTitleForLoadingProfile" xml:space="preserve">
+    <value>加载个人信息...</value>
+  </data>
+  <data name="ExpectedCultureIdentifier" xml:space="preserve">
+    <value>预期的区域性标识符</value>
+  </data>
+  <data name="TabTitleForContributions" xml:space="preserve">
+    <value>贡献列表</value>
+  </data>
+  <data name="TabTitleForProfile" xml:space="preserve">
+    <value>个人信息</value>
+  </data>
+  <data name="AddButton" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="DevToolsInfo" xml:space="preserve">
+    <value> 用C#和Xamarin开发</value>
+  </data>
+  <data name="LabelForAwardCategories" xml:space="preserve">
+    <value>获奖类别</value>
+  </data>
+  <data name="LabelForContributionArea" xml:space="preserve">
+    <value>贡献区域</value>
+  </data>
+  <data name="LabelForContributionDate" xml:space="preserve">
+    <value>贡献日期</value>
+  </data>
+  <data name="LabelForContributionTitle" xml:space="preserve">
+    <value>贡献标题</value>
+  </data>
+  <data name="LabelForContributionType" xml:space="preserve">
+    <value>贡献类型</value>
+  </data>
+  <data name="LabelForDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="LabelForFirstAward" xml:space="preserve">
+    <value>第一次获奖年份</value>
+  </data>
+  <data name="LabelForNumberOfAward" xml:space="preserve">
+    <value>获奖总次数</value>
+  </data>
+  <data name="LabelForURL" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="LabelForVisibility" xml:space="preserve">
+    <value>公开度</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>了解MVP项目</value>
+  </data>
+  <data name="PageTitleForLogOn" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="PageTitleForSetting" xml:space="preserve">
+    <value>关于MVP</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="SettingsButton" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SigninTo" xml:space="preserve">
+    <value>登录MVP账号</value>
+  </data>
+  <data name="SignoutButton" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>欢迎</value>
+  </data>
+</root>

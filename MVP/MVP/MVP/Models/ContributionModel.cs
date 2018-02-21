@@ -54,21 +54,6 @@ namespace Microsoft.Mvp.Models
 
         public bool IsBelongToLatestAwardCycle { get; set; }
 
-        public string TitleDisplay
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(Title) && Title.Length > 40)
-                {
-                    return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}{1}", Title.Substring(0, 40), Title.Length > 40 ? "..." : "");
-                }
-                else
-                {
-                    return Title;
-                }
-            }
-        }
-
         public string DataFormat
         {
             get

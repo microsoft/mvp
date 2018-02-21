@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   x:Class="Microsoft.Mvpui.XamlResources.Styles">
+	<Color x:Key="Primary">#0072C6</Color>
+	<Color x:Key="PrimaryDark">#004f8a</Color>
+	<Color x:Key="Accent">#FFC107</Color>
+	<Color x:Key="BlueBackgroundColor">#0072C6</Color>
+	<Color x:Key="BackgroundColoriOS">#FFFFFF</Color>
+	<Color x:Key="NavigationTintColor">#999fa5</Color>
+	<Color x:Key="NavigationTitleColor">#0a77b2</Color>
+	<Color x:Key="NavigationShadowColor">#f2f2f2</Color>
+	<Color x:Key="TabTintColor">#0078d7</Color>
+	<Color x:Key="PrimaryTextColor">#818181</Color>
+	<Color x:Key="SecondaryTextColor">#4B4B4B</Color>
+
+	<OnPlatform x:Key="BackgroundColor" x:TypeArguments="Color">
+		<On Platform="iOS" Value="#FFFFFF" />
+		<On Platform="Android" Value="#F5F5F5" />
+		<On Platform="UWP" Value="#F5F5F5" />
+	</OnPlatform>
+	<OnPlatform x:Key="NormalLabelFontSize" x:TypeArguments="x:Double">
+		<On Platform="iOS" Value="13" />
+		<On Platform="Android" Value="14" />
+		<On Platform="UWP" Value="14" />
+	</OnPlatform>
+	<OnPlatform x:Key="BottomMenuLabelFontSize" x:TypeArguments="x:Double">
+		<On Platform="iOS" Value="10" />
+		<On Platform="Android" Value="12" />
+		<On Platform="UWP" Value="12" />
+	</OnPlatform>
+	<OnPlatform x:Key="ContributionBtnFontSize" x:TypeArguments="x:Double">
+		<On Platform="iOS" Value="10" />
+		<On Platform="Android" Value="16" />
+		<On Platform="UWP" Value="16" />
+	</OnPlatform>
+	<OnPlatform x:Key="CommonProfileLabelFontSize" x:TypeArguments="x:Double">
+		<On Platform="iOS" Value="12" />
+		<On Platform="Android" Value="14" />
+		<On Platform="UWP" Value="14" />
+	</OnPlatform>
+	<OnPlatform x:Key="SmallProfileLabelFontSize" x:TypeArguments="x:Double" >
+		<On Platform="iOS" Value="10" />
+		<On Platform="Android" Value="14" />
+		<On Platform="UWP" Value="14" />
+	</OnPlatform>
+	<OnPlatform x:Key="XSmallProfileLabelFontSize" x:TypeArguments="x:Double" >
+		<On Platform="iOS" Value="13" />
+		<On Platform="Android" Value="13" />
+		<On Platform="UWP" Value="13" />
+	</OnPlatform>
+
+	<Style TargetType="Label">
+		<Setter Property="FontFamily">
+			<Setter.Value>
+				<OnPlatform x:TypeArguments="x:String">
+					<OnPlatform.iOS>HelveticaNeue</OnPlatform.iOS>
+				</OnPlatform>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style TargetType="Button">
+		<Setter Property="FontFamily">
+			<Setter.Value>
+				<OnPlatform x:TypeArguments="x:String">
+					<OnPlatform.iOS>HelveticaNeue-Bold</OnPlatform.iOS>
+				</OnPlatform>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="FontSize">
+			<Setter.Value>
+				<OnPlatform x:TypeArguments="x:Double">
+					<OnPlatform.iOS>14</OnPlatform.iOS>
+				</OnPlatform>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style TargetType="Label" x:Key="BoldLabel">
+		<Setter Property="FontFamily">
+			<Setter.Value>
+				<OnPlatform x:TypeArguments="x:String">
+					<OnPlatform.iOS>HelveticaNeue-Bold</OnPlatform.iOS>
+				</OnPlatform>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

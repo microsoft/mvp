@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using AppResources = Microsoft.Mvp.Resources.AppResources;
 //using Xamarin.Forms.Maps;
 
 namespace Microsoft.Mvpui
@@ -70,16 +71,16 @@ namespace Microsoft.Mvpui
 			IProgressDialog progress = null;
             try
             {
-				progress = UserDialogs.Instance.Loading("Loading...", maskType: MaskType.Clear);
+				progress = UserDialogs.Instance.Loading(TranslateServices.GetResourceString(CommonConstants.DialogLoading), maskType: MaskType.Clear);
 				progress.Show();
 
 				InitContributionType();
                 await BindContributionAreas();
                 BindingSelectors();
             }
-			catch
+			catch(Exception ex)
 			{
-
+				await UserDialogs.Instance.AlertAsync(string.Format(CommonConstants.DialogDescriptionForCheckNetworkFormat,ex.Message), TranslateServices.GetResourceString(CommonConstants.DialogOK));
 			}
             finally
             {
@@ -90,7 +91,13 @@ namespace Microsoft.Mvpui
 
         private async void InitContributionType()
         {
-            await BindContributionType();
+			try
+			{
+				await BindContributionType();
+			}
+			catch (Exception ex)
+			{ }
+
         }
 
 
@@ -238,13 +245,13 @@ namespace Microsoft.Mvpui
 
 				if (!CrossConnectivity.Current.IsConnected)
 				{
-					await UserDialogs.Instance.AlertAsync("Please check connectivity to submit contribution.", "Check Connectivity", "OK");
+					await UserDialogs.Instance.AlertAsync(TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForCheckNetworkFormat1), TranslateServices.GetResourceString(CommonConstants.DialogTitleForCheckNetwork), TranslateServices.GetResourceString(CommonConstants.DialogOK));
 
 					return;
 				}
 
 				IsBusy = true;
-				progress = UserDialogs.Instance.Loading("Saving...", maskType: MaskType.Clear);
+				progress = UserDialogs.Instance.Loading(TranslateServices.GetResourceString(CommonConstants.DialogSaving), maskType: MaskType.Clear);
 				progress.Show();
                 
 
@@ -274,7 +281,7 @@ namespace Microsoft.Mvpui
                     }
                     else
                     {
-						return;
+						throw new Exception(MyProfileViewModel.Instance.ErrorMessage); 
                     }
                 }
                 else
@@ -299,8 +306,8 @@ namespace Microsoft.Mvpui
                         int index = MyProfileViewModel.Instance.List.IndexOf(currentContribution);
                         MyProfileViewModel.Instance.List.Remove(currentContribution);
                         MyProfileViewModel.Instance.List.Insert(index, ViewModel.MyContributionBackup);
-                        return;
-                    }
+						throw new Exception(MyProfileViewModel.Instance.ErrorMessage);
+					}
                 }
 
                 ViewModel.MyContribution = null;
@@ -311,7 +318,7 @@ namespace Microsoft.Mvpui
 
 				progress?.Hide();
 
-				await UserDialogs.Instance.AlertAsync("MVP contribution has been saved successfully. Thank you for your contribution.", "Saved!", "OK");
+				await UserDialogs.Instance.AlertAsync(TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForSaved), TranslateServices.GetResourceString(CommonConstants.DialogTitleForSaved), TranslateServices.GetResourceString(CommonConstants.DialogOK));
 
                 await Navigation.PopModalAsync();
 
@@ -320,7 +327,7 @@ namespace Microsoft.Mvpui
             {
 				progress?.Hide();
 				ViewModel.ErrorMessage = ex.Message;
-				await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection and submit again. Error: " + ex.Message, "Unable to save", "OK");
+				await UserDialogs.Instance.AlertAsync(string.Format(TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForUnableSave), ex.Message), TranslateServices.GetResourceString(CommonConstants.DialogOK));
 
 			}
 			finally
@@ -343,19 +350,19 @@ namespace Microsoft.Mvpui
 
             if (string.IsNullOrEmpty(title))
             {
-                ViewModel.ErrorMessageForTitle = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
+                ViewModel.ErrorMessageForTitle = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, TranslateServices.GetResourceString(CommonConstants.RequiredFieldMessageText));
                 isValid = false;
             }
             if (ViewModel.IsNeededUrl)
             {
                 if (string.IsNullOrEmpty(url))
                 {
-                    ViewModel.ErrorMessageForUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.InvalidUrlMessageText);
+                    ViewModel.ErrorMessageForUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, TranslateServices.GetResourceString(CommonConstants.InvalidUrlMessageText));
                     isValid = false;
                 }
                 else if (!Regex.IsMatch(url, CommonConstants.UrlPattern))
                 {
-                    ViewModel.ErrorMessageForUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.InvalidUrlMessageText);
+                    ViewModel.ErrorMessageForUrl = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, TranslateServices.GetResourceString(CommonConstants.InvalidUrlMessageText));
                     isValid = false;
                 }
             }
@@ -365,13 +372,13 @@ namespace Microsoft.Mvpui
                 {
                     if (!Regex.IsMatch(annualQuantity, CommonConstants.NumberPattern))
                     {
-                        ViewModel.ErrorMessageForAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.FieldMustbeNumberMessageText);
+                        ViewModel.ErrorMessageForAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, TranslateServices.GetResourceString(CommonConstants.FieldMustbeNumberMessageText));
                         isValid = false;
                     }
                 }
                 else
                 {
-                    ViewModel.ErrorMessageForAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
+                    ViewModel.ErrorMessageForAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, TranslateServices.GetResourceString(CommonConstants.RequiredFieldMessageText));
                     isValid = false;
                 }
             }
@@ -381,13 +388,13 @@ namespace Microsoft.Mvpui
                 {
                     if (!Regex.IsMatch(secondAnnualQuantity, CommonConstants.NumberPattern))
                     {
-                        ViewModel.ErrorMessageForSecondAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.FieldMustbeNumberMessageText);
+                        ViewModel.ErrorMessageForSecondAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, TranslateServices.GetResourceString(CommonConstants.FieldMustbeNumberMessageText));
                         isValid = false;
                     }
                 }
                 else
                 {
-                    ViewModel.ErrorMessageForSecondAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, CommonConstants.RequiredFieldMessageText);
+                    ViewModel.ErrorMessageForSecondAnnualQuantity = string.Format(System.Globalization.CultureInfo.InvariantCulture, " {0} {1}", CommonConstants.HighlightMessageText, TranslateServices.GetResourceString(CommonConstants.RequiredFieldMessageText));
                     isValid = false;
                 }
             }
@@ -395,7 +402,7 @@ namespace Microsoft.Mvpui
             {
                 if (!Regex.IsMatch(annualReach, CommonConstants.NumberPattern))
                 {
-                    ViewModel.ErrorMessageForAnnualReach = CommonConstants.FieldMustbeNumberMessageText;
+                    ViewModel.ErrorMessageForAnnualReach = TranslateServices.GetResourceString(CommonConstants.FieldMustbeNumberMessageText);
                     isValid = false;
                 }
             }
@@ -438,8 +445,8 @@ namespace Microsoft.Mvpui
                 {
                     case CommonConstants.AT:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Articles";
-                        ViewModel.AnnualReachTipText = "Number of Views";
+                        ViewModel.AnnualQuantityTipText =TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForArticle);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForArticle);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -447,9 +454,9 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.Bsp:
                         ViewModel.IsSecondAnnualQuantityVisible = true;
-                        ViewModel.AnnualQuantityTipText = "Number of Posts";
-                        ViewModel.AnnualReachTipText = "Annual Unique Visitors";
-                        ViewModel.SecondAnnualQuantityTipText = "Number of Subscribers";
+                        ViewModel.AnnualQuantityTipText =TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForPosts);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForPosts);
+                        ViewModel.SecondAnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.SecondAnnualQuantityTipTextForPosts);
                         ViewModel.IsNeededUrl = true;
                         ViewModel.IsNeededAnnualQuantity = true;
                         ViewModel.IsNeededSecondAnnualQuantity = false;
@@ -457,8 +464,8 @@ namespace Microsoft.Mvpui
                     case CommonConstants.BA:
                     case CommonConstants.Bca:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Books";
-                        ViewModel.AnnualReachTipText = "Copies sold";
+                        ViewModel.AnnualQuantityTipText =TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForBook);
+                        ViewModel.AnnualReachTipText =TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForBook);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -466,8 +473,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.CS:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Samples";
-                        ViewModel.AnnualReachTipText = "Number of Downloads";
+                        ViewModel.AnnualQuantityTipText =TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForSamples);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForSamples);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = true;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -475,8 +482,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.Cpt:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Projects";
-                        ViewModel.AnnualReachTipText = "Number of Downloads";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForProject);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForProject);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = true;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -485,8 +492,8 @@ namespace Microsoft.Mvpui
                     case CommonConstants.Cbp:
                     case CommonConstants.CO:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Conferences";
-                        ViewModel.AnnualReachTipText = "Number of Visitors";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForConference);
+                        ViewModel.AnnualReachTipText =TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForConference);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -494,8 +501,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.FM:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Threads moderated";
-                        ViewModel.AnnualReachTipText = "Annual reach";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForForumModerator);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForForumModerator);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -503,26 +510,26 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.FP:
                         ViewModel.IsSecondAnnualQuantityVisible = true;
-                        ViewModel.AnnualQuantityTipText = "Number of Answers";
-                        ViewModel.AnnualReachTipText = "View of answers";
-                        ViewModel.SecondAnnualQuantityTipText = "Number of Posts";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForForumParticipation);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForForumParticipation);
+                        ViewModel.SecondAnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.SecondAnnualQuantityTipTextForumParticipation);
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = false;
                         ViewModel.IsNeededSecondAnnualQuantity = true;
                         break;
                     case CommonConstants.Fpmf:
                         ViewModel.IsSecondAnnualQuantityVisible = true;
-                        ViewModel.AnnualQuantityTipText = "Number of Answers";
-                        ViewModel.AnnualReachTipText = "View of answers";
-                        ViewModel.SecondAnnualQuantityTipText = "Number of Posts";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForForumParticipation);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForForumParticipation);
+                        ViewModel.SecondAnnualQuantityTipText =TranslateServices.GetResourceString(CommonConstants.SecondAnnualQuantityTipTextForumParticipation);
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
                         ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.MS:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Mentees";
-                        ViewModel.AnnualReachTipText = "Annual reach";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForMentorship);
+                        ViewModel.AnnualReachTipText =TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForMentorship);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -530,8 +537,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.Osp:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Projects";
-                        ViewModel.AnnualReachTipText = "Commits";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForOpenSource);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForOpenSource);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -539,8 +546,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.OT:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Annual quantity";
-                        ViewModel.AnnualReachTipText = "Annual reach";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForOther);
+                        ViewModel.AnnualReachTipText =TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForOther);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -548,8 +555,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.Pcf:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Events provided";
-                        ViewModel.AnnualReachTipText = "Number of Feedbacks provided";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForFeedback);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForFeedback);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -558,35 +565,35 @@ namespace Microsoft.Mvpui
                     case CommonConstants.Pgf:
                     case CommonConstants.Pgfg:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Events provided";
-                        ViewModel.AnnualReachTipText = "Number of Feedbacks provided";
-                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+						ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForFeedback);
+						ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForFeedback);
+						ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
                         ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Pgi:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Events provided";
-                        ViewModel.AnnualReachTipText = "Number of Feedbacks provided";
-                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+						ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForFeedback);
+						ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForFeedback);
+						ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
                         ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.Ptdp:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Events provided";
-                        ViewModel.AnnualReachTipText = "Number of Feedbacks provided";
-                        ViewModel.SecondAnnualQuantityTipText = string.Empty;
+						ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForFeedback);
+						ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForFeedback);
+						ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
                         ViewModel.IsNeededSecondAnnualQuantity = false;
                         break;
                     case CommonConstants.SO:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Posts";
-                        ViewModel.AnnualReachTipText = "Visitors";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForSiteOwner);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForSiteOwner);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -596,8 +603,8 @@ namespace Microsoft.Mvpui
                     case CommonConstants.SL:
                     case CommonConstants.Sug:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Talks";
-                        ViewModel.AnnualReachTipText = "Attendees of talks";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForSpeaking);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForSpeaking);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -605,8 +612,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.Tsm:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Posts";
-                        ViewModel.AnnualReachTipText = "Number of Followers";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForSocialMedia);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForSocialMedia);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = true;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -614,8 +621,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.Trfe:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Annual quantity";
-                        ViewModel.AnnualReachTipText = "Annual reach";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForTranslationReviewFeedbackEditing);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForTranslationReviewFeedbackEditing);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -623,8 +630,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.Ugo:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Meetings";
-                        ViewModel.AnnualReachTipText = "Members";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForUserGroupOwner);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForUserGroupOwner);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -632,8 +639,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.VD:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Videos";
-                        ViewModel.AnnualReachTipText = "Number of Views";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForVideo);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForVideo);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = true;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -641,8 +648,8 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.WB:
                         ViewModel.IsSecondAnnualQuantityVisible = false;
-                        ViewModel.AnnualQuantityTipText = "Number of Videos";
-                        ViewModel.AnnualReachTipText = "Number of Views";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForVideo);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForVideo);
                         ViewModel.SecondAnnualQuantityTipText = string.Empty;
                         ViewModel.IsNeededUrl = false;
                         ViewModel.IsNeededAnnualQuantity = true;
@@ -650,9 +657,9 @@ namespace Microsoft.Mvpui
                         break;
                     case CommonConstants.WP:
                         ViewModel.IsSecondAnnualQuantityVisible = true;
-                        ViewModel.AnnualQuantityTipText = "Number of Posts";
-                        ViewModel.AnnualReachTipText = "Annual Unique Visitors";
-                        ViewModel.SecondAnnualQuantityTipText = "Number of Subscribers";
+                        ViewModel.AnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.AnnualQuantityTipTextForWebsitePosts);
+                        ViewModel.AnnualReachTipText = TranslateServices.GetResourceString(CommonConstants.AnnualReachTipTextForWebsitePosts);
+                        ViewModel.SecondAnnualQuantityTipText = TranslateServices.GetResourceString(CommonConstants.SecondAnnualQuantityTipTextForWebsitePosts);
                         ViewModel.IsNeededUrl = true;
                         ViewModel.IsNeededAnnualQuantity = true;
                         ViewModel.IsNeededSecondAnnualQuantity = false;

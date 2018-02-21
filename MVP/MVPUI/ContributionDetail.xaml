@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Microsoft.Mvpui.ContributionDetail"
              BackgroundColor="#FFFFFF"
-			 Title="Add a new contribution">
+			 Title="{Binding ContributionActionType}">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Close" x:Name="ToolbarClose" Icon="toolbar_close.png" />
+		<ToolbarItem Text="{Binding CloseButton}" x:Name="ToolbarClose" Icon="toolbar_close.png" />
 	</ContentPage.ToolbarItems>
 	<Grid>
 		<StackLayout Spacing="0">
@@ -13,31 +13,31 @@
 				<StackLayout>
 					<StackLayout Padding="20">
 
-						<Label Text="Contribution type" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForContributionType}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<Picker HeightRequest="40" x:Name="contributionTypeSelector" SelectedIndexChanged="OnContributionTypeSelectedIndexChanged" />
 
-						<Label Text="Contribution Area" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForContributionArea}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<Picker HeightRequest="40"  x:Name="ContributionAreaSelector" TextColor="Black" />
 
-						<Label Text="Date of contribution" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForContributionDate}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<DatePicker x:Name="ContributionDateSelector" Date="{Binding MyContribution.StartDate}" TextColor="Black" />
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
-							<Label Text="Title of contribution" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+							<Label Text="{Binding LabelForContributionTitle}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 							<Label Text="{Binding ErrorMessageForTitle}"  FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" VerticalTextAlignment="End" />
 						</StackLayout>
 						<Entry  x:Name="entryTitle" Text="{Binding MyContribution.Title}" TextColor="Black" />
 
-						<Label Text="Visibility" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForVisibility}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<Picker x:Name="PersonGroupSelector" TextColor="Black" />
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
-							<Label Text="URL" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+							<Label Text="{Binding LabelForURL}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 							<Label Text="{Binding ErrorMessageForUrl}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" IsVisible="{Binding IsNeededUrl}" VerticalTextAlignment="End" />
 						</StackLayout>
 						<Entry x:Name="entryURL" Keyboard="Url" TextColor="Black" Text="{Binding MyContribution.ReferenceUrl}" />
 
-						<Label Text="Description" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForDescription}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<Editor HeightRequest="180" BackgroundColor="#10000000" x:Name="entryDescription" TextColor="Black" Text="{Binding MyContribution.Description}" />
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
@@ -71,7 +71,7 @@
 					BorderRadius="0"
 					BackgroundColor="{StaticResource PrimaryDark}"  
 					IsEnabled="{Binding IsNotBusy}"
-					Clicked="ButtonSaveClicked" Text="Save"
+					Clicked="ButtonSaveClicked" Text="{Binding SaveButton}"
                     HorizontalOptions="FillAndExpand" />
 		</StackLayout>
 	</Grid>

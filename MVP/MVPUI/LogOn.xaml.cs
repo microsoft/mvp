@@ -38,6 +38,7 @@ namespace Microsoft.Mvpui
 
 			if (IsBusy)
 				return;
+			
 
 			if (Settings.GetSetting(CommonConstants.TokenKey) != string.Empty)
 			{
@@ -45,13 +46,13 @@ namespace Microsoft.Mvpui
 				try
 				{
 					IsBusy = true;
-					progress = UserDialogs.Instance.Loading("Refreshing tokens...");
+					progress = UserDialogs.Instance.Loading(TranslateServices.GetResourceString(CommonConstants.RefreshTokenKey));
 					await LiveIdLogOnViewModel.GetNewAccessToken();
 					
 				}
 				catch (Exception ex)
 				{
-					Debug.WriteLine($"Unable to refresh token: {ex}");
+					Debug.WriteLine(string.Format(TranslateServices.GetResourceString(CommonConstants.RefreshTokenExceptionTip), ex.Message));
 				}
 				finally
 				{
@@ -86,7 +87,9 @@ namespace Microsoft.Mvpui
             }
             else if(!CrossConnectivity.Current.IsConnected)
 			{
-				await DisplayAlert("Check Connectivity", "Please check connectivity to proceed to MVP account sign in.", "OK");
+				await DisplayAlert(TranslateServices.GetResourceString(CommonConstants.DialogTitleForCheckNetwork),
+					TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForCheckNetwork),
+					TranslateServices.GetResourceString(CommonConstants.DialogOK));
 			}
 			else
             {
@@ -110,7 +113,7 @@ namespace Microsoft.Mvpui
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", "Failed to open your browser.", "OK");
+                await DisplayAlert(TranslateServices.GetResourceString(CommonConstants.DialogTitleForError), TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForError), TranslateServices.GetResourceString(CommonConstants.DialogOK));
             }
         }
 

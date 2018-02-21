@@ -11,46 +11,48 @@ using System.Collections.Generic;
 
 namespace Microsoft.Mvp.ViewModels
 {
-    public class MyProfileViewModel : ViewModelBase
-    {
-        #region Singleton pattern and constructors
+	public class MyProfileViewModel : ViewModelBase
+	{
+		#region Singleton pattern and constructors
 
-        private static MyProfileViewModel _instance = null;
-        private static readonly object _synObject = new object();
-        public static MyProfileViewModel Instance
-        {
-            get
-            {
-                // Double-Checked Locking
-                if (null == _instance)
-                {
-                    lock (_synObject)
-                    {
-                        if (null == _instance)
-                        {
-                            _instance = new MyProfileViewModel();
-                        }
-                    }
-                }
-                return _instance;
-            }
-        }
+		private static MyProfileViewModel _instance = null;
+		private static readonly object _synObject = new object();
+		public static MyProfileViewModel Instance
+		{
+			get
+			{
+				// Double-Checked Locking
+				if (null == _instance)
+				{
+					lock (_synObject)
+					{
+						if (null == _instance)
+						{
+							_instance = new MyProfileViewModel();
+						}
+					}
+				}
+				return _instance;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region Private Members
+		#region Private Members
 
-        private string _personName = string.Empty;
-        private string _mvpNumber = string.Empty;
-        private string _awardCategoriesValue = string.Empty;
-        private string _firstAwardValue = string.Empty;
-        private string _awardsCountValue = string.Empty;
-        private string _description = string.Empty;
-        private ObservableRangeCollection<ContributionModel> _list = new ObservableRangeCollection<ContributionModel>();
+		private string _personName = string.Empty;
+		private string _mvpNumber = string.Empty;
+		private string _awardCategoriesValue = string.Empty;
+		private string _firstAwardValue = string.Empty;
+		private string _awardsCountValue = string.Empty;	
+		private string _description = string.Empty;
+		private string _tabTitleForContributions = TranslateServices.GetResourceString(CommonConstants.TabTitleForContributions);
+		private string _tabTitleForProfile = TranslateServices.GetResourceString(CommonConstants.TabTitleForProfile);
+		private ObservableRangeCollection<ContributionModel> _list = new ObservableRangeCollection<ContributionModel>();
 
-        private string _storeImageBase64Str;
+		private string _storeImageBase64Str;
 
-        private string _ErrorMessage = string.Empty;
+		private string _ErrorMessage = string.Empty;
 		#endregion
 
 		#region Public Members
@@ -61,11 +63,11 @@ namespace Microsoft.Mvp.ViewModels
 			set => SetProperty<string>(ref _personName, value);
 		}
 
-        public string MvpNumber
-        {
-            get => _mvpNumber;
-            set => SetProperty<string>(ref _mvpNumber, value);
-        }
+		public string MvpNumber
+		{
+			get => _mvpNumber;
+			set => SetProperty<string>(ref _mvpNumber, value);
+		}
 
 		public string AwardCategoriesValue
 		{
@@ -85,11 +87,11 @@ namespace Microsoft.Mvp.ViewModels
 			set => SetProperty<string>(ref _awardsCountValue, value);
 		}
 
-        public string Description
-        {
-            get => _description;
-            set => SetProperty(ref _description, value);
-        }
+		public string Description
+		{
+			get => _description;
+			set => SetProperty(ref _description, value);
+		}
 
 		public ObservableRangeCollection<ContributionModel> List
 		{
@@ -104,69 +106,65 @@ namespace Microsoft.Mvp.ViewModels
 		{
 			get => _storeImageBase64Str;
 			set
-            {
-                SetProperty<string>(ref _storeImageBase64Str, value);
-                OnPropertyChanged(nameof(ProfilePhoto));
-            }
+			{
+				SetProperty<string>(ref _storeImageBase64Str, value);
+				OnPropertyChanged(nameof(ProfilePhoto));
+			}
 		}
 
-        public ImageSource ProfilePhoto
-        {
-            get
-            {
-                ImageSource retSource = null;
-                bool useDefault = false;
-                if (StoreImageBase64Str != null)
-                {
-                    if (MvpHelper.MvpService is DesignMvpService)
-                    {
-                        retSource = ImageSource.FromUri(new Uri(StoreImageBase64Str));
-                        return retSource;
-                    }
+		public ImageSource ProfilePhoto
+		{
+			get
+			{
+				ImageSource retSource = null;
+				bool useDefault = false;
+				byte[] bytes = default(byte[]);
 
-                    try
-                    {
-                        var bytes2 = Convert.FromBase64String(StoreImageBase64Str);
-                        retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes2));
-                    }
-                    catch
-                    {
-                        useDefault = true;
-                    }
-                }
-                else
-                {
-                    useDefault = true;
-                }
+				if (StoreImageBase64Str != null)
+				{
+					try
+					{
+						bytes = Convert.FromBase64String(StoreImageBase64Str);
+					}
+					catch
+					{
+						useDefault = true;
+					}
+				}
+				else
+				{
+					useDefault = true;
+				}
 
-                if (useDefault)
-                {
-                    var bytes = Convert.FromBase64String(CommonConstants.DefaultPhoto);
-                    retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes));
-                }
-                return retSource;
-            }
-        }
+				if (useDefault)
+				{
+					bytes = Convert.FromBase64String(CommonConstants.DefaultPhoto);
+				}
 
-        public bool HasError => !string.IsNullOrEmpty(ErrorMessage);
+				retSource = ImageSource.FromStream(() => new System.IO.MemoryStream(bytes));
+				return retSource;
+			}
+		}
 
-        public string ErrorMessage
-        {
-            get => _ErrorMessage;
-            set
-            {
-                _ErrorMessage = value;
-                OnPropertyChanged("ErrorMessage");
-                OnPropertyChanged("HasError");
-            }
-        }
+		public bool HasError => !string.IsNullOrEmpty(ErrorMessage);
+
+		public string ErrorMessage
+		{
+			get => _ErrorMessage;
+			set
+			{
+				_ErrorMessage = value;
+				OnPropertyChanged("ErrorMessage");
+				OnPropertyChanged("HasError");
+			}
+		}
 
 		Command<ContributionModel> deleteCommand;
 		public ICommand DeleteCommand => deleteCommand ?? (deleteCommand = new Command<ContributionModel>(async (c) => await ExecuteDeleteCommand(c)));
 
 		async Task ExecuteDeleteCommand(ContributionModel contribution)
 		{
-			var remove = await Application.Current.MainPage.DisplayAlert("Delete Contribution?", "Are you sure you want to delete this contribution?", "Yes, Delete", "Cancel");
+			var remove = await Application.Current.MainPage.DisplayAlert(TranslateServices.GetResourceString(CommonConstants.DialogTitleForDelete), TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForDelete), TranslateServices.GetResourceString(CommonConstants.DialogConfirmTextForDelete), TranslateServices.GetResourceString(CommonConstants.DialogCancel));
 			if (!remove)
 				return;
 
@@ -187,28 +185,27 @@ namespace Microsoft.Mvp.ViewModels
 			if (MyProfileViewModel.Instance.IsBusy || loadedProfile)
 				return;
 
-
 			ErrorMessage = "";
 			IsBusy = true;
 			IProgressDialog progress = null;
 			try
 			{
-				progress = UserDialogs.Instance.Loading("Loading profile...", maskType: MaskType.Clear);
+				progress = UserDialogs.Instance.Loading(TranslateServices.GetResourceString(CommonConstants.DialogTitleForLoadingProfile), maskType: MaskType.Clear);
 				progress.Show();
 
 				await GetPhoto();
 				await GetProfile();
 
-				if (string.Compare(CommonConstants.DefaultNetworkErrorString, ErrorMessage, StringComparison.OrdinalIgnoreCase) == 0)
+				if (string.Compare(TranslateServices.GetResourceString(CommonConstants.DefaultNetworkErrorString), ErrorMessage, StringComparison.OrdinalIgnoreCase) == 0)
 				{
 					StoreImageBase64Str = CommonConstants.DefaultPhoto;
-					ErrorMessage = CommonConstants.DefaultNetworkErrorString;
+					ErrorMessage = TranslateServices.GetResourceString(CommonConstants.DefaultNetworkErrorString);
 				}
 			}
 			catch (Exception ex)
 			{
 				progress?.Hide();
-				await UserDialogs.Instance.AlertAsync("Looks like something went wrong. Please check your connection.. Error: " + ex.Message, "Unable to load", "OK");
+				await UserDialogs.Instance.AlertAsync(TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForCheckNetworkFormat), TranslateServices.GetResourceString(CommonConstants.DialogOK));
 
 			}
 			finally
@@ -225,14 +222,11 @@ namespace Microsoft.Mvp.ViewModels
 
 		private async Task GetProfile()
 		{
-			
 			if (string.IsNullOrEmpty(MyProfileViewModel.Instance.FirstAwardValue))
 			{
-				
 				ProfileModel profile = null;
 
 				CheckCache();
-
 				CheckCacheItem();
 
 				if (cacheItem.ContainsKey(CommonConstants.ProfileCacheKey))
@@ -275,21 +269,16 @@ namespace Microsoft.Mvp.ViewModels
 					Description = profile.Biography;
 					AwardsCountValue = profile.YearsAsMVP.ToString(System.Globalization.CultureInfo.CurrentCulture);
 				}
-				
 			}
-
 		}
-
 
 		private async Task GetPhoto()
 		{
-
 			if (string.IsNullOrEmpty(StoreImageBase64Str))
 			{
 				try
 				{
 					CheckCache();
-
 					CheckCacheItem();
 
 					if (cacheItem.ContainsKey(CommonConstants.ProfilePhotoCacheKey))
@@ -323,7 +312,6 @@ namespace Microsoft.Mvp.ViewModels
 
 				}
 			}
-
 		}
 
 		private void CheckCache()
@@ -358,6 +346,25 @@ namespace Microsoft.Mvp.ViewModels
 		Command refreshCommand;
 		public ICommand RefreshCommand => refreshCommand ?? (refreshCommand = new Command(async () => await ExecuteRefreshCommand()));
 
+		public string TabTitleForContributions
+		{
+			get => _tabTitleForContributions;
+			set => _tabTitleForContributions = value;
+		}
+		public string TabTitleForProfile
+		{
+			get => _tabTitleForProfile;
+			set => _tabTitleForProfile = value;
+		}
+		public string LabelForAwardCategories { get; } = TranslateServices.GetResourceString(CommonConstants.LabelForAwardCategories);
+		public string LabelForFirstAward { get; } = TranslateServices.GetResourceString(CommonConstants.LabelForFirstAward);
+		public string LabelForNumberOfAward { get; } = TranslateServices.GetResourceString(CommonConstants.LabelForNumberOfAward);
+
+		public string AddButton { get; } = TranslateServices.GetResourceString(CommonConstants.AddButton);
+		public string DeleteButton { get; } = TranslateServices.GetResourceString(CommonConstants.DeleteButton);
+
+		public string SettingsButton { get; } = TranslateServices.GetResourceString(CommonConstants.SettingsButton);
+
 		public async Task ExecuteRefreshCommand()
 		{
 			if (IsBusy)
@@ -368,25 +375,22 @@ namespace Microsoft.Mvp.ViewModels
 			CanLoadMore = true;
 			await ExecuteLoadMoreCommand();
 		}
-		
+
 		public async Task ExecuteLoadMoreCommand()
 		{
 			if (!CanLoadMore || IsBusy)
 				return;
 
-
 			IProgressDialog progress = null;
-			IsBusy = true;
 			var index = List.Count;
-
 
 			try
 			{
-				progress = UserDialogs.Instance.Loading("Loading Contributions...", maskType: MaskType.Clear);
+				progress = UserDialogs.Instance.Loading(TranslateServices.GetResourceString(CommonConstants.DialogTitleForLoadingContribution), maskType: MaskType.Clear);
 				progress?.Show();
 
-				var contributions = await MvpHelper.MvpService.GetContributions(index, 50, LogOnViewModel.StoredToken);
-				
+				var contributions = await MvpHelper.MvpService.GetContributions(index, 20, LogOnViewModel.StoredToken);
+
 				if (contributions.Contributions.Count != 0)
 				{
 					var finalList = contributions.Contributions.Select(c =>
@@ -394,18 +398,18 @@ namespace Microsoft.Mvp.ViewModels
 						MvpHelper.SetLabelTextOfContribution(c);
 						return c;
 					});
-					
+
 					List.AddRange(finalList);
 				}
-				CanLoadMore = contributions.Contributions.Count == 50;				
+				CanLoadMore = contributions.Contributions.Count == 20;
 			}
 			catch (Exception ex)
 			{
+				await UserDialogs.Instance.AlertAsync(string.Format(TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForCheckNetworkFormat1), ex.Message), TranslateServices.GetResourceString(CommonConstants.DialogOK));
 			}
 			finally
 			{
 				progress?.Hide();
-				IsBusy = false;
 			}
 		}
 

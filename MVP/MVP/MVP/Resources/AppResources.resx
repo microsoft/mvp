@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnnualQuantityTipTextDefault" xml:space="preserve">
+    <value>Number of Articles</value>
+  </data>
+  <data name="AnnualQuantityTipTextForArticle" xml:space="preserve">
+    <value>Number of Articles</value>
+    <comment>Number of Articles</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForBook" xml:space="preserve">
+    <value>Number of Books</value>
+    <comment>Number of Books</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForConference" xml:space="preserve">
+    <value>Number of Conferences</value>
+    <comment>Number of Conferences</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForFeedback" xml:space="preserve">
+    <value>Number of Events provided</value>
+    <comment>Number of Events provided</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForForumModerator" xml:space="preserve">
+    <value>Number of Threads moderated</value>
+    <comment>Number of Threads moderated</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForMentorship" xml:space="preserve">
+    <value>Number of Mentees</value>
+    <comment>Number of Mentees</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForOpenSource" xml:space="preserve">
+    <value>Projects</value>
+    <comment>Projects</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForOther" xml:space="preserve">
+    <value>Annual quantity</value>
+    <comment>Annual quantity</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForPosts" xml:space="preserve">
+    <value>Number of Posts</value>
+    <comment>Number of Posts</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForProject" xml:space="preserve">
+    <value>Number of Projects</value>
+    <comment>Number of Projects</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForSamples" xml:space="preserve">
+    <value>Number of Samples</value>
+    <comment>Number of Samples</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForSiteOwner" xml:space="preserve">
+    <value>Posts</value>
+    <comment>Posts</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForSocialMedia" xml:space="preserve">
+    <value>Number of Posts</value>
+    <comment>Number of Posts</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForSpeaking" xml:space="preserve">
+    <value>Talks</value>
+    <comment>Talks</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForTranslationReviewFeedbackEditing" xml:space="preserve">
+    <value>Annual quantity</value>
+    <comment>Annual quantity</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForForumParticipation" xml:space="preserve">
+    <value>Number of Answers</value>
+    <comment>Number of Answers</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForUserGroupOwner" xml:space="preserve">
+    <value>Meetings</value>
+    <comment>Meetings</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForVideo" xml:space="preserve">
+    <value>Number of Videos</value>
+    <comment>Number of Videos</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForWebcast" xml:space="preserve">
+    <value>Number of Videos</value>
+    <comment>Number of Videos</comment>
+  </data>
+  <data name="AnnualQuantityTipTextForWebsitePosts" xml:space="preserve">
+    <value>Number of Posts</value>
+    <comment>Number of Posts</comment>
+  </data>
+  <data name="AnnualReachTipTextDefault" xml:space="preserve">
+    <value>Number of Views</value>
+  </data>
+  <data name="AnnualReachTipTextForArticle" xml:space="preserve">
+    <value>Number of Views</value>
+    <comment>Number of Views</comment>
+  </data>
+  <data name="AnnualReachTipTextForBook" xml:space="preserve">
+    <value>Copies sold</value>
+    <comment>Copies sold</comment>
+  </data>
+  <data name="AnnualReachTipTextForConference" xml:space="preserve">
+    <value>Number of Visitors</value>
+    <comment>Number of Visitors</comment>
+  </data>
+  <data name="AnnualReachTipTextForFeedback" xml:space="preserve">
+    <value>Number of Feedbacks provided</value>
+    <comment>Number of Feedbacks provided</comment>
+  </data>
+  <data name="AnnualReachTipTextForForumModerator" xml:space="preserve">
+    <value>Annual reach</value>
+    <comment>Annual reach</comment>
+  </data>
+  <data name="AnnualReachTipTextForMentorship" xml:space="preserve">
+    <value>Annual reach</value>
+    <comment>Annual reach</comment>
+  </data>
+  <data name="AnnualReachTipTextForOpenSource" xml:space="preserve">
+    <value>Commits</value>
+    <comment>Commits</comment>
+  </data>
+  <data name="AnnualReachTipTextForOther" xml:space="preserve">
+    <value>Annual reach</value>
+    <comment>Annual reach</comment>
+  </data>
+  <data name="AnnualReachTipTextForPosts" xml:space="preserve">
+    <value>Annual Unique Visitors</value>
+    <comment>Annual Unique Visitors</comment>
+  </data>
+  <data name="AnnualReachTipTextForProject" xml:space="preserve">
+    <value>Number of Downloads</value>
+    <comment>Number of Downloads</comment>
+  </data>
+  <data name="AnnualReachTipTextForSamples" xml:space="preserve">
+    <value>Number of Downloads</value>
+    <comment>Number of Downloads</comment>
+  </data>
+  <data name="AnnualReachTipTextForSiteOwner" xml:space="preserve">
+    <value>Visitors</value>
+    <comment>Visitors</comment>
+  </data>
+  <data name="AnnualReachTipTextForSocialMedia" xml:space="preserve">
+    <value>Number of Followers</value>
+    <comment>Number of Followers</comment>
+  </data>
+  <data name="AnnualReachTipTextForSpeaking" xml:space="preserve">
+    <value>Attendees of talks</value>
+    <comment>Attendees of talks</comment>
+  </data>
+  <data name="AnnualReachTipTextForTranslationReviewFeedbackEditing" xml:space="preserve">
+    <value>Annual reach</value>
+    <comment>Annual reach</comment>
+  </data>
+  <data name="AnnualReachTipTextForForumParticipation" xml:space="preserve">
+    <value>View of answers</value>
+    <comment>View of answers</comment>
+  </data>
+  <data name="AnnualReachTipTextForUserGroupOwner" xml:space="preserve">
+    <value>Members</value>
+    <comment>Members</comment>
+  </data>
+  <data name="AnnualReachTipTextForVideo" xml:space="preserve">
+    <value>Number of Views</value>
+    <comment>Number of Views</comment>
+  </data>
+  <data name="AnnualReachTipTextForWebcast" xml:space="preserve">
+    <value>Number of Views</value>
+    <comment>Number of Views</comment>
+  </data>
+  <data name="AnnualReachTipTextForWebsitePosts" xml:space="preserve">
+    <value>Annual Unique Visitors</value>
+    <comment>Annual Unique Visitors</comment>
+  </data>
+  <data name="DefaultNetworkErrorString" xml:space="preserve">
+    <value>NetworkError:Please check your network and try again</value>
+  </data>
+  <data name="FieldMustbeNumberMessageText" xml:space="preserve">
+    <value>This is a numerical field.</value>
+  </data>
+  <data name="InvalidUrlMessageText" xml:space="preserve">
+    <value>Please enter a valid url</value>
+  </data>
+  <data name="MaxLengthMessageText" xml:space="preserve">
+    <value>This field exceeded the maximum length</value>
+  </data>
+  <data name="NetworkErrorFormatString" xml:space="preserve">
+    <value>NetworkError:{0}</value>
+  </data>
+  <data name="RequiredFieldMessageText" xml:space="preserve">
+    <value>This field is required</value>
+  </data>
+  <data name="SecondAnnualQuantityTipTextForPosts" xml:space="preserve">
+    <value>Number of Subscribers</value>
+    <comment>Number of Subscribers</comment>
+  </data>
+  <data name="SecondAnnualQuantityTipTextForumParticipation" xml:space="preserve">
+    <value>Number of Posts</value>
+    <comment>Number of Posts</comment>
+  </data>
+  <data name="SecondAnnualQuantityTipTextForWebsitePosts" xml:space="preserve">
+    <value>Number of Subscribers</value>
+    <comment>Number of Subscribers</comment>
+  </data>
+  <data name="DialogTitleForSignout" xml:space="preserve">
+    <value>Sign out?</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>This is the official Microsoft Most Valuable Professional (MVP) Award program app.
+Microsoft MVP award is given to exceptional, independent community leaders who share their passion, technical expertise, and real-world knowledge of Microsoft products with others.Microsoft MVPs can use this app to access their profile,  contribution data, as well as automating several different tasks creating efficiency in daily tasks.</value>
+  </data>
+  <data name="ContributionDetailTitleForEditing" xml:space="preserve">
+    <value>Edit a contribution</value>
+  </data>
+  <data name="ContributionDetailTitleForNew" xml:space="preserve">
+    <value>Add a new contribution</value>
+  </data>
+  <data name="CopyrightFormat" xml:space="preserve">
+    <value>Copyright {0} Microsoft</value>
+  </data>
+  <data name="DialogDescriptionForCheckNetwork" xml:space="preserve">
+    <value>Please check connectivity to proceed to MVP account sign in.</value>
+  </data>
+  <data name="DialogDescriptionForCheckNetworkFormat" xml:space="preserve">
+    <value>Looks like something went wrong. Please check your connection.. Error: {0} unable to load</value>
+  </data>
+  <data name="DialogDescriptionForCheckNetworkFormat1" xml:space="preserve">
+    <value>Please check connectivity to submit contribution.</value>
+  </data>
+  <data name="DialogDescriptionForError" xml:space="preserve">
+    <value>Failed to open your browser.</value>
+  </data>
+  <data name="DialogDescriptionForInvalidCredentials" xml:space="preserve">
+    <value>Unable to validate MVP status, please login again with your MVP credentials.</value>
+  </data>
+  <data name="DialogDescriptionForSaved" xml:space="preserve">
+    <value>MVP contribution has been saved successfully. Thank you for your contribution.</value>
+  </data>
+  <data name="DialogDescriptionForUnableSave" xml:space="preserve">
+    <value>Looks like something went wrong. Please check your connection and submit again. Error: {0} unable to save"</value>
+  </data>
+  <data name="DialogLoading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="DialogOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="DialogSaving" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
+  <data name="DialogTitleForCheckNetwork" xml:space="preserve">
+    <value>Check Connectivity</value>
+  </data>
+  <data name="DialogTitleForError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="DialogTitleForSaved" xml:space="preserve">
+    <value>Saved!</value>
+  </data>
+  <data name="RefreshTokenExceptionTip" xml:space="preserve">
+    <value>$"Unable to refresh token: {0}"</value>
+  </data>
+  <data name="RefreshTokenTip" xml:space="preserve">
+    <value>Refreshing tokens...</value>
+  </data>
+  <data name="DialogCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DialogForSignoutConfirmTipText" xml:space="preserve">
+    <value>Are you sure you want to sign out?</value>
+  </data>
+  <data name="DialogForSignoutOKText" xml:space="preserve">
+    <value>Yes, sign out</value>
+  </data>
+  <data name="VersionFormat" xml:space="preserve">
+    <value>Version: {0}</value>
+  </data>
+  <data name="DialogConfirmTextForDelete" xml:space="preserve">
+    <value>Yes, Delete</value>
+  </data>
+  <data name="DialogDescriptionForDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this contribution?</value>
+  </data>
+  <data name="DialogTitleForDelete" xml:space="preserve">
+    <value>Delete Contribution?</value>
+  </data>
+  <data name="DialogTitleForLoadingContribution" xml:space="preserve">
+    <value>Loading Contributions...</value>
+  </data>
+  <data name="DialogTitleForLoadingProfile" xml:space="preserve">
+    <value>Loading profile...</value>
+  </data>
+  <data name="ExpectedCultureIdentifier" xml:space="preserve">
+    <value>Expected culture identifier</value>
+  </data>
+  <data name="TabTitleForContributions" xml:space="preserve">
+    <value>Contributions</value>
+  </data>
+  <data name="TabTitleForProfile" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="AddButton" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CloseButton" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DevToolsInfo" xml:space="preserve">
+    <value>Built in C# with Xamarin</value>
+  </data>
+  <data name="LabelForAwardCategories" xml:space="preserve">
+    <value>AWARD CATEGORIES</value>
+  </data>
+  <data name="LabelForContributionArea" xml:space="preserve">
+    <value>Contribution Area</value>
+  </data>
+  <data name="LabelForContributionDate" xml:space="preserve">
+    <value>Date of contribution</value>
+  </data>
+  <data name="LabelForContributionTitle" xml:space="preserve">
+    <value>Title of contribution</value>
+  </data>
+  <data name="LabelForContributionType" xml:space="preserve">
+    <value>Contribution type</value>
+  </data>
+  <data name="LabelForDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LabelForFirstAward" xml:space="preserve">
+    <value>FIRST AWARDED</value>
+  </data>
+  <data name="LabelForNumberOfAward" xml:space="preserve">
+    <value># OF AWARDS</value>
+  </data>
+  <data name="LabelForURL" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="LabelForVisibility" xml:space="preserve">
+    <value>Visibility</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Learn about MVP program</value>
+  </data>
+  <data name="PageTitleForLogOn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="PageTitleForSetting" xml:space="preserve">
+    <value>About MVP</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SettingsButton" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SigninTo" xml:space="preserve">
+    <value>Sign in to MVP account</value>
+  </data>
+  <data name="SignoutButton" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+</root>

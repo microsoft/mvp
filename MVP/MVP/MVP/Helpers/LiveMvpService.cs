@@ -35,116 +35,120 @@ namespace Microsoft.Mvp.Helpers
 
             MyProfileViewModel.Instance.ErrorMessage = string.Empty;
             string errorMsg = "";
-            try
-            {
-                var handler = new HttpClientHandler
-                {
-                    UseDefaultCredentials = false,
-                };
+			try
+			{
+				var handler = new HttpClientHandler
+				{
+					UseDefaultCredentials = false,
+				};
 
-                using (var client = new HttpClient(handler) { Timeout = new System.TimeSpan(0, 0, 15) })
-                {
-                    client.DefaultRequestHeaders.Add(CommonConstants.OcpApimSubscriptionKey, CommonConstants.OcpApimSubscriptionValue);
-                    client.DefaultRequestHeaders.Add(CommonConstants.AuthorizationKey, "Bearer " + token);
-                    if (!isImage)
-                    {
-                        client.DefaultRequestHeaders.Add(CommonConstants.AcceptsKey, CommonConstants.MediaTypeForJson);
-                    }
+				using (var client = new HttpClient(handler) { Timeout = new System.TimeSpan(0, 0, 15) })
+				{
+					client.DefaultRequestHeaders.Add(CommonConstants.OcpApimSubscriptionKey, CommonConstants.OcpApimSubscriptionValue);
+					client.DefaultRequestHeaders.Add(CommonConstants.AuthorizationKey, "Bearer " + token);
+					if (!isImage)
+					{
+						client.DefaultRequestHeaders.Add(CommonConstants.AcceptsKey, CommonConstants.MediaTypeForJson);
+					}
 
-                    string requestJsonString = string.Empty;
-                    if (model != null)
-                    {
-                        requestJsonString = JsonConvert.SerializeObject(model);
-                    }
+					string requestJsonString = string.Empty;
+					if (model != null)
+					{
+						requestJsonString = JsonConvert.SerializeObject(model);
+					}
 
-                    HttpResponseMessage response = null;
-                    using (StringContent theContent = new StringContent(requestJsonString, System.Text.Encoding.UTF8, CommonConstants.MediaTypeForJson))
-                    {
-                        switch (httpMethod)
-                        {
-                            case HttpMethod.Put:
-                                response = await client.PutAsync(url, theContent);
-                                break;
-                            case HttpMethod.Post:
-                                response = await client.PostAsync(url, theContent);
-                                break;
-                            case HttpMethod.Delete:
-                                response = await client.DeleteAsync(url);
-                                break;
-                            case HttpMethod.Get:
-                                response = await client.GetAsync(url);
-                                break;
-                            default:
-                                break;
-                        }
+					HttpResponseMessage response = null;
+					using (StringContent theContent = new StringContent(requestJsonString, System.Text.Encoding.UTF8, CommonConstants.MediaTypeForJson))
+					{
+						switch (httpMethod)
+						{
+							case HttpMethod.Put:
+								response = await client.PutAsync(url, theContent);
+								break;
+							case HttpMethod.Post:
+								response = await client.PostAsync(url, theContent);
+								break;
+							case HttpMethod.Delete:
+								response = await client.DeleteAsync(url);
+								break;
+							case HttpMethod.Get:
+								response = await client.GetAsync(url);
+								break;
+							default:
+								break;
+						}
 
-                        // Parse response
-                        if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.Created)
-                        {
-                            var responseString = await response.Content.ReadAsStringAsync();
-                            if (string.IsNullOrEmpty(responseString))
-                            {
-                                return CommonConstants.OkResult;
-                            }
-                            return responseString;
-                        }
-                        else if (response.StatusCode == HttpStatusCode.BadRequest)
-                        {
-                            if (isAddOrUpdateContribution)
-                            {
-                                var responseString = await response.Content.ReadAsStringAsync();
-                                if (!string.IsNullOrEmpty(responseString))
-                                {
-                                    errorMsg = responseString;
-                                }
-                            }
-                            else
-                            {
-                                throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.NetworkErrorFormatString, response.StatusCode.ToString()));
-                            }
-                        }
-                        else if (response.StatusCode == HttpStatusCode.Forbidden)
-                        {
-                            if (isRefreshedToken)
-                            {
-                                throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.NetworkErrorFormatString, response.StatusCode.ToString()));
-                            }
-                            else
-                            {
-                                string newAccessToken = await LiveIdLogOnViewModel.GetNewAccessToken();
-                                string result = await DoWork(url, model, httpMethod, newAccessToken, isImage, true, isAddOrUpdateContribution);
-                                return result;
-                            }
-                        }
-                        else
-                        {
-                            if (CheckInternetConnection())
-                            {
-                                string newAccessToken = await LiveIdLogOnViewModel.GetNewAccessToken();
-                                string result = await DoWork(url, model, httpMethod, newAccessToken, isImage, true, isAddOrUpdateContribution);
-                                return result;
-                            }
-                            else
-                            {
-                                throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, CommonConstants.NetworkErrorFormatString, response.StatusCode.ToString()));
-                            }
+						// Parse response
+						if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.Created)
+						{
+							var responseString = await response.Content.ReadAsStringAsync();
+							if (string.IsNullOrEmpty(responseString))
+							{
+								return CommonConstants.OkResult;
+							}
+							return responseString;
+						}
+						else if (response.StatusCode == HttpStatusCode.BadRequest)
+						{
+							if (isAddOrUpdateContribution)
+							{
+								var responseString = await response.Content.ReadAsStringAsync();
+								if (!string.IsNullOrEmpty(responseString))
+								{
+									errorMsg = responseString;
+								}
+							}
+							else
+							{
+								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, TranslateServices.GetResourceString(CommonConstants.NetworkErrorFormatString), response.StatusCode.ToString()));
+							}
+						}
+						else if (response.StatusCode == HttpStatusCode.Forbidden)
+						{
+							if (isRefreshedToken)
+							{
+								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, TranslateServices.GetResourceString(CommonConstants.NetworkErrorFormatString), response.StatusCode.ToString()));
+							}
+							else
+							{
+								string newAccessToken = await LiveIdLogOnViewModel.GetNewAccessToken();
+								string result = await DoWork(url, model, httpMethod, newAccessToken, isImage, true, isAddOrUpdateContribution);
+								return result;
+							}
+						}
+						else
+						{
+							if (CheckInternetConnection())
+							{
+								string newAccessToken = await LiveIdLogOnViewModel.GetNewAccessToken();
+								string result = await DoWork(url, model, httpMethod, newAccessToken, isImage, true, isAddOrUpdateContribution);
+								return result;
+							}
+							else
+							{
+								throw new WebException(string.Format(System.Globalization.CultureInfo.InvariantCulture, TranslateServices.GetResourceString(CommonConstants.NetworkErrorFormatString), response.StatusCode.ToString()));
+							}
 
-                        }
-                    }
-                }
-            }
-            catch (WebException ex)
-            {
-                errorMsg = CommonConstants.DefaultNetworkErrorString;
-            }
-            catch (HttpRequestException ex)
-            {
-                errorMsg = CommonConstants.DefaultNetworkErrorString;
-            }
+						}
+					}
+				}
+			}
+			catch (WebException ex)
+			{
+				errorMsg = TranslateServices.GetResourceString(CommonConstants.DefaultNetworkErrorString);
+			}
+			catch (HttpRequestException ex)
+			{
+				errorMsg = TranslateServices.GetResourceString(CommonConstants.DefaultNetworkErrorString);
+			}
+			catch (Exception ex) {
+				errorMsg = TranslateServices.GetResourceString(CommonConstants.DefaultNetworkErrorString);
+			}
 
             if (!string.IsNullOrEmpty(errorMsg))
             {
                 MyProfileViewModel.Instance.ErrorMessage = errorMsg;
+				throw new Exception(errorMsg);
             }
             return null;
         }

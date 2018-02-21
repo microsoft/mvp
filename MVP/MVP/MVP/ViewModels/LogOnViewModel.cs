@@ -4,89 +4,124 @@ using Xamarin.Forms;
 
 namespace Microsoft.Mvp.ViewModels
 {
-    public class LogOnViewModel : ViewModelBase
-    {
+	public class LogOnViewModel : ViewModelBase
+	{
 
-        #region Singleton pattern and constructors
+		#region Singleton pattern and constructors
 
-        private static LogOnViewModel _instance = null;
-        private static readonly object _synObject = new object();
+		private static LogOnViewModel _instance = null;
+		private static readonly object _synObject = new object();
 
-        public static LogOnViewModel Instance
-        {
-            get
-            {
-                if (null == _instance)
-                {
-                    lock (_synObject)
-                    {
-                        if (null == _instance)
-                        {
-                            _instance = new LogOnViewModel();
-                        }
-                    }
-                }
-                return _instance;
-            }
-        }
+		public static LogOnViewModel Instance
+		{
+			get
+			{
+				if (null == _instance)
+				{
+					lock (_synObject)
+					{
+						if (null == _instance)
+						{
+							_instance = new LogOnViewModel();
+						}
+					}
+				}
+				return _instance;
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region Private Members
+		#region Private Members
 
-        private static string _storedToken;
+		private static string _storedToken;
 
-        #endregion
+		#endregion
 
-        #region Public Members
+		#region Public Members
 
-        public bool IsLoggedIn
-        {
-            get
-            {
+		public bool IsLoggedIn
+		{
+			get
+			{
 
-                string tokenAndExpiredTime = null;
-                if (Settings.GetSetting(CommonConstants.TokenKey) != string.Empty)
-                {
-                    tokenAndExpiredTime = Settings.GetSetting(CommonConstants.TokenKey);
-                }
+				string tokenAndExpiredTime = null;
+				if (Settings.GetSetting(CommonConstants.TokenKey) != string.Empty)
+				{
+					tokenAndExpiredTime = Settings.GetSetting(CommonConstants.TokenKey);
+				}
 
-                if (!string.IsNullOrEmpty(tokenAndExpiredTime))
-                {
-                    var index = tokenAndExpiredTime.LastIndexOf(",", StringComparison.Ordinal);
+				if (!string.IsNullOrEmpty(tokenAndExpiredTime))
+				{
+					var index = tokenAndExpiredTime.LastIndexOf(",", StringComparison.Ordinal);
 
-                    var expiredtime = Convert.ToDateTime(tokenAndExpiredTime.Substring(index + 1), System.Globalization.CultureInfo.InvariantCulture);
-                    var token = tokenAndExpiredTime.Substring(0, index);
-                    if (DateTime.Now.AddHours(-7) < expiredtime)
-                    {
+					var expiredtime = Convert.ToDateTime(tokenAndExpiredTime.Substring(index + 1), System.Globalization.CultureInfo.InvariantCulture);
+					var token = tokenAndExpiredTime.Substring(0, index);
+					if (DateTime.Now.AddHours(-7) < expiredtime)
+					{
 						StoredToken = token;
-                    }
-                    else
-                    {
+					}
+					else
+					{
 						StoredToken = "";
-                    }
-                }
+					}
+				}
 
-                return !string.IsNullOrEmpty(LogOnViewModel.StoredToken);
-            }
-        }
+				return !string.IsNullOrEmpty(LogOnViewModel.StoredToken);
+			}
+		}
 
-        public static string StoredToken
-        {
-            get
-            {
-                return _storedToken;
-            }
+		public static string StoredToken
+		{
+			get
+			{
+				return _storedToken;
+			}
 
-            set
-            {
-                _storedToken = value;
+			set
+			{
+				_storedToken = value;
 
-            }
+			}
 
-        }
+		}
 
-        #endregion
+		public string LearnMore
+		{
+			get {
+				return TranslateServices.GetResourceString(CommonConstants.LearnMore);
+			} 
+		}
 
-    }
+		public string SigninTo {
+			get
+			{
+				return TranslateServices.GetResourceString(CommonConstants.SigninTo);
+			}
+		}
+
+		public string Welcome
+		{
+			get
+			{
+				return TranslateServices.GetResourceString(CommonConstants.Welcome);
+			}
+		}
+
+		public string PageTitleForLogOn
+		{
+			get
+			{
+				return TranslateServices.GetResourceString(CommonConstants.PageTitleForLogOn);
+			}
+		}
+
+		public string CancelButton { get; } = TranslateServices.GetResourceString(CommonConstants.CancelButton);
+
+
+
+
+		#endregion
+
+	}
 }

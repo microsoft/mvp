@@ -57,7 +57,7 @@ namespace Microsoft.Mvpui
                 if (profileTest == null || profileTest.MvpId == 0)
                 {
 					Logger.Log("Login-Invalid");
-                    await DisplayAlert(string.Empty, "Unable to validate MVP status, please login again with your MVP credentials.", "OK");
+                    await DisplayAlert(string.Empty, TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForInvalidCredentials), TranslateServices.GetResourceString(CommonConstants.DialogOK));
                     App.CookieHelper.ClearCookie();
                     LiveIdLogOnViewModel.Instance.SignOut();
                     await Navigation.PopModalAsync(true);
