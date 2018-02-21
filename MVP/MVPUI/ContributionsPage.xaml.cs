@@ -50,15 +50,19 @@ namespace Microsoft.Mvpui
 			{
 				var viewModel = new ContributionViewModel();
 				viewModel.MyContribution = e.SelectedItem as ContributionModel;
-				await Navigation.PushModalAsync(new MVPNavigationPage(
-					new ContributionDetail()
-					{
-						BindingContext = viewModel,
-						Title = TranslateServices.GetResourceString(CommonConstants.ContributionDetailTitleForEditing)
-					}));
+				//TODO: Check state of BugZilla bug : https://bugzilla.xamarin.com/show_bug.cgi?id=52248
+				//Temporary fix for UWP - Currently ViewCell disable is not working ( cfr BugZilla link in todo )
+				if (viewModel.MyContribution.ContributionEnableEditDelete)
+				{
+					await Navigation.PushModalAsync(new MVPNavigationPage(
+						new ContributionDetail()
+						{
+							BindingContext = viewModel,
+							Title = TranslateServices.GetResourceString(CommonConstants.ContributionDetailTitleForEditing)
+						}));
+				}
 
 				ListViewContributions.SelectedItem = null;
-
 			}
 		}
 
