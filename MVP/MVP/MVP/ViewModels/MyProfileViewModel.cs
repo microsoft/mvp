@@ -401,15 +401,15 @@ namespace Microsoft.Mvp.ViewModels
 
 					List.AddRange(finalList);
 				}
+
 				CanLoadMore = contributions.Contributions.Count == 20;
+
+                progress?.Hide();
 			}
 			catch (Exception ex)
 			{
+                progress?.Hide();
 				await UserDialogs.Instance.AlertAsync(string.Format(TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForCheckNetworkFormat1), ex.Message), TranslateServices.GetResourceString(CommonConstants.DialogOK));
-			}
-			finally
-			{
-				progress?.Hide();
 			}
 		}
 
