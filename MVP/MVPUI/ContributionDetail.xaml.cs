@@ -75,6 +75,7 @@ namespace Microsoft.Mvpui
 				progress.Show();
 
 				InitContributionType();
+				BindPickers();
                 await BindContributionAreas();
                 BindingSelectors();
             }
@@ -87,6 +88,13 @@ namespace Microsoft.Mvpui
 				progress?.Hide();
                 IsBusy = false;
             }
+        }
+        
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            UnbindPickers();
         }
 
         private async void InitContributionType()
@@ -157,25 +165,30 @@ namespace Microsoft.Mvpui
         private void BindingSelectors()
         {
 
+            ContributionCategorySelector.Items.Clear();
             ContributionAreaSelector.Items.Clear();
             PersonGroupSelector.Items.Clear();
 
-            foreach (var item in ViewModel.ContributionAreas)
+            foreach (var item in ViewModel.ContributionCategories)
             {
-                ContributionAreaSelector.Items.Add(item.Name);
+                ContributionCategorySelector.Items.Add(item);
             }
+
             foreach (var item in ViewModel.PersonGroups)
             {
                 PersonGroupSelector.Items.Add(item.Description);
             }
+
+            ContributionTechnologyModel activeContributionArea = null;
 
             if (ViewModel.MyContribution != null)
             {
 
                 if (ViewModel.ContributionAreas.Count > 0)
                 {
-                    var activeContributionArea = ViewModel.ContributionAreas.Where(item => item.Id == ViewModel.MyContribution.ContributionTechnology.Id).FirstOrDefault();
-                    ViewModel.ContributionAreaIndex = ViewModel.ContributionAreas.IndexOf(activeContributionArea);
+                    activeContributionArea = ViewModel.ContributionAreas.Where(item => item.Id == ViewModel.MyContribution.ContributionTechnology.Id).FirstOrDefault();
+                    //ViewModel.ContributionAreaIndex = ViewModel.ContributionAreas.IndexOf(activeContributionArea);
+                    ViewModel.ContributionCategoryIndex = ViewModel.ContributionCategories.IndexOf(activeContributionArea.AwardName);                                    
                 }
 
                 if (ViewModel.PersonGroups.Count > 0)
@@ -185,16 +198,23 @@ namespace Microsoft.Mvpui
                 }
             }
 
+            //Pre-select Contribution Category
+               
             if ((BindingContext as ContributionViewModel).MyContribution == null)
             {
+                var contributionCategory = MyProfileViewModel.Instance.AwardCategoriesValue;
 
-                //ContributionAreaSelector.SelectedIndex = 0;
-                var activeContributionType = ViewModel.ContributionAreas.Where(item => string.Compare(item.AwardName, MyProfileViewModel.Instance.AwardCategoriesValue, StringComparison.CurrentCultureIgnoreCase) == 0).FirstOrDefault();
-                ContributionAreaSelector.SelectedIndex = ViewModel.ContributionAreas.IndexOf(activeContributionType);
+                var contributionCategoryIndex = viewModel.ContributionCategories.IndexOf(contributionCategory);
+                ContributionCategorySelector.SelectedIndex = contributionCategoryIndex;
             }
             else
             {
-                ContributionAreaSelector.SelectedIndex = ViewModel.ContributionAreaIndex;
+                var contributionCategoryIndex = viewModel.ContributionCategories.IndexOf(activeContributionArea.AwardName);
+                ContributionCategorySelector.SelectedIndex = contributionCategoryIndex;
+
+                var validContributionAreas = ViewModel.ContributionAreas.Where(item => string.Compare(item.AwardName, activeContributionArea.AwardName, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.Name).ToList();
+
+                ContributionAreaSelector.SelectedIndex = validContributionAreas.IndexOf(activeContributionArea.Name);
             }
 
             PersonGroupSelector.SelectedIndex = ViewModel.VibilityIndex;
@@ -408,6 +428,31 @@ namespace Microsoft.Mvpui
             }
 
             return isValid;
+        }
+        
+        private void BindPickers(){
+        	ContributionCategorySelector.SelectedIndexChanged -= ContributionCategorySelector_SelectedIndexChanged;
+            ContributionCategorySelector.SelectedIndexChanged += ContributionCategorySelector_SelectedIndexChanged;
+        }
+
+        private void UnbindPickers(){
+            ContributionCategorySelector.SelectedIndexChanged -= ContributionCategorySelector_SelectedIndexChanged;
+
+        }
+
+        private void ContributionCategorySelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var contributionCategory = (string)ContributionCategorySelector.SelectedItem;
+
+            var validContributionAreas = ViewModel.ContributionAreas.Where(item => string.Compare(item.AwardName, contributionCategory, StringComparison.CurrentCultureIgnoreCase) == 0).Select(x => x.Name).ToList();
+
+            ContributionAreaSelector.Items.Clear();
+            foreach (var contributionArea in validContributionAreas)
+            {
+                ContributionAreaSelector.Items.Add(contributionArea);
+            }
+
+            ContributionAreaSelector.SelectedIndex = 0;
         }
         #endregion
 
