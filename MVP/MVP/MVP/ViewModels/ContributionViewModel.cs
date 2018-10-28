@@ -2,6 +2,7 @@
 using Microsoft.Mvp.Models;
 using MvvmHelpers;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Microsoft.Mvp.ViewModels
 {
@@ -48,6 +49,7 @@ namespace Microsoft.Mvp.ViewModels
 		private string _errorMessageForAnnualReach = "";
 
 		private int _contributionTypeIndex = 0;
+        private int _contributionCategoryIndex = 0;
 		private int _contributionAreaIndex = 0;
 		private int _vibilityIndex = 0;
 
@@ -83,6 +85,8 @@ namespace Microsoft.Mvp.ViewModels
 		}
 
 		public ObservableRangeCollection<ContributionTypeModel> ContributionTypeNames { get; set; }
+		        
+		public ObservableRangeCollection<string> ContributionCategories { get; set; }
 
 		public ObservableRangeCollection<ContributionTechnologyModel> ContributionAreas { get; set; }
 
@@ -169,6 +173,14 @@ namespace Microsoft.Mvp.ViewModels
 
 			//TODO: Original code has no notifypropchanged? Why?
 		}
+		
+        public int ContributionCategoryIndex
+        {
+            get => _contributionCategoryIndex;
+            set => _contributionCategoryIndex = value;
+
+            //TODO: Original code has no notifypropchanged? Why?
+        }
 
 		public int ContributionAreaIndex
 		{
@@ -249,6 +261,9 @@ namespace Microsoft.Mvp.ViewModels
 			try
 			{
 				var contributionDetail = await MvpHelper.MvpService.GetContributionAreas(LogOnViewModel.StoredToken);
+                var distinctAwardNames = contributionDetail?.ContributionArea.Select(x => x.AwardName).Distinct().ToList();
+
+                ContributionCategories = new ObservableRangeCollection<string>(distinctAwardNames);
 				ContributionAreas = new ObservableRangeCollection<ContributionTechnologyModel>(contributionDetail.ContributionArea);
 			}
 			catch (TaskCanceledException tce)

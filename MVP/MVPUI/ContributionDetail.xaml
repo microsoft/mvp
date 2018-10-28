@@ -16,6 +16,9 @@
 						<Label Text="{Binding LabelForContributionType}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<Picker HeightRequest="40" x:Name="contributionTypeSelector" SelectedIndexChanged="OnContributionTypeSelectedIndexChanged" />
 
+                        <Label Text="Contribution Category" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+                        <Picker HeightRequest="40"  x:Name="ContributionCategorySelector" TextColor="Black" />
+
 						<Label Text="{Binding LabelForContributionArea}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
 						<Picker HeightRequest="40"  x:Name="ContributionAreaSelector" TextColor="Black" />
 
