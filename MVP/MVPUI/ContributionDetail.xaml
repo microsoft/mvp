@@ -13,50 +13,50 @@
 				<StackLayout>
 					<StackLayout Padding="20">
 
-						<Label Text="{Binding LabelForContributionType}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForContributionType}" Style="{StaticResource FormFieldHeaderLabel}" />
 						<Picker HeightRequest="40" x:Name="contributionTypeSelector" SelectedIndexChanged="OnContributionTypeSelectedIndexChanged" />
 
-						<Label Text="{Binding LabelForContributionArea}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForContributionArea}" Style="{StaticResource FormFieldHeaderLabel}" />
 						<Picker HeightRequest="40"  x:Name="ContributionAreaSelector" TextColor="Black" />
 
-						<Label Text="{Binding LabelForContributionDate}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForContributionDate}" Style="{StaticResource FormFieldHeaderLabel}" />
 						<DatePicker x:Name="ContributionDateSelector" Date="{Binding MyContribution.StartDate}" TextColor="Black" />
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
-							<Label Text="{Binding LabelForContributionTitle}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-							<Label Text="{Binding ErrorMessageForTitle}"  FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" VerticalTextAlignment="End" />
+							<Label Text="{Binding LabelForContributionTitle}" Style="{StaticResource FormFieldHeaderLabel}" />
+							<Label Text="{Binding ErrorMessageForTitle}"   Style="{StaticResource FormFieldErrorHeaderLabel}" />
 						</StackLayout>
 						<Entry  x:Name="entryTitle" Text="{Binding MyContribution.Title}" TextColor="Black" />
 
-						<Label Text="{Binding LabelForVisibility}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForVisibility}"  Style="{StaticResource FormFieldHeaderLabel}" />
 						<Picker x:Name="PersonGroupSelector" TextColor="Black" />
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
-							<Label Text="{Binding LabelForURL}" FontSize="{StaticResource NormalLabelFontSize}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-							<Label Text="{Binding ErrorMessageForUrl}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="Red" IsVisible="{Binding IsNeededUrl}" VerticalTextAlignment="End" />
+							<Label Text="{Binding LabelForURL}" Style="{StaticResource FormFieldHeaderLabel}" />
+							<Label Text="{Binding ErrorMessageForUrl}"  Style="{StaticResource FormFieldErrorHeaderLabel}" IsVisible="{Binding IsNeededUrl}" />
 						</StackLayout>
 						<Entry x:Name="entryURL" Keyboard="Url" TextColor="Black" Text="{Binding MyContribution.ReferenceUrl}" />
 
-						<Label Text="{Binding LabelForDescription}" FontSize="{StaticResource NormalLabelFontSize}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
+						<Label Text="{Binding LabelForDescription}"  Style="{StaticResource FormFieldHeaderLabel}" />
 						<Editor HeightRequest="180" BackgroundColor="#10000000" x:Name="entryDescription" TextColor="Black" Text="{Binding MyContribution.Description}" />
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
-							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualQuantityTipText}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForAnnualQuantity}" TextColor="Red" IsVisible="{Binding IsNeededAnnualQuantity}" VerticalTextAlignment="End" />
+							<Label Text="{Binding AnnualQuantityTipText}" Style="{StaticResource FormFieldHeaderLabel}" />
+							<Label Text="{Binding ErrorMessageForAnnualQuantity}" Style="{StaticResource FormFieldErrorHeaderLabel}" IsVisible="{Binding IsNeededAnnualQuantity}" />
 						</StackLayout>
 						<Entry x:Name="entryAnnualQuantity" Keyboard="Numeric" TextColor="Black" Text="{Binding MyContribution.AnnualQuantity}" />
 
 						<StackLayout IsVisible="{Binding IsNeededSecondAnnualQuantity}">
 							<StackLayout Spacing="0" Orientation="Horizontal">
-								<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding SecondAnnualQuantityTipText}" TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-								<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForSecondAnnualQuantity}" TextColor="Red" VerticalTextAlignment="End" />
+								<Label Text="{Binding SecondAnnualQuantityTipText}" Style="{StaticResource FormFieldHeaderLabel}" />
+								<Label Text="{Binding ErrorMessageForSecondAnnualQuantity}"  Style="{StaticResource FormFieldErrorHeaderLabel}" />
 							</StackLayout>
 							<Entry x:Name="entrySecondAnnualQuantity" Keyboard="Numeric" TextColor="Black" Text="{Binding MyContribution.SecondAnnualQuantity}" />
 						</StackLayout>
 
 						<StackLayout Spacing="0" Orientation="Horizontal">
-							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding AnnualReachTipText}"  TextColor="{StaticResource SecondaryTextColor}" VerticalTextAlignment="End" />
-							<Label FontSize="{StaticResource NormalLabelFontSize}" Text="{Binding ErrorMessageForAnnualReach}" TextColor="Red" VerticalTextAlignment="End" />
+							<Label Text="{Binding AnnualReachTipText}" Style="{StaticResource FormFieldHeaderLabel}" />
+							<Label Text="{Binding ErrorMessageForAnnualReach}" Style="{StaticResource FormFieldErrorHeaderLabel}" />
 						</StackLayout>
 						<Entry x:Name="entryAnnualReach" Keyboard="Numeric" TextColor="Black" Text="{Binding MyContribution.AnnualReach}" />
 

@@ -57,15 +57,11 @@
 
 									<StackLayout Orientation="Horizontal"
 												 Grid.Row="2">
-										<Label Text="{Binding DataFormat}" TextColor="{StaticResource PrimaryTextColor}"
-											   FontSize="{StaticResource XSmallProfileLabelFontSize}" />
-										<Label Text="|" TextColor="{StaticResource PrimaryTextColor}"
-											   FontSize="{StaticResource XSmallProfileLabelFontSize}" />
+										<Label Text="{Binding DataFormat}" Style="{StaticResource CellSmallLabel}" />
+										<Label Text="|" Style="{StaticResource CellSmallLabel}" />
 										<StackLayout Orientation="Horizontal">
-											<Label Text="{Binding LabelTextOfContribution, Converter={StaticResource TranslateExtensionConverter}}"
-												   TextColor="{StaticResource PrimaryTextColor}" FontSize="{StaticResource XSmallProfileLabelFontSize}" />
-											<Label Text="{Binding AnnualReach}" TextColor="{StaticResource PrimaryTextColor}"
-												   FontSize="{StaticResource XSmallProfileLabelFontSize}" />
+											<Label Text="{Binding LabelTextOfContribution, Converter={StaticResource TranslateExtensionConverter}}" Style="{StaticResource CellSmallLabel}" />
+											<Label Text="{Binding AnnualReach}"  Style="{StaticResource CellSmallLabel}" />
 										</StackLayout>
 									</StackLayout>
 								</Grid>
