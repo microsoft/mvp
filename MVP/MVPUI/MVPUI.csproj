@@ -1,23 +1,22 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Acr.UserDialogs" Version="6.5.1" />
+        <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
         <PackageReference Include="Microsoft.Azure.Mobile" Version="0.17.1" />
         <PackageReference Include="Microsoft.Azure.Mobile.Analytics" Version="0.17.1" />
         <PackageReference Include="Microsoft.Azure.Mobile.Crashes" Version="0.17.1" />
-        <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-        <PackageReference Include="Plugin.Permissions" Version="2.1.0" />
-        <PackageReference Include="Plugin.Share" Version="7.0.2-beta27" />
+        <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+        <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+        <PackageReference Include="Plugin.Share" Version="7.1.1" />
         <PackageReference Include="Plugin.VersionTracking" Version="2.1.0" />
         <PackageReference Include="Refractored.FloatingActionButtonForms" Version="2.1.0" />
         <PackageReference Include="Refractored.MvvmHelpers" Version="1.3.0" />
-        <PackageReference Include="Splat" Version="2.0.0" />
         <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0-beta139" />
-        <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="1.8.2.19-beta" />
-        <PackageReference Include="Xamarin.Forms" Version="2.4.0.38779" />
+        <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
+        <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\MVP\MVP\MVP.csproj" />
