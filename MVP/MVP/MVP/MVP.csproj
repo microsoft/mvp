@@ -87,6 +87,7 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Interfaces\ISignOutHelper.cs" />
+    <Compile Include="Helpers\JsonContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
