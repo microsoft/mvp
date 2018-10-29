@@ -267,9 +267,18 @@ namespace Microsoft.Mvpui
                         Title = entryTitle.Text,
                         ReferenceUrl = entryURL.Text,
                         Description = entryDescription.Text,
-                        AnnualQuantity = Convert.ToInt32(entryAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture),
-                        AnnualReach = Convert.ToInt32(entryAnnualReach.Text, System.Globalization.CultureInfo.InvariantCulture),
-                        SecondAnnualQuantity = Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture)
+                        AnnualQuantity = 
+                        	!string.IsNullOrEmpty(entryAnnualQuantity.Text)
+                        		? Convert.ToInt32(entryAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture)
+                        		: 0,
+                        AnnualReach = 
+                        	!string.IsNullOrEmpty(entryAnnualReach.Text) 
+                        		? Convert.ToInt32(entryAnnualReach.Text, System.Globalization.CultureInfo.InvariantCulture)
+                        		: 0,
+                        SecondAnnualQuantity = 
+                        	!string.IsNullOrEmpty(entrySecondAnnualQuantity.Text)
+                        		? Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture)
+                        		: 0
                     };
                     var result = await MvpHelper.MvpService.AddContributionModel(model, LogOnViewModel.StoredToken);
                     if (result != null && result.ContributionId != "0")
@@ -291,9 +300,18 @@ namespace Microsoft.Mvpui
                     ViewModel.MyContribution.ContributionTechnology = ViewModel.ContributionAreas[ContributionAreaSelector.SelectedIndex];
                     ViewModel.MyContribution.Visibility = ViewModel.PersonGroups[PersonGroupSelector.SelectedIndex];
                     ViewModel.MyContribution.StartDate = ContributionDateSelector.Date.ToUniversalTime();
-                    ViewModel.MyContribution.AnnualQuantity = Convert.ToInt32(entryAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
-                    ViewModel.MyContribution.AnnualReach = Convert.ToInt32(entryAnnualReach.Text, System.Globalization.CultureInfo.InvariantCulture);
-                    ViewModel.MyContribution.SecondAnnualQuantity = Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);
+					ViewModel.MyContribution.AnnualQuantity =
+				   		!string.IsNullOrEmpty(entryAnnualQuantity.Text)
+							? Convert.ToInt32(entryAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture)
+							: 0;
+                     ViewModel.MyContribution.AnnualReach =
+						!string.IsNullOrEmpty(entryAnnualReach.Text)
+							? Convert.ToInt32(entryAnnualReach.Text, System.Globalization.CultureInfo.InvariantCulture)
+							: 0;
+                     ViewModel.MyContribution.SecondAnnualQuantity =
+						!string.IsNullOrEmpty(entrySecondAnnualQuantity.Text)
+							? Convert.ToInt32(entrySecondAnnualQuantity.Text, System.Globalization.CultureInfo.InvariantCulture)
+							: 0;
                     string result = await MvpHelper.MvpService.EditContributionModel(ViewModel.MyContribution, LogOnViewModel.StoredToken);
                     if (result == CommonConstants.OkResult)
 					{
