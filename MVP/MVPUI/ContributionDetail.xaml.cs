@@ -12,7 +12,6 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using AppResources = Microsoft.Mvp.Resources.AppResources;
 //using Xamarin.Forms.Maps;
 
 namespace Microsoft.Mvpui

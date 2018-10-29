@@ -96,7 +96,7 @@ namespace Microsoft.Mvpui
 			{
 				// determine the correct, supported .NET culture
 				var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-				Microsoft.Mvp.Resources.AppResources.Culture = ci; // set the RESX for resource localization
+				MVP.Resources.AppResources.Culture = ci; // set the RESX for resource localization
 				DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
 			}
 
@@ -116,7 +116,7 @@ namespace Microsoft.Mvpui
 			if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
 			{
 				var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-				Mvp.Resources.AppResources.Culture = ci; // set the RESX for resource localization
+				MVP.Resources.AppResources.Culture = ci; // set the RESX for resource localization
 				DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
 			}
 #endif
