@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Microsoft.Mvpui;assembly=Mvpui"
-             xmlns:converters="clr-namespace:Microsoft.Mvpui.Converters;assembly=Mvpui"
-			 xmlns:xamlresources="clr-namespace:Microsoft.Mvpui.XamlResources;assembly=Mvpui"
-			 xmlns:mvpHelpers="clr-namespace:Microsoft.Mvp.Helpers;assembly=Mvp"
+             xmlns:local="clr-namespace:Microsoft.Mvpui;assembly=MVPUI"
+             xmlns:converters="clr-namespace:Microsoft.Mvpui.Converters;assembly=MVPUI"
+			 xmlns:xamlresources="clr-namespace:Microsoft.Mvpui.XamlResources;assembly=MVPUI"
+			 xmlns:mvpHelpers="clr-namespace:Microsoft.Mvp.Helpers;assembly=MVP"
              x:Class="Microsoft.Mvpui.App">
     <Application.Resources>
 

@@ -9,12 +9,13 @@ using System.Resources;
 using Microsoft.Mvp.Interfaces;
 using Xamarin.Forms;
 
+[assembly: NeutralResourcesLanguage("en-US")]
 namespace Microsoft.Mvp.Helpers
 {
 	public class TranslateServices
 	{
 		static CultureInfo ci = new CultureInfo("en");
-		const string resourceId = "Microsoft.Mvp.Resources.AppResources";
+		const string resourceId = "MVP.Resources.AppResources";
 
 		private static readonly Lazy<ResourceManager> resMgr = new Lazy<ResourceManager>(
 			() => new ResourceManager(resourceId, typeof(TranslateServices).GetTypeInfo().Assembly));

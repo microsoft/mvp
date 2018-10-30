@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -8,6 +7,7 @@ using Android.Widget;
 using Android.OS;
 using Microsoft.Mvpui;
 using Plugin.Permissions;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace Microsoft.Mvp.Droid
 {
@@ -23,15 +23,17 @@ namespace Microsoft.Mvp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-			ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
-			//Xamarin.FormsMaps.Init(this,bundle);
-			LoadApplication(new App());
+			Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
 
+            ImageCircleRenderer.Init();
+
+			LoadApplication(new App());
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

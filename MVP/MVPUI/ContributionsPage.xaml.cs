@@ -21,7 +21,7 @@ namespace Microsoft.Mvpui
 
 			BindingContext = MyProfileViewModel.Instance;
 
-			if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
+			if (Device.RuntimePlatform == Device.UWP)
 				ToolbarAddContribution.Icon = "Assets\\toolbar_add.png";
 
 

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Linq;
 using Acr.UserDialogs;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Microsoft.Mvp.ViewModels
 {
@@ -17,6 +18,7 @@ namespace Microsoft.Mvp.ViewModels
 
 		private static MyProfileViewModel _instance = null;
 		private static readonly object _synObject = new object();
+		private static readonly SemaphoreSlim _loadLock = new SemaphoreSlim(1, 1);
 		public static MyProfileViewModel Instance
 		{
 			get
@@ -190,6 +192,7 @@ namespace Microsoft.Mvp.ViewModels
 			IProgressDialog progress = null;
 			try
 			{
+				await _loadLock.WaitAsync();
 				progress = UserDialogs.Instance.Loading(TranslateServices.GetResourceString(CommonConstants.DialogTitleForLoadingProfile), maskType: MaskType.Clear);
 				progress.Show();
 
@@ -212,6 +215,7 @@ namespace Microsoft.Mvp.ViewModels
 			{
 				progress?.Hide();
 				IsBusy = false;
+				_loadLock.Release();
 			}
 		}
 
@@ -386,6 +390,7 @@ namespace Microsoft.Mvp.ViewModels
 
 			try
 			{
+				await _loadLock.WaitAsync();
 				progress = UserDialogs.Instance.Loading(TranslateServices.GetResourceString(CommonConstants.DialogTitleForLoadingContribution), maskType: MaskType.Clear);
 				progress?.Show();
 
@@ -410,6 +415,10 @@ namespace Microsoft.Mvp.ViewModels
 			{
                 progress?.Hide();
 				await UserDialogs.Instance.AlertAsync(string.Format(TranslateServices.GetResourceString(CommonConstants.DialogDescriptionForCheckNetworkFormat1), ex.Message), TranslateServices.GetResourceString(CommonConstants.DialogOK));
+			}
+			finally
+			{
+				_loadLock.Release();
 			}
 		}
 

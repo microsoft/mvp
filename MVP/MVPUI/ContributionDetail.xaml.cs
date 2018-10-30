@@ -12,7 +12,6 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using AppResources = Microsoft.Mvp.Resources.AppResources;
 //using Xamarin.Forms.Maps;
 
 namespace Microsoft.Mvpui
@@ -37,7 +36,7 @@ namespace Microsoft.Mvpui
 
             ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
 
-			if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
+			if (Device.RuntimePlatform == Device.UWP)
 				ToolbarClose.Icon = "Assets\\toolbar_close.png";
 
             this.BindingContext = new ContributionViewModel();

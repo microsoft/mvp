@@ -17,7 +17,7 @@ namespace Microsoft.Mvpui
 
 			ToolbarClose.Command = new Command(async () => await Navigation.PopModalAsync());
 
-            if (Device.RuntimePlatform == Device.UWP || Device.RuntimePlatform == Device.WinPhone)
+            if (Device.RuntimePlatform == Device.UWP)
                 ToolbarClose.Icon = "Assets\\toolbar_close.png";
 
 			//Don't need toolbar on UWP/Android as we pushed.
