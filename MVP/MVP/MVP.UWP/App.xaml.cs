@@ -59,7 +59,7 @@ namespace MVP.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 				var rendererAssemblies = new[]
 				{
-					typeof(Microsoft.Mvp.Resources.AppResources).GetTypeInfo().Assembly,
+					typeof(MVP.Resources.AppResources).GetTypeInfo().Assembly,
 					typeof(ImageCircleRenderer).GetTypeInfo().Assembly
 				};
 				Xamarin.Forms.Forms.Init(e, rendererAssemblies);
